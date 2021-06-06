@@ -20,12 +20,12 @@ const useStyles = makeStyles({
   },
   focused: {
     backgroundColor: "white",
-    textAlign: "center",
+    textAlign: (props) => props.textAlign,
   },
 });
 
-const CardFront = () => {
-  const classes = useStyles();
+const CardFront = (props) => {
+  const classes = useStyles(props);
   return (
     <CardContainer>
       <CardStyleOptions />

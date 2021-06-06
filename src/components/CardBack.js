@@ -20,11 +20,12 @@ const useStyles = makeStyles({
   },
   focused: {
     backgroundColor: "white",
+    textAlign: (props) => props.textAlign,
   },
 });
 
-const CardFront = () => {
-  const classes = useStyles();
+const CardBack = (props) => {
+  const classes = useStyles(props);
   return (
     <CardContainer>
       <CardStyleOptions />
@@ -46,4 +47,4 @@ const CardFront = () => {
   );
 };
 
-export default CardFront;
+export default CardBack;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import FormatAlignLeftIcon from "@material-ui/icons/FormatAlignLeft";
 import FormatAlignRightIcon from "@material-ui/icons/FormatAlignRight";
@@ -7,6 +7,7 @@ import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import FormatListNumberedIcon from "@material-ui/icons/FormatListNumbered";
 import FormatSizeIcon from "@material-ui/icons/FormatSize";
 import IconButton from "@material-ui/core/IconButton";
+import { CardInputContext } from "../context/CardInputContext";
 
 const useStyles = makeStyles({
   optionsContainer: {
@@ -35,16 +36,26 @@ const useStyles = makeStyles({
 
 const CardStyleOptions = () => {
   const classes = useStyles();
+  const ctx = useContext(CardInputContext);
   return (
     <div className={classes.optionsContainer}>
       <div className={classes.positionOptions}>
-        <IconButton size="small">
+        <IconButton
+          size="small"
+          onClick={() => ctx.setCardFrontAlignment("left")}
+        >
           <FormatAlignLeftIcon />
         </IconButton>
-        <IconButton size="small">
+        <IconButton
+          size="small"
+          onClick={() => ctx.setCardFrontAlignment("center")}
+        >
           <FormatAlignCenterIcon />
         </IconButton>
-        <IconButton size="small">
+        <IconButton
+          size="small"
+          onClick={() => ctx.setCardFrontAlignment("right")}
+        >
           <FormatAlignRightIcon />
         </IconButton>
       </div>
