@@ -8,11 +8,8 @@ const CardFrontAndBackContainer = () => {
 
   return (
     <React.Fragment>
-      <CardFront
-        textAlign={ctx.cardFrontAlignment}
-        value={ctx.cardFrontInput}
-      />
-      <CardBack textAlign={ctx.cardBackAlignment} value={ctx.cardBackInput} />
+      <CardFront textAlign={ctx.front} />
+      <CardBack textAlign={ctx.back} />
     </React.Fragment>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import FormatAlignLeftIcon from "@material-ui/icons/FormatAlignLeft";
 import FormatAlignRightIcon from "@material-ui/icons/FormatAlignRight";
@@ -34,27 +34,43 @@ const useStyles = makeStyles({
   },
 });
 
-const CardStyleOptions = () => {
+const CardStyleOptions = (props) => {
   const classes = useStyles();
   const ctx = useContext(CardInputContext);
+
   return (
     <div className={classes.optionsContainer}>
-      <div className={classes.positionOptions}>
+      <div onClick={props.handleClick} className={classes.positionOptions}>
         <IconButton
           size="small"
-          onClick={() => ctx.setCardFrontAlignment("left")}
+          onClick={() =>
+            ctx.dispatch({
+              side: props.side.toUpperCase(),
+              alignment: "left",
+            })
+          }
         >
           <FormatAlignLeftIcon />
         </IconButton>
         <IconButton
           size="small"
-          onClick={() => ctx.setCardFrontAlignment("center")}
+          onClick={() =>
+            ctx.dispatch({
+              side: props.side.toUpperCase(),
+              alignment: "center",
+            })
+          }
         >
           <FormatAlignCenterIcon />
         </IconButton>
         <IconButton
           size="small"
-          onClick={() => ctx.setCardFrontAlignment("right")}
+          onClick={() =>
+            ctx.dispatch({
+              side: props.side.toUpperCase(),
+              alignment: "right",
+            })
+          }
         >
           <FormatAlignRightIcon />
         </IconButton>

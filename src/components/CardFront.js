@@ -26,9 +26,15 @@ const useStyles = makeStyles({
 
 const CardFront = (props) => {
   const classes = useStyles(props);
+  const frontInputRef = React.useRef("");
+
+  const setFocus = () => {
+    frontInputRef.current.focus();
+  };
+
   return (
     <CardContainer>
-      <CardStyleOptions />
+      <CardStyleOptions handleClick={setFocus} side="front" />
       <form>
         <FilledInput
           classes={{
@@ -41,6 +47,7 @@ const CardFront = (props) => {
           rowsMax={7}
           fullWidth
           disableUnderline={true}
+          inputRef={frontInputRef}
         />
       </form>
     </CardContainer>

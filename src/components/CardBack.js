@@ -26,9 +26,14 @@ const useStyles = makeStyles({
 
 const CardBack = (props) => {
   const classes = useStyles(props);
+  const backInputRef = React.useRef("");
+  const setFocus = () => {
+    backInputRef.current.focus();
+  };
+
   return (
     <CardContainer>
-      <CardStyleOptions />
+      <CardStyleOptions handleClick={setFocus} side="back" />
       <form>
         <FilledInput
           classes={{
@@ -41,6 +46,7 @@ const CardBack = (props) => {
           rowsMax={10}
           fullWidth
           disableUnderline={true}
+          inputRef={backInputRef}
         />
       </form>
     </CardContainer>
