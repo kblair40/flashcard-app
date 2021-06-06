@@ -1,12 +1,15 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import FilledInput from "@material-ui/core/FilledInput";
+import CardStyleOptions from "./CardStyleOptions";
 
 import CardContainer from "./CardContainer";
 
 const useStyles = makeStyles({
   cardInput: {
     width: "100%",
+    height: "15rem",
+    fontSize: "1.1rem",
     backgroundColor: "white",
     "&:hover": {
       backgroundColor: "white",
@@ -24,6 +27,7 @@ const CardFront = () => {
   const classes = useStyles();
   return (
     <CardContainer>
+      <CardStyleOptions />
       <form>
         <FilledInput
           classes={{
@@ -33,7 +37,7 @@ const CardFront = () => {
           }}
           multiline
           rows={10}
-          rowsMax={50}
+          rowsMax={10}
           fullWidth
           disableUnderline={true}
         />

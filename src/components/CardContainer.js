@@ -11,7 +11,6 @@ const useStyles = makeStyles({
   },
   card: {
     width: "60%",
-    padding: "1rem",
   },
 });
 
