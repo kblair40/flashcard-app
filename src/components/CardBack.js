@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import FilledInput from "@material-ui/core/FilledInput";
 import CardStyleOptions from "./CardStyleOptions";
+import AddCardButton from "./AddCardButton";
 
 import CardContainer from "./CardContainer";
 
@@ -25,16 +26,28 @@ const useStyles = makeStyles({
 });
 
 const CardBack = (props) => {
+  const [textInput, setTextInput] = useState("");
   const classes = useStyles(props);
-  const backInputRef = React.useRef("");
+  const backInputRef = useRef("");
   const setFocus = () => {
     backInputRef.current.focus();
   };
 
+  const handleChange = (e) => {
+    setTextInput(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("FINAL VALUE =", textInput);
+    setTextInput("");
+  };
+
   return (
-    <CardContainer>
-      <CardStyleOptions handleClick={setFocus} side="back" />
-      <form>
+    <form onSubmit={handleSubmit}>
+      <CardContainer>
+        <CardStyleOptions handleClick={setFocus} side="back" />
+
         <FilledInput
           classes={{
             root: classes.cardInput,
@@ -45,11 +58,14 @@ const CardBack = (props) => {
           rows={10}
           rowsMax={10}
           fullWidth
+          onChange={handleChange}
+          value={textInput}
           disableUnderline={true}
           inputRef={backInputRef}
         />
-      </form>
-    </CardContainer>
+      </CardContainer>
+      <AddCardButton handleSubmit={handleSubmit} />
+    </form>
   );
 };
 
