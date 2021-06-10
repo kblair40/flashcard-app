@@ -1,10 +1,10 @@
 import "./App.css";
-import CardContainer from "./components/CardContainer";
+import CardFrontAndBackContainer from "./components/CardFrontAndBackContainer";
 
 function App() {
   return (
     <div className="App">
-      <CardContainer />
+      <CardFrontAndBackContainer />
     </div>
   );
 }
