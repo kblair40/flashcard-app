@@ -1,14 +1,11 @@
 import "./App.css";
-import CardFrontAndBackContainer from "./components/CardFrontAndBackContainer";
-import { CardInputProvider } from "./context/CardInputContext";
+import CardContainer from "./components/CardContainer";
 
 function App() {
   return (
-    <CardInputProvider>
-      <div className="App">
-        <CardFrontAndBackContainer />
-      </div>
-    </CardInputProvider>
+    <div className="App">
+      <CardContainer />
+    </div>
   );
 }
 
