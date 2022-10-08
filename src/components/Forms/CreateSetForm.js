@@ -39,6 +39,11 @@ const CreateSetForm = () => {
         description,
       });
       console.log("\nCREATE RESPONSE:", response.data);
+
+      if (response.data && response.data.flashcardSet) {
+        const { _id } = response.data.flashcardSet;
+        navigate(`/create/${_id}`);
+      }
     } catch (e) {
       console.error("FAILED CREATING SET:", e);
     }
