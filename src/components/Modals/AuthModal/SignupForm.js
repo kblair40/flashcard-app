@@ -9,8 +9,12 @@ import {
   FormControl,
   FormLabel,
   FormErrorMessage,
+  InputGroup,
+  InputRightElement,
+  IconButton,
 } from "@chakra-ui/react";
 
+import { VisibleIcon, NotVisibleIcon } from "utils/icons";
 import api from "api";
 
 const INITIAL_ERROR_STATE = {
@@ -33,6 +37,8 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
     confirm_password: "",
   });
   const [errors, setErrors] = useState(INITIAL_ERROR_STATE);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChange = (e) => {
     // console.log("NAME:", e.target.name);
@@ -124,6 +130,13 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
     setLoading(false);
   };
 
+  const iconButtonProps = {
+    size: "sm",
+    bg: "transparent",
+    transitionDuration: "0.3s",
+    _hover: { bg: "gray.100" },
+  };
+
   return (
     <Box>
       <VStack>
@@ -137,7 +150,11 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
               value={formData.first_name}
               onChange={handleChange}
             />
-            <FormErrorMessage>First name is required</FormErrorMessage>
+            <FormErrorMessage>
+              {errors["first_name"] && typeof errors["first_name"] === "boolean"
+                ? "First name is required"
+                : errors["first_name"]}
+            </FormErrorMessage>
           </FormControl>
 
           <FormControl isRequired isInvalid={!!errors["last_name"]}>
@@ -148,7 +165,11 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
               onChange={handleChange}
             />
 
-            <FormErrorMessage>Last name is required</FormErrorMessage>
+            <FormErrorMessage>
+              {errors["last_name"] && typeof errors["last_name"] === "boolean"
+                ? "Last name is required"
+                : errors["last_name"]}
+            </FormErrorMessage>
           </FormControl>
         </HStack>
 
@@ -177,38 +198,69 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
           </FormErrorMessage>
         </FormControl>
 
-        <HStack>
-          <FormControl isRequired isInvalid={!!errors["password"]}>
-            <FormLabel>Password</FormLabel>
+        <FormControl isRequired isInvalid={!!errors["password"]}>
+          <FormLabel>Password</FormLabel>
+          <InputGroup>
             <Input
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               value={formData.password}
               onChange={handleChange}
             />
-            <FormErrorMessage>
-              {errors["Password"] && typeof errors["password"] === "boolean"
-                ? "Email is required"
-                : errors["password"]}
-            </FormErrorMessage>
-          </FormControl>
 
-          <FormControl isRequired isInvalid={!!errors["confirm_password"]}>
-            <FormLabel>Confirm Password</FormLabel>
+            <InputRightElement w="3.5rem">
+              <IconButton
+                {...iconButtonProps}
+                onClick={() => setShowPassword(!showPassword)}
+                icon={
+                  showPassword ? (
+                    <NotVisibleIcon boxSize="20px" />
+                  ) : (
+                    <VisibleIcon boxSize="20px" />
+                  )
+                }
+              />
+            </InputRightElement>
+          </InputGroup>
+
+          <FormErrorMessage>
+            {errors["Password"] && typeof errors["password"] === "boolean"
+              ? "Email is required"
+              : errors["password"]}
+          </FormErrorMessage>
+        </FormControl>
+
+        <FormControl isRequired isInvalid={!!errors["confirm_password"]}>
+          <FormLabel>Confirm Password</FormLabel>
+          <InputGroup>
             <Input
-              type="password"
+              type={showConfirmPassword ? "text" : "password"}
               name="confirm_password"
               value={formData.confirm_password}
               onChange={handleChange}
             />
-            <FormErrorMessage>
-              {errors["confirm_password"] &&
-              typeof errors["confirm_password"] === "boolean"
-                ? "Please confirm your password"
-                : errors["confirm_password"]}
-            </FormErrorMessage>
-          </FormControl>
-        </HStack>
+            <InputRightElement w="3.5rem">
+              <IconButton
+                {...iconButtonProps}
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                icon={
+                  showConfirmPassword ? (
+                    <NotVisibleIcon boxSize="20px" />
+                  ) : (
+                    <VisibleIcon boxSize="20px" />
+                  )
+                }
+              />
+            </InputRightElement>
+          </InputGroup>
+
+          <FormErrorMessage>
+            {errors["confirm_password"] &&
+            typeof errors["confirm_password"] === "boolean"
+              ? "Please confirm your password"
+              : errors["confirm_password"]}
+          </FormErrorMessage>
+        </FormControl>
 
         <HStack pt="1.5rem" w="100%" justify="end">
           <Button>Cancel</Button>
