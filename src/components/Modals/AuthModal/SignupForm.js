@@ -112,7 +112,9 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
       });
       // console.log("RESPONSE:", response.data);
 
-      if (response && response.data) onClose();
+      if (response && response.data) {
+        onAuthSuccess(response.data.token);
+      }
     } catch (e) {
       console.error("FAILED SIGNING UP:", e.response);
       if (e.response.data) {
@@ -279,7 +281,9 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
         </FormControl>
 
         <HStack pt="1.5rem" w="100%" justify="end" spacing="1rem">
-          <Button w="50%">Cancel</Button>
+          <Button w="50%" onClick={onClose}>
+            Cancel
+          </Button>
           <Button w="50%" isLoading={loading} onClick={handleSubmit}>
             Submit
           </Button>

@@ -1,20 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
   Button,
 } from "@chakra-ui/react";
 
+import UserContext from "store/UserContext";
 import Tabs from "./Tabs";
 
 const AuthModal = ({ isOpen, onClose }) => {
+  const { handleSignIn } = useContext(UserContext);
+
   const onAuthSuccess = (token) => {
     window.localStorage.setItem("auth-token", token);
+    handleSignIn();
+    onClose();
   };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="lg">
       <ModalOverlay />
@@ -23,13 +28,6 @@ const AuthModal = ({ isOpen, onClose }) => {
         <ModalBody>
           <Tabs onClose={onClose} onAuthSuccess={onAuthSuccess} />
         </ModalBody>
-
-        {/* <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={onClose}>
-            Close
-          </Button>
-          <Button variant="ghost">Secondary Action</Button>
-        </ModalFooter> */}
       </ModalContent>
     </Modal>
   );

@@ -1,3 +1,4 @@
+import React, { useContext } from "react";
 import {
   Box,
   Flex,
@@ -16,15 +17,30 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, ChevronIcon, CloseIcon } from "utils/icons";
 
+import UserContext from "store/UserContext";
 import AuthModal from "components/Modals/AuthModal";
 
 export default function WithSubnavigation() {
+  const { handleSignOut, isSignedIn, loading } = useContext(UserContext);
+  console.log("\n\nIS SIGNED IN:", isSignedIn, "\n\n");
+
   const { isOpen, onToggle } = useDisclosure();
   const {
     isOpen: isAuthModalOpen,
     onClose: onAuthModalClose,
     onOpen: onAuthModalOpen,
   } = useDisclosure();
+
+  const handleClickSignInOrSignOut = (signInOrSignOut) => {
+    if (signInOrSignOut === "signin" || signInOrSignOut === "signup") {
+      // TODO: add/pass arg to modal to tell it which tab to show onMount
+      onAuthModalOpen();
+    } else if (signInOrSignOut === "signout") {
+      handleSignOut();
+    } else {
+      throw new Error("Invalid value: must be 'signin' or 'signout'");
+    }
+  };
 
   return (
     <Box>
@@ -74,16 +90,19 @@ export default function WithSubnavigation() {
           direction={"row"}
           spacing={6}
         >
-          <Button
-            as={"a"}
-            fontSize={"sm"}
-            fontWeight={400}
-            variant={"link"}
-            href={"#"}
-            onClick={onAuthModalOpen}
-          >
-            Sign In
-          </Button>
+          {!isSignedIn && (
+            <Button
+              as={"a"}
+              fontSize={"sm"}
+              fontWeight={400}
+              variant={"link"}
+              href={"#"}
+              onClick={() => handleClickSignInOrSignOut("signin")}
+            >
+              Sign In
+            </Button>
+          )}
+
           <Button
             display={{ base: "none", md: "inline-flex" }}
             fontSize={"sm"}
@@ -94,9 +113,11 @@ export default function WithSubnavigation() {
             _hover={{
               bg: "blue.500",
             }}
-            onClick={onAuthModalOpen}
+            onClick={() =>
+              handleClickSignInOrSignOut(isSignedIn ? "signout" : "signup")
+            }
           >
-            Sign Up
+            {isSignedIn ? "Sign Out" : "Sign Up"}
           </Button>
         </Stack>
       </Flex>
