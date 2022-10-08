@@ -9,8 +9,13 @@ const Editor = () => {
   const [value, setValue] = useState("");
 
   return (
-    <Flex justify="center" mt="2rem">
-      <Box w="100%" maxW={{ base: "90%", sm: "450px", md: "600px" }}>
+    <Flex justify="center" mt="2rem" w="100%">
+      <Box
+        w="100%"
+        // w={{ base: "90%", sm: "80%" }}
+        // w={{ base: "90%", sm: "100%" }}
+        // maxW={{ base: "100vw", sm: "450px", md: "640px" }}
+      >
         <ReactQuill
           theme="snow"
           modules={quillSettings.modules}

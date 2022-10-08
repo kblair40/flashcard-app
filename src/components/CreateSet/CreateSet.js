@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Box, Flex } from "@chakra-ui/react";
 
 import Editors from "./Editors";
 import api from "api";
@@ -29,9 +30,11 @@ const CreateSet = () => {
   }, [params]);
 
   return (
-    <div>
-      <Editors />
-    </div>
+    <Flex justify="center" w="100%">
+      <Box w={{ base: "90%", md: "700px" }}>
+        <Editors />
+      </Box>
+    </Flex>
   );
 };
 
