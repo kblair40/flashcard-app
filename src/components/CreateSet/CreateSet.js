@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import Editors from "./Editors";
 import api from "api";
 
 const CreateSet = () => {
-  const [setData, setSetData] = useState();
+  const [flashcardSetData, setFlashcardSetData] = useState();
 
   const params = useParams();
 
@@ -13,6 +14,10 @@ const CreateSet = () => {
       try {
         const response = await api.get(`/flashcard_set/${id}`);
         console.log("\nRESPONSE:", response.data, "\n");
+
+        if (response.data && response.data.set) {
+          setFlashcardSetData(response.data.set);
+        }
       } catch (e) {
         console.log("FAILED FETCHING SET:", e);
       }
@@ -23,7 +28,11 @@ const CreateSet = () => {
     }
   }, [params]);
 
-  return <div>CreateSet</div>;
+  return (
+    <div>
+      <Editors />
+    </div>
+  );
 };
 
 export default CreateSet;

@@ -20,3 +20,9 @@ code {
 .ql-container {
   min-height: 200px !important;
 }
+.ql-editor {
+  height: 100% !important;
+}
+.ql-blank {
+  height: 100% !important;
+}
