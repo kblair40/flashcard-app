@@ -4,9 +4,9 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import SignupForm from "../SignupForm";
 import SigninForm from "../SigninForm";
 
-const AuthModalTabs = ({ onClose, onAuthSuccess }) => {
+const AuthModalTabs = ({ onClose, onAuthSuccess, defaultTab }) => {
   return (
-    <Tabs isFitted>
+    <Tabs isFitted defaultIndex={defaultTab}>
       <TabList mb="1rem">
         <Tab>Sign Up</Tab>
         <Tab>Sign In</Tab>

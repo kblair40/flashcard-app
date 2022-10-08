@@ -11,7 +11,7 @@ import {
 import UserContext from "store/UserContext";
 import Tabs from "./Tabs";
 
-const AuthModal = ({ isOpen, onClose }) => {
+const AuthModal = ({ isOpen, onClose, defaultTab }) => {
   const { handleSignIn } = useContext(UserContext);
 
   const onAuthSuccess = (token) => {
@@ -26,7 +26,11 @@ const AuthModal = ({ isOpen, onClose }) => {
       <ModalContent>
         <ModalCloseButton />
         <ModalBody>
-          <Tabs onClose={onClose} onAuthSuccess={onAuthSuccess} />
+          <Tabs
+            onClose={onClose}
+            onAuthSuccess={onAuthSuccess}
+            defaultTab={defaultTab}
+          />
         </ModalBody>
       </ModalContent>
     </Modal>

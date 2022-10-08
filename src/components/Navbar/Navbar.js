@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   Box,
   Flex,
@@ -21,6 +21,7 @@ import UserContext from "store/UserContext";
 import AuthModal from "components/Modals/AuthModal";
 
 export default function WithSubnavigation() {
+  const [authModalDefaultTab, setAuthModalDefaultTab] = useState(0);
   const { handleSignOut, isSignedIn, loading } = useContext(UserContext);
   console.log("\n\nIS SIGNED IN:", isSignedIn, "\n\n");
 
@@ -34,6 +35,9 @@ export default function WithSubnavigation() {
   const handleClickSignInOrSignOut = (signInOrSignOut) => {
     if (signInOrSignOut === "signin" || signInOrSignOut === "signup") {
       // TODO: add/pass arg to modal to tell it which tab to show onMount
+      let defaultTab = signInOrSignOut === "signin" ? 1 : 0;
+      setAuthModalDefaultTab(defaultTab);
+
       onAuthModalOpen();
     } else if (signInOrSignOut === "signout") {
       handleSignOut();
@@ -79,7 +83,11 @@ export default function WithSubnavigation() {
           </Text>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
-            <AuthModal isOpen={isAuthModalOpen} onClose={onAuthModalClose} />
+            <AuthModal
+              isOpen={isAuthModalOpen}
+              onClose={onAuthModalClose}
+              defaultTab={authModalDefaultTab}
+            />
             <DesktopNav />
           </Flex>
         </Flex>
