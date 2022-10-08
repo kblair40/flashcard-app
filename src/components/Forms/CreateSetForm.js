@@ -3,24 +3,47 @@ import {
   FormControl,
   Input,
   FormLabel,
-  Box,
-  Text,
   VStack,
   Flex,
   Button,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+
+import api from "api";
 
 const INITIAL_ERROR_STATE = { title: false };
 
 const CreateSetForm = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
   });
+  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState(INITIAL_ERROR_STATE);
 
-  const handleSubmit = () => {
-    //
+  const handleSubmit = async () => {
+    setLoading(true);
+    const { title, description } = formData;
+
+    if (!title) {
+      setErrors({ ...errors, title: true });
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await api.post("/flashcard_set", {
+        title,
+        description,
+      });
+      console.log("\nCREATE RESPONSE:", response.data);
+    } catch (e) {
+      console.error("FAILED CREATING SET:", e);
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -40,7 +63,7 @@ const CreateSetForm = () => {
           />
         </FormControl>
 
-        <FormControl isRequired>
+        <FormControl>
           <FormLabel>Description</FormLabel>
           <Input
             onChange={(e) =>
@@ -49,7 +72,7 @@ const CreateSetForm = () => {
           />
         </FormControl>
 
-        <Button w="100%" onClick={handleSubmit}>
+        <Button w="100%" onClick={handleSubmit} isLoading={loading}>
           Create
         </Button>
       </VStack>
