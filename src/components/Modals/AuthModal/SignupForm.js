@@ -49,6 +49,21 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
   const handleSubmit = async () => {
     setLoading(true);
 
+    let errorObj = { ...INITIAL_ERROR_STATE };
+    let foundError = false;
+    for (let field in errorObj) {
+      if (!formData[field]) {
+        errorObj[field] = true;
+        foundError = true;
+      }
+    }
+
+    if (foundError) {
+      setErrors({ ...errors, ...errorObj });
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await api.post("/signup", {
         ...formData,
@@ -59,14 +74,11 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
         onClose();
       }
     } catch (e) {
-      console.error("FAILED SIGNING UP:", e);
-      console.log("ERROR RESPONSE:", e.response);
+      console.error("FAILED SIGNING UP:", e.response);
       if (e.response.data) {
         const { error_field, error_msg } = e.response.data;
-        console.log("yes");
 
         if (error_field && error_msg) {
-          console.log("yes2");
           let errorMsg = ["email", "username"].includes(error_field)
             ? error_msg
             : true;
