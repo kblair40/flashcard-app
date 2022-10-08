@@ -41,8 +41,6 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChange = (e) => {
-    // console.log("NAME:", e.target.name);
-    // console.log("VALUE:", e.target.value);
     const { name, value } = e.target;
     setFormData({ ...formData, [`${name}`]: value });
 
