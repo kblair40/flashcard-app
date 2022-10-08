@@ -18,7 +18,7 @@ const AuthModal = ({ isOpen, onClose }) => {
       <ModalContent>
         <ModalCloseButton />
         <ModalBody>
-          <Tabs />
+          <Tabs onClose={onClose} />
         </ModalBody>
 
         {/* <ModalFooter>

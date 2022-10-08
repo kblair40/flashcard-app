@@ -2,19 +2,20 @@ import React, { useState } from "react";
 import {
   Box,
   Heading,
-  Text,
-  Flex,
   Button,
   VStack,
   HStack,
   Input,
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
+  // FormErrorMessage,
+  // FormHelperText,q
 } from "@chakra-ui/react";
 
-const SignupForm = () => {
+import api from "api";
+
+const SignupForm = ({ onClose }) => {
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -29,6 +30,25 @@ const SignupForm = () => {
     // console.log("VALUE:", e.target.value);
     const { name, value } = e.target;
     setFormData({ ...formData, [`${name}`]: value });
+  };
+
+  const handleSubmit = async () => {
+    setLoading(true);
+
+    try {
+      const response = await api.post("/signup", {
+        ...formData,
+      });
+      console.log("RESPONSE:", response.data);
+
+      if (response && response.data) {
+        onClose();
+      }
+    } catch (e) {
+      console.error("FAILED SIGNING UP:", e);
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -93,7 +113,9 @@ const SignupForm = () => {
 
         <HStack pt="1.5rem" w="100%" justify="end">
           <Button>Cancel</Button>
-          <Button>Submit</Button>
+          <Button isLoading={loading} onClick={handleSubmit}>
+            Submit
+          </Button>
         </HStack>
       </VStack>
     </Box>
