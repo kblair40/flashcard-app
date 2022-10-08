@@ -12,13 +12,16 @@ import {
 import Tabs from "./Tabs";
 
 const AuthModal = ({ isOpen, onClose }) => {
+  const onAuthSuccess = (token) => {
+    window.localStorage.setItem("auth-token", token);
+  };
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="lg">
       <ModalOverlay />
       <ModalContent>
         <ModalCloseButton />
         <ModalBody>
-          <Tabs onClose={onClose} />
+          <Tabs onClose={onClose} onAuthSuccess={onAuthSuccess} />
         </ModalBody>
 
         {/* <ModalFooter>

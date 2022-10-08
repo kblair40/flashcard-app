@@ -8,13 +8,21 @@ import {
   Input,
   FormControl,
   FormLabel,
-  // FormErrorMessage,
-  // FormHelperText,q
+  FormErrorMessage,
 } from "@chakra-ui/react";
 
 import api from "api";
 
-const SignupForm = ({ onClose }) => {
+const INITIAL_ERROR_STATE = {
+  first_name: false,
+  last_name: false,
+  email: false,
+  username: false,
+  password: false,
+  confirm_password: false,
+};
+
+const SignupForm = ({ onClose, onAuthSuccess }) => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     first_name: "",
@@ -24,6 +32,7 @@ const SignupForm = ({ onClose }) => {
     password: "",
     confirm_password: "",
   });
+  const [errors, setErrors] = useState(INITIAL_ERROR_STATE);
 
   const handleChange = (e) => {
     // console.log("NAME:", e.target.name);
@@ -57,41 +66,45 @@ const SignupForm = ({ onClose }) => {
         <Heading mb="2rem">Sign Up</Heading>
 
         <HStack>
-          <FormControl>
+          <FormControl isRequired isInvalid={!!errors["first_name"]}>
             <FormLabel>First Name</FormLabel>
             <Input
               name="first_name"
               value={formData.first_name}
               onChange={handleChange}
             />
+            <FormErrorMessage>First name is required</FormErrorMessage>
           </FormControl>
 
-          <FormControl>
+          <FormControl isRequired isInvalid={!!errors["last_name"]}>
             <FormLabel>Last Name</FormLabel>
             <Input
               name="last_name"
               value={formData.last_name}
               onChange={handleChange}
             />
+            <FormErrorMessage>Last name is required</FormErrorMessage>
           </FormControl>
         </HStack>
 
-        <FormControl>
+        <FormControl isRequired isInvalid={!!errors["email"]}>
           <FormLabel>Email address</FormLabel>
           <Input name="email" value={formData.email} onChange={handleChange} />
+          <FormErrorMessage>Email is required</FormErrorMessage>
         </FormControl>
 
-        <FormControl>
+        <FormControl isRequired isInvalid={!!errors["username"]}>
           <FormLabel>Username</FormLabel>
           <Input
             name="username"
             value={formData.username}
             onChange={handleChange}
           />
+          <FormErrorMessage>Username is required</FormErrorMessage>
         </FormControl>
 
         <HStack>
-          <FormControl>
+          <FormControl isRequired isInvalid={!!errors["password"]}>
             <FormLabel>Password</FormLabel>
             <Input
               type="password"
@@ -99,8 +112,9 @@ const SignupForm = ({ onClose }) => {
               value={formData.password}
               onChange={handleChange}
             />
+            <FormErrorMessage>Password is required</FormErrorMessage>
           </FormControl>
-          <FormControl>
+          <FormControl isRequired isInvalid={!!errors["confirm_password"]}>
             <FormLabel>Confirm Password</FormLabel>
             <Input
               type="password"
@@ -108,6 +122,7 @@ const SignupForm = ({ onClose }) => {
               value={formData.confirm_password}
               onChange={handleChange}
             />
+            <FormErrorMessage>Confirm password is required</FormErrorMessage>
           </FormControl>
         </HStack>
 
