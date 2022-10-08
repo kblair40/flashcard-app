@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Flex, Box } from "@chakra-ui/react";
-
-import ReactQuill from "react-quill";
+import ReactQuill, { Quill } from "react-quill";
 import "react-quill/dist/quill.snow.css";
+
+import { quillSettings } from "utils/constants";
 
 const Editor = () => {
   const [value, setValue] = useState("");
@@ -10,7 +11,14 @@ const Editor = () => {
   return (
     <Flex justify="center" mt="2rem">
       <Box w="100%" maxW={"600px"}>
-        <ReactQuill theme="snow" value={value} onChange={setValue} />
+        <ReactQuill
+          // formats={quillSettings.formats}
+          // toolbar={quillSettings.toolbar}
+          theme="snow"
+          value={value}
+          onChange={setValue}
+          preserveWhitespace={true}
+        />
       </Box>
     </Flex>
   );
