@@ -8,6 +8,12 @@ import {
   Stack,
   Collapse,
   Link,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuDivider,
+  Avatar,
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -22,8 +28,8 @@ import AuthModal from "components/Modals/AuthModal";
 
 export default function WithSubnavigation() {
   const [authModalDefaultTab, setAuthModalDefaultTab] = useState(0);
-  const { handleSignOut, isSignedIn, loading } = useContext(UserContext);
-  console.log("\n\nIS SIGNED IN:", isSignedIn, "\n\n");
+  const { handleSignOut, isSignedIn } = useContext(UserContext);
+  console.log("IS SIGNED IN:", isSignedIn);
 
   const { isOpen, onToggle } = useDisclosure();
   const {
@@ -111,22 +117,28 @@ export default function WithSubnavigation() {
             </Button>
           )}
 
-          <Button
-            display={{ base: "none", md: "inline-flex" }}
-            fontSize={"sm"}
-            fontWeight={600}
-            color={"white"}
-            bg={"blue.400"}
-            href={"#"}
-            _hover={{
-              bg: "blue.500",
-            }}
-            onClick={() =>
-              handleClickSignInOrSignOut(isSignedIn ? "signout" : "signup")
-            }
-          >
-            {isSignedIn ? "Sign Out" : "Sign Up"}
-          </Button>
+          {isSignedIn ? (
+            <AvatarMenu
+              handleClickSignout={() => handleClickSignInOrSignOut("signout")}
+            />
+          ) : (
+            <Button
+              display={{ base: "none", md: "inline-flex" }}
+              fontSize={"sm"}
+              fontWeight={600}
+              color={"white"}
+              bg={"blue.400"}
+              href={"#"}
+              _hover={{
+                bg: "blue.500",
+              }}
+              onClick={() =>
+                handleClickSignInOrSignOut(isSignedIn ? "signout" : "signup")
+              }
+            >
+              {isSignedIn ? "Sign Out" : "Sign Up"}
+            </Button>
+          )}
         </Stack>
       </Flex>
 
@@ -216,8 +228,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
           align={"center"}
           flex={1}
         >
-          <ChevronIcon fill="blue.500" boxSize="20px" />
-          {/* <Icon color={"pink.400"} w={5} h={5} as={ChevronRightIcon} /> */}
+          <ChevronIcon fill="blue.400" boxSize="20px" />
         </Flex>
       </Stack>
     </Link>
@@ -287,6 +298,30 @@ const MobileNavItem = ({ label, children, href }) => {
         </Stack>
       </Collapse>
     </Stack>
+  );
+};
+
+const AvatarMenu = ({ handleClickSignout }) => {
+  return (
+    <Flex alignItems={"center"}>
+      <Menu>
+        <MenuButton
+          as={Button}
+          rounded={"full"}
+          variant={"link"}
+          cursor={"pointer"}
+          minW={0}
+        >
+          <Avatar size={"sm"} bg="blue.400" />
+        </MenuButton>
+        <MenuList>
+          <MenuItem>Link 1</MenuItem>
+          <MenuItem>Link 2</MenuItem>
+          <MenuDivider />
+          <MenuItem onClick={handleClickSignout}>Signout</MenuItem>
+        </MenuList>
+      </Menu>
+    </Flex>
   );
 };
 
