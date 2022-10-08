@@ -5,15 +5,17 @@ import "react-quill/dist/quill.snow.css";
 
 import { quillSettings } from "utils/constants";
 
+// const formats = ["bold", "italic", "underline"];
+
 const Editor = () => {
   const [value, setValue] = useState("");
 
   return (
     <Flex justify="center" mt="2rem">
-      <Box w="100%" maxW={"600px"}>
+      <Box w="100%" maxW={{ base: "90%", sm: "450px", md: "600px" }}>
         <ReactQuill
-          // formats={quillSettings.formats}
-          // toolbar={quillSettings.toolbar}
+          // formats={formats}
+          modules={quillSettings.modules}
           theme="snow"
           value={value}
           onChange={setValue}
