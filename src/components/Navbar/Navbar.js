@@ -14,9 +14,9 @@ import {
   MenuItem,
   MenuDivider,
   Avatar,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
+  // Popover,
+  // PopoverTrigger,
+  // PopoverContent,
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
@@ -158,24 +158,24 @@ const DesktopNav = () => {
     <Stack direction={"row"} spacing={4}>
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
-          <Popover trigger={"hover"} placement={"bottom-start"}>
-            <PopoverTrigger>
-              <Link
-                p={2}
-                href={navItem.href ?? "#"}
-                fontSize={"sm"}
-                fontWeight={500}
-                color={linkColor}
-                _hover={{
-                  textDecoration: "none",
-                  color: linkHoverColor,
-                }}
-              >
-                {navItem.label}
-              </Link>
-            </PopoverTrigger>
+          {/* <Popover trigger={"hover"} placement={"bottom-start"}> */}
+          {/* <PopoverTrigger> */}
+          <Link
+            p={2}
+            href={navItem.href ?? "#"}
+            fontSize={"sm"}
+            fontWeight={500}
+            color={linkColor}
+            _hover={{
+              textDecoration: "none",
+              color: linkHoverColor,
+            }}
+          >
+            {navItem.label}
+          </Link>
+          {/* </PopoverTrigger> */}
 
-            {navItem.children && (
+          {/* {navItem.children && (
               <PopoverContent
                 border={0}
                 boxShadow={"xl"}
@@ -190,8 +190,8 @@ const DesktopNav = () => {
                   ))}
                 </Stack>
               </PopoverContent>
-            )}
-          </Popover>
+            )} */}
+          {/* </Popover> */}
         </Box>
       ))}
     </Stack>
@@ -206,13 +206,13 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
       display={"block"}
       p={2}
       rounded={"md"}
-      _hover={{ bg: useColorModeValue("pink.50", "gray.900") }}
+      _hover={{ bg: useColorModeValue("blue.50", "gray.900") }}
     >
       <Stack direction={"row"} align={"center"}>
         <Box>
           <Text
             transition={"all .3s ease"}
-            _groupHover={{ color: "pink.400" }}
+            _groupHover={{ color: "blue.400" }}
             fontWeight={500}
           >
             {label}
@@ -328,18 +328,18 @@ const AvatarMenu = ({ handleClickSignout }) => {
 const NAV_ITEMS = [
   {
     label: "Create",
-    children: [
-      {
-        label: "Job Board",
-        subLabel: "Find your dream design job",
-        href: "#",
-      },
-      {
-        label: "Freelance Projects",
-        subLabel: "An exclusive list for contract work",
-        href: "#",
-      },
-    ],
+    // children: [
+    //   {
+    //     label: "Job Board",
+    //     subLabel: "Find your dream design job",
+    //     href: "#",
+    //   },
+    //   {
+    //     label: "Freelance Projects",
+    //     subLabel: "An exclusive list for contract work",
+    //     href: "#",
+    //   },
+    // ],
   },
   {
     label: "Manage",
