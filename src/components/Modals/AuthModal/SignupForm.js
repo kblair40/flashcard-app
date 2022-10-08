@@ -39,6 +39,11 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
     // console.log("VALUE:", e.target.value);
     const { name, value } = e.target;
     setFormData({ ...formData, [`${name}`]: value });
+
+    if (errors[name]) {
+      // clear all errors on change if the field being edited has an error.
+      setErrors(INITIAL_ERROR_STATE);
+    }
   };
 
   const handleSubmit = async () => {
@@ -62,7 +67,9 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
 
         if (error_field && error_msg) {
           console.log("yes2");
-          let errorMsg = error_field === "email" ? error_msg : true;
+          let errorMsg = ["email", "username"].includes(error_field)
+            ? error_msg
+            : true;
           setErrors({ ...errors, [`${error_field}`]: errorMsg });
         }
       }
@@ -117,7 +124,11 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
             value={formData.username}
             onChange={handleChange}
           />
-          <FormErrorMessage>Username is required</FormErrorMessage>
+          <FormErrorMessage>
+            {errors["username"] && typeof errors["username"] === "boolean"
+              ? "Username is required"
+              : errors["username"]}
+          </FormErrorMessage>
         </FormControl>
 
         <HStack>
