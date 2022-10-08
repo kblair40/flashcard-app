@@ -13,11 +13,13 @@ function App() {
       <Box minH="100vh">
         <Navbar />
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/create" element={<Create />} />
-          <Route path="/create/:id" element={<Create />} />
-        </Routes>
+        <Box position="relative">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/create" element={<Create />} />
+            <Route path="/create/:id" element={<Create />} />
+          </Routes>
+        </Box>
       </Box>
     </UserProvider>
   );
