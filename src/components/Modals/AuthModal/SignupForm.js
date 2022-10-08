@@ -132,20 +132,27 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
 
   const iconButtonProps = {
     size: "sm",
+    position: "relative",
+    bottom: "4px",
+    width: "100%",
+    borderRadius: "4px",
     bg: "transparent",
     transitionDuration: "0.3s",
-    _hover: { bg: "gray.100" },
+    _hover: { bg: "gray.50" },
+    _active: { bg: "gray.100" },
   };
 
   return (
     <Box>
-      <VStack>
+      <VStack spacing="1rem">
         <Heading mb="2rem">Sign Up</Heading>
 
-        <HStack>
+        <HStack w="100%" spacing="1rem">
           <FormControl isRequired isInvalid={!!errors["first_name"]}>
-            <FormLabel>First Name</FormLabel>
+            <FormLabel fontSize="sm">First Name</FormLabel>
             <Input
+              size="sm"
+              w="100%"
               name="first_name"
               value={formData.first_name}
               onChange={handleChange}
@@ -158,8 +165,9 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
           </FormControl>
 
           <FormControl isRequired isInvalid={!!errors["last_name"]}>
-            <FormLabel>Last Name</FormLabel>
+            <FormLabel fontSize="sm">Last Name</FormLabel>
             <Input
+              size="sm"
               name="last_name"
               value={formData.last_name}
               onChange={handleChange}
@@ -174,8 +182,13 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
         </HStack>
 
         <FormControl isRequired isInvalid={!!errors["email"]}>
-          <FormLabel>Email address</FormLabel>
-          <Input name="email" value={formData.email} onChange={handleChange} />
+          <FormLabel fontSize="sm">Email address</FormLabel>
+          <Input
+            size="sm"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+          />
 
           <FormErrorMessage>
             {errors["email"] && typeof errors["email"] === "boolean"
@@ -185,8 +198,9 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
         </FormControl>
 
         <FormControl isRequired isInvalid={!!errors["username"]}>
-          <FormLabel>Username</FormLabel>
+          <FormLabel fontSize="sm">Username</FormLabel>
           <Input
+            size="sm"
             name="username"
             value={formData.username}
             onChange={handleChange}
@@ -199,16 +213,17 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
         </FormControl>
 
         <FormControl isRequired isInvalid={!!errors["password"]}>
-          <FormLabel>Password</FormLabel>
+          <FormLabel fontSize="sm">Password</FormLabel>
           <InputGroup>
             <Input
+              size="sm"
               type={showPassword ? "text" : "password"}
               name="password"
               value={formData.password}
               onChange={handleChange}
             />
 
-            <InputRightElement w="3.5rem">
+            <InputRightElement w="2.5rem">
               <IconButton
                 {...iconButtonProps}
                 onClick={() => setShowPassword(!showPassword)}
@@ -231,15 +246,16 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
         </FormControl>
 
         <FormControl isRequired isInvalid={!!errors["confirm_password"]}>
-          <FormLabel>Confirm Password</FormLabel>
+          <FormLabel fontSize="sm">Confirm Password</FormLabel>
           <InputGroup>
             <Input
+              size="sm"
               type={showConfirmPassword ? "text" : "password"}
               name="confirm_password"
               value={formData.confirm_password}
               onChange={handleChange}
             />
-            <InputRightElement w="3.5rem">
+            <InputRightElement w="2.5rem">
               <IconButton
                 {...iconButtonProps}
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
@@ -262,9 +278,9 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
           </FormErrorMessage>
         </FormControl>
 
-        <HStack pt="1.5rem" w="100%" justify="end">
-          <Button>Cancel</Button>
-          <Button isLoading={loading} onClick={handleSubmit}>
+        <HStack pt="1.5rem" w="100%" justify="end" spacing="1rem">
+          <Button w="50%">Cancel</Button>
+          <Button w="50%" isLoading={loading} onClick={handleSubmit}>
             Submit
           </Button>
         </HStack>
