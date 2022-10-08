@@ -55,6 +55,17 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
       }
     } catch (e) {
       console.error("FAILED SIGNING UP:", e);
+      console.log("ERROR RESPONSE:", e.response);
+      if (e.response.data) {
+        const { error_field, error_msg } = e.response.data;
+        console.log("yes");
+
+        if (error_field && error_msg) {
+          console.log("yes2");
+          let errorMsg = error_field === "email" ? error_msg : true;
+          setErrors({ ...errors, [`${error_field}`]: errorMsg });
+        }
+      }
     }
 
     setLoading(false);
@@ -83,6 +94,7 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
               value={formData.last_name}
               onChange={handleChange}
             />
+
             <FormErrorMessage>Last name is required</FormErrorMessage>
           </FormControl>
         </HStack>
@@ -90,7 +102,12 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
         <FormControl isRequired isInvalid={!!errors["email"]}>
           <FormLabel>Email address</FormLabel>
           <Input name="email" value={formData.email} onChange={handleChange} />
-          <FormErrorMessage>Email is required</FormErrorMessage>
+
+          <FormErrorMessage>
+            {errors["email"] && typeof errors["email"] === "boolean"
+              ? "Email is required"
+              : errors["email"]}
+          </FormErrorMessage>
         </FormControl>
 
         <FormControl isRequired isInvalid={!!errors["username"]}>
@@ -114,6 +131,7 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
             />
             <FormErrorMessage>Password is required</FormErrorMessage>
           </FormControl>
+
           <FormControl isRequired isInvalid={!!errors["confirm_password"]}>
             <FormLabel>Confirm Password</FormLabel>
             <Input
