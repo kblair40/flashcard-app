@@ -6,8 +6,8 @@ import SigninForm from "../SigninForm";
 
 const AuthModalTabs = () => {
   return (
-    <Tabs>
-      <TabList>
+    <Tabs isFitted>
+      <TabList mb="1rem">
         <Tab>Sign Up</Tab>
         <Tab>Sign In</Tab>
       </TabList>
