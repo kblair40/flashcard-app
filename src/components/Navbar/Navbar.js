@@ -8,15 +8,6 @@ import {
   Stack,
   Collapse,
   Link,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
-  Avatar,
-  // Popover,
-  // PopoverTrigger,
-  // PopoverContent,
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
@@ -24,6 +15,7 @@ import {
 import { HamburgerIcon, ChevronIcon, CloseIcon } from "utils/icons";
 
 import UserContext from "store/UserContext";
+import AvatarMenu from "./AvatarMenu";
 import AuthModal from "components/Modals/AuthModal";
 
 export default function WithSubnavigation() {
@@ -158,8 +150,6 @@ const DesktopNav = () => {
     <Stack direction={"row"} spacing={4}>
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
-          {/* <Popover trigger={"hover"} placement={"bottom-start"}> */}
-          {/* <PopoverTrigger> */}
           <Link
             p={2}
             href={navItem.href ?? "#"}
@@ -173,65 +163,9 @@ const DesktopNav = () => {
           >
             {navItem.label}
           </Link>
-          {/* </PopoverTrigger> */}
-
-          {/* {navItem.children && (
-              <PopoverContent
-                border={0}
-                boxShadow={"xl"}
-                bg={popoverContentBgColor}
-                p={4}
-                rounded={"xl"}
-                minW={"sm"}
-              >
-                <Stack>
-                  {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
-                  ))}
-                </Stack>
-              </PopoverContent>
-            )} */}
-          {/* </Popover> */}
         </Box>
       ))}
     </Stack>
-  );
-};
-
-const DesktopSubNav = ({ label, href, subLabel }) => {
-  return (
-    <Link
-      href={href}
-      role={"group"}
-      display={"block"}
-      p={2}
-      rounded={"md"}
-      _hover={{ bg: useColorModeValue("blue.50", "gray.900") }}
-    >
-      <Stack direction={"row"} align={"center"}>
-        <Box>
-          <Text
-            transition={"all .3s ease"}
-            _groupHover={{ color: "blue.400" }}
-            fontWeight={500}
-          >
-            {label}
-          </Text>
-          <Text fontSize={"sm"}>{subLabel}</Text>
-        </Box>
-        <Flex
-          transition={"all .3s ease"}
-          transform={"translateX(-10px)"}
-          opacity={0}
-          _groupHover={{ opacity: "100%", transform: "translateX(0)" }}
-          justify={"flex-end"}
-          align={"center"}
-          flex={1}
-        >
-          <ChevronIcon fill="blue.400" boxSize="20px" />
-        </Flex>
-      </Stack>
-    </Link>
   );
 };
 
@@ -301,48 +235,13 @@ const MobileNavItem = ({ label, children, href }) => {
   );
 };
 
-const AvatarMenu = ({ handleClickSignout }) => {
-  return (
-    <Flex alignItems={"center"}>
-      <Menu>
-        <MenuButton
-          as={Button}
-          rounded={"full"}
-          variant={"link"}
-          cursor={"pointer"}
-          minW={0}
-        >
-          <Avatar size={"sm"} bg="blue.400" />
-        </MenuButton>
-        <MenuList>
-          <MenuItem>Link 1</MenuItem>
-          <MenuItem>Link 2</MenuItem>
-          <MenuDivider />
-          <MenuItem onClick={handleClickSignout}>Signout</MenuItem>
-        </MenuList>
-      </Menu>
-    </Flex>
-  );
-};
-
 const NAV_ITEMS = [
   {
-    label: "Create",
-    // children: [
-    //   {
-    //     label: "Job Board",
-    //     subLabel: "Find your dream design job",
-    //     href: "#",
-    //   },
-    //   {
-    //     label: "Freelance Projects",
-    //     subLabel: "An exclusive list for contract work",
-    //     href: "#",
-    //   },
-    // ],
+    label: "Create Flashcard Set",
+    href: "/create",
   },
   {
-    label: "Manage",
+    label: "Manage Flashcard Sets",
     href: "#",
   },
   {

@@ -13,7 +13,10 @@ code {
 }
 
 
+
 /* OVERRIDES */
+
+/* Quill Overrides */
 .ql-container {
   min-height: 200px !important;
 }

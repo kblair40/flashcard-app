@@ -4,6 +4,7 @@ import { Box } from "@chakra-ui/react";
 
 import { UserProvider } from "store/UserContext";
 import Home from "pages/Home";
+import Create from "pages/Create";
 import Navbar from "components/Navbar";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/create" element={<Create />} />
         </Routes>
       </Box>
     </UserProvider>
