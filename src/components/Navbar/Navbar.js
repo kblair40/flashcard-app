@@ -216,6 +216,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
           align={"center"}
           flex={1}
         >
+          <ChevronIcon fill="blue.500" boxSize="20px" />
           {/* <Icon color={"pink.400"} w={5} h={5} as={ChevronRightIcon} /> */}
         </Flex>
       </Stack>
@@ -258,15 +259,14 @@ const MobileNavItem = ({ label, children, href }) => {
         >
           {label}
         </Text>
-        {/* {children && (
-          <Icon
-            as={ChevronDownIcon}
+        {children && (
+          <ChevronIcon
+            boxSize="20px"
             transition={"all .25s ease-in-out"}
-            transform={isOpen ? "rotate(180deg)" : ""}
-            w={6}
-            h={6}
+            transform={isOpen ? "rotate(270deg)" : "rotate(90deg)"}
+            fill={"gray.600"}
           />
-        )} */}
+        )}
       </Flex>
 
       <Collapse in={isOpen} animateOpacity style={{ marginTop: "0!important" }}>
@@ -291,21 +291,6 @@ const MobileNavItem = ({ label, children, href }) => {
 };
 
 const NAV_ITEMS = [
-  // {
-  //   label: "Inspiration",
-  //   children: [
-  //     {
-  //       label: "Explore Design Work",
-  //       subLabel: "Trending Design to inspire you",
-  //       href: "#",
-  //     },
-  //     {
-  //       label: "New & Noteworthy",
-  //       subLabel: "Up-and-coming Designers",
-  //       href: "#",
-  //     },
-  //   ],
-  // },
   {
     label: "Create",
     children: [
