@@ -2,7 +2,7 @@ import {
   Box,
   Flex,
   Text,
-  // IconButton,
+  IconButton,
   Button,
   Stack,
   Collapse,
@@ -15,6 +15,7 @@ import {
   useBreakpointValue,
   useDisclosure,
 } from "@chakra-ui/react";
+import { HamburgerIcon, ChevronIcon, CloseIcon } from "utils/icons";
 // import {
 //   HamburgerIcon,
 //   CloseIcon,
@@ -43,14 +44,14 @@ export default function WithSubnavigation() {
           ml={{ base: -2 }}
           display={{ base: "flex", md: "none" }}
         >
-          {/* <IconButton
+          <IconButton
             onClick={onToggle}
             icon={
               isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
             }
             variant={"ghost"}
             aria-label={"Toggle Navigation"}
-          /> */}
+          />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
           <Text
@@ -86,10 +87,10 @@ export default function WithSubnavigation() {
             fontSize={"sm"}
             fontWeight={600}
             color={"white"}
-            bg={"pink.400"}
+            bg={"blue.400"}
             href={"#"}
             _hover={{
-              bg: "pink.300",
+              bg: "blue.500",
             }}
           >
             Sign Up
@@ -258,23 +259,23 @@ const MobileNavItem = ({ label, children, href }) => {
 };
 
 const NAV_ITEMS = [
+  // {
+  //   label: "Inspiration",
+  //   children: [
+  //     {
+  //       label: "Explore Design Work",
+  //       subLabel: "Trending Design to inspire you",
+  //       href: "#",
+  //     },
+  //     {
+  //       label: "New & Noteworthy",
+  //       subLabel: "Up-and-coming Designers",
+  //       href: "#",
+  //     },
+  //   ],
+  // },
   {
-    label: "Inspiration",
-    children: [
-      {
-        label: "Explore Design Work",
-        subLabel: "Trending Design to inspire you",
-        href: "#",
-      },
-      {
-        label: "New & Noteworthy",
-        subLabel: "Up-and-coming Designers",
-        href: "#",
-      },
-    ],
-  },
-  {
-    label: "Find Work",
+    label: "Create",
     children: [
       {
         label: "Job Board",
@@ -289,11 +290,11 @@ const NAV_ITEMS = [
     ],
   },
   {
-    label: "Learn Design",
+    label: "Manage",
     href: "#",
   },
   {
-    label: "Hire Designers",
+    label: "Study",
     href: "#",
   },
 ];
