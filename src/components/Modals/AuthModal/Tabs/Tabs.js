@@ -5,7 +5,23 @@ import SignupForm from "../SignupForm";
 import SigninForm from "../SigninForm";
 
 const AuthModalTabs = () => {
-  return <div>Tabs</div>;
+  return (
+    <Tabs>
+      <TabList>
+        <Tab>Sign Up</Tab>
+        <Tab>Sign In</Tab>
+      </TabList>
+
+      <TabPanels>
+        <TabPanel>
+          <SignupForm />
+        </TabPanel>
+        <TabPanel>
+          <SigninForm />
+        </TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
 };
 
 export default AuthModalTabs;
