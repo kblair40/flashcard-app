@@ -6,7 +6,6 @@ import {
   Button,
   Stack,
   Collapse,
-  // Icon,
   Link,
   Popover,
   PopoverTrigger,
@@ -16,12 +15,8 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { HamburgerIcon, ChevronIcon, CloseIcon } from "utils/icons";
-// import {
-//   HamburgerIcon,
-//   CloseIcon,
-//   ChevronDownIcon,
-//   ChevronRightIcon,
-// } from "@chakra-ui/icons";
+
+import SignupModal from "components/Modals/SignupModal";
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
