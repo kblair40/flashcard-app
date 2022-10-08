@@ -11,7 +11,7 @@ import {
   Input,
 } from "@chakra-ui/react";
 
-const SignupModal = ({ isOpen, onClose }) => {
+const AuthModal = ({ isOpen, onClose }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -31,4 +31,4 @@ const SignupModal = ({ isOpen, onClose }) => {
   );
 };
 
-export default SignupModal;
+export default AuthModal;

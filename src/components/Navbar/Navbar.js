@@ -16,10 +16,15 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, ChevronIcon, CloseIcon } from "utils/icons";
 
-import SignupModal from "components/Modals/SignupModal";
+import AuthModal from "components/Modals/AuthModal";
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
+  const {
+    isOpen: isAuthModalOpen,
+    onClose: onAuthModalClose,
+    onOpen: onAuthModalOpen,
+  } = useDisclosure();
 
   return (
     <Box>
@@ -58,6 +63,7 @@ export default function WithSubnavigation() {
           </Text>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
+            <AuthModal isOpen={isAuthModalOpen} onClose={onAuthModalClose} />
             <DesktopNav />
           </Flex>
         </Flex>
@@ -74,6 +80,7 @@ export default function WithSubnavigation() {
             fontWeight={400}
             variant={"link"}
             href={"#"}
+            onClick={onAuthModalOpen}
           >
             Sign In
           </Button>
@@ -87,6 +94,7 @@ export default function WithSubnavigation() {
             _hover={{
               bg: "blue.500",
             }}
+            onClick={onAuthModalOpen}
           >
             Sign Up
           </Button>
