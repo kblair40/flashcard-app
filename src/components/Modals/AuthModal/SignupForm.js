@@ -64,15 +64,49 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
       return;
     }
 
+    const {
+      first_name,
+      last_name,
+      email,
+      username,
+      password,
+      confirm_password,
+    } = formData;
+
+    const tooShort = (charCount = 3) =>
+      `Must be at least ${charCount} characters`;
+    const tooLong = (charCount = 28) =>
+      `Cannot be longer than ${charCount} characters`;
+
+    if (first_name.length < 3) errorObj["first_name"] = tooShort();
+    if (first_name.length > 28) errorObj["first_name"] = tooLong();
+    if (last_name.length > 28) errorObj["last_name"] = tooLong();
+    if (last_name.length > 28) errorObj["last_name"] = tooLong();
+    if (username.length < 5) errorObj["username"] = tooShort(5);
+    if (username.length > 24) errorObj["username"] = tooLong(24);
+    if (password !== confirm_password) {
+      errorObj["password"] = "Password does not match confirm password value";
+      errorObj["confirm_password"] = "values must match";
+    }
+    if (password.length < 6) errorObj["password"] = tooShort(6);
+    if (password.length > 24) errorObj["password"] = tooLong(24);
+
+    // TODO - ADD HANDLING TO VALIDATE THAT EMAIL IS LIKELY A VALID EMAIL ADDRESS
+
+    if (Object.values(errorObj).some(Boolean)) {
+      console.log("SETTING ERRORS TO:", errorObj);
+      setErrors(errorObj);
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await api.post("/signup", {
         ...formData,
       });
-      console.log("RESPONSE:", response.data);
+      // console.log("RESPONSE:", response.data);
 
-      if (response && response.data) {
-        onClose();
-      }
+      if (response && response.data) onClose();
     } catch (e) {
       console.error("FAILED SIGNING UP:", e.response);
       if (e.response.data) {
@@ -152,7 +186,11 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
               value={formData.password}
               onChange={handleChange}
             />
-            <FormErrorMessage>Password is required</FormErrorMessage>
+            <FormErrorMessage>
+              {errors["Password"] && typeof errors["password"] === "boolean"
+                ? "Email is required"
+                : errors["password"]}
+            </FormErrorMessage>
           </FormControl>
 
           <FormControl isRequired isInvalid={!!errors["confirm_password"]}>
@@ -163,7 +201,12 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
               value={formData.confirm_password}
               onChange={handleChange}
             />
-            <FormErrorMessage>Confirm password is required</FormErrorMessage>
+            <FormErrorMessage>
+              {errors["confirm_password"] &&
+              typeof errors["confirm_password"] === "boolean"
+                ? "Please confirm your password"
+                : errors["confirm_password"]}
+            </FormErrorMessage>
           </FormControl>
         </HStack>
 
