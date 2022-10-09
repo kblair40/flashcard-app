@@ -31,14 +31,29 @@ const CreateSet = () => {
   }, [params]);
 
   return (
-    <Flex justify="center" w="100%">
-      <Box w={{ base: "100%" }}>
-        <Sidebar />
-      </Box>
+    <Flex
+      justify="center"
+      w="100%"
+      // border="1px solid black"
+      h="calc(100vh - 60px)"
+      overflowY="hidden"
+      // position={"absolute"}
+      // height="100%"
+      // top={0}
+      // left={0}
+      // right={0}
+      // bottom={0}
+    >
+      {/* <Box
+        display={{ base: "hidden", sm: "block" }}
+        w={{ base: "100%", sm: "70%" }}
+      > */}
+      <Sidebar width={{ base: "100%", sm: "30%" }} />
+      {/* </Box> */}
 
-      <Box w={{ base: "90%", md: "700px" }}>
-        <Editors width={{ base: "100%" }} />
-      </Box>
+      {/* <Box w={{ base: "90%", sm: "70%" }}> */}
+      <Editors width={{ base: "100%", sm: "70%" }} />
+      {/* </Box> */}
     </Flex>
   );
 };
