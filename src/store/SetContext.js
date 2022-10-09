@@ -131,6 +131,11 @@ const SetProvider = ({ children }) => {
     setDeleting(false);
   };
 
+  const addCard = () => {
+    clearCards();
+    setActiveCard({ index: -1, id: undefined });
+  };
+
   const clearCards = () => {
     setFrontCardContent("");
     setBackCardContent("");
@@ -151,6 +156,7 @@ const SetProvider = ({ children }) => {
         activeCard,
         updateActiveCard,
         patchCard,
+        addCard,
       }}
     >
       {children}

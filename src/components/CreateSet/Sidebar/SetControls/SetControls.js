@@ -6,8 +6,15 @@ import SetContext from "store/SetContext";
 const SetControls = ({ height = "100%", width = "100%" }) => {
   const [isEditing, setIsEditing] = useState(false);
 
-  const { saveCard, deleteCard, deleting, saving, activeCard, patchCard } =
-    useContext(SetContext);
+  const {
+    addCard,
+    saveCard,
+    deleteCard,
+    deleting,
+    saving,
+    activeCard,
+    patchCard,
+  } = useContext(SetContext);
 
   useEffect(() => {
     setIsEditing(Boolean(activeCard && activeCard.id));
@@ -38,7 +45,7 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
       // borderBottom="1px solid #ececec"
     >
       <VStack w="100%" spacing="1rem">
-        <ControlButton label="New Card" />
+        <ControlButton label="New Card" onClick={addCard} />
         <ControlButton
           onClick={handleClickSave}
           label="Save Card"
