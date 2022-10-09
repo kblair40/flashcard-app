@@ -1,9 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Flex, Button, VStack } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 import SetContext from "store/SetContext";
 
 const SetControls = ({ height = "100%", width = "100%" }) => {
+  const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
 
   const {
@@ -29,6 +31,10 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
     }
   };
 
+  const handleClickExit = () => {
+    navigate("/account/sets");
+  };
+
   return (
     <Flex
       direction="column"
@@ -44,7 +50,7 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
       // border="1px solid #ccc"
       // borderBottom="1px solid #ececec"
     >
-      <VStack w="100%" spacing="1rem">
+      <VStack w="100%" spacing=".5rem">
         <ControlButton label="New Card" onClick={addCard} />
         <ControlButton
           onClick={handleClickSave}
@@ -57,6 +63,7 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
           label="Delete Card"
           loading={deleting}
         />
+        <ControlButton onClick={handleClickExit} label="Save & Exit" />
       </VStack>
     </Flex>
   );
