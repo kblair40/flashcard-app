@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Box, Flex, VStack, Grid, GridItem } from "@chakra-ui/react";
 
+import Sidebar from "./Sidebar";
 import Editors from "./Editors";
 import api from "api";
 
@@ -31,6 +32,10 @@ const CreateSet = () => {
 
   return (
     <Flex justify="center" w="100%">
+      <Box w={{ base: "100%" }}>
+        <Sidebar />
+      </Box>
+
       <Box w={{ base: "90%", md: "700px" }}>
         <Editors width={{ base: "100%" }} />
       </Box>
