@@ -49,6 +49,7 @@ const SetProvider = ({ children }) => {
 
       console.log("\nRESPONSE:", response.data, "\n");
       clearCards();
+      setFlashcardSetData(response.data.flashcardSet);
       setSaving(false);
       return true;
     } catch (err) {

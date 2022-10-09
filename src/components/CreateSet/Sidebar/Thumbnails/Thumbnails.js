@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Heading, Flex } from "@chakra-ui/react";
+import { Box, Heading, Text, Flex } from "@chakra-ui/react";
 
 const Thumbnails = ({ cards, height = "100%", width = "100%" }) => {
   return (
@@ -32,28 +32,52 @@ const Thumbnails = ({ cards, height = "100%", width = "100%" }) => {
         pt="4px"
         mt="4px"
       >
-        <Thumbnail />
-        <Thumbnail />
-        <Thumbnail />
-        <Thumbnail />
+        {cards && cards.length ? (
+          cards.map((card, i) => {
+            return (
+              <Thumbnail key={i} frontContent={card.front_content} index={i} />
+            );
+          })
+        ) : (
+          <Text>No Cards</Text>
+        )}
       </Box>
-      {/* <Thumbnail />
-      <Thumbnail /> */}
     </Box>
   );
 };
 
 export default Thumbnails;
 
-const Thumbnail = () => {
+const Thumbnail = ({ frontContent, index }) => {
   return (
-    <Box
+    <Flex
       mx="auto"
       mb="8px"
-      h="150px"
+      // h="120px"
+      py="8px"
+      minH="60px"
+      maxH="120px"
       w="100%"
       borderRadius="4px"
       border="1px solid #ccc"
-    />
+      justify="center"
+      align="center"
+      cursor="pointer"
+      position="relative"
+      transition={"background 0.3s"}
+      _hover={{ background: "#eee" }}
+    >
+      <Box dangerouslySetInnerHTML={{ __html: frontContent }} />
+
+      <Text
+        position="absolute"
+        top="4px"
+        left="4px"
+        fontWeight="medium"
+        fontSize="xs"
+      >
+        {index + 1}
+      </Text>
+    </Flex>
   );
 };
