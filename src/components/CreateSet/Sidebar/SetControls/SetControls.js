@@ -1,17 +1,25 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Flex, Button, VStack } from "@chakra-ui/react";
 
 import SetContext from "store/SetContext";
 
 const SetControls = ({ height = "100%", width = "100%" }) => {
-  const { saveCard, deleteCard, addCard, saving, activeCard } =
+  const [isEditing, setIsEditing] = useState(false);
+
+  const { saveCard, deleteCard, saving, activeCard, patchCard } =
     useContext(SetContext);
 
-  const isEditing = Boolean(activeCard && activeCard.id);
+  useEffect(() => {
+    setIsEditing(Boolean(activeCard && activeCard.id));
+  }, [activeCard]);
 
   const handleClickSave = async () => {
-    await saveCard();
-    addCard();
+    if (isEditing) {
+      // patch card
+      patchCard(activeCard.id);
+    } else {
+      await saveCard();
+    }
   };
 
   return (
@@ -30,7 +38,7 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
       // borderBottom="1px solid #ececec"
     >
       <VStack w="100%" spacing="1rem">
-        <ControlButton onClick={addCard} label="New Card" />
+        <ControlButton label="New Card" />
         <ControlButton
           onClick={handleClickSave}
           label="Save Card"

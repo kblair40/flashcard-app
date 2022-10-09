@@ -10,7 +10,7 @@ const SetProvider = ({ children }) => {
   const [flashcardSetData, setFlashcardSetData] = useState();
   const [frontCardContent, setFrontCardContent] = useState("");
   const [backCardContent, setBackCardContent] = useState("");
-  const [activeCard, setActiveCard] = useState({ index: 0, id: undefined });
+  const [activeCard, setActiveCard] = useState({ index: -1, id: undefined });
 
   const params = useParams();
 
@@ -73,24 +73,32 @@ const SetProvider = ({ children }) => {
     }
   };
 
-  const patchCard = async (card) => {
-    const { id } = card;
-
+  const patchCard = async (id) => {
     try {
       const response = await api.patch(`/flashcard/${id}`, {
         front_content: frontCardContent,
         back_content: backCardContent,
       });
+
+      console.log("\n\nPATCH RESPONSE:", response.data);
+      if (response.data && response.data.flashcard) {
+        const { flashcard } = response.data;
+        const dataCopy = { ...flashcardSetData };
+        const cardsCopy = [...dataCopy.flashcards];
+
+        cardsCopy[activeCard.index] = flashcard;
+        dataCopy.flashcards = cardsCopy;
+
+        setFlashcardSetData(dataCopy);
+        clearCards();
+        setActiveCard({ id: undefined, index: -1 });
+      }
     } catch (err) {
       console.log("\nERROR PATCHING CARD:", err);
     }
   };
 
   const deleteCard = () => {
-    //
-  };
-
-  const addCard = () => {
     //
   };
 
@@ -109,10 +117,10 @@ const SetProvider = ({ children }) => {
         flashcardSetData,
         saveCard,
         deleteCard,
-        addCard,
         saving,
         activeCard,
         updateActiveCard,
+        patchCard,
       }}
     >
       {children}
