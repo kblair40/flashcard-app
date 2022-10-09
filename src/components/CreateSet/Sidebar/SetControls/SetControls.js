@@ -16,14 +16,16 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
     <Flex
       direction="column"
       justify="center"
+      align="center"
       height={height}
       width={width}
       position="absolute"
       top={0}
       left={0}
       pt="8px"
+      px="8px"
       // border="1px solid #ccc"
-      borderBottom="1px solid #ccc"
+      // borderBottom="1px solid #ececec"
     >
       <VStack w="100%" spacing="1rem">
         <ControlButton onClick={handleClickNewCard} label="New Card" />
@@ -39,7 +41,7 @@ export default SetControls;
 const ControlButton = ({ label, onClick }) => {
   return (
     <Button
-      w="96%"
+      w="100%"
       size="sm"
       colorScheme={label.startsWith("Delete") ? "red" : "blue"}
       onClick={onClick}

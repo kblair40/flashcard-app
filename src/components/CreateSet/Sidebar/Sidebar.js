@@ -12,10 +12,12 @@ const Sidebar = ({ cards, width = "100%" }) => {
         h="100%"
         width="100%"
         position="relative"
-        px="16px"
+        borderRight="1px solid"
+        borderColor="#ccc"
+        // px="16px"
       >
-        <SetControls height="29%" />
-        <Thumbnails height="70%" cards={cards} />
+        <SetControls height="25%" />
+        <Thumbnails height="75%" cards={cards} />
       </Flex>
     </Box>
   );
