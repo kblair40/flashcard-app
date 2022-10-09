@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 
 import SetControls from "./SetControls";
 import Thumbnails from "./Thumbnails";
@@ -8,18 +8,16 @@ const Sidebar = ({ width = "100%" }) => {
   return (
     <Box
       width={width}
-      // border="1px solid red"
-      // position="absolute"
+      border="1px solid #ececec"
       h="100%"
-      // top={0}
-      // left={0}
-      // bottom={0}
+      display={{ base: "none", sm: "block" }}
     >
       <Flex
         direction="column"
         h="100%"
-        // border="1px solid black"
-        //
+        width="100%"
+        position="relative"
+        px="16px"
       >
         <SetControls height="30%" />
         <Thumbnails height="70%" />
