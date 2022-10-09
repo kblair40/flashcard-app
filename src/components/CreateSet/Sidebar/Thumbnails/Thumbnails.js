@@ -1,23 +1,30 @@
 import React from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 
 const Thumbnails = ({ cards, height = "100%", width = "100%" }) => {
   return (
-    <Box
-      height={height}
-      width={width}
-      maxHeight="100%"
-      overflowY="auto"
-      position="absolute"
-      bottom={0}
-      left={0}
-      pt="8px"
-    >
-      <Thumbnail />
-      <Thumbnail />
-      <Thumbnail />
-      <Thumbnail />
-    </Box>
+    <>
+      <Heading size="sm" mb="8px">
+        Cards
+      </Heading>
+      <Box
+        height={height}
+        width={width}
+        maxHeight="100%"
+        overflowY="auto"
+        position="absolute"
+        bottom={0}
+        left={0}
+        pt="8px"
+      >
+        <Thumbnail />
+        <Thumbnail />
+        <Thumbnail />
+        <Thumbnail />
+        {/* <Thumbnail />
+      <Thumbnail /> */}
+      </Box>
+    </>
   );
 };
 

@@ -23,6 +23,7 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
       left={0}
       pt="8px"
       // border="1px solid #ccc"
+      borderBottom="1px solid #ccc"
     >
       <VStack w="100%" spacing="1rem">
         <ControlButton onClick={handleClickNewCard} label="New Card" />

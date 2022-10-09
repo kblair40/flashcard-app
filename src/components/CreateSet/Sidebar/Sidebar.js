@@ -14,7 +14,7 @@ const Sidebar = ({ cards, width = "100%" }) => {
         position="relative"
         px="16px"
       >
-        <SetControls height="30%" />
+        <SetControls height="29%" />
         <Thumbnails height="70%" cards={cards} />
       </Flex>
     </Box>
