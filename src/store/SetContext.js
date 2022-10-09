@@ -6,11 +6,11 @@ import api from "api";
 const SetContext = createContext();
 
 const SetProvider = ({ children }) => {
-  const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [flashcardSetData, setFlashcardSetData] = useState();
   const [frontCardContent, setFrontCardContent] = useState("");
   const [backCardContent, setBackCardContent] = useState("");
+  const [activeCard, setActiveCard] = useState({ index: 0, id: undefined });
 
   const params = useParams();
 
@@ -84,6 +84,8 @@ const SetProvider = ({ children }) => {
         deleteCard,
         addCard,
         saving,
+        activeCard,
+        setActiveCard,
       }}
     >
       {children}

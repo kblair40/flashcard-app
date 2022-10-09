@@ -1,19 +1,17 @@
-import React, { useContext } from "react";
+import React from // { useContext }
+"react";
 import { Flex } from "@chakra-ui/react";
 
-import SetContext from "store/SetContext";
+// import SetContext from "store/SetContext";
 import Sidebar from "./Sidebar";
 import Editors from "./Editors";
 
 const CreateSet = () => {
-  const { flashcardSetData } = useContext(SetContext);
+  // const setCtx = useContext(SetContext);
 
   return (
     <Flex justify="center" w="100%" h="calc(100vh - 60px)" overflowY="hidden">
-      <Sidebar
-        width={{ base: "100%", sm: "30%", md: "25%" }}
-        cards={flashcardSetData ? flashcardSetData.flashcards : []}
-      />
+      <Sidebar width={{ base: "100%", sm: "30%", md: "25%" }} />
 
       <Editors width={{ base: "100%", sm: "70%", md: "75%" }} />
     </Flex>

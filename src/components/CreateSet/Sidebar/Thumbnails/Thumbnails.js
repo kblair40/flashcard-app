@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Heading, Text, Flex } from "@chakra-ui/react";
 
-const Thumbnails = ({ cards, height = "100%", width = "100%" }) => {
+import SetContext from "store/SetContext";
+
+const Thumbnails = ({ height = "100%", width = "100%" }) => {
+  const { flashcardSetData, activeCard, setActiveCard } =
+    useContext(SetContext);
+
+  let cards = [];
+  if (flashcardSetData) {
+    cards = flashcardSetData.flashcards;
+  }
+
   return (
     <Box
       height={height}
       width={width}
       maxHeight="100%"
-      // overflowY="auto"
       position="absolute"
       bottom={0}
       left={0}
       pt="8px"
-      // pl="4px"
-      // border="1px solid #000"
+      pb="32px"
     >
       <Heading
         size="sm"
@@ -23,15 +31,8 @@ const Thumbnails = ({ cards, height = "100%", width = "100%" }) => {
       >
         Cards
       </Heading>
-      <Box
-        w="100%"
-        h="100%"
-        overflowY="auto"
-        pl="8px"
-        pr="12px"
-        pt="4px"
-        mt="4px"
-      >
+
+      <Box w="100%" h="100%" overflowY="auto" p="4px 12px 0 8px" mt="4px">
         {cards && cards.length ? (
           cards.map((card, i) => {
             return (
