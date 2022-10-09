@@ -3,9 +3,9 @@ import { VStack } from "@chakra-ui/react";
 
 import Editor from "components/Editor";
 
-const Editors = () => {
+const Editors = ({ width = "100%" }) => {
   return (
-    <VStack spacing="3rem" w="100%">
+    <VStack spacing="3rem" w={width}>
       <Editor />
 
       <Editor />

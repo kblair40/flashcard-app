@@ -32,7 +32,7 @@ const CreateSet = () => {
   return (
     <Flex justify="center" w="100%">
       <Box w={{ base: "90%", md: "700px" }}>
-        <Editors />
+        <Editors width={{ base: "100%" }} />
       </Box>
     </Flex>
   );
