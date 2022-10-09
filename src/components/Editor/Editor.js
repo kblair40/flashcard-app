@@ -6,16 +6,13 @@ import "react-quill/dist/quill.snow.css";
 import { quillSettings } from "utils/constants";
 
 const Editor = ({ value, onChange }) => {
-  // const [value, setValue] = useState("");
-
   return (
-    <Flex justify="center" mt="2rem" w="100%">
+    <Flex justify="center" w="100%">
       <Box w="100%">
         <ReactQuill
           theme="snow"
           modules={quillSettings.modules}
           value={value}
-          // onChange={setValue}
           onChange={onChange}
           preserveWhitespace={true}
         />

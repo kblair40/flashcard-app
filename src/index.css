@@ -25,8 +25,11 @@ code {
   min-height: 200px !important;
 }
 .ql-editor {
+  height: 200px !important;
+}
+.ql-snow {
   height: 100% !important;
 }
 .ql-blank {
-  height: 100% !important;
+  height: 200px !important;
 }

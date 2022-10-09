@@ -14,7 +14,8 @@ const Editors = ({ width = "100%", height = "100%" }) => {
 
   return (
     <VStack
-      spacing="3rem"
+      mt="1.5rem"
+      spacing="2rem"
       w={width}
       h={height}
       px={{ base: "8px", md: "16px" }}
