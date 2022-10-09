@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import { Box } from "@chakra-ui/react";
 
 import { UserProvider } from "store/UserContext";
-import { SetProvider } from "store/SetContext";
 import Home from "pages/Home";
 import Create from "pages/Create";
 import Navbar from "components/Navbar";
@@ -17,11 +16,8 @@ function App() {
         <Box position="relative">
           <Routes>
             <Route path="/" element={<Home />} />
-
-            <SetProvider>
-              <Route path="/create" element={<Create />} />
-              <Route path="/create/:id" element={<Create />} />
-            </SetProvider>
+            <Route path="/create" element={<Create />} />
+            <Route path="/create/:id" element={<Create />} />
           </Routes>
         </Box>
       </Box>
