@@ -14,6 +14,10 @@ import {
 const AvatarMenu = ({ handleClickSignout }) => {
   const navigate = useNavigate();
 
+  const handleClickAccount = () => {
+    navigate("/account");
+  };
+
   return (
     <Flex alignItems={"center"}>
       <Menu>
@@ -26,9 +30,10 @@ const AvatarMenu = ({ handleClickSignout }) => {
         >
           <Avatar size={"sm"} bg="blue.400" />
         </MenuButton>
+
         <MenuList>
-          <MenuItem>Link 1</MenuItem>
-          <MenuItem>Link 2</MenuItem>
+          <MenuItem onClick={handleClickAccount}>My Account</MenuItem>
+          {/* <MenuItem>Link 2</MenuItem> */}
           <MenuDivider />
           <MenuItem onClick={handleClickSignout}>Signout</MenuItem>
         </MenuList>
