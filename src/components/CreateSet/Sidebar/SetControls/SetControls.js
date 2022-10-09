@@ -1,16 +1,10 @@
-import React from "react";
-import { Box, Flex, Button, VStack } from "@chakra-ui/react";
+import React, { useContext } from "react";
+import { Flex, Button, VStack } from "@chakra-ui/react";
+
+import SetContext from "store/SetContext";
 
 const SetControls = ({ height = "100%", width = "100%" }) => {
-  const handleClickNewCard = () => {
-    console.log("CREATE NEW CARD");
-  };
-  const handleClickSaveCard = () => {
-    console.log("SAVE CARD");
-  };
-  const handleClickDeleteCard = () => {
-    console.log("DELETE CARD");
-  };
+  const { saveCard, deleteCard, addCard } = useContext(SetContext);
 
   return (
     <Flex
@@ -28,9 +22,9 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
       // borderBottom="1px solid #ececec"
     >
       <VStack w="100%" spacing="1rem">
-        <ControlButton onClick={handleClickNewCard} label="New Card" />
-        <ControlButton onClick={handleClickSaveCard} label="Save Card" />
-        <ControlButton onClick={handleClickDeleteCard} label="Delete Card" />
+        <ControlButton onClick={addCard} label="New Card" />
+        <ControlButton onClick={saveCard} label="Save Card" />
+        <ControlButton onClick={deleteCard} label="Delete Card" />
       </VStack>
     </Flex>
   );

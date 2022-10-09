@@ -1,26 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { Flex, Box } from "@chakra-ui/react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 import { quillSettings } from "utils/constants";
 
-const Editor = () => {
-  const [value, setValue] = useState("");
+const Editor = ({ value, onChange }) => {
+  // const [value, setValue] = useState("");
 
   return (
     <Flex justify="center" mt="2rem" w="100%">
-      <Box
-        w="100%"
-        // w={{ base: "90%", sm: "80%" }}
-        // w={{ base: "90%", sm: "100%" }}
-        // maxW={{ base: "100vw", sm: "450px", md: "640px" }}
-      >
+      <Box w="100%">
         <ReactQuill
           theme="snow"
           modules={quillSettings.modules}
           value={value}
-          onChange={setValue}
+          // onChange={setValue}
+          onChange={onChange}
           preserveWhitespace={true}
         />
       </Box>

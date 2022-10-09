@@ -29,7 +29,19 @@ const SetProvider = ({ children }) => {
     if (params.id) {
       fetchSet(params.id);
     }
-  }, [params]);
+  }, [params.id]);
+
+  const saveCard = () => {
+    //
+  };
+
+  const deleteCard = () => {
+    //
+  };
+
+  const addCard = () => {
+    //
+  };
 
   return (
     <SetContext.Provider
@@ -39,6 +51,9 @@ const SetProvider = ({ children }) => {
         backCardContent,
         setBackCardContent,
         flashcardSetData,
+        saveCard,
+        deleteCard,
+        addCard,
       }}
     >
       {children}
