@@ -7,6 +7,7 @@ const SetContext = createContext();
 
 const SetProvider = ({ children }) => {
   const [saving, setSaving] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const [flashcardSetData, setFlashcardSetData] = useState();
   const [frontCardContent, setFrontCardContent] = useState("");
   const [backCardContent, setBackCardContent] = useState("");
@@ -73,14 +74,19 @@ const SetProvider = ({ children }) => {
     }
   };
 
-  const patchCard = async (id) => {
+  const patchCard = async () => {
+    const { id } = activeCard;
+    if (!id) return null;
+
+    setSaving(true);
+
     try {
       const response = await api.patch(`/flashcard/${id}`, {
         front_content: frontCardContent,
         back_content: backCardContent,
       });
 
-      console.log("\n\nPATCH RESPONSE:", response.data);
+      // console.log("\n\nPATCH RESPONSE:", response.data);
       if (response.data && response.data.flashcard) {
         const { flashcard } = response.data;
         const dataCopy = { ...flashcardSetData };
@@ -96,10 +102,33 @@ const SetProvider = ({ children }) => {
     } catch (err) {
       console.log("\nERROR PATCHING CARD:", err);
     }
+
+    setSaving(false);
   };
 
-  const deleteCard = () => {
-    //
+  const deleteCard = async () => {
+    const { id: card_id } = activeCard;
+    if (!card_id || !flashcardSetData) return null;
+
+    const { _id: set_id } = flashcardSetData;
+
+    setDeleting(true);
+
+    try {
+      const response = await api.delete(`/flashcard_set/${set_id}/${card_id}`);
+      console.log("\n\nRESPONSE.DATA:", response.data);
+
+      if (response.data && response.data.set) {
+        const { set } = response.data;
+
+        setFlashcardSetData(set);
+        clearCards();
+      }
+    } catch (e) {
+      console.error("FAILED DELETING CARD:", e);
+    }
+
+    setDeleting(false);
   };
 
   const clearCards = () => {
@@ -118,6 +147,7 @@ const SetProvider = ({ children }) => {
         saveCard,
         deleteCard,
         saving,
+        deleting,
         activeCard,
         updateActiveCard,
         patchCard,

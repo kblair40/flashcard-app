@@ -6,7 +6,7 @@ import SetContext from "store/SetContext";
 const SetControls = ({ height = "100%", width = "100%" }) => {
   const [isEditing, setIsEditing] = useState(false);
 
-  const { saveCard, deleteCard, saving, activeCard, patchCard } =
+  const { saveCard, deleteCard, deleting, saving, activeCard, patchCard } =
     useContext(SetContext);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
   const handleClickSave = async () => {
     if (isEditing) {
       // patch card
-      patchCard(activeCard.id);
+      patchCard();
     } else {
       await saveCard();
     }
@@ -44,7 +44,12 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
           label="Save Card"
           loading={saving}
         />
-        <ControlButton onClick={deleteCard} label="Delete Card" />
+        <ControlButton
+          isDisabled={!isEditing}
+          onClick={deleteCard}
+          label="Delete Card"
+          loading={deleting}
+        />
       </VStack>
     </Flex>
   );
@@ -52,7 +57,7 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
 
 export default SetControls;
 
-const ControlButton = ({ label, onClick, loading }) => {
+const ControlButton = ({ label, onClick, loading, isDisabled }) => {
   return (
     <Button
       w="100%"
@@ -60,6 +65,7 @@ const ControlButton = ({ label, onClick, loading }) => {
       colorScheme={label.startsWith("Delete") ? "red" : "blue"}
       onClick={onClick}
       isLoading={loading}
+      isDisabled={isDisabled}
     >
       {label}
     </Button>
