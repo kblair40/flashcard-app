@@ -7,6 +7,7 @@ const SetContext = createContext();
 
 const SetProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
   const [flashcardSetData, setFlashcardSetData] = useState();
   const [frontCardContent, setFrontCardContent] = useState("");
   const [backCardContent, setBackCardContent] = useState("");
@@ -35,6 +36,8 @@ const SetProvider = ({ children }) => {
   const saveCard = async () => {
     if (!flashcardSetData) return false;
 
+    setSaving(true);
+
     try {
       const response = await api.patch(
         `/flashcard_set/add/${flashcardSetData._id}`,
@@ -45,9 +48,12 @@ const SetProvider = ({ children }) => {
       );
 
       console.log("\nRESPONSE:", response.data, "\n");
+      clearCards();
+      setSaving(false);
       return true;
     } catch (err) {
       console.error("FAILED SAVING CARD:", err);
+      setSaving(false);
       return false;
     }
   };
@@ -58,6 +64,11 @@ const SetProvider = ({ children }) => {
 
   const addCard = () => {
     //
+  };
+
+  const clearCards = () => {
+    setFrontCardContent("");
+    setBackCardContent("");
   };
 
   return (
@@ -71,6 +82,7 @@ const SetProvider = ({ children }) => {
         saveCard,
         deleteCard,
         addCard,
+        saving,
       }}
     >
       {children}

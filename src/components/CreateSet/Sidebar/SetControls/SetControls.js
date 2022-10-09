@@ -4,7 +4,7 @@ import { Flex, Button, VStack } from "@chakra-ui/react";
 import SetContext from "store/SetContext";
 
 const SetControls = ({ height = "100%", width = "100%" }) => {
-  const { saveCard, deleteCard, addCard } = useContext(SetContext);
+  const { saveCard, deleteCard, addCard, saving } = useContext(SetContext);
 
   const handleClickSave = async () => {
     await saveCard();
@@ -28,7 +28,11 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
     >
       <VStack w="100%" spacing="1rem">
         <ControlButton onClick={addCard} label="New Card" />
-        <ControlButton onClick={handleClickSave} label="Save Card" />
+        <ControlButton
+          onClick={handleClickSave}
+          label="Save Card"
+          loading={saving}
+        />
         <ControlButton onClick={deleteCard} label="Delete Card" />
       </VStack>
     </Flex>
@@ -37,13 +41,14 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
 
 export default SetControls;
 
-const ControlButton = ({ label, onClick }) => {
+const ControlButton = ({ label, onClick, loading }) => {
   return (
     <Button
       w="100%"
       size="sm"
       colorScheme={label.startsWith("Delete") ? "red" : "blue"}
       onClick={onClick}
+      isLoading={loading}
     >
       {label}
     </Button>
