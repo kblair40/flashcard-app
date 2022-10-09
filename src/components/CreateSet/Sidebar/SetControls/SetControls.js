@@ -6,6 +6,11 @@ import SetContext from "store/SetContext";
 const SetControls = ({ height = "100%", width = "100%" }) => {
   const { saveCard, deleteCard, addCard } = useContext(SetContext);
 
+  const handleClickSave = async () => {
+    await saveCard();
+    addCard();
+  };
+
   return (
     <Flex
       direction="column"
@@ -23,7 +28,7 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
     >
       <VStack w="100%" spacing="1rem">
         <ControlButton onClick={addCard} label="New Card" />
-        <ControlButton onClick={saveCard} label="Save Card" />
+        <ControlButton onClick={handleClickSave} label="Save Card" />
         <ControlButton onClick={deleteCard} label="Delete Card" />
       </VStack>
     </Flex>
