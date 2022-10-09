@@ -4,7 +4,10 @@ import { Flex, Button, VStack } from "@chakra-ui/react";
 import SetContext from "store/SetContext";
 
 const SetControls = ({ height = "100%", width = "100%" }) => {
-  const { saveCard, deleteCard, addCard, saving } = useContext(SetContext);
+  const { saveCard, deleteCard, addCard, saving, activeCard } =
+    useContext(SetContext);
+
+  const isEditing = Boolean(activeCard && activeCard.id);
 
   const handleClickSave = async () => {
     await saveCard();

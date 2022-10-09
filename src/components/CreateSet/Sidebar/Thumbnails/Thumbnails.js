@@ -4,7 +4,7 @@ import { Box, Heading, Text, Flex } from "@chakra-ui/react";
 import SetContext from "store/SetContext";
 
 const Thumbnails = ({ height = "100%", width = "100%" }) => {
-  const { flashcardSetData, activeCard, setActiveCard } =
+  const { flashcardSetData, activeCard, updateActiveCard } =
     useContext(SetContext);
 
   let cards = [];
@@ -36,7 +36,18 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
         {cards && cards.length ? (
           cards.map((card, i) => {
             return (
-              <Thumbnail key={i} frontContent={card.front_content} index={i} />
+              <Thumbnail
+                updateActiveCard={updateActiveCard}
+                key={i}
+                frontContent={card.front_content}
+                id={card._id}
+                index={i}
+                isActive={
+                  activeCard && activeCard.id
+                    ? activeCard.id === card._id
+                    : false
+                }
+              />
             );
           })
         ) : (
@@ -49,18 +60,24 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
 
 export default Thumbnails;
 
-const Thumbnail = ({ frontContent, index }) => {
+const Thumbnail = ({ frontContent, index, id, updateActiveCard, isActive }) => {
+  const handleClick = () => {
+    updateActiveCard({ index, id });
+  };
+
   return (
     <Flex
+      onClick={handleClick}
       mx="auto"
       mb="8px"
-      // h="120px"
       py="8px"
       minH="60px"
       maxH="120px"
       w="100%"
+      borderWidth={1}
+      borderStyle="solid"
+      borderColor={isActive ? "green.500" : "#ccc"}
       borderRadius="4px"
-      border="1px solid #ccc"
       justify="center"
       align="center"
       cursor="pointer"

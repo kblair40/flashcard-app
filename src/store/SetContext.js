@@ -21,7 +21,12 @@ const SetProvider = ({ children }) => {
         console.log("\nRESPONSE:", response.data, "\n");
 
         if (response.data && response.data.set) {
+          const { set } = response.data;
           setFlashcardSetData(response.data.set);
+
+          if (set.flashcards.length) {
+            setActiveCard({ index: set.flashcards.length, id: undefined });
+          }
         }
       } catch (e) {
         console.log("FAILED FETCHING SET:", e);
@@ -32,6 +37,15 @@ const SetProvider = ({ children }) => {
       fetchSet(params.id);
     }
   }, [params.id]);
+
+  const updateActiveCard = (card) => {
+    const { index } = card;
+    const actualCard = flashcardSetData.flashcards[index];
+
+    setActiveCard(card);
+    setBackCardContent(actualCard.back_content);
+    setFrontCardContent(actualCard.front_content);
+  };
 
   const saveCard = async () => {
     if (!flashcardSetData) return false;
@@ -56,6 +70,19 @@ const SetProvider = ({ children }) => {
       console.error("FAILED SAVING CARD:", err);
       setSaving(false);
       return false;
+    }
+  };
+
+  const patchCard = async (card) => {
+    const { id } = card;
+
+    try {
+      const response = await api.patch(`/flashcard/${id}`, {
+        front_content: frontCardContent,
+        back_content: backCardContent,
+      });
+    } catch (err) {
+      console.log("\nERROR PATCHING CARD:", err);
     }
   };
 
@@ -85,7 +112,7 @@ const SetProvider = ({ children }) => {
         addCard,
         saving,
         activeCard,
-        setActiveCard,
+        updateActiveCard,
       }}
     >
       {children}
