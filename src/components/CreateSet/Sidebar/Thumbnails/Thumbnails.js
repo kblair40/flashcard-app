@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
 
-const Thumbnails = ({ height = "100%", width = "100%" }) => {
+const Thumbnails = ({ cards, height = "100%", width = "100%" }) => {
   return (
     <Box
       height={height}

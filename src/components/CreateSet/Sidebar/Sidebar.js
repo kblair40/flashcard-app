@@ -4,14 +4,9 @@ import { Box, Flex } from "@chakra-ui/react";
 import SetControls from "./SetControls";
 import Thumbnails from "./Thumbnails";
 
-const Sidebar = ({ width = "100%" }) => {
+const Sidebar = ({ cards, width = "100%" }) => {
   return (
-    <Box
-      width={width}
-      border="1px solid #ececec"
-      h="100%"
-      display={{ base: "none", sm: "block" }}
-    >
+    <Box width={width} h="100%" display={{ base: "none", sm: "block" }}>
       <Flex
         direction="column"
         h="100%"
@@ -20,7 +15,7 @@ const Sidebar = ({ width = "100%" }) => {
         px="16px"
       >
         <SetControls height="30%" />
-        <Thumbnails height="70%" />
+        <Thumbnails height="70%" cards={cards} />
       </Flex>
     </Box>
   );
