@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Box, Text, Flex, Heading } from "@chakra-ui/react";
+import { Box, Text, Flex, Heading, Center, Spinner } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
+import CurrentCard from "./CurrentCard";
 import api from "api";
 
 const StudySession = () => {
-  const [loading, setLoading] = useState(false);
+  const [currentCard, setCurrentCard] = useState(0);
+  const [loading, setLoading] = useState(true);
   const [flashcards, setFlashcards] = useState();
+  const [title, setTitle] = useState("");
 
   const params = useParams();
 
@@ -17,12 +20,14 @@ const StudySession = () => {
         console.log("\nSET RESPONSE:", response.data);
 
         if (response.data && response.data.set) {
-          const { flashcards } = response.data.set;
+          const { flashcards, title } = response.data.set;
           setFlashcards(flashcards);
+          setTitle(title);
         }
       } catch (e) {
         console.error("FAILED FETCHING SET:", e);
       }
+      setLoading(false);
     };
 
     if (params && params.id) {
@@ -30,14 +35,28 @@ const StudySession = () => {
     }
   }, [params]);
 
+  if (loading) {
+    return (
+      <Center h={"calc(100vh - 60px)"} overflowY="hidden">
+        <Spinner />
+      </Center>
+    );
+  }
+
   return (
-    <Flex justify="center">
-      <Flex
-        w="100%"
-        maxW={{ base: "90%" }}
-        direction="column"
-        align="center"
-      ></Flex>
+    <Flex justify="center" pt="2rem">
+      <Flex w="100%" maxW={{ base: "90%" }} direction="column" align="center">
+        <Heading mb="1.5rem" textAlign="center">
+          {title}
+        </Heading>
+
+        <Box
+          w={{ base: "340px", sm: "440px" }}
+          h={{ base: "250px", sm: "310px" }}
+        >
+          <CurrentCard card={flashcards[currentCard]} />
+        </Box>
+      </Flex>
     </Flex>
   );
 };
