@@ -1,11 +1,7 @@
 import React from "react";
-import {
-  Box,
-  Flex,
-  // Transition
-} from "@chakra-ui/react";
+import { Box, Flex, Transition } from "@chakra-ui/react";
 
-const AllCards = ({ flashcards }) => {
+const AllCards = ({ flashcards, onClickCard, show }) => {
   return (
     <Flex
       w={{ base: "100vw" }}
@@ -16,11 +12,17 @@ const AllCards = ({ flashcards }) => {
       right={0}
       py="8px"
       overflowX="auto"
+      pl="8px"
     >
       {flashcards && flashcards.length
         ? flashcards.map((card, i) => {
-            console.log("CARD:", card);
-            return <Card key={i} content={card.front_content} />;
+            return (
+              <Card
+                key={i}
+                content={card.front_content}
+                onClick={() => onClickCard(i)}
+              />
+            );
           })
         : null}
     </Flex>
@@ -29,9 +31,10 @@ const AllCards = ({ flashcards }) => {
 
 export default AllCards;
 
-const Card = ({ content }) => {
+const Card = ({ content, onClick }) => {
   return (
     <Flex
+      onClick={onClick}
       justify="center"
       align="center"
       h="100px"

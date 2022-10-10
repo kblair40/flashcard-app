@@ -11,6 +11,7 @@ const StudySession = () => {
   const [loading, setLoading] = useState(true);
   const [flashcards, setFlashcards] = useState();
   const [title, setTitle] = useState("");
+  const [hideAllCards, setHideAllCards] = useState(false);
 
   const params = useParams();
 
@@ -35,6 +36,11 @@ const StudySession = () => {
       fetchSet(params.id);
     }
   }, [params]);
+
+  const handleClickCardPreview = (index) => {
+    console.log("INDEX:", index);
+    setCurrentCard(index);
+  };
 
   if (loading) {
     return (
@@ -76,7 +82,11 @@ const StudySession = () => {
         </Flex>
       </Flex>
 
-      <AllCards flashcards={flashcards} />
+      <AllCards
+        show={!hideAllCards}
+        onClickCard={handleClickCardPreview}
+        flashcards={flashcards}
+      />
     </Flex>
   );
 };
