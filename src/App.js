@@ -6,6 +6,7 @@ import { UserProvider } from "store/UserContext";
 import Home from "pages/Home";
 import Create from "pages/Create";
 import Account from "pages/Account";
+import Study from "pages/Study";
 import ManageSets from "pages/Account/ManageSets";
 import Navbar from "components/Navbar";
 
@@ -20,6 +21,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/create" element={<Create />} />
             <Route path="/create/:id" element={<Create />} />
+
+            <Route path="/study" element={<Study />} />
 
             <Route path="/account" element={<Account />} />
             <Route path="/account/sets" element={<ManageSets />} />
