@@ -11,8 +11,6 @@ import {
   Th,
   Td,
   TableContainer,
-  Box,
-  Text,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
@@ -28,18 +26,16 @@ const ManageSets = () => {
         const response = await api.get("/user", {
           params: { flashcard_sets: true },
         });
-        console.log("\nUSER RESPONSE:", response.data);
+        // console.log("\nUSER RESPONSE:", response.data);
         if (response.data && response.data.user) {
           setLoading(false);
           setFlashcardSets(response.data.user.flashcard_sets || []);
         }
       } catch (e) {
-        console.error("FAILED FETCHING USER:", e);
+        console.error("FAILE FETCHING USER:", e);
       }
 
-      if (loading) {
-        setLoading(false);
-      }
+      setLoading(false);
     };
 
     fetchFlashcardData();
@@ -81,6 +77,7 @@ const ManageSets = () => {
                       updatedAt,
                       title,
                       flashcards,
+                      _id,
                       public: isPublic,
                     } = set;
                     console.log("SET:", set);
@@ -93,18 +90,12 @@ const ManageSets = () => {
                         <Td>{lastUpdated.toLocaleString()}</Td>
                         <Td>{isPublic ? "Yes" : "No"}</Td>
                         <Td>
-                          <Link to="#">
+                          <Link to={`/create/${_id}`}>
                             <Button w="100%">Edit</Button>
                           </Link>
                         </Td>
                       </Tr>
                     );
-
-                    // return (
-                    // <Link to="#" key={i} style={{ width: "100%" }}>
-                    //   <Button w="100%">{set.title}</Button>
-                    // </Link>
-                    // );
                   })
                 : null}
             </Tbody>
