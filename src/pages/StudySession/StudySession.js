@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Text, Flex, Heading, Center, Spinner } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Center, Spinner } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
 import CurrentCard from "./CurrentCard";
@@ -56,6 +56,22 @@ const StudySession = () => {
         >
           <CurrentCard card={flashcards[currentCard]} />
         </Box>
+
+        <Flex mt="2rem" justify="center" w="100%">
+          <Button
+            isDisabled={currentCard === 0}
+            onClick={() => setCurrentCard(currentCard - 1)}
+            mr="8px"
+          >
+            Prev Card
+          </Button>
+          <Button
+            isDisabled={flashcards && currentCard === flashcards.length - 1}
+            onClick={() => setCurrentCard(currentCard + 1)}
+          >
+            Next Card
+          </Button>
+        </Flex>
       </Flex>
     </Flex>
   );

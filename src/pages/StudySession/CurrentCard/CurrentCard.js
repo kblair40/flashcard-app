@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Box, Flex, Text, Center, Button } from "@chakra-ui/react";
+import { Box, Flex, Button } from "@chakra-ui/react";
 
 const CurrentCard = ({ card }) => {
   const [side, setSide] = useState("front");
 
   useEffect(() => {
-    setSide("front");
+    if (card) setSide("front");
   }, [card]);
 
   return (
@@ -18,14 +18,20 @@ const CurrentCard = ({ card }) => {
         h="100%"
         w="100%"
       >
-        <Box
-          dangerouslySetInnerHTML={{
-            __html: side === "front" ? card.front_content : card.back_content,
-          }}
-        />
+        {card ? (
+          <Box
+            dangerouslySetInnerHTML={{
+              __html: side === "front" ? card.front_content : card.back_content,
+            }}
+          />
+        ) : null}
       </Flex>
 
-      <Button mt="1rem" variant="ghost">
+      <Button
+        onClick={() => setSide((prev) => (prev === "front" ? "back" : "front"))}
+        mt="1rem"
+        variant="ghost"
+      >
         Flip
       </Button>
     </Flex>
