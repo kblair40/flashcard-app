@@ -44,14 +44,14 @@ const Study = () => {
         w="100%"
         maxW={{ base: "340px", sm: "420px", md: "600px" }}
       >
-        <Text fontSize="xl" fontWeight="600">
+        <Text fontSize="xl" fontWeight="600" mb="16px">
           Sets
         </Text>
 
         {flashcardSets && flashcardSets.length
           ? flashcardSets.map((set, i) => {
               return (
-                <Link to={`/study/${set._id}`}>
+                <Link key={i} to={`/study/${set._id}`}>
                   <Button>
                     <Flex justify="center" align="center">
                       <Text>{`${set.title}`}</Text>
