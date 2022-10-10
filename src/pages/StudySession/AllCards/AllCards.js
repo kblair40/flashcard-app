@@ -14,7 +14,7 @@ const AllCards = ({ flashcards, onClickCard, show }) => {
         overflowX: "auto",
         overflowY: "hidden",
         width: { base: "100vw" },
-        border: "1px solid #aaa",
+        boxShadow: "inset 0 2px 4px 0 rgba(0,0,0,0.09)",
         padding: "8px",
       }}
       unmountOnExit
@@ -46,8 +46,8 @@ const Card = ({ content, onClick }) => {
       align="center"
       h="100px"
       minW="180px"
-      mr="16px"
-      border="1px solid #ccc"
+      mr="8px"
+      boxShadow="md"
       borderRadius="4px"
       cursor="pointer"
       _hover={{ bg: "gray.50" }}
