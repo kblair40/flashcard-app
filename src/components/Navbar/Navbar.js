@@ -242,10 +242,10 @@ const NAV_ITEMS = [
   },
   {
     label: "Manage Flashcard Sets",
-    href: "#",
+    href: "/account/sets",
   },
   {
     label: "Study",
-    href: "#",
+    href: "/study",
   },
 ];
