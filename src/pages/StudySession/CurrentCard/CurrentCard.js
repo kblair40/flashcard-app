@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import ReactCardFlip from "react-card-flip";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { Box, Flex, Button } from "@chakra-ui/react";
+import { Box, Flex, Button, Text } from "@chakra-ui/react";
 
 const MotionContainer = ({ flashcards, currentCard }) => {
   const [flipCards, setFlipCards] = useState();
@@ -18,7 +18,7 @@ const MotionContainer = ({ flashcards, currentCard }) => {
       const { front_content, back_content } = card;
 
       flipCardsArray.push(
-        <FlipContainer key={i}>
+        <FlipContainer key={i} index={i} currentCard={currentCard}>
           <Flashcard content={front_content} side="front" />
           <Flashcard content={back_content} side="back" />
         </FlipContainer>
@@ -32,7 +32,17 @@ const MotionContainer = ({ flashcards, currentCard }) => {
 
   return (
     <Flex direction="column" w="100%" align="center">
-      {flipCards[currentCard]}
+      <AnimatePresence>
+        <motion.div
+          key={`flashcard-${currentCard}`}
+          initial={{ x: "-100%" }}
+          animate={{ x: 0 }}
+          exit={{ x: "100%" }}
+          transition={{ duration: 0.5 }}
+        >
+          {flipCards[currentCard]}
+        </motion.div>
+      </AnimatePresence>
     </Flex>
   );
 };
@@ -41,33 +51,27 @@ export default MotionContainer;
 
 const FlipContainer = ({ children }) => {
   const [side, setSide] = useState("front");
+
   if (!children) return null;
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ x: "-100%" }}
-        animate={{ x: 0 }}
-        exit={{ opacity: 0.4 }}
-        transition={{ duration: 1 }}
+    <>
+      <ReactCardFlip
+        flipSpeedBackToFront={0.3}
+        flipSpeedFrontToBack={0.3}
+        isFlipped={side === "back"}
+        flipDirection="vertical"
       >
-        <ReactCardFlip
-          flipSpeedBackToFront={0.3}
-          flipSpeedFrontToBack={0.3}
-          isFlipped={side === "back"}
-          flipDirection="vertical"
-        >
-          {children}
-        </ReactCardFlip>
-        <Button
-          mt=".75rem"
-          variant="ghost"
-          onClick={() => setSide(side === "back" ? "front" : "back")}
-        >
-          Flip
-        </Button>
-      </motion.div>
-    </AnimatePresence>
+        {children}
+      </ReactCardFlip>
+      <Button
+        mt=".75rem"
+        variant="ghost"
+        onClick={() => setSide(side === "back" ? "front" : "back")}
+      >
+        Flip
+      </Button>
+    </>
   );
 };
 
