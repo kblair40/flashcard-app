@@ -3,6 +3,7 @@ import { Button, Flex, Heading, Center, Spinner } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
 import CurrentCard from "./CurrentCard";
+import AllCards from "./AllCards";
 import api from "api";
 
 const StudySession = () => {
@@ -37,14 +38,20 @@ const StudySession = () => {
 
   if (loading) {
     return (
-      <Center h={"calc(100vh - 60px)"} overflowY="hidden">
+      <Center h="calc(100vh - 60px)" overflowY="hidden">
         <Spinner />
       </Center>
     );
   }
 
   return (
-    <Flex justify="center" pt="2rem">
+    <Flex
+      justify="center"
+      pt="2rem"
+      // border="1px solid red"
+      h="calc(100vh - 60px)"
+      position="relative"
+    >
       <Flex w="100%" maxW={{ base: "90%" }} direction="column" align="center">
         <Heading mb="1.5rem" textAlign="center">
           {title}
@@ -67,30 +74,9 @@ const StudySession = () => {
             Next Card
           </Button>
         </Flex>
-
-        {/* <Box
-          w={{ base: "340px", sm: "440px" }}
-          h={{ base: "250px", sm: "310px" }}
-        >
-          <CurrentCard card={flashcards[currentCard]} />
-        </Box>
-
-        <Flex mt="2rem" justify="center" w="100%">
-          <Button
-            isDisabled={currentCard === 0}
-            onClick={() => setCurrentCard(currentCard - 1)}
-            mr="8px"
-          >
-            Prev Card
-          </Button>
-          <Button
-            isDisabled={flashcards && currentCard === flashcards.length - 1}
-            onClick={() => setCurrentCard(currentCard + 1)}
-          >
-            Next Card
-          </Button>
-        </Flex> */}
       </Flex>
+
+      <AllCards flashcards={flashcards} />
     </Flex>
   );
 };
