@@ -54,9 +54,9 @@ const StudySession = () => {
     <Flex
       justify="center"
       pt="2rem"
-      // border="1px solid red"
       h="calc(100vh - 60px)"
       position="relative"
+      overflowY="hidden"
     >
       <Flex w="100%" maxW={{ base: "90%" }} direction="column" align="center">
         <Heading mb="1.5rem" textAlign="center">
@@ -87,6 +87,15 @@ const StudySession = () => {
         onClickCard={handleClickCardPreview}
         flashcards={flashcards}
       />
+      <Button
+        size="sm"
+        onClick={() => setHideAllCards(!hideAllCards)}
+        position="fixed"
+        bottom="10rem"
+        left="1rem"
+      >
+        Hide/Show
+      </Button>
     </Flex>
   );
 };

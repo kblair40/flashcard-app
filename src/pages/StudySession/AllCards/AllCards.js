@@ -1,31 +1,38 @@
 import React from "react";
-import { Box, Flex, Transition } from "@chakra-ui/react";
+import { Box, Flex, Slide } from "@chakra-ui/react";
 
 const AllCards = ({ flashcards, onClickCard, show }) => {
   return (
-    <Flex
-      w={{ base: "100vw" }}
-      border="1px solid #aaa"
-      position="absolute"
-      bottom={0}
-      left={0}
-      right={0}
-      py="8px"
-      overflowX="auto"
-      pl="8px"
+    <Slide
+      in={show}
+      direction="bottom"
+      style={{
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        overflowX: "auto",
+        overflowY: "hidden",
+        width: { base: "100vw" },
+        border: "1px solid #aaa",
+        padding: "8px",
+      }}
+      unmountOnExit
     >
-      {flashcards && flashcards.length
-        ? flashcards.map((card, i) => {
-            return (
-              <Card
-                key={i}
-                content={card.front_content}
-                onClick={() => onClickCard(i)}
-              />
-            );
-          })
-        : null}
-    </Flex>
+      <Flex align="center" justify="start" mr="8px">
+        {flashcards && flashcards.length
+          ? flashcards.map((card, i) => {
+              return (
+                <Card
+                  key={i}
+                  content={card.front_content}
+                  onClick={() => onClickCard(i)}
+                />
+              );
+            })
+          : null}
+      </Flex>
+    </Slide>
   );
 };
 
@@ -39,7 +46,7 @@ const Card = ({ content, onClick }) => {
       align="center"
       h="100px"
       minW="180px"
-      mr="8px"
+      mr="16px"
       border="1px solid #ccc"
       borderRadius="4px"
       cursor="pointer"
