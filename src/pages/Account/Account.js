@@ -1,9 +1,12 @@
-import React from "react";
-import { Box, Flex, Text, Button } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { Flex, Button, Text } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+
+import UserContext from "store/UserContext";
 
 const Account = () => {
-  const navigate = useNavigate();
+  const { userData } = useContext(UserContext);
+  const numOfSets = userData?.flashcard_sets?.length || 0;
 
   return (
     <Flex justify="center">
@@ -13,7 +16,16 @@ const Account = () => {
         pt="2rem"
         maxW={{ base: "300px", sm: "400px" }}
       >
-        <Button onClick={() => navigate(`/accounts/sets`)}>Manage Sets</Button>
+        <Link to="sets">
+          <Button w="100%">
+            <Flex align="center" justify="center">
+              <Text>Manage Sets</Text>
+              <Text ml="6px" fontSize="sm" color="gray.500">
+                ({numOfSets})
+              </Text>
+            </Flex>
+          </Button>
+        </Link>
       </Flex>
     </Flex>
   );
