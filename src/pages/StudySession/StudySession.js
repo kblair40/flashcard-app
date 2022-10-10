@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Flex, Heading, Center, Spinner } from "@chakra-ui/react";
+import { Button, Flex, Heading, Center, Spinner } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
 import CurrentCard from "./CurrentCard";
-import MotionContainer from "./MotionContainer";
 import api from "api";
 
 const StudySession = () => {
@@ -51,7 +50,7 @@ const StudySession = () => {
           {title}
         </Heading>
 
-        <MotionContainer flashcards={flashcards} currentCard={currentCard} />
+        <CurrentCard flashcards={flashcards} currentCard={currentCard} />
 
         <Flex justify="center" w="100%" mt="1.5rem">
           <Button

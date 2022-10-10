@@ -1,41 +1,84 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import ReactCardFlip from "react-card-flip";
+
 import { Box, Flex, Button } from "@chakra-ui/react";
 
-const CurrentCard = ({ card }) => {
-  const [side, setSide] = useState("front");
+const MotionContainer = ({ flashcards, currentCard }) => {
+  const [flipCards, setFlipCards] = useState();
 
+  const didMount = useRef(false);
   useEffect(() => {
-    if (card) setSide("front");
-  }, [card]);
+    if (didMount.current || !flashcards) return;
+
+    didMount.current = true;
+
+    let flipCardsArray = [];
+    flashcards.forEach((card, i) => {
+      const { front_content, back_content } = card;
+
+      flipCardsArray.push(
+        <FlipContainer key={i}>
+          <Flashcard content={front_content} side="front" />
+          <Flashcard content={back_content} side="back" />
+        </FlipContainer>
+      );
+    });
+
+    setFlipCards(flipCardsArray);
+  }, [flashcards]);
+
+  if (!flipCards || !flipCards.length) return null;
 
   return (
-    <Flex align="center" direction="column" h="100%" w="100%">
-      <Flex
-        align="center"
-        bg="#fcfcfc"
-        justify="center"
-        shadow="sm"
-        h="100%"
-        w="100%"
-      >
-        {card ? (
-          <Box
-            dangerouslySetInnerHTML={{
-              __html: side === "front" ? card.front_content : card.back_content,
-            }}
-          />
-        ) : null}
-      </Flex>
-
-      <Button
-        onClick={() => setSide((prev) => (prev === "front" ? "back" : "front"))}
-        mt="1rem"
-        variant="ghost"
-      >
-        Flip
-      </Button>
+    <Flex direction="column" w="100%" align="center">
+      {flipCards[currentCard]}
     </Flex>
   );
 };
 
-export default CurrentCard;
+export default MotionContainer;
+
+const FlipContainer = ({ children }) => {
+  const [side, setSide] = useState("front");
+  if (!children) return null;
+
+  return (
+    <>
+      <ReactCardFlip
+        flipSpeedBackToFront={0.3}
+        flipSpeedFrontToBack={0.3}
+        isFlipped={side === "back"}
+        flipDirection="vertical"
+      >
+        {children}
+      </ReactCardFlip>
+      <Button
+        mt=".75rem"
+        variant="ghost"
+        onClick={() => setSide(side === "back" ? "front" : "back")}
+      >
+        Flip
+      </Button>
+    </>
+  );
+};
+
+const Flashcard = ({ content }) => {
+  return (
+    <Flex
+      justify="center"
+      align="center"
+      h={{ base: "250px", sm: "260px", md: "340px" }}
+      w={{ base: "340px", sm: "440px", md: "550px" }}
+      borderRadius="2px"
+      shadow="sm"
+      bg="gray.50"
+    >
+      <Box
+        dangerouslySetInnerHTML={{
+          __html: content ? content : "<div />",
+        }}
+      />
+    </Flex>
+  );
+};
