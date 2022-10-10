@@ -11,6 +11,7 @@ import {
   Th,
   Td,
   TableContainer,
+  Checkbox,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
@@ -19,6 +20,7 @@ import api from "api";
 const ManageSets = () => {
   const [loading, setLoading] = useState(true);
   const [flashcardSets, setFlashcardSets] = useState();
+  const [changingPublicStatus, setChangingPublicStatus] = useState(false);
 
   useEffect(() => {
     const fetchFlashcardData = async () => {
@@ -26,13 +28,13 @@ const ManageSets = () => {
         const response = await api.get("/user", {
           params: { flashcard_sets: true },
         });
-        // console.log("\nUSER RESPONSE:", response.data);
+
         if (response.data && response.data.user) {
           setLoading(false);
           setFlashcardSets(response.data.user.flashcard_sets || []);
         }
       } catch (e) {
-        console.error("FAILE FETCHING USER:", e);
+        console.error("FAILED FETCHING USER:", e);
       }
 
       setLoading(false);
@@ -40,6 +42,33 @@ const ManageSets = () => {
 
     fetchFlashcardData();
   }, []);
+
+  const handleChangePublicStatus = async (e, id) => {
+    setChangingPublicStatus(true);
+    const { checked } = e.target;
+
+    try {
+      const response = await api.patch(`/flashcard_set/patch/${id}`, {
+        public: checked,
+      });
+
+      if (response.data && response.data.set) {
+        const { _id } = response.data.set;
+        const setIdx = flashcardSets.findIndex((card) => card._id === _id);
+        const setsCopy = [...flashcardSets];
+
+        if (setIdx > -1) {
+          setsCopy[setIdx] = response.data.set;
+        }
+
+        setFlashcardSets(setsCopy);
+      }
+    } catch (e) {
+      console.error("FAILED PATCHING PUBLIC STATUS:", e);
+    }
+
+    setChangingPublicStatus(false);
+  };
 
   if (loading) {
     return (
@@ -80,7 +109,7 @@ const ManageSets = () => {
                       _id,
                       public: isPublic,
                     } = set;
-                    console.log("SET:", set);
+                    // console.log("SET:", set);
                     const lastUpdated = new Date(updatedAt);
 
                     return (
@@ -88,7 +117,22 @@ const ManageSets = () => {
                         <Td>{title}</Td>
                         <Td>{flashcards.length}</Td>
                         <Td>{lastUpdated.toLocaleString()}</Td>
-                        <Td>{isPublic ? "Yes" : "No"}</Td>
+                        <Td>
+                          <Flex justify="center">
+                            {changingPublicStatus ? (
+                              <Spinner />
+                            ) : (
+                              <Checkbox
+                                isDisabled={changingPublicStatus}
+                                isChecked={isPublic}
+                                onChange={(e) =>
+                                  handleChangePublicStatus(e, _id)
+                                }
+                              />
+                            )}
+                          </Flex>
+                        </Td>
+
                         <Td>
                           <Link to={`/create/${_id}`}>
                             <Button w="100%">Edit</Button>
