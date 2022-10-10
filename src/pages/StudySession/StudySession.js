@@ -3,6 +3,7 @@ import { Box, Button, Flex, Heading, Center, Spinner } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
 import CurrentCard from "./CurrentCard";
+import MotionContainer from "./MotionContainer";
 import api from "api";
 
 const StudySession = () => {
@@ -50,7 +51,25 @@ const StudySession = () => {
           {title}
         </Heading>
 
-        <Box
+        <MotionContainer flashcards={flashcards} currentCard={currentCard} />
+
+        <Flex justify="center" w="100%" mt="1.5rem">
+          <Button
+            mr="1rem"
+            isDisabled={currentCard === 0}
+            onClick={() => setCurrentCard((prev) => prev - 1)}
+          >
+            Prev Card
+          </Button>
+          <Button
+            onClick={() => setCurrentCard((prev) => prev + 1)}
+            isDisabled={flashcards && flashcards.length - 1 === currentCard}
+          >
+            Next Card
+          </Button>
+        </Flex>
+
+        {/* <Box
           w={{ base: "340px", sm: "440px" }}
           h={{ base: "250px", sm: "310px" }}
         >
@@ -71,7 +90,7 @@ const StudySession = () => {
           >
             Next Card
           </Button>
-        </Flex>
+        </Flex> */}
       </Flex>
     </Flex>
   );
