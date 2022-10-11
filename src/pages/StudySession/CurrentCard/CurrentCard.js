@@ -28,6 +28,15 @@ const MotionContainer = ({ flashcards, currentCard }) => {
     setFlipCards(flipCardsArray);
   }, [flashcards]);
 
+  const curIdx = useRef(0);
+
+  let forward = false;
+  if (curIdx.current <= currentCard) {
+    forward = true;
+  }
+
+  curIdx.current = currentCard;
+
   if (!flipCards || !flipCards.length) return null;
 
   return (
@@ -35,14 +44,13 @@ const MotionContainer = ({ flashcards, currentCard }) => {
       <AnimatePresence>
         <motion.div
           key={`flashcard-${currentCard}`}
-          initial={{ x: "-150%" }}
+          initial={{ x: forward ? "-150%" : "150%" }}
           animate={{
             x: 0,
             position: "absolute",
           }}
-          exit={{ x: "100vw" }}
+          exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
-          transitionEnd={() => console.log("END")}
         >
           {flipCards[currentCard]}
         </motion.div>
