@@ -9,11 +9,12 @@ import {
   Collapse,
   Link,
   useColorModeValue,
-  useBreakpointValue,
   useDisclosure,
+  Image,
 } from "@chakra-ui/react";
 import { HamburgerIcon, ChevronIcon, CloseIcon } from "utils/icons";
 
+import logo from "assets/images/logo.svg";
 import UserContext from "store/UserContext";
 import AvatarMenu from "./AvatarMenu";
 import AuthModal from "components/Modals/AuthModal";
@@ -72,13 +73,9 @@ export default function WithSubnavigation() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Text
-            textAlign={useBreakpointValue({ base: "center", md: "left" })}
-            fontFamily={"heading"}
-            color={useColorModeValue("gray.800", "white")}
-          >
-            Logo
-          </Text>
+          <Link href="/">
+            <Image src={logo} h={{ base: "31.05px" }} w={{ base: "100px" }} />
+          </Link>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <AuthModal
@@ -144,7 +141,6 @@ export default function WithSubnavigation() {
 const DesktopNav = () => {
   const linkColor = useColorModeValue("gray.600", "gray.200");
   const linkHoverColor = useColorModeValue("gray.800", "white");
-  const popoverContentBgColor = useColorModeValue("white", "gray.800");
 
   return (
     <Stack direction={"row"} spacing={4}>
