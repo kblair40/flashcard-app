@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Box, Heading, Text, Flex } from "@chakra-ui/react";
+import { Reorder } from "framer-motion";
 
 import SetContext from "store/SetContext";
 
@@ -11,6 +12,10 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
   if (flashcardSetData) {
     cards = flashcardSetData.flashcards;
   }
+
+  const handleChangeOrder = () => {
+    //
+  };
 
   return (
     <Box
@@ -33,26 +38,34 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
       </Heading>
 
       <Box w="100%" h="100%" overflowY="auto" p="4px 12px 0 8px" mt="4px">
-        {cards && cards.length ? (
-          cards.map((card, i) => {
-            return (
-              <Thumbnail
-                updateActiveCard={updateActiveCard}
-                key={i}
-                frontContent={card.front_content}
-                id={card._id}
-                index={i}
-                isActive={
-                  activeCard && activeCard.id
-                    ? activeCard.id === card._id
-                    : false
-                }
-              />
-            );
-          })
-        ) : (
-          <Text>No Cards</Text>
-        )}
+        <Reorder.Group
+          onReorder={handleChangeOrder}
+          values={cards ? cards : []}
+          axis="y"
+        >
+          {cards && cards.length ? (
+            cards.map((card, i) => {
+              return (
+                <Reorder.Item key={i} value={card}>
+                  <Thumbnail
+                    updateActiveCard={updateActiveCard}
+                    key={i}
+                    frontContent={card.front_content}
+                    id={card._id}
+                    index={i}
+                    isActive={
+                      activeCard && activeCard.id
+                        ? activeCard.id === card._id
+                        : false
+                    }
+                  />
+                </Reorder.Item>
+              );
+            })
+          ) : (
+            <Text>No Cards</Text>
+          )}
+        </Reorder.Group>
       </Box>
     </Box>
   );
