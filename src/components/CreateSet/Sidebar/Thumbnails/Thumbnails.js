@@ -1,6 +1,6 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { Box, Heading, Text, Flex, Spinner } from "@chakra-ui/react";
-import { Reorder } from "framer-motion";
+import { Reorder, useDragControls } from "framer-motion";
 
 import api from "api";
 import SetContext from "store/SetContext";
@@ -10,19 +10,54 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
   const [saving, setSaving] = useState(false);
   const [cards, setCards] = useState([]);
 
+  const dragControls = useDragControls();
+
   const { flashcardSetData, activeCard, updateActiveCard } =
     useContext(SetContext);
+
+  const flashcardsOrder = useRef();
+  const flashcardsOrderComparator = useRef();
 
   useEffect(() => {
     if (flashcardSetData && flashcardSetData.flashcards) {
       setCards(flashcardSetData.flashcards);
+      flashcardsOrder.current = flashcardSetData.flashcards;
+      flashcardsOrderComparator.current = flashcardSetData.flashcards;
     }
   }, [flashcardSetData]);
 
   const handleChangeOrder = async (cardsArray) => {
-    setSaving(true);
     console.log("NEW ORDER:", cardsArray);
+    // Only updates locally, so user can visually see order has changed.
+    // api call to change the order is in the endDrag handler
     setCards(cardsArray);
+    flashcardsOrder.current = cardsArray;
+  };
+
+  const isDragging = useRef(false);
+  const startDrag = (e) => {
+    isDragging.current = true;
+  };
+
+  const didChange = (cardsArray, comparator) => {
+    for (let i = 0; i < cardsArray.length; i++) {
+      if (cardsArray[i]._id !== comparator[i]._id) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  const endDrag = async (e) => {
+    const cardsArray = flashcardsOrder.current;
+    isDragging.current = false;
+
+    if (
+      !didChange(flashcardsOrder.current, flashcardsOrderComparator.current)
+    ) {
+      return;
+    }
 
     for (let i = 0; i < cardsArray.length; i++) {
       let card = cardsArray[i];
@@ -37,10 +72,15 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
         }
       );
       console.log("CHANGE ORDER RESPONSE:", response.data);
+
+      if (response.data && response.data.set) {
+        const { set } = response.data;
+        flashcardsOrder.current = set.flashcards;
+        flashcardsOrderComparator.current = set.flashcards;
+      }
     } catch (err) {
       console.error("FAILED PATCHING SET ORDER:", err);
     }
-    setSaving(false);
   };
 
   return (
@@ -63,12 +103,35 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
         Cards
       </Heading>
 
-      <Box w="100%" h="100%" overflowY="auto" p="4px 12px 0 8px" mt="4px">
-        <Reorder.Group onReorder={handleChangeOrder} values={cards} axis="y">
+      <Box
+        onPointerDown={startDrag}
+        onPointerUp={endDrag}
+        w="100%"
+        h="100%"
+        overflowY="auto"
+        p="4px 12px 0 8px"
+        mt="4px"
+      >
+        <Reorder.Group
+          // onDrag={() => console.log("DRAGGING")}
+          // onDrop={() => console.log("DROPPED!")}
+          // onDragStartCapture={() => console.log("DRAG START")}
+          onReorder={(newOrder) => {
+            // if (!isDragging)... then call handleChangeOrder
+            handleChangeOrder(newOrder);
+          }}
+          // onReorder={handleChangeOrder}
+          values={cards}
+          axis="y"
+        >
           {cards && cards.length ? (
             cards.map((card, i) => {
               return (
-                <Reorder.Item key={card._id} value={card}>
+                <Reorder.Item
+                  key={card._id}
+                  value={card}
+                  dragControls={dragControls}
+                >
                   <Thumbnail
                     updateActiveCard={updateActiveCard}
                     key={i}
@@ -89,6 +152,7 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
           )}
         </Reorder.Group>
       </Box>
+      {saving && <LoadingOverlay />}
     </Box>
   );
 };
@@ -136,5 +200,16 @@ const Thumbnail = ({ frontContent, index, id, updateActiveCard, isActive }) => {
 };
 
 const LoadingOverlay = () => {
-  return <Box></Box>;
+  return (
+    <Flex
+      border="2px solid red"
+      position="absolute"
+      h="100%"
+      w="100%"
+      justify="center"
+      align="center"
+    >
+      <Spinner />
+    </Flex>
+  );
 };
