@@ -84,7 +84,6 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
         flashcardsOrder.current = set.flashcards;
         flashcardsOrderComparator.current = set.flashcards;
         setFlashcardSetData(set);
-        // setCards(set.flashcards);
       }
     } catch (err) {
       console.error("FAILED PATCHING SET ORDER:", err);
@@ -207,7 +206,6 @@ const Thumbnail = ({ frontContent, index, id, updateActiveCard, isActive }) => {
 const LoadingOverlay = ({ cardCount }) => {
   return (
     <Flex
-      // border="2px solid red"
       position="absolute"
       bottom={0}
       top="1.8rem"
@@ -216,7 +214,6 @@ const LoadingOverlay = ({ cardCount }) => {
       w="100%"
       justify="center"
       align="center"
-      // bg="rgba(0,0,0,0.09)"
       onClick={(e) => e.stopPropagation()}
       zIndex={10}
     >

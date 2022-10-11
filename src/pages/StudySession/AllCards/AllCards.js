@@ -1,7 +1,7 @@
 import React from "react";
-import { Box, Flex, Slide } from "@chakra-ui/react";
+import { Box, Flex, Slide, Button } from "@chakra-ui/react";
 
-const AllCards = ({ flashcards, onClickCard, show }) => {
+const AllCards = ({ flashcards, onClickCard, show, shuffle }) => {
   return (
     <Slide
       in={show}
@@ -15,10 +15,20 @@ const AllCards = ({ flashcards, onClickCard, show }) => {
         overflowY: "hidden",
         width: { base: "100vw" },
         boxShadow: "inset 0 2px 4px 0 rgba(0,0,0,0.09)",
-        padding: "8px",
+        padding: "40px 8px 8px 8px",
       }}
       unmountOnExit
     >
+      <Button
+        onClick={() => shuffle(flashcards)}
+        size="xs"
+        position="absolute"
+        right="1rem"
+        top=".5rem"
+      >
+        Randomize
+      </Button>
+
       <Flex align="center" justify="start" mr="8px">
         {flashcards && flashcards.length
           ? flashcards.map((card, i) => {

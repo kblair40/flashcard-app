@@ -2,14 +2,15 @@ import React, { useState, useEffect, useRef } from "react";
 import ReactCardFlip from "react-card-flip";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { Box, Flex, Button, Text } from "@chakra-ui/react";
+import { Box, Flex, Button } from "@chakra-ui/react";
 
-const MotionContainer = ({ flashcards, currentCard }) => {
+const CurrentCard = ({ flashcards, currentCard }) => {
   const [flipCards, setFlipCards] = useState();
 
   const didMount = useRef(false);
   useEffect(() => {
-    if (didMount.current || !flashcards) return;
+    // if (didMount.current || !flashcards) return;
+    if (!flashcards) return;
 
     didMount.current = true;
 
@@ -59,7 +60,7 @@ const MotionContainer = ({ flashcards, currentCard }) => {
   );
 };
 
-export default MotionContainer;
+export default CurrentCard;
 
 const FlipContainer = ({ children }) => {
   const [side, setSide] = useState("front");

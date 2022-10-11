@@ -29,6 +29,7 @@ const StudySession = () => {
       } catch (e) {
         console.error("FAILED FETCHING SET:", e);
       }
+
       setLoading(false);
     };
 
@@ -36,6 +37,15 @@ const StudySession = () => {
       fetchSet(params.id);
     }
   }, [params]);
+
+  const shuffle = (cardsArray) => {
+    const copy = [...cardsArray];
+    console.log("CARDS BEFORE:", copy);
+    copy.sort(() => Math.random() - 0.5);
+    console.log("CARDS AFTER:", copy);
+    setCurrentCard(0);
+    setFlashcards(copy);
+  };
 
   const handleClickCardPreview = (index) => {
     console.log("INDEX:", index);
@@ -86,6 +96,7 @@ const StudySession = () => {
         show={!hideAllCards}
         onClickCard={handleClickCardPreview}
         flashcards={flashcards}
+        shuffle={shuffle}
       />
       <Button
         size="sm"
