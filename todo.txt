@@ -1,0 +1,2 @@
+1. Add functionality to "shuffle" cards during a study session
+2. Pomodoro clock timer could be cool

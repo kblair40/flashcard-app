@@ -1,11 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Box, Heading, Text, Flex } from "@chakra-ui/react";
+import { Box, Heading, Text, Flex, Spinner } from "@chakra-ui/react";
 import { Reorder } from "framer-motion";
 
 import api from "api";
 import SetContext from "store/SetContext";
 
 const Thumbnails = ({ height = "100%", width = "100%" }) => {
+  // add some kind of overlay with spinner while saving new order
+  const [saving, setSaving] = useState(false);
   const [cards, setCards] = useState([]);
 
   const { flashcardSetData, activeCard, updateActiveCard } =
@@ -16,11 +18,6 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
       setCards(flashcardSetData.flashcards);
     }
   }, [flashcardSetData]);
-
-  // let cards = [];
-  // if (flashcardSetData) {
-  //   cards = flashcardSetData.flashcards;
-  // }
 
   const handleChangeOrder = async (cardsArray) => {
     console.log("NEW ORDER:", cardsArray);
@@ -38,7 +35,7 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
           flashcards: cardsArray,
         }
       );
-      console.log("RESPONSE:", response.data);
+      console.log("CHANGE ORDER RESPONSE:", response.data);
     } catch (err) {
       console.error("FAILED PATCHING SET ORDER:", err);
     }
