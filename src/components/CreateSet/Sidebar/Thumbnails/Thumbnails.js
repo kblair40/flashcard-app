@@ -12,8 +12,12 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
 
   const dragControls = useDragControls();
 
-  const { flashcardSetData, activeCard, updateActiveCard } =
-    useContext(SetContext);
+  const {
+    flashcardSetData,
+    activeCard,
+    updateActiveCard,
+    setFlashcardSetData,
+  } = useContext(SetContext);
 
   const flashcardsOrder = useRef();
   const flashcardsOrderComparator = useRef();
@@ -79,6 +83,8 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
         const { set } = response.data;
         flashcardsOrder.current = set.flashcards;
         flashcardsOrderComparator.current = set.flashcards;
+        setFlashcardSetData(set);
+        // setCards(set.flashcards);
       }
     } catch (err) {
       console.error("FAILED PATCHING SET ORDER:", err);
@@ -115,12 +121,14 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
         overflowY="auto"
         p="4px 12px 0 8px"
         mt="4px"
-        bg={saving ? "rgba(10,20,240,0.05)" : "#fff"}
+        background={saving ? "rgba(10,20,240,0.02)" : "#fff"}
+        transition={"background 0.2s"}
         zIndex={-1}
       >
         <Reorder.Group onReorder={handleChangeOrder} values={cards} axis="y">
           {cards && cards.length ? (
             cards.map((card, i) => {
+              console.log("\nCARD:", card);
               return (
                 <Reorder.Item
                   key={card._id}

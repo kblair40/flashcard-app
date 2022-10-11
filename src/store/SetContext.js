@@ -40,6 +40,7 @@ const SetProvider = ({ children }) => {
   }, [params.id]);
 
   const updateActiveCard = (card) => {
+    if (!card) return;
     const { index } = card;
     const actualCard = flashcardSetData.flashcards[index];
 
@@ -149,6 +150,7 @@ const SetProvider = ({ children }) => {
         backCardContent,
         setBackCardContent,
         flashcardSetData,
+        setFlashcardSetData,
         saveCard,
         deleteCard,
         saving,
