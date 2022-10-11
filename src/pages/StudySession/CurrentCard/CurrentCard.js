@@ -97,7 +97,7 @@ const Flashcard = ({ content }) => {
       h={{ base: "250px", sm: "260px", md: "340px" }}
       w={{ base: "340px", sm: "440px", md: "550px" }}
       borderRadius="2px"
-      shadow="sm"
+      shadow="md"
       bg="gray.50"
     >
       <Box
