@@ -59,6 +59,8 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
       return;
     }
 
+    setSaving(true);
+
     for (let i = 0; i < cardsArray.length; i++) {
       let card = cardsArray[i];
       card.index = i + 1;
@@ -81,6 +83,8 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
     } catch (err) {
       console.error("FAILED PATCHING SET ORDER:", err);
     }
+
+    setSaving(false);
   };
 
   return (
@@ -111,19 +115,10 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
         overflowY="auto"
         p="4px 12px 0 8px"
         mt="4px"
+        bg={saving ? "rgba(10,20,240,0.05)" : "#fff"}
+        zIndex={-1}
       >
-        <Reorder.Group
-          // onDrag={() => console.log("DRAGGING")}
-          // onDrop={() => console.log("DROPPED!")}
-          // onDragStartCapture={() => console.log("DRAG START")}
-          onReorder={(newOrder) => {
-            // if (!isDragging)... then call handleChangeOrder
-            handleChangeOrder(newOrder);
-          }}
-          // onReorder={handleChangeOrder}
-          values={cards}
-          axis="y"
-        >
+        <Reorder.Group onReorder={handleChangeOrder} values={cards} axis="y">
           {cards && cards.length ? (
             cards.map((card, i) => {
               return (
@@ -152,7 +147,7 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
           )}
         </Reorder.Group>
       </Box>
-      {saving && <LoadingOverlay />}
+      {saving && <LoadingOverlay cardCount={cards ? cards.length : 0} />}
     </Box>
   );
 };
@@ -166,6 +161,7 @@ const Thumbnail = ({ frontContent, index, id, updateActiveCard, isActive }) => {
 
   return (
     <Flex
+      zIndex={1}
       onClick={handleClick}
       mx="auto"
       mb="8px"
@@ -182,6 +178,7 @@ const Thumbnail = ({ frontContent, index, id, updateActiveCard, isActive }) => {
       cursor="pointer"
       position="relative"
       transition={"background 0.3s"}
+      bg="#fff"
       _hover={{ background: "#eee" }}
     >
       <Box dangerouslySetInnerHTML={{ __html: frontContent }} />
@@ -199,17 +196,23 @@ const Thumbnail = ({ frontContent, index, id, updateActiveCard, isActive }) => {
   );
 };
 
-const LoadingOverlay = () => {
+const LoadingOverlay = ({ cardCount }) => {
   return (
     <Flex
-      border="2px solid red"
+      // border="2px solid red"
       position="absolute"
+      bottom={0}
+      top="1.8rem"
+      left={0}
       h="100%"
       w="100%"
       justify="center"
       align="center"
+      // bg="rgba(0,0,0,0.09)"
+      onClick={(e) => e.stopPropagation()}
+      zIndex={10}
     >
-      <Spinner />
+      <Spinner position="relative" bottom={cardCount <= 5 ? "40px" : 0} />
     </Flex>
   );
 };
