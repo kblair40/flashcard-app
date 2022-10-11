@@ -1,12 +1,8 @@
 import React from "react";
-import Editor from "components/Editor";
+// import Editor from "components/Editor";
 
 const Home = () => {
-  return (
-    <div>
-      <Editor />
-    </div>
-  );
+  return <div>{/* <Editor /> */}</div>;
 };
 
 export default Home;
