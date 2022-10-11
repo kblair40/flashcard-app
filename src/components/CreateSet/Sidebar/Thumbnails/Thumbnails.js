@@ -20,6 +20,7 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
   }, [flashcardSetData]);
 
   const handleChangeOrder = async (cardsArray) => {
+    setSaving(true);
     console.log("NEW ORDER:", cardsArray);
     setCards(cardsArray);
 
@@ -39,6 +40,7 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
     } catch (err) {
       console.error("FAILED PATCHING SET ORDER:", err);
     }
+    setSaving(false);
   };
 
   return (
@@ -131,4 +133,8 @@ const Thumbnail = ({ frontContent, index, id, updateActiveCard, isActive }) => {
       </Text>
     </Flex>
   );
+};
+
+const LoadingOverlay = () => {
+  return <Box></Box>;
 };
