@@ -1,19 +1,29 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Box, Heading, Text, Flex } from "@chakra-ui/react";
 import { Reorder } from "framer-motion";
 
 import SetContext from "store/SetContext";
 
 const Thumbnails = ({ height = "100%", width = "100%" }) => {
+  const [cards, setCards] = useState([]);
+
   const { flashcardSetData, activeCard, updateActiveCard } =
     useContext(SetContext);
 
-  let cards = [];
-  if (flashcardSetData) {
-    cards = flashcardSetData.flashcards;
-  }
+  useEffect(() => {
+    if (flashcardSetData && flashcardSetData.flashcards) {
+      setCards(flashcardSetData.flashcards);
+    }
+  }, [flashcardSetData]);
 
-  const handleChangeOrder = () => {
+  // let cards = [];
+  // if (flashcardSetData) {
+  //   cards = flashcardSetData.flashcards;
+  // }
+
+  const handleChangeOrder = (newOrder) => {
+    console.log("NEW ORDER:", newOrder);
+    setCards(newOrder);
     //
   };
 
@@ -38,15 +48,11 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
       </Heading>
 
       <Box w="100%" h="100%" overflowY="auto" p="4px 12px 0 8px" mt="4px">
-        <Reorder.Group
-          onReorder={handleChangeOrder}
-          values={cards ? cards : []}
-          axis="y"
-        >
+        <Reorder.Group onReorder={handleChangeOrder} values={cards} axis="y">
           {cards && cards.length ? (
             cards.map((card, i) => {
               return (
-                <Reorder.Item key={i} value={card}>
+                <Reorder.Item key={card._id} value={card}>
                   <Thumbnail
                     updateActiveCard={updateActiveCard}
                     key={i}
