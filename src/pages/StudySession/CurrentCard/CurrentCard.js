@@ -35,10 +35,14 @@ const MotionContainer = ({ flashcards, currentCard }) => {
       <AnimatePresence>
         <motion.div
           key={`flashcard-${currentCard}`}
-          initial={{ x: "-100%" }}
-          animate={{ x: 0 }}
-          exit={{ x: "100%" }}
+          initial={{ x: "-150%" }}
+          animate={{
+            x: 0,
+            position: "absolute",
+          }}
+          exit={{ x: "100vw" }}
           transition={{ duration: 0.5 }}
+          transitionEnd={() => console.log("END")}
         >
           {flipCards[currentCard]}
         </motion.div>
@@ -65,6 +69,7 @@ const FlipContainer = ({ children }) => {
         {children}
       </ReactCardFlip>
       <Button
+        width="100%"
         mt=".75rem"
         variant="ghost"
         onClick={() => setSide(side === "back" ? "front" : "back")}
