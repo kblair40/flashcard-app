@@ -1,7 +1,14 @@
 import React from "react";
-import { Box, Flex, Slide, Button } from "@chakra-ui/react";
+import { Box, Flex, Slide, Button, HStack } from "@chakra-ui/react";
 
-const AllCards = ({ flashcards, onClickCard, show, shuffle }) => {
+const AllCards = ({
+  flashcards,
+  onClickCard,
+  show,
+  shuffle,
+  isHidden,
+  hideSelf,
+}) => {
   return (
     <Slide
       in={show}
@@ -19,15 +26,15 @@ const AllCards = ({ flashcards, onClickCard, show, shuffle }) => {
       }}
       unmountOnExit
     >
-      <Button
-        onClick={() => shuffle(flashcards)}
-        size="xs"
-        position="absolute"
-        right="1rem"
-        top=".5rem"
-      >
-        Randomize
-      </Button>
+      <HStack position="absolute" right="1rem" top=".5rem">
+        <Button onClick={hideSelf} size="xs">
+          Hide
+        </Button>
+
+        <Button onClick={() => shuffle(flashcards)} size="xs">
+          Randomize
+        </Button>
+      </HStack>
 
       <Flex align="center" justify="start" mr="8px">
         {flashcards && flashcards.length

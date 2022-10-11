@@ -97,16 +97,21 @@ const StudySession = () => {
         onClickCard={handleClickCardPreview}
         flashcards={flashcards}
         shuffle={shuffle}
+        isHidden={hideAllCards}
+        hideSelf={() => setHideAllCards(true)}
       />
-      <Button
-        size="sm"
-        onClick={() => setHideAllCards(!hideAllCards)}
-        position="fixed"
-        bottom="10rem"
-        left="1rem"
-      >
-        Hide/Show
-      </Button>
+
+      {hideAllCards && (
+        <Button
+          size="sm"
+          onClick={() => setHideAllCards(!hideAllCards)}
+          position="fixed"
+          bottom=".25rem"
+          right=".5rem"
+        >
+          Show Cards
+        </Button>
+      )}
     </Flex>
   );
 };
