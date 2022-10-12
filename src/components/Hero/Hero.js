@@ -28,7 +28,10 @@ const Hero = () => {
         </Text>
 
         <Flex align="center" justify="flex-end" mt="2rem">
-          <SmartIcon boxSize={{ base: "120px" }} />
+          <SmartIcon
+            boxSize={{ base: "120px" }}
+            fill={isDark ? "gray.100" : undefined}
+          />
           <Text
             fontWeight="500"
             ml="1rem"
@@ -47,7 +50,10 @@ const Hero = () => {
           >
             Search, discover and share your Flashcards with your peers.
           </Text>
-          <GlobeNetworkIcon boxSize={{ base: "120px" }} />
+          <GlobeNetworkIcon
+            fill={isDark ? "gray.100" : undefined}
+            boxSize={{ base: "120px" }}
+          />
         </Flex>
 
         <Button
@@ -56,13 +62,13 @@ const Hero = () => {
           rounded="full"
           size="lg"
           fontWeight="700"
-          color={isDark ? "#010c0d" : "#fff"}
-          bg={isDark ? "primary.600" : "blue.400"}
+          color={isDark ? "#fff" : "#fff"}
+          bg={isDark ? "primary.400" : "blue.400"}
           _hover={{
             bg: isDark ? "primary.500" : "blue.500",
           }}
           _active={{
-            bg: isDark ? "primary.400" : "blue.600",
+            bg: isDark ? "primary.500" : "blue.600",
           }}
           // bg={isDark ? "primary.600" : "gray.700"}
           // _hover={{
