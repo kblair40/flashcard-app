@@ -6,6 +6,7 @@ import {
   Flex,
   Heading,
   IconButton,
+  Button,
   Text,
   Menu,
   MenuButton,
@@ -15,7 +16,13 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-import { SettingsIcon, EditIcon, MoreHorizontalIcon } from "utils/icons";
+import {
+  SettingsIcon,
+  StudyIcon,
+  EditIcon,
+  MoreHorizontalIcon,
+  ChevronIcon,
+} from "utils/icons";
 import api from "api";
 
 const AllSets = () => {
@@ -24,6 +31,8 @@ const AllSets = () => {
 
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
+
+  const studyButtonBg = isDark ? "gray.50" : "#fff";
 
   useEffect(() => {
     const fetchFlashcardData = async () => {
@@ -59,7 +68,7 @@ const AllSets = () => {
       position="absolute"
       top={0}
       left={0}
-      width={{ base: "200px" }}
+      width={{ base: "220px" }}
       borderRightWidth="1px"
       borderBottomWidth="1px"
       borderColor="#eee"
@@ -70,7 +79,12 @@ const AllSets = () => {
         <IconButton
           variant="ghost"
           size="sm"
-          icon={<SettingsIcon boxSize="18px" />}
+          icon={
+            <SettingsIcon
+              boxSize="18px"
+              fill={isDark ? "gray.50" : "gray.700"}
+            />
+          }
           position="absolute"
           right="8px"
           top="1rem"
@@ -78,12 +92,7 @@ const AllSets = () => {
       </Link>
 
       <Flex h="100%" w="100%" direction="column">
-        <Heading
-          p="0 8px 0 12px"
-          size="lg"
-          mb=".75rem"
-          textStyle="lm-secondary"
-        >
+        <Heading p="0 8px 0 12px" size="lg" mb=".75rem">
           Sets
         </Heading>
 
@@ -91,15 +100,26 @@ const AllSets = () => {
           ? flashcardSets.map((set, i) => {
               return (
                 <Flex
+                  position="relative"
                   direction="column"
                   key={i}
                   cursor="pointer"
                   w="100%"
-                  transition="background 0.2s"
-                  _hover={{ bg: "gray.50" }}
-                  _active={{ bg: "gray.100" }}
                   p="2px 8px 10px 12px"
-                  // border="1px solid #ccc"
+                  transition="background 0.2s"
+                  _hover={{
+                    bg: "gray.50",
+                    "& button": {
+                      transform: "translateX(-16px)",
+                      bg: "gray.50",
+                    },
+                  }}
+                  _active={{
+                    bg: "gray.100",
+                    "& button": {
+                      bg: "gray.100",
+                    },
+                  }}
                 >
                   <Flex
                     justify="space-between"
@@ -107,42 +127,59 @@ const AllSets = () => {
                     w="100%"
                     h="100%"
                   >
-                    <Text fontWeight="600" lineHeight={1}>
+                    <Text fontSize="lg" fontWeight="600" lineHeight={1}>
                       {set.title}
                     </Text>
-
-                    <Menu>
-                      <MenuButton
-                        as={IconButton}
-                        rounded="full"
-                        variant="ghost"
-                        size="xs"
-                        icon={<MoreHorizontalIcon boxSize="14px" />}
-                      />
-                      <MenuList py={0} w="80px">
-                        <MenuItem py="8px" icon={<EditIcon boxSize="16px" />}>
-                          <Link to={`/manage-sets/${set._id}`}>
-                            <Text
-                              lineHeight={1}
-                              fontSize="sm"
-                              ml="8px"
-                              fontWeight="500"
-                            >
-                              Edit
-                            </Text>
-                          </Link>
-                        </MenuItem>
-                      </MenuList>
-                    </Menu>
                   </Flex>
 
                   <Text
+                    mt="2px"
                     lineHeight={1}
                     fontSize="xs"
+                    fontWeight="500"
                     textStyle={isDark ? "dm-secondary" : "lm-secondary"}
                   >
                     Last Studied: 10/7
                   </Text>
+
+                  <Box
+                    bottom="4px"
+                    right="10px"
+                    position="absolute"
+                    w="80px"
+                    h="24px"
+                  >
+                    <Button
+                      size="xs"
+                      pr={0}
+                      variant="ghost"
+                      position="absolute"
+                      fontWeight="700"
+                      w="64px"
+                      top={0}
+                      bottom={0}
+                      right={0}
+                      zIndex={2}
+                      bg={studyButtonBg}
+                      leftIcon={
+                        <StudyIcon
+                          fill={isDark ? "gray.50" : "gray.700"}
+                          boxSize="14px"
+                        />
+                      }
+                    >
+                      Study
+                    </Button>
+
+                    <ChevronIcon
+                      boxSize="12px"
+                      fill={isDark ? "gray.50" : "gray.800"}
+                      position="absolute"
+                      right="0"
+                      top="6px"
+                      zIndex={1}
+                    />
+                  </Box>
                 </Flex>
               );
             })
