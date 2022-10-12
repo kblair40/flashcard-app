@@ -13,7 +13,7 @@ import {
   useDisclosure,
   Image,
 } from "@chakra-ui/react";
-import { Link as RRLink } from "react-router-dom";
+import { Link as RRLink, useLocation } from "react-router-dom";
 
 import { HamburgerIcon, ChevronIcon, CloseIcon } from "utils/icons";
 import logo from "assets/images/logo.svg";
@@ -85,7 +85,7 @@ export default function WithSubnavigation() {
           </RRLink>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
-            <DesktopNav />
+            <DesktopNav isSignedIn={isSignedIn} />
           </Flex>
 
           <AuthModal
@@ -149,24 +149,44 @@ export default function WithSubnavigation() {
   );
 }
 
-const DesktopNav = () => {
-  const linkColor = useColorModeValue("gray.600", "gray.200");
-  const linkHoverColor = useColorModeValue("gray.800", "white");
+const DesktopNav = ({ isSignedIn }) => {
+  const linkColor = useColorModeValue("gray.700", "gray.200");
+  const linkHoverColor = useColorModeValue("gray.900", "white");
+
+  const { pathname } = useLocation();
+  console.log("PATHNAME:", pathname);
 
   return (
     <Stack align="center" direction={"row"} spacing={{ base: 2, sm: 4 }}>
       {NAV_ITEMS.map((navItem) => (
-        <Box key={navItem.label}>
+        <Box key={navItem.label} p={2}>
           <Link
-            p={2}
+            cursor={!isSignedIn ? "not-allowed" : "pointer"}
+            position="relative"
+            display="inline-block"
             as={RRLink}
-            to={navItem.href ?? "#"}
+            to={(isSignedIn && navItem.href) ?? "#"}
             fontSize={"sm"}
-            fontWeight={500}
+            fontWeight={600}
             color={linkColor}
             _hover={{
               textDecoration: "none",
               color: linkHoverColor,
+
+              _after: {
+                transform: "scaleX(1)",
+              },
+            }}
+            _after={{
+              content: `""`,
+              width: "100%",
+              bottom: 0,
+              left: 0,
+              position: "absolute",
+              transform: pathname === navItem.href ? "scaleX(1)" : "scaleX(0)",
+              transition: "all 0.2s",
+              height: "1px",
+              bg: "gray.700",
             }}
           >
             {navItem.label}
@@ -245,15 +265,15 @@ const MobileNavItem = ({ label, children, href }) => {
 
 const NAV_ITEMS = [
   {
-    label: "Create",
+    label: "Create New Set",
     href: "/create",
   },
   {
-    label: "Manage",
+    label: "Manage Sets",
     href: "/manage-sets",
   },
-  {
-    label: "Study",
-    href: "/study",
-  },
+  // {
+  //   label: "Study",
+  //   href: "/study",
+  // },
 ];

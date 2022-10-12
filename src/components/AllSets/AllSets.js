@@ -195,18 +195,19 @@ export default AllSets;
 const NoSets = () => {
   return (
     <Flex w="100%" direction="column" justify="center" align="center" pt="1rem">
-      <Text textAlign="center" fontWeight="600">
-        No Sets Created
+      <Text textAlign="center" fontWeight="700" textTransform="uppercase">
+        YOU HAVE no sets
       </Text>
 
       <Link to="/create">
         <Button
           mt="1rem"
           rounded="full"
+          size="lg"
           leftIcon={<AddIcon fill="white" boxSize="16px" />}
-          _hover={{ bg: "primary.600" }}
-          _active={{ bg: "primary.700" }}
-          bg="primary.base"
+          _hover={{ bg: "primary.500" }}
+          _active={{ bg: "primary.500" }}
+          bg="primary.400"
           color="white"
         >
           Create a Set
