@@ -26,7 +26,7 @@ const AllSets = () => {
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
 
-  const studyButtonBg = isDark ? "gray.50" : "#fff";
+  const studyButtonBg = isDark ? "gray.800" : "#fff";
 
   useEffect(() => {
     const fetchFlashcardData = async () => {
@@ -79,6 +79,7 @@ const AllSets = () => {
           <Link to="/manage-sets">
             <Tooltip label="Manage and Edit Sets">
               <IconButton
+                rounded="full"
                 variant="ghost"
                 transition="all 0.3s"
                 _hover={{
@@ -115,17 +116,17 @@ const AllSets = () => {
                     p="8px 16px 10px 16px"
                     transition="background 0.2s"
                     _hover={{
-                      bg: "gray.50",
+                      bg: !isDark ? "gray.50" : "gray.700",
                       "& button": {
                         transform: "translateX(-16px)",
-                        bg: "gray.50",
+                        bg: !isDark ? "gray.50" : "gray.700",
                       },
                       "& .chev_icon": { opacity: 1, right: "4px" },
                     }}
                     _active={{
-                      bg: "gray.100",
+                      bg: !isDark ? "gray.100" : "gray.600",
                       "& button": {
-                        bg: "gray.100",
+                        bg: !isDark ? "gray.100" : "gray.600",
                       },
                     }}
                   >
