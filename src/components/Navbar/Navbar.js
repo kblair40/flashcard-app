@@ -17,6 +17,7 @@ import { Link as RRLink, useLocation } from "react-router-dom";
 
 import { HamburgerIcon, ChevronIcon, CloseIcon } from "utils/icons";
 import logo from "assets/images/logo.svg";
+import logo_dk from "assets/images/logo-dk.svg";
 import UserContext from "store/UserContext";
 import AvatarMenu from "./AvatarMenu";
 import ThemeToggle from "./ThemeToggle";
@@ -79,7 +80,7 @@ export default function WithSubnavigation() {
           <RRLink to="/">
             <Image
               maxWidth={"243px"}
-              src={logo}
+              src={isDark ? logo_dk : logo}
               w={{ base: "170px", sm: "200px" }}
             />
           </RRLink>
