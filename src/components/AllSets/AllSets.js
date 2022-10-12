@@ -78,6 +78,7 @@ const AllSets = () => {
           ? flashcardSets.map((set, i) => {
               return (
                 <Flex
+                  key={i}
                   justify="space-between"
                   align="center"
                   cursor="pointer"
