@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Spinner, Center, Box, Flex, Heading } from "@chakra-ui/react";
+import {
+  Spinner,
+  Center,
+  Box,
+  Flex,
+  Heading,
+  IconButton,
+} from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
+import { SettingsIcon } from "utils/icons";
 import api from "api";
 
 const AllSets = () => {
   const [loading, setLoading] = useState(true);
   const [flashcardSets, setFlashcardSets] = useState();
-  const [changingPublicStatus, setChangingPublicStatus] = useState(false);
 
   useEffect(() => {
     const fetchFlashcardData = async () => {
@@ -44,8 +52,19 @@ const AllSets = () => {
       left={0}
       width={{ base: "200px" }}
       border="1px solid #ccc"
-      p="16px 8px"
+      p="12px 8px"
     >
+      <Link to="/manage-sets">
+        <IconButton
+          variant="ghost"
+          size="sm"
+          icon={<SettingsIcon boxSize="18px" />}
+          position="absolute"
+          right="8px"
+          top="1rem"
+        />
+      </Link>
+
       <Flex h="100%" w="100%" direction="column">
         <Heading mb="1rem">Sets</Heading>
 
