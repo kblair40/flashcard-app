@@ -20,12 +20,18 @@ function App() {
         <Box position="relative">
           <Routes>
             <Route path="/" element={<Home />} />
+
             <Route path="/create" element={<Create />} />
             <Route path="/create/:id" element={<Create />} />
+
             <Route path="/study" element={<Study />} />
+
             <Route path="/study/:id" element={<StudySession />} />
+
             <Route path="/manage-sets" element={<ManageSets />} />
+
             <Route path="/account" element={<Account />} />
+
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Box>

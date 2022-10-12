@@ -12,6 +12,7 @@ import {
   useDisclosure,
   Image,
 } from "@chakra-ui/react";
+import { Link as RRLink } from "react-router-dom";
 
 import { HamburgerIcon, ChevronIcon, CloseIcon } from "utils/icons";
 import logo from "assets/images/logo.svg";
@@ -52,11 +53,8 @@ export default function WithSubnavigation() {
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}
         minH={"60px"}
-        py={{ base: 2 }}
         px={{ base: 4 }}
-        borderBottom={1}
-        borderStyle={"solid"}
-        borderColor={useColorModeValue("gray.200", "gray.900")}
+        shadow="sm"
         align={"center"}
       >
         <Flex
@@ -74,9 +72,9 @@ export default function WithSubnavigation() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Link href="/">
-            <Image src={logo} h={{ base: "31.05px" }} w={{ base: "100px" }} />
-          </Link>
+          <RRLink to="/">
+            <Image src={logo} h={{ base: "58px" }} w={{ base: "354px" }} />
+          </RRLink>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <AuthModal
@@ -94,6 +92,8 @@ export default function WithSubnavigation() {
           direction={"row"}
           spacing={6}
         >
+          <ThemeToggle hidden={{ base: true, md: false }} />
+
           {!isSignedIn && (
             <Button
               as={"a"}
@@ -106,8 +106,6 @@ export default function WithSubnavigation() {
               Sign In
             </Button>
           )}
-
-          <ThemeToggle />
 
           {isSignedIn ? (
             <AvatarMenu
@@ -146,12 +144,13 @@ const DesktopNav = () => {
   const linkHoverColor = useColorModeValue("gray.800", "white");
 
   return (
-    <Stack direction={"row"} spacing={4}>
+    <Stack align="center" direction={"row"} spacing={{ base: 2, sm: 4 }}>
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <Link
             p={2}
-            href={navItem.href ?? "#"}
+            as={RRLink}
+            to={navItem.href ?? "#"}
             fontSize={"sm"}
             fontWeight={500}
             color={linkColor}
@@ -236,11 +235,11 @@ const MobileNavItem = ({ label, children, href }) => {
 
 const NAV_ITEMS = [
   {
-    label: "Create Flashcard Set",
+    label: "Create",
     href: "/create",
   },
   {
-    label: "Manage Flashcard Sets",
+    label: "Manage",
     href: "/manage-sets",
   },
   {

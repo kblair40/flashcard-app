@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   Spinner,
   Center,
@@ -12,10 +12,13 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
+import UserContext from "store/UserContext";
 import { SettingsIcon, StudyIcon, ChevronIcon, AddIcon } from "utils/icons";
 import api from "api";
 
 const AllSets = () => {
+  const { isSignedIn } = useContext(UserContext);
+
   const [loading, setLoading] = useState(true);
   const [flashcardSets, setFlashcardSets] = useState();
 
@@ -44,6 +47,10 @@ const AllSets = () => {
 
     fetchFlashcardData();
   }, []);
+
+  if (!isSignedIn) {
+    return null;
+  }
 
   if (loading) {
     return (
@@ -85,7 +92,9 @@ const AllSets = () => {
           Sets
         </Heading>
 
-        {flashcardSets && flashcardSets.length ? (
+        {!isSignedIn ? (
+          <NotLoggedIn />
+        ) : flashcardSets && flashcardSets.length ? (
           flashcardSets.map((set, i) => {
             return (
               <Link key={i} to={`/study/${set._id}`}>
@@ -203,6 +212,16 @@ const NoSets = () => {
           Create a Set
         </Button>
       </Link>
+    </Flex>
+  );
+};
+
+const NotLoggedIn = () => {
+  return (
+    <Flex w="100%" direction="column" justify="center" align="center" pt="1rem">
+      <Text lineHeight={1.2} fontWeight="500" textAlign="center">
+        Sign up or log in to create custom flashcard sets
+      </Text>
     </Flex>
   );
 };

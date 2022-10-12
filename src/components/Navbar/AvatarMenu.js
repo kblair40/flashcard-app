@@ -1,23 +1,17 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import {
   Flex,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
-  MenuDivider,
   Button,
   Avatar,
 } from "@chakra-ui/react";
 
+import { LogoutIcon } from "utils/icons";
+
 const AvatarMenu = ({ handleClickSignout }) => {
-  const navigate = useNavigate();
-
-  const handleClickAccount = () => {
-    navigate("/account");
-  };
-
   return (
     <Flex alignItems={"center"}>
       <Menu>
@@ -31,11 +25,14 @@ const AvatarMenu = ({ handleClickSignout }) => {
           <Avatar size={"sm"} bg="primary.300" />
         </MenuButton>
 
-        <MenuList>
-          <MenuItem onClick={handleClickAccount}>My Account</MenuItem>
-          {/* <MenuItem>Link 2</MenuItem> */}
-          <MenuDivider />
-          <MenuItem onClick={handleClickSignout}>Signout</MenuItem>
+        <MenuList py={0}>
+          <MenuItem
+            fontWeight="600"
+            icon={<LogoutIcon boxSize="18px" />}
+            onClick={handleClickSignout}
+          >
+            Signout
+          </MenuItem>
         </MenuList>
       </Menu>
     </Flex>
