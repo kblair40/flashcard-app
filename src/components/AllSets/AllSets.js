@@ -10,16 +10,14 @@ import {
   Text,
   useColorMode,
 } from "@chakra-ui/react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import { SettingsIcon, StudyIcon, ChevronIcon } from "utils/icons";
+import { SettingsIcon, StudyIcon, ChevronIcon, AddIcon } from "utils/icons";
 import api from "api";
 
 const AllSets = () => {
   const [loading, setLoading] = useState(true);
   const [flashcardSets, setFlashcardSets] = useState();
-
-  const navigate = useNavigate();
 
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
@@ -77,7 +75,7 @@ const AllSets = () => {
             />
           }
           position="absolute"
-          right="8px"
+          right="4px"
           top="1rem"
         />
       </Link>
@@ -87,169 +85,124 @@ const AllSets = () => {
           Sets
         </Heading>
 
-        {flashcardSets && flashcardSets.length
-          ? flashcardSets.map((set, i) => {
-              return (
-                <Link key={i} to={`/study/${set._id}`}>
-                  <Flex
-                    position="relative"
-                    direction="column"
-                    cursor="pointer"
-                    w="100%"
-                    p="6px 8px 10px 12px"
-                    transition="background 0.2s"
-                    _hover={{
+        {flashcardSets && flashcardSets.length ? (
+          flashcardSets.map((set, i) => {
+            return (
+              <Link key={i} to={`/study/${set._id}`}>
+                <Flex
+                  position="relative"
+                  direction="column"
+                  cursor="pointer"
+                  w="100%"
+                  p="6px 8px 10px 12px"
+                  transition="background 0.2s"
+                  _hover={{
+                    bg: "gray.50",
+                    "& button": {
+                      transform: "translateX(-16px)",
                       bg: "gray.50",
-                      "& button": {
-                        transform: "translateX(-16px)",
-                        bg: "gray.50",
-                      },
-                    }}
-                    _active={{
+                    },
+                  }}
+                  _active={{
+                    bg: "gray.100",
+                    "& button": {
                       bg: "gray.100",
-                      "& button": {
-                        bg: "gray.100",
-                      },
-                    }}
+                    },
+                  }}
+                >
+                  <Flex
+                    justify="space-between"
+                    align="center"
+                    w="100%"
+                    h="100%"
                   >
-                    <Flex
-                      justify="space-between"
-                      align="center"
-                      w="100%"
-                      h="100%"
-                    >
-                      <Text fontSize="lg" fontWeight="600" lineHeight={1}>
-                        {set.title}
-                      </Text>
-                    </Flex>
-
-                    <Text
-                      mt="2px"
-                      lineHeight={1}
-                      fontSize="xs"
-                      fontWeight="500"
-                      textStyle={isDark ? "dm-secondary" : "lm-secondary"}
-                    >
-                      Last Studied: 10/7
+                    <Text fontSize="lg" fontWeight="600" lineHeight={1}>
+                      {set.title}
                     </Text>
-
-                    <Box
-                      bottom="4px"
-                      right="10px"
-                      position="absolute"
-                      w="80px"
-                      h="24px"
-                    >
-                      <Button
-                        size="xs"
-                        pr={0}
-                        variant="ghost"
-                        position="absolute"
-                        fontWeight="700"
-                        w="64px"
-                        top={0}
-                        bottom={0}
-                        right={0}
-                        zIndex={2}
-                        bg={studyButtonBg}
-                        leftIcon={
-                          <StudyIcon
-                            fill={isDark ? "gray.50" : "gray.700"}
-                            boxSize="14px"
-                          />
-                        }
-                      >
-                        Study
-                      </Button>
-
-                      <ChevronIcon
-                        boxSize="12px"
-                        fill={isDark ? "gray.50" : "gray.800"}
-                        position="absolute"
-                        right="0"
-                        top="6px"
-                        zIndex={1}
-                      />
-                    </Box>
                   </Flex>
-                </Link>
-              );
-            })
-          : null}
+
+                  <Text
+                    mt="2px"
+                    lineHeight={1}
+                    fontSize="xs"
+                    fontWeight="500"
+                    textStyle={isDark ? "dm-secondary" : "lm-secondary"}
+                  >
+                    Last Studied: 10/7
+                  </Text>
+
+                  <Box
+                    bottom="4px"
+                    right="10px"
+                    position="absolute"
+                    w="80px"
+                    h="24px"
+                  >
+                    <Button
+                      size="xs"
+                      pr={0}
+                      variant="ghost"
+                      position="absolute"
+                      fontWeight="700"
+                      w="64px"
+                      top={0}
+                      bottom={0}
+                      right={0}
+                      zIndex={2}
+                      bg={studyButtonBg}
+                      leftIcon={
+                        <StudyIcon
+                          fill={isDark ? "gray.50" : "gray.700"}
+                          boxSize="14px"
+                        />
+                      }
+                    >
+                      Study
+                    </Button>
+
+                    <ChevronIcon
+                      boxSize="12px"
+                      fill={isDark ? "gray.50" : "gray.800"}
+                      position="absolute"
+                      right="0"
+                      top="6px"
+                      zIndex={1}
+                    />
+                  </Box>
+                </Flex>
+              </Link>
+            );
+          })
+        ) : flashcardSets && !flashcardSets.length ? (
+          <NoSets />
+        ) : null}
       </Flex>
     </Box>
   );
-
-  // return (
-  //   <Flex justify="center">
-  //     <Flex
-  //       direction="column"
-  //       align="center"
-  //       w="100%"
-  //       maxW={{ base: "98%", sm: "90%", md: "720px" }}
-  //       mt="2rem"
-  //     >
-  //       <TableContainer>
-  //         <Table size="sm">
-  //           <Thead>
-  //             <Tr>
-  //               <Th>Title</Th>
-  //               <Th># of Cards</Th>
-  //               <Th>Last Updated</Th>
-  //               <Th>Public</Th>
-  //               <Th></Th>
-  //             </Tr>
-  //           </Thead>
-
-  //           <Tbody>
-  //             {flashcardSets && flashcardSets.length
-  //               ? flashcardSets.map((set, i) => {
-  //                   const {
-  //                     updatedAt,
-  //                     title,
-  //                     flashcards,
-  //                     _id,
-  //                     public: isPublic,
-  //                   } = set;
-  //                   // console.log("SET:", set);
-  //                   const lastUpdated = new Date(updatedAt);
-
-  //                   return (
-  //                     <Tr key={i}>
-  //                       <Td>{title}</Td>
-  //                       <Td>{flashcards.length}</Td>
-  //                       <Td>{lastUpdated.toLocaleString()}</Td>
-  //                       <Td>
-  //                         <Flex justify="center">
-  //                           {changingPublicStatus ? (
-  //                             <Spinner />
-  //                           ) : (
-  //                             <Checkbox
-  //                               isDisabled={changingPublicStatus}
-  //                               isChecked={isPublic}
-  //                               onChange={(e) =>
-  //                                 handleChangePublicStatus(e, _id)
-  //                               }
-  //                             />
-  //                           )}
-  //                         </Flex>
-  //                       </Td>
-
-  //                       <Td>
-  //                         <Link to={`/create/${_id}`}>
-  //                           <Button w="100%">Edit</Button>
-  //                         </Link>
-  //                       </Td>
-  //                     </Tr>
-  //                   );
-  //                 })
-  //               : null}
-  //           </Tbody>
-  //         </Table>
-  //       </TableContainer>
-  //     </Flex>
-  //   </Flex>
-  // );
 };
 
 export default AllSets;
+
+const NoSets = () => {
+  return (
+    <Flex w="100%" direction="column" justify="center" align="center" pt="1rem">
+      <Text textAlign="center" fontWeight="600">
+        No Sets Created
+      </Text>
+
+      <Link to="/create">
+        <Button
+          mt="1rem"
+          rounded="full"
+          leftIcon={<AddIcon fill="white" boxSize="16px" />}
+          _hover={{ bg: "primary.600" }}
+          _active={{ bg: "primary.700" }}
+          bg="primary.base"
+          color="white"
+        >
+          Create a Set
+        </Button>
+      </Link>
+    </Flex>
+  );
+};
