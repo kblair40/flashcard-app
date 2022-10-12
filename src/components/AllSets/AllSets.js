@@ -58,7 +58,7 @@ const AllSets = () => {
   }
 
   return (
-    <Flex justify="center" pt="20px">
+    <Flex justify="center" pt="32px">
       <Flex
         direction="column"
         w="100%"
@@ -66,13 +66,12 @@ const AllSets = () => {
         maxW={{ base: "100%", sm: "440px", md: "600px" }}
         position="relative"
       >
-        <Flex w="100%" justify="space-between">
+        <Flex w="100%" justify="space-between" mb="1rem">
           <Heading
             textTransform="capitalize"
             fontWeight="700"
-            pl="12px"
+            pl="16px"
             fontSize="2xl"
-            mb=".75rem"
           >
             {userData ? `${makeDisplayName(userData)}'s` : ""} Flashcard Sets
           </Heading>
@@ -81,11 +80,17 @@ const AllSets = () => {
             <Tooltip label="Manage and Edit Sets">
               <IconButton
                 variant="ghost"
-                size="sm"
+                transition="all 0.3s"
+                _hover={{
+                  bg: "primary.300",
+                  "& svg": { fill: "#fff" },
+                }}
+                _active={{ bg: "primary.400" }}
                 icon={
                   <SettingsIcon
-                    boxSize="18px"
+                    boxSize="22px"
                     fill={isDark ? "gray.50" : "gray.700"}
+                    transition="all 0.3s"
                   />
                 }
               />
@@ -107,7 +112,7 @@ const AllSets = () => {
                     direction="column"
                     cursor="pointer"
                     w="100%"
-                    p="8px 8px 10px 12px"
+                    p="8px 16px 10px 16px"
                     transition="background 0.2s"
                     _hover={{
                       bg: "gray.50",
@@ -115,6 +120,7 @@ const AllSets = () => {
                         transform: "translateX(-16px)",
                         bg: "gray.50",
                       },
+                      "& .chev_icon": { opacity: 1, right: "4px" },
                     }}
                     _active={{
                       bg: "gray.100",
@@ -123,65 +129,54 @@ const AllSets = () => {
                       },
                     }}
                   >
-                    <Flex
-                      justify="space-between"
-                      align="center"
-                      w="100%"
-                      h="100%"
-                    >
-                      <Text fontSize="lg" fontWeight="600" lineHeight={1}>
-                        {set.title}
-                      </Text>
+                    <Flex justify="space-between" align="center">
+                      <Box w="100%" h="100%">
+                        <Text fontSize="lg" fontWeight="600" lineHeight={1}>
+                          {set.title}
+                        </Text>
+
+                        <Text
+                          mt="4px"
+                          lineHeight={1}
+                          fontSize="sm"
+                          fontWeight="500"
+                          textStyle={isDark ? "dm-secondary" : "lm-secondary"}
+                        >
+                          Last studied on 10/7
+                        </Text>
+                      </Box>
+
+                      <Flex align="center" w="80px" h="24px">
+                        <Button
+                          size="md"
+                          variant="ghost"
+                          fontWeight="700"
+                          w="64px"
+                          bg={studyButtonBg}
+                          zIndex={2}
+                          leftIcon={
+                            <StudyIcon
+                              fill={isDark ? "gray.50" : "gray.700"}
+                              boxSize="18px"
+                              mr="4px"
+                            />
+                          }
+                        >
+                          Study
+                        </Button>
+
+                        <ChevronIcon
+                          className="chev_icon"
+                          boxSize="12px"
+                          fill={isDark ? "gray.50" : "gray.800"}
+                          zIndex={1}
+                          position="relative"
+                          right="12px"
+                          transition="all 0.2s"
+                          opacity={0}
+                        />
+                      </Flex>
                     </Flex>
-
-                    <Text
-                      mt="4px"
-                      lineHeight={1}
-                      fontSize="11px"
-                      fontWeight="500"
-                      textStyle={isDark ? "dm-secondary" : "lm-secondary"}
-                    >
-                      Last studied on 10/7
-                    </Text>
-
-                    <Box
-                      bottom="4px"
-                      right="10px"
-                      position="absolute"
-                      w="80px"
-                      h="24px"
-                    >
-                      <Button
-                        size="xs"
-                        pr={0}
-                        variant="ghost"
-                        position="absolute"
-                        fontWeight="700"
-                        w="64px"
-                        top={0}
-                        bottom={0}
-                        right={0}
-                        zIndex={2}
-                        bg={studyButtonBg}
-                        leftIcon={
-                          <StudyIcon
-                            fill={isDark ? "gray.50" : "gray.700"}
-                            boxSize="14px"
-                          />
-                        }
-                      >
-                        Study
-                      </Button>
-
-                      <ChevronIcon
-                        boxSize="12px"
-                        fill={isDark ? "gray.50" : "gray.800"}
-                        position="absolute"
-                        right="0"
-                        top="6px"
-                        zIndex={1}
-                      />
-                    </Box>
                   </Flex>
                 </Link>
               );
