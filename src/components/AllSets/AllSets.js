@@ -8,26 +8,18 @@ import {
   IconButton,
   Button,
   Text,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
   useColorMode,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import {
-  SettingsIcon,
-  StudyIcon,
-  EditIcon,
-  MoreHorizontalIcon,
-  ChevronIcon,
-} from "utils/icons";
+import { SettingsIcon, StudyIcon, ChevronIcon } from "utils/icons";
 import api from "api";
 
 const AllSets = () => {
   const [loading, setLoading] = useState(true);
   const [flashcardSets, setFlashcardSets] = useState();
+
+  const navigate = useNavigate();
 
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
@@ -73,7 +65,6 @@ const AllSets = () => {
       borderBottomWidth="1px"
       borderColor="#eee"
       py="12px"
-      // p="12px 8px 12px 12px"
     >
       <Link to="/manage-sets">
         <IconButton
@@ -99,88 +90,89 @@ const AllSets = () => {
         {flashcardSets && flashcardSets.length
           ? flashcardSets.map((set, i) => {
               return (
-                <Flex
-                  position="relative"
-                  direction="column"
-                  key={i}
-                  cursor="pointer"
-                  w="100%"
-                  p="2px 8px 10px 12px"
-                  transition="background 0.2s"
-                  _hover={{
-                    bg: "gray.50",
-                    "& button": {
-                      transform: "translateX(-16px)",
-                      bg: "gray.50",
-                    },
-                  }}
-                  _active={{
-                    bg: "gray.100",
-                    "& button": {
-                      bg: "gray.100",
-                    },
-                  }}
-                >
+                <Link key={i} to={`/study/${set._id}`}>
                   <Flex
-                    justify="space-between"
-                    align="center"
+                    position="relative"
+                    direction="column"
+                    cursor="pointer"
                     w="100%"
-                    h="100%"
+                    p="6px 8px 10px 12px"
+                    transition="background 0.2s"
+                    _hover={{
+                      bg: "gray.50",
+                      "& button": {
+                        transform: "translateX(-16px)",
+                        bg: "gray.50",
+                      },
+                    }}
+                    _active={{
+                      bg: "gray.100",
+                      "& button": {
+                        bg: "gray.100",
+                      },
+                    }}
                   >
-                    <Text fontSize="lg" fontWeight="600" lineHeight={1}>
-                      {set.title}
-                    </Text>
-                  </Flex>
-
-                  <Text
-                    mt="2px"
-                    lineHeight={1}
-                    fontSize="xs"
-                    fontWeight="500"
-                    textStyle={isDark ? "dm-secondary" : "lm-secondary"}
-                  >
-                    Last Studied: 10/7
-                  </Text>
-
-                  <Box
-                    bottom="4px"
-                    right="10px"
-                    position="absolute"
-                    w="80px"
-                    h="24px"
-                  >
-                    <Button
-                      size="xs"
-                      pr={0}
-                      variant="ghost"
-                      position="absolute"
-                      fontWeight="700"
-                      w="64px"
-                      top={0}
-                      bottom={0}
-                      right={0}
-                      zIndex={2}
-                      bg={studyButtonBg}
-                      leftIcon={
-                        <StudyIcon
-                          fill={isDark ? "gray.50" : "gray.700"}
-                          boxSize="14px"
-                        />
-                      }
+                    <Flex
+                      justify="space-between"
+                      align="center"
+                      w="100%"
+                      h="100%"
                     >
-                      Study
-                    </Button>
+                      <Text fontSize="lg" fontWeight="600" lineHeight={1}>
+                        {set.title}
+                      </Text>
+                    </Flex>
 
-                    <ChevronIcon
-                      boxSize="12px"
-                      fill={isDark ? "gray.50" : "gray.800"}
+                    <Text
+                      mt="2px"
+                      lineHeight={1}
+                      fontSize="xs"
+                      fontWeight="500"
+                      textStyle={isDark ? "dm-secondary" : "lm-secondary"}
+                    >
+                      Last Studied: 10/7
+                    </Text>
+
+                    <Box
+                      bottom="4px"
+                      right="10px"
                       position="absolute"
-                      right="0"
-                      top="6px"
-                      zIndex={1}
-                    />
-                  </Box>
-                </Flex>
+                      w="80px"
+                      h="24px"
+                    >
+                      <Button
+                        size="xs"
+                        pr={0}
+                        variant="ghost"
+                        position="absolute"
+                        fontWeight="700"
+                        w="64px"
+                        top={0}
+                        bottom={0}
+                        right={0}
+                        zIndex={2}
+                        bg={studyButtonBg}
+                        leftIcon={
+                          <StudyIcon
+                            fill={isDark ? "gray.50" : "gray.700"}
+                            boxSize="14px"
+                          />
+                        }
+                      >
+                        Study
+                      </Button>
+
+                      <ChevronIcon
+                        boxSize="12px"
+                        fill={isDark ? "gray.50" : "gray.800"}
+                        position="absolute"
+                        right="0"
+                        top="6px"
+                        zIndex={1}
+                      />
+                    </Box>
+                  </Flex>
+                </Link>
               );
             })
           : null}
