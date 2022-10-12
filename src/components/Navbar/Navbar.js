@@ -8,6 +8,7 @@ import {
   Stack,
   Collapse,
   Link,
+  useColorMode,
   useColorModeValue,
   useDisclosure,
   Image,
@@ -25,6 +26,9 @@ export default function WithSubnavigation() {
   const [authModalDefaultTab, setAuthModalDefaultTab] = useState(0);
   const { handleSignOut, isSignedIn } = useContext(UserContext);
   console.log("IS SIGNED IN:", isSignedIn);
+
+  const { colorMode } = useColorMode();
+  const isDark = colorMode === "dark";
 
   const { isOpen, onToggle } = useDisclosure();
   const {
@@ -73,17 +77,22 @@ export default function WithSubnavigation() {
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
           <RRLink to="/">
-            <Image src={logo} h={{ base: "58px" }} w={{ base: "354px" }} />
+            <Image
+              maxWidth={"243px"}
+              src={logo}
+              w={{ base: "170px", sm: "200px" }}
+            />
           </RRLink>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
-            <AuthModal
-              isOpen={isAuthModalOpen}
-              onClose={onAuthModalClose}
-              defaultTab={authModalDefaultTab}
-            />
             <DesktopNav />
           </Flex>
+
+          <AuthModal
+            isOpen={isAuthModalOpen}
+            onClose={onAuthModalClose}
+            defaultTab={authModalDefaultTab}
+          />
         </Flex>
 
         <Stack
@@ -98,8 +107,9 @@ export default function WithSubnavigation() {
             <Button
               as={"a"}
               fontSize={"sm"}
-              fontWeight={400}
+              fontWeight={500}
               variant={"link"}
+              color={isDark ? "gray.50" : "gray.800"}
               href={"#"}
               onClick={() => handleClickSignInOrSignOut("signin")}
             >
