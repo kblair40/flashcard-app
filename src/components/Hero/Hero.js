@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Flex, Text, Button, useColorMode } from "@chakra-ui/react";
 
+import UserContext from "store/UserContext";
 import AuthModal from "components/Modals/AuthModal";
 import { SmartIcon, GlobeNetworkIcon } from "utils/icons";
 
 const Hero = () => {
   const [authModalOpen, setAuthModalOpen] = useState(false);
 
+  const { isSignedIn } = useContext(UserContext);
+
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
 
   return (
-    <Flex justify="center" mt="3rem">
+    <Flex display={isSignedIn ? "none" : "flex"} justify="center" mt="3rem">
       <Flex
         direction="column"
         maxWidth={{ base: "300px", sm: "400px", md: "600px" }}
