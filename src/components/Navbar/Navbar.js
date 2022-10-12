@@ -12,11 +12,12 @@ import {
   useDisclosure,
   Image,
 } from "@chakra-ui/react";
-import { HamburgerIcon, ChevronIcon, CloseIcon } from "utils/icons";
 
+import { HamburgerIcon, ChevronIcon, CloseIcon } from "utils/icons";
 import logo from "assets/images/logo.svg";
 import UserContext from "store/UserContext";
 import AvatarMenu from "./AvatarMenu";
+import ThemeToggle from "./ThemeToggle";
 import AuthModal from "components/Modals/AuthModal";
 
 export default function WithSubnavigation() {
@@ -105,6 +106,8 @@ export default function WithSubnavigation() {
               Sign In
             </Button>
           )}
+
+          <ThemeToggle />
 
           {isSignedIn ? (
             <AvatarMenu

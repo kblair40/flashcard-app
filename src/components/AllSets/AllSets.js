@@ -70,7 +70,7 @@ const AllSets = () => {
       </Link>
 
       <Flex h="100%" w="100%" direction="column">
-        <Heading size="lg" mb=".75rem">
+        <Heading size="lg" mb=".75rem" textStyle="lm-secondary">
           Sets
         </Heading>
 

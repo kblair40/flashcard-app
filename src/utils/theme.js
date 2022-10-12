@@ -1,6 +1,9 @@
 import { extendTheme } from "@chakra-ui/react";
+import { mode } from "@chakra-ui/theme-tools";
 
 const theme = extendTheme({
+  initialColorMode: "light",
+  useSystemColorMode: false,
   colors: {
     primary: {
       base: "#1A5CFB",
@@ -16,14 +19,13 @@ const theme = extendTheme({
       900: "#000820",
     },
   },
-  // textStyles: {
-  //   secondary: { color: "gray.600" },
-  // },
-  textStyles: (...args) => {
-    console.log("ARGS:", args);
-    return {
-      secondary: { color: "gray.600" },
-    };
+  textStyles: {
+    primary: { color: mode("gray.800", "gray.50") },
+    secondary: { color: mode("gray.600", "gray.200") },
+    tertiary: { color: mode("gray.400", "gray.400") },
+    // "lm-primary": { color: "gray.800" },
+    // "lm-secondary": { color: "gray.600" },
+    // "lm-tertiary": { color: "gray.400" },
   },
 });
 
