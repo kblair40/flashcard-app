@@ -3,12 +3,12 @@ import { IconButton, useColorMode } from "@chakra-ui/react";
 
 import { SunIcon, MoonIcon } from "utils/icons";
 
-const ThemeToggle = ({ hidden }) => {
+const ThemeToggle = ({ display }) => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <IconButton
-      display={hidden ? "none" : "block"}
+      display={display}
       rounded="full"
       size="sm"
       variant="ghost"

@@ -101,7 +101,7 @@ export default function WithSubnavigation() {
           direction={"row"}
           spacing={6}
         >
-          <ThemeToggle hidden={{ base: true, md: false }} />
+          <ThemeToggle display={{ base: "none", md: "block" }} />
 
           {!isSignedIn && (
             <Button
