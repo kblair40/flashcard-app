@@ -108,9 +108,10 @@ const StudySession = () => {
         shuffle={shuffle}
         isHidden={hideAllCards}
         hideSelf={() => setHideAllCards(true)}
+        showSelf={() => setHideAllCards(false)}
       />
 
-      {hideAllCards && (
+      {/* {hideAllCards && (
         <Button
           size="sm"
           onClick={() => setHideAllCards(!hideAllCards)}
@@ -120,7 +121,7 @@ const StudySession = () => {
         >
           Show Cards
         </Button>
-      )}
+      )} */}
       <GoBack isDark={isDark} />
     </Flex>
   );

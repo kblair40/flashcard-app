@@ -8,48 +8,63 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 
-const AllCards = ({ flashcards, onClickCard, show, shuffle, hideSelf }) => {
+const AllCards = ({
+  flashcards,
+  onClickCard,
+  show,
+  shuffle,
+  hideSelf,
+  showSelf,
+}) => {
   return (
-    <Slide
-      in={show}
-      direction="bottom"
-      style={{
-        position: "absolute",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        overflowX: "auto",
-        overflowY: "hidden",
-        width: { base: "100vw" },
-        boxShadow: "inset 0 2px 4px 0 rgba(0,0,0,0.09)",
-        padding: "40px 8px 8px 8px",
-      }}
-      unmountOnExit
-    >
-      <HStack position="absolute" right="1rem" top=".5rem">
-        <Button onClick={hideSelf} size="xs">
-          Hide
+    <>
+      <Slide
+        in={show}
+        direction="bottom"
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          overflowX: "auto",
+          overflowY: "hidden",
+          width: { base: "100vw" },
+          boxShadow: "inset 0 2px 4px 0 rgba(0,0,0,0.09)",
+          padding: "8px 8px 8px 8px",
+        }}
+        unmountOnExit
+      >
+        <Flex align="center" justify="start" mr="8px">
+          {flashcards && flashcards.length
+            ? flashcards.map((card, i) => {
+                return (
+                  <Card
+                    key={i}
+                    content={card.front_content}
+                    onClick={() => onClickCard(i)}
+                  />
+                );
+              })
+            : null}
+        </Flex>
+      </Slide>
+
+      <HStack
+        transition="all 0.4s ease"
+        position="fixed"
+        right="1rem"
+        bottom={show ? "8.5rem" : "1rem"}
+        zIndex={10}
+      >
+        <Button onClick={show ? hideSelf : showSelf} size="xs">
+          {show ? "Hide" : "Show Cards"}
         </Button>
 
         <Button onClick={() => shuffle(flashcards)} size="xs">
           Randomize
         </Button>
       </HStack>
-
-      <Flex align="center" justify="start" mr="8px">
-        {flashcards && flashcards.length
-          ? flashcards.map((card, i) => {
-              return (
-                <Card
-                  key={i}
-                  content={card.front_content}
-                  onClick={() => onClickCard(i)}
-                />
-              );
-            })
-          : null}
-      </Flex>
-    </Slide>
+    </>
   );
 };
 

@@ -28,3 +28,6 @@
 .ql-blank {
   height: 200px !important;
 }
+.ql-size-large {
+  font-size: 20px;
+}
