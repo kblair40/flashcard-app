@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Button, Flex, Heading, Center, Spinner } from "@chakra-ui/react";
-import { useParams } from "react-router-dom";
+import {
+  Button,
+  Flex,
+  Heading,
+  Center,
+  Spinner,
+  Box,
+  IconButton,
+} from "@chakra-ui/react";
+import { useParams, Link } from "react-router-dom";
 
+import { ChevronIcon } from "utils/icons";
 import CurrentCard from "./CurrentCard";
 import AllCards from "./AllCards";
 import api from "api";
@@ -87,22 +96,6 @@ const StudySession = () => {
           flashcards={flashcards}
           currentCard={currentCard}
         />
-
-        {/* <Flex justify="center" w="100%" top={"20.5rem"} position="relative">
-          <Button
-            mr="1rem"
-            isDisabled={currentCard === 0}
-            onClick={handleClickPrev}
-          >
-            Prev Card
-          </Button>
-          <Button
-            onClick={handleClickNext}
-            isDisabled={flashcards && flashcards.length - 1 === currentCard}
-          >
-            Next Card
-          </Button>
-        </Flex> */}
       </Flex>
 
       <AllCards
@@ -125,8 +118,35 @@ const StudySession = () => {
           Show Cards
         </Button>
       )}
+      <GoBack />
     </Flex>
   );
 };
 
 export default StudySession;
+
+const GoBack = () => {
+  return (
+    <Box position="absolute" top="1rem" left="1rem">
+      <Button
+        variant="ghost"
+        leftIcon={
+          <ChevronIcon
+            transform="rotate(180deg)"
+            transition="all 0.3s"
+            boxSize="20px"
+          />
+        }
+        _hover={{
+          bg: "primary.300",
+          color: "white",
+          "& svg": { fill: "#fff" },
+        }}
+        _active={{ bg: "primary.400" }}
+        transition="all 0.3s"
+      >
+        Back to My Sets
+      </Button>
+    </Box>
+  );
+};
