@@ -28,7 +28,7 @@ const AvatarMenu = ({ handleClickSignout }) => {
           cursor={"pointer"}
           minW={0}
         >
-          <Avatar size={"sm"} bg="blue.400" />
+          <Avatar size={"sm"} bg="primary.300" />
         </MenuButton>
 
         <MenuList>
