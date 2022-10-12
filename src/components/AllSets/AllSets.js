@@ -6,10 +6,11 @@ import {
   Flex,
   Heading,
   IconButton,
+  Text,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-import { SettingsIcon } from "utils/icons";
+import { SettingsIcon, EditIcon } from "utils/icons";
 import api from "api";
 
 const AllSets = () => {
@@ -51,8 +52,11 @@ const AllSets = () => {
       top={0}
       left={0}
       width={{ base: "200px" }}
-      border="1px solid #ccc"
+      // borderRightWidth="1px"
+      // borderBottomWidth="1px"
+      // borderColor="#eee"
       p="12px 8px"
+      shadow="inner"
     >
       <Link to="/manage-sets">
         <IconButton
@@ -66,12 +70,16 @@ const AllSets = () => {
       </Link>
 
       <Flex h="100%" w="100%" direction="column">
-        <Heading mb="1rem">Sets</Heading>
+        <Heading size="lg" mb=".75rem">
+          Sets
+        </Heading>
 
         {flashcardSets && flashcardSets.length
           ? flashcardSets.map((set, i) => {
               return (
-                <Box
+                <Flex
+                  justify="space-between"
+                  align="center"
                   cursor="pointer"
                   borderBottomWidth="1px"
                   borderColor="#ccc"
@@ -79,9 +87,17 @@ const AllSets = () => {
                   transition="background 0.2s"
                   _hover={{ bg: "#fafafa" }}
                   _active={{ bg: "#efefef" }}
+                  h="32px"
                 >
-                  {set.title}
-                </Box>
+                  <Text>{set.title}</Text>
+                  <Link to={`/manage-sets/${set._id}`}>
+                    <IconButton
+                      variant="ghost"
+                      size="xs"
+                      icon={<EditIcon boxSize="14px" />}
+                    />
+                  </Link>
+                </Flex>
               );
             })
           : null}
