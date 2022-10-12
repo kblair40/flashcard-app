@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import {
-  Spinner,
-  Center,
   Box,
   Flex,
   Heading,
@@ -12,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
+import Loading from "components/Loading";
 import UserContext from "store/UserContext";
 import { SettingsIcon, StudyIcon, ChevronIcon, AddIcon } from "utils/icons";
 import api from "api";
@@ -45,19 +44,15 @@ const AllSets = () => {
       setLoading(false);
     };
 
-    fetchFlashcardData();
-  }, []);
+    if (isSignedIn) {
+      fetchFlashcardData();
+    } else {
+      setLoading(false);
+    }
+  }, [isSignedIn]);
 
   if (!isSignedIn) {
     return null;
-  }
-
-  if (loading) {
-    return (
-      <Center h="400px">
-        <Spinner />
-      </Center>
-    );
   }
 
   return (
@@ -92,7 +87,9 @@ const AllSets = () => {
           Sets
         </Heading>
 
-        {!isSignedIn ? (
+        {loading ? (
+          <Loading h="100px" />
+        ) : !isSignedIn ? (
           <NotLoggedIn />
         ) : flashcardSets && flashcardSets.length ? (
           flashcardSets.map((set, i) => {
