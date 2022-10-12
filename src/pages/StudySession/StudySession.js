@@ -6,7 +6,7 @@ import {
   Center,
   Spinner,
   Box,
-  IconButton,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useParams, Link } from "react-router-dom";
 
@@ -21,6 +21,9 @@ const StudySession = () => {
   const [flashcards, setFlashcards] = useState();
   const [title, setTitle] = useState("");
   const [hideAllCards, setHideAllCards] = useState(false);
+
+  const { colorMode } = useColorMode();
+  const isDark = colorMode === "dark";
 
   const params = useParams();
 
@@ -118,14 +121,14 @@ const StudySession = () => {
           Show Cards
         </Button>
       )}
-      <GoBack />
+      <GoBack isDark={isDark} />
     </Flex>
   );
 };
 
 export default StudySession;
 
-const GoBack = () => {
+const GoBack = ({ isDark }) => {
   return (
     <Box position="absolute" top="1rem" left="1rem">
       <Link to="/">
@@ -136,6 +139,7 @@ const GoBack = () => {
               transform="rotate(180deg)"
               transition="all 0.3s"
               boxSize="20px"
+              fill={isDark ? "gray.50" : "gray.700"}
             />
           }
           _hover={{

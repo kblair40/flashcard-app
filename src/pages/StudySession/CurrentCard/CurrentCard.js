@@ -3,7 +3,7 @@ import ReactCardFlip from "react-card-flip";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { FlipIcon, ChevronIcon } from "utils/icons";
-import { Box, Flex, Button } from "@chakra-ui/react";
+import { Box, Flex, Button, useColorMode } from "@chakra-ui/react";
 
 const CurrentCard = ({
   flashcards,
@@ -12,6 +12,9 @@ const CurrentCard = ({
   handleClickNext,
 }) => {
   const [flipCards, setFlipCards] = useState();
+
+  const { colorMode } = useColorMode();
+  const isDark = colorMode === "dark";
 
   const didMount = useRef(false);
   useEffect(() => {
@@ -67,6 +70,7 @@ const CurrentCard = ({
               boxSize="14px"
               transform="rotate(180deg)"
               transition="all 0.3s"
+              fill={isDark ? "gray.50" : "gray.700"}
             />
           }
           _hover={{
@@ -86,7 +90,13 @@ const CurrentCard = ({
           isDisabled={currentCard === flashcards.length - 1}
           onClick={handleClickNext}
           transition="all 0.3s"
-          rightIcon={<ChevronIcon boxSize="14px" transition="all 0.3s" />}
+          rightIcon={
+            <ChevronIcon
+              fill={isDark ? "gray.50" : "gray.700"}
+              boxSize="14px"
+              transition="all 0.3s"
+            />
+          }
           variant="ghost"
           size="sm"
           _hover={{
@@ -125,6 +135,9 @@ export default CurrentCard;
 const FlipContainer = ({ children }) => {
   const [side, setSide] = useState("front");
 
+  const { colorMode } = useColorMode();
+  const isDark = colorMode === "dark";
+
   if (!children) return null;
 
   return (
@@ -155,7 +168,12 @@ const FlipContainer = ({ children }) => {
             variant="ghost"
             transition={"all 0.3s"}
             onClick={() => setSide(side === "back" ? "front" : "back")}
-            leftIcon={<FlipIcon transition={"all 0.3s"} />}
+            leftIcon={
+              <FlipIcon
+                transition={"all 0.3s"}
+                fill={isDark ? "gray.50" : "gray.700"}
+              />
+            }
             _hover={{
               bg: "primary.300",
               color: "white",
@@ -171,6 +189,9 @@ const FlipContainer = ({ children }) => {
 };
 
 const Flashcard = ({ content }) => {
+  const { colorMode } = useColorMode();
+  const isDark = colorMode === "dark";
+
   return (
     <Flex
       justify="center"
@@ -179,7 +200,7 @@ const Flashcard = ({ content }) => {
       w={{ base: "340px", sm: "440px", md: "520px" }}
       borderRadius="2px"
       shadow="md"
-      bg="gray.50"
+      bg={isDark ? "gray.700" : "gray.50"}
     >
       <Box
         dangerouslySetInnerHTML={{
@@ -189,90 +210,3 @@ const Flashcard = ({ content }) => {
     </Flex>
   );
 };
-
-//
-// BACKUP COPY
-// import React, { useState, useEffect, useRef } from "react";
-// import ReactCardFlip from "react-card-flip";
-
-// import { Box, Flex, Button } from "@chakra-ui/react";
-
-// const MotionContainer = ({ flashcards, currentCard }) => {
-//   const [flipCards, setFlipCards] = useState();
-
-//   const didMount = useRef(false);
-//   useEffect(() => {
-//     if (didMount.current || !flashcards) return;
-
-//     didMount.current = true;
-
-//     let flipCardsArray = [];
-//     flashcards.forEach((card, i) => {
-//       const { front_content, back_content } = card;
-
-//       flipCardsArray.push(
-//         <FlipContainer key={i}>
-//           <Flashcard content={front_content} side="front" />
-//           <Flashcard content={back_content} side="back" />
-//         </FlipContainer>
-//       );
-//     });
-
-//     setFlipCards(flipCardsArray);
-//   }, [flashcards]);
-
-//   if (!flipCards || !flipCards.length) return null;
-
-//   return (
-//     <Flex direction="column" w="100%" align="center">
-//       {flipCards[currentCard]}
-//     </Flex>
-//   );
-// };
-
-// export default MotionContainer;
-
-// const FlipContainer = ({ children }) => {
-//   const [side, setSide] = useState("front");
-//   if (!children) return null;
-
-//   return (
-//     <>
-//       <ReactCardFlip
-//         flipSpeedBackToFront={0.3}
-//         flipSpeedFrontToBack={0.3}
-//         isFlipped={side === "back"}
-//         flipDirection="vertical"
-//       >
-//         {children}
-//       </ReactCardFlip>
-//       <Button
-//         mt=".75rem"
-//         variant="ghost"
-//         onClick={() => setSide(side === "back" ? "front" : "back")}
-//       >
-//         Flip
-//       </Button>
-//     </>
-//   );
-// };
-
-// const Flashcard = ({ content }) => {
-//   return (
-//     <Flex
-//       justify="center"
-//       align="center"
-//       h={{ base: "250px", sm: "260px", md: "340px" }}
-//       w={{ base: "340px", sm: "440px", md: "550px" }}
-//       borderRadius="2px"
-//       shadow="sm"
-//       bg="gray.50"
-//     >
-//       <Box
-//         dangerouslySetInnerHTML={{
-//           __html: content ? content : "<div />",
-//         }}
-//       />
-//     </Flex>
-//   );
-// };

@@ -1,14 +1,14 @@
 import React from "react";
-import { Box, Flex, Slide, Button, HStack } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Slide,
+  Button,
+  HStack,
+  useColorMode,
+} from "@chakra-ui/react";
 
-const AllCards = ({
-  flashcards,
-  onClickCard,
-  show,
-  shuffle,
-  isHidden,
-  hideSelf,
-}) => {
+const AllCards = ({ flashcards, onClickCard, show, shuffle, hideSelf }) => {
   return (
     <Slide
       in={show}
@@ -56,6 +56,9 @@ const AllCards = ({
 export default AllCards;
 
 const Card = ({ content, onClick }) => {
+  const { colorMode } = useColorMode();
+  const isDark = colorMode === "dark";
+
   return (
     <Flex
       onClick={onClick}
@@ -67,8 +70,10 @@ const Card = ({ content, onClick }) => {
       boxShadow="md"
       borderRadius="4px"
       cursor="pointer"
-      _hover={{ bg: "gray.50" }}
-      _active={{ bg: "gray.100" }}
+      transition="background 0.3s"
+      bg={isDark ? "gray.700" : undefined}
+      _hover={{ bg: isDark ? "gray.600" : "gray.50" }}
+      _active={{ bg: isDark ? "gray.600" : "gray.100" }}
     >
       {content ? <Box dangerouslySetInnerHTML={{ __html: content }} /> : null}
     </Flex>
