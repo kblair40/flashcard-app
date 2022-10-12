@@ -7,15 +7,23 @@ import {
   Heading,
   IconButton,
   Text,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  useColorMode,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-import { SettingsIcon, EditIcon } from "utils/icons";
+import { SettingsIcon, EditIcon, MoreHorizontalIcon } from "utils/icons";
 import api from "api";
 
 const AllSets = () => {
   const [loading, setLoading] = useState(true);
   const [flashcardSets, setFlashcardSets] = useState();
+
+  const { colorMode } = useColorMode();
+  const isDark = colorMode === "dark";
 
   useEffect(() => {
     const fetchFlashcardData = async () => {
@@ -52,11 +60,11 @@ const AllSets = () => {
       top={0}
       left={0}
       width={{ base: "200px" }}
-      // borderRightWidth="1px"
-      // borderBottomWidth="1px"
-      // borderColor="#eee"
-      p="12px 8px"
-      shadow="inner"
+      borderRightWidth="1px"
+      borderBottomWidth="1px"
+      borderColor="#eee"
+      py="12px"
+      // p="12px 8px 12px 12px"
     >
       <Link to="/manage-sets">
         <IconButton
@@ -70,7 +78,12 @@ const AllSets = () => {
       </Link>
 
       <Flex h="100%" w="100%" direction="column">
-        <Heading size="lg" mb=".75rem" textStyle="lm-secondary">
+        <Heading
+          p="0 8px 0 12px"
+          size="lg"
+          mb=".75rem"
+          textStyle="lm-secondary"
+        >
           Sets
         </Heading>
 
@@ -78,26 +91,58 @@ const AllSets = () => {
           ? flashcardSets.map((set, i) => {
               return (
                 <Flex
+                  direction="column"
                   key={i}
-                  justify="space-between"
-                  align="center"
                   cursor="pointer"
-                  borderBottomWidth="1px"
-                  borderColor="#ccc"
                   w="100%"
                   transition="background 0.2s"
-                  _hover={{ bg: "#fafafa" }}
-                  _active={{ bg: "#efefef" }}
-                  h="32px"
+                  _hover={{ bg: "gray.50" }}
+                  _active={{ bg: "gray.100" }}
+                  p="2px 8px 10px 12px"
+                  // border="1px solid #ccc"
                 >
-                  <Text>{set.title}</Text>
-                  <Link to={`/manage-sets/${set._id}`}>
-                    <IconButton
-                      variant="ghost"
-                      size="xs"
-                      icon={<EditIcon boxSize="14px" />}
-                    />
-                  </Link>
+                  <Flex
+                    justify="space-between"
+                    align="center"
+                    w="100%"
+                    h="100%"
+                  >
+                    <Text fontWeight="600" lineHeight={1}>
+                      {set.title}
+                    </Text>
+
+                    <Menu>
+                      <MenuButton
+                        as={IconButton}
+                        rounded="full"
+                        variant="ghost"
+                        size="xs"
+                        icon={<MoreHorizontalIcon boxSize="14px" />}
+                      />
+                      <MenuList py={0} w="80px">
+                        <MenuItem py="8px" icon={<EditIcon boxSize="16px" />}>
+                          <Link to={`/manage-sets/${set._id}`}>
+                            <Text
+                              lineHeight={1}
+                              fontSize="sm"
+                              ml="8px"
+                              fontWeight="500"
+                            >
+                              Edit
+                            </Text>
+                          </Link>
+                        </MenuItem>
+                      </MenuList>
+                    </Menu>
+                  </Flex>
+
+                  <Text
+                    lineHeight={1}
+                    fontSize="xs"
+                    textStyle={isDark ? "dm-secondary" : "lm-secondary"}
+                  >
+                    Last Studied: 10/7
+                  </Text>
                 </Flex>
               );
             })
