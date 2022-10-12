@@ -52,6 +52,14 @@ const StudySession = () => {
     setCurrentCard(index);
   };
 
+  const handleClickPrev = () => {
+    setCurrentCard((prev) => prev - 1);
+  };
+
+  const handleClickNext = () => {
+    setCurrentCard((prev) => prev + 1);
+  };
+
   if (loading) {
     return (
       <Center h="calc(100vh - 60px)" overflowY="hidden">
@@ -73,23 +81,28 @@ const StudySession = () => {
           {title}
         </Heading>
 
-        <CurrentCard flashcards={flashcards} currentCard={currentCard} />
+        <CurrentCard
+          handleClickNext={handleClickNext}
+          handleClickPrev={handleClickPrev}
+          flashcards={flashcards}
+          currentCard={currentCard}
+        />
 
-        <Flex justify="center" w="100%" top={"20.5rem"} position="relative">
+        {/* <Flex justify="center" w="100%" top={"20.5rem"} position="relative">
           <Button
             mr="1rem"
             isDisabled={currentCard === 0}
-            onClick={() => setCurrentCard((prev) => prev - 1)}
+            onClick={handleClickPrev}
           >
             Prev Card
           </Button>
           <Button
-            onClick={() => setCurrentCard((prev) => prev + 1)}
+            onClick={handleClickNext}
             isDisabled={flashcards && flashcards.length - 1 === currentCard}
           >
             Next Card
           </Button>
-        </Flex>
+        </Flex> */}
       </Flex>
 
       <AllCards

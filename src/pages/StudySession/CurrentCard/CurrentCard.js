@@ -2,10 +2,15 @@ import React, { useState, useEffect, useRef } from "react";
 import ReactCardFlip from "react-card-flip";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { FlipIcon } from "utils/icons";
+import { FlipIcon, ChevronIcon } from "utils/icons";
 import { Box, Flex, Button } from "@chakra-ui/react";
 
-const CurrentCard = ({ flashcards, currentCard }) => {
+const CurrentCard = ({
+  flashcards,
+  currentCard,
+  handleClickPrev,
+  handleClickNext,
+}) => {
   const [flipCards, setFlipCards] = useState();
 
   const didMount = useRef(false);
@@ -42,22 +47,76 @@ const CurrentCard = ({ flashcards, currentCard }) => {
   if (!flipCards || !flipCards.length) return null;
 
   return (
-    <Flex direction="column" w="100%" align="center">
-      <AnimatePresence>
-        <motion.div
-          key={`flashcard-${currentCard}`}
-          initial={{ x: forward ? "-150%" : "150%" }}
-          animate={{
-            x: 0,
-            position: "absolute",
+    <>
+      <Flex
+        maxW={{ base: "340px", sm: "440px", md: "520px" }}
+        w="100%"
+        justify="space-between"
+        mb=".5rem"
+      >
+        <Button
+          rounded="full"
+          onClick={handleClickPrev}
+          variant="ghost"
+          size="sm"
+          pointerEvents={currentCard === 0 ? "none" : undefined}
+          isDisabled={currentCard === 0}
+          transition="all 0.3s"
+          leftIcon={
+            <ChevronIcon
+              boxSize="14px"
+              transform="rotate(180deg)"
+              transition="all 0.3s"
+            />
+          }
+          _hover={{
+            bg: "primary.300",
+            color: "white",
+            "& svg": { fill: "#fff" },
           }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
+          _active={{ bg: "primary.400" }}
         >
-          {flipCards[currentCard]}
-        </motion.div>
-      </AnimatePresence>
-    </Flex>
+          Last Card
+        </Button>
+        <Button
+          rounded="full"
+          pointerEvents={
+            currentCard === flashcards.length - 1 ? "none" : undefined
+          }
+          isDisabled={currentCard === flashcards.length - 1}
+          onClick={handleClickNext}
+          transition="all 0.3s"
+          rightIcon={<ChevronIcon boxSize="14px" transition="all 0.3s" />}
+          variant="ghost"
+          size="sm"
+          _hover={{
+            bg: "primary.300",
+            color: "white",
+            "& svg": { fill: "#fff" },
+          }}
+          _active={{ bg: "primary.400" }}
+        >
+          Next Card
+        </Button>
+      </Flex>
+
+      <Flex direction="column" w="100%" align="center">
+        <AnimatePresence>
+          <motion.div
+            key={`flashcard-${currentCard}`}
+            initial={{ x: forward ? "-150%" : "150%" }}
+            animate={{
+              x: 0,
+              position: "absolute",
+            }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {flipCards[currentCard]}
+          </motion.div>
+        </AnimatePresence>
+      </Flex>
+    </>
   );
 };
 
@@ -85,6 +144,7 @@ const FlipContainer = ({ children }) => {
           _hover={{
             "& svg": {
               transform: "rotate(180deg)",
+              fill: "#fff",
             },
           }}
         >
@@ -92,11 +152,15 @@ const FlipContainer = ({ children }) => {
             rounded="full"
             mx="auto"
             mt="1rem"
-            fontSize="lg"
-            fontWeight="600"
             variant="ghost"
+            transition={"all 0.3s"}
             onClick={() => setSide(side === "back" ? "front" : "back")}
             leftIcon={<FlipIcon transition={"all 0.3s"} />}
+            _hover={{
+              bg: "primary.300",
+              color: "white",
+            }}
+            _active={{ bg: "primary.400" }}
           >
             Flip
           </Button>
@@ -111,8 +175,8 @@ const Flashcard = ({ content }) => {
     <Flex
       justify="center"
       align="center"
-      h={{ base: "250px", sm: "260px", md: "340px" }}
-      w={{ base: "340px", sm: "440px", md: "550px" }}
+      h={{ base: "250px", sm: "260px", md: "310px" }}
+      w={{ base: "340px", sm: "440px", md: "520px" }}
       borderRadius="2px"
       shadow="md"
       bg="gray.50"
