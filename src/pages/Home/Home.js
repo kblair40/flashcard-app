@@ -13,7 +13,7 @@ const Home = () => {
       <Hero />
       <AllSets />
 
-      {isSignedIn && <Text textAlign="center">Signed In!</Text>}
+      {/* {isSignedIn && <Text textAlign="center">Signed In!</Text>} */}
     </div>
   );
 };
