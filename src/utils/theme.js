@@ -27,6 +27,10 @@ const theme = extendTheme({
     // "lm-secondary": { color: "gray.600" },
     // "lm-tertiary": { color: "gray.400" },
   },
+  fonts: {
+    body: "Open Sans, sans-serif",
+    heading: "Open Sans, sans-serif",
+  },
 });
 
 export default theme;
