@@ -128,25 +128,27 @@ export default StudySession;
 const GoBack = () => {
   return (
     <Box position="absolute" top="1rem" left="1rem">
-      <Button
-        variant="ghost"
-        leftIcon={
-          <ChevronIcon
-            transform="rotate(180deg)"
-            transition="all 0.3s"
-            boxSize="20px"
-          />
-        }
-        _hover={{
-          bg: "primary.300",
-          color: "white",
-          "& svg": { fill: "#fff" },
-        }}
-        _active={{ bg: "primary.400" }}
-        transition="all 0.3s"
-      >
-        Back to My Sets
-      </Button>
+      <Link to="/">
+        <Button
+          variant="ghost"
+          leftIcon={
+            <ChevronIcon
+              transform="rotate(180deg)"
+              transition="all 0.3s"
+              boxSize="20px"
+            />
+          }
+          _hover={{
+            bg: "primary.300",
+            color: "white",
+            "& svg": { fill: "#fff" },
+          }}
+          _active={{ bg: "primary.400" }}
+          transition="all 0.3s"
+        >
+          Back to My Sets
+        </Button>
+      </Link>
     </Box>
   );
 };
