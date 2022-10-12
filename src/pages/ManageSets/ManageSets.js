@@ -12,15 +12,21 @@ import {
   Td,
   TableContainer,
   Checkbox,
+  useColorMode,
+  Text,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
+import { AddIcon } from "utils/icons";
 import api from "api";
 
 const ManageSets = () => {
   const [loading, setLoading] = useState(true);
   const [flashcardSets, setFlashcardSets] = useState();
   const [changingPublicStatus, setChangingPublicStatus] = useState(false);
+
+  const { colorMode } = useColorMode();
+  const isDark = colorMode === "dark";
 
   useEffect(() => {
     const fetchFlashcardData = async () => {
@@ -90,7 +96,7 @@ const ManageSets = () => {
         <TableContainer>
           <Table size="sm">
             <Thead>
-              <Tr>
+              <Tr sx={{ "& th": { color: isDark ? "gray.50" : "gray.900" } }}>
                 <Th>Title</Th>
                 <Th># of Cards</Th>
                 <Th>Last Updated</Th>
@@ -109,7 +115,6 @@ const ManageSets = () => {
                       _id,
                       public: isPublic,
                     } = set;
-                    // console.log("SET:", set);
                     const lastUpdated = new Date(updatedAt);
 
                     return (
@@ -144,22 +149,43 @@ const ManageSets = () => {
                 : null}
             </Tbody>
           </Table>
-        </TableContainer>
 
-        {/* {flashcardSets && flashcardSets.length
-          ? flashcardSets.map((set, i) => {
-              const { updatedAt, title, flashcards, public: isPublic } = set;
-              console.log("SET:", set);
-              return (
-                <Link to="#" key={i} style={{ width: "100%" }}>
-                  <Button w="100%">{set.title}</Button>
-                </Link>
-              );
-            })
-          : null} */}
+          {flashcardSets && !flashcardSets.length ? (
+            <NoSets isDark={isDark} />
+          ) : null}
+        </TableContainer>
       </Flex>
     </Flex>
   );
 };
 
 export default ManageSets;
+
+const NoSets = ({ isDark }) => {
+  return (
+    <Flex direction="column" h="200px" w="100%" justify="center" align="center">
+      <Text
+        textAlign="center"
+        fontWeight="700"
+        color={isDark ? "gray.50" : "gray.700"}
+      >
+        NO SETS FOUND
+      </Text>
+
+      <Link to="/create">
+        <Button
+          mt="2rem"
+          rounded="full"
+          size="lg"
+          leftIcon={<AddIcon fill="white" boxSize="16px" />}
+          _hover={{ bg: "primary.500" }}
+          _active={{ bg: "primary.500" }}
+          bg="primary.400"
+          color="white"
+        >
+          Create a Set
+        </Button>
+      </Link>
+    </Flex>
+  );
+};

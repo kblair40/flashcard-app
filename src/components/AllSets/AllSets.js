@@ -195,8 +195,8 @@ export default AllSets;
 const NoSets = () => {
   return (
     <Flex w="100%" direction="column" justify="center" align="center" pt="1rem">
-      <Text textAlign="center" fontWeight="700" textTransform="uppercase">
-        YOU HAVE no sets
+      <Text textAlign="center" fontWeight="700">
+        NO SETS FOUND
       </Text>
 
       <Link to="/create">

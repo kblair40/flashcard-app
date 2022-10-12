@@ -86,7 +86,7 @@ export default function WithSubnavigation() {
           </RRLink>
 
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
-            <DesktopNav isSignedIn={isSignedIn} />
+            <DesktopNav isDark={isDark} isSignedIn={isSignedIn} />
           </Flex>
 
           <AuthModal
@@ -150,8 +150,8 @@ export default function WithSubnavigation() {
   );
 }
 
-const DesktopNav = ({ isSignedIn }) => {
-  const linkColor = useColorModeValue("gray.700", "gray.200");
+const DesktopNav = ({ isSignedIn, isDark }) => {
+  const linkColor = useColorModeValue("gray.700", "gray.100");
   const linkHoverColor = useColorModeValue("gray.900", "white");
 
   const { pathname } = useLocation();
@@ -187,7 +187,7 @@ const DesktopNav = ({ isSignedIn }) => {
               transform: pathname === navItem.href ? "scaleX(1)" : "scaleX(0)",
               transition: "all 0.2s",
               height: "1px",
-              bg: "gray.700",
+              bg: isDark ? "gray.100" : "gray.700",
             }}
           >
             {navItem.label}
