@@ -69,13 +69,13 @@ const StudySession = () => {
       overflowY="hidden"
     >
       <Flex w="100%" maxW={{ base: "90%" }} direction="column" align="center">
-        <Heading mb="1.5rem" textAlign="center">
+        <Heading mb="1.5rem" textAlign="center" textTransform="capitalize">
           {title}
         </Heading>
 
         <CurrentCard flashcards={flashcards} currentCard={currentCard} />
 
-        <Flex justify="center" w="100%" top={"20rem"} position="relative">
+        <Flex justify="center" w="100%" top={"20.5rem"} position="relative">
           <Button
             mr="1rem"
             isDisabled={currentCard === 0}

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import ReactCardFlip from "react-card-flip";
 import { motion, AnimatePresence } from "framer-motion";
 
+import { FlipIcon } from "utils/icons";
 import { Box, Flex, Button } from "@chakra-ui/react";
 
 const CurrentCard = ({ flashcards, currentCard }) => {
@@ -77,14 +78,30 @@ const FlipContainer = ({ children }) => {
       >
         {children}
       </ReactCardFlip>
-      <Button
-        width="100%"
-        mt=".75rem"
-        variant="ghost"
-        onClick={() => setSide(side === "back" ? "front" : "back")}
-      >
-        Flip
-      </Button>
+      <Flex w="100%" justify="center">
+        <Box
+          rounded="full"
+          w="min-content"
+          _hover={{
+            "& svg": {
+              transform: "rotate(180deg)",
+            },
+          }}
+        >
+          <Button
+            rounded="full"
+            mx="auto"
+            mt="1rem"
+            fontSize="lg"
+            fontWeight="600"
+            variant="ghost"
+            onClick={() => setSide(side === "back" ? "front" : "back")}
+            leftIcon={<FlipIcon transition={"all 0.3s"} />}
+          >
+            Flip
+          </Button>
+        </Box>
+      </Flex>
     </>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { Text } from "@chakra-ui/react";
+// import { Text } from "@chakra-ui/react";
 // import Editor from "components/Editor";
-import ManageSets from "pages/ManageSets";
+// import ManageSets from "pages/ManageSets";
 import AllSets from "components/AllSets";
 import Hero from "components/Hero";
 import UserContext from "store/UserContext";
