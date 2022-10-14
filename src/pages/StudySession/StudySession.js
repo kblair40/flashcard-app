@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   Button,
   Flex,
@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useParams, Link } from "react-router-dom";
 
+import { getUnixTimestamp } from "utils/helpers";
 import { ChevronIcon } from "utils/icons";
 import CurrentCard from "./CurrentCard";
 import AllCards from "./AllCards";
@@ -21,6 +22,7 @@ const StudySession = () => {
   const [flashcards, setFlashcards] = useState();
   const [title, setTitle] = useState("");
   const [hideAllCards, setHideAllCards] = useState(false);
+  const [sessionId, setSessionId] = useState();
 
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
@@ -47,6 +49,30 @@ const StudySession = () => {
 
     if (params && params.id) {
       fetchSet(params.id);
+    }
+  }, [params]);
+
+  const sessionCreated = useRef(false);
+  useEffect(() => {
+    const createStudySession = async (setId) => {
+      try {
+        const response = await api.post("/study_session", {
+          flashcard_set: setId,
+          start_time: getUnixTimestamp(),
+        });
+        console.log("RESPONSE:", response.data);
+        if (response.data && response.data.study_session) {
+          const { _id } = response.data.study_session;
+          setSessionId(_id);
+        }
+      } catch (e) {
+        console.log("FAILED TO CREATE SESfSION:", e);
+      }
+    };
+
+    if (params && params.id && !sessionCreated.current) {
+      sessionCreated.current = true;
+      createStudySession(params.id);
     }
   }, [params]);
 
