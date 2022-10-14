@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import { Box, Flex, Text, IconButton } from "@chakra-ui/react";
 import { useStopwatch } from "react-timer-hook";
 
@@ -13,7 +13,22 @@ const Timer = ({ setDuration }) => {
     if (minutes > 0 || hours > 0) {
       setDuration({ hours, minutes });
     }
-  }, [minutes]);
+  }, [minutes, hours]);
+
+  useEffect(() => {
+    if (seconds % 3 === 0) {
+      updateDurationInLocalStorage({ seconds, minutes, hours, saved: false });
+    }
+  }, [seconds, minutes, hours]);
+
+  const updateDurationInLocalStorage = useCallback(
+    (dur) => {
+      const duration = dur ? dur : { hours, minutes, seconds, saved: false };
+      console.log("DURATION UPDATE:", JSON.stringify(duration));
+      localStorage.setItem("sessionDuration", JSON.stringify(duration));
+    },
+    [hours, minutes, seconds]
+  );
 
   const padTime = (num) => {
     return String(num).length === 2 ? num : `0${num}`;
