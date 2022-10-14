@@ -23,6 +23,7 @@ const StudySession = () => {
   const [flashcards, setFlashcards] = useState();
   const [title, setTitle] = useState("");
   const [hideAllCards, setHideAllCards] = useState(false);
+  const [duration, setDuration] = useState({ hours: 0, minutes: 0 });
   const [sessionId, setSessionId] = useState();
 
   const { colorMode } = useColorMode();
@@ -116,7 +117,8 @@ const StudySession = () => {
       overflowY="hidden"
     >
       <Flex w="100%" maxW={{ base: "90%" }} direction="column" align="center">
-        <Timer />
+        <Timer setDuration={setDuration} />
+
         <Heading
           mt=".5rem"
           mb="1.5rem"
