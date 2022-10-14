@@ -146,13 +146,10 @@ const AllSets = () => {
                           lineHeight={1.3}
                           noOfLines={2}
                         >
-                          {i !== 1
-                            ? set.title
-                            : " Very Long Set Title That issss won't fit on mobile"}
+                          {set.title}
                         </Text>
 
                         <Text
-                          // mt="4px"
                           lineHeight={1}
                           fontSize="sm"
                           fontWeight="500"
