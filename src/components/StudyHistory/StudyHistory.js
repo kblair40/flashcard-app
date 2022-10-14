@@ -31,7 +31,9 @@ const StudyHistory = () => {
         direction="column"
         align="center"
       >
-        <Heading w="100%">History</Heading>
+        <Heading w="100%" fontSize="2xl">
+          History
+        </Heading>
 
         {history &&
           history.map((histItem, idx) => {
