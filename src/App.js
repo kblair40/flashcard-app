@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { Box, Flex, Text } from "@chakra-ui/react";
 
 import { UserProvider } from "store/UserContext";
+import { StudySessionProvider } from "store/StudySessionContext";
 import Home from "pages/Home";
 import Create from "pages/Create";
 import Account from "pages/Account";
@@ -14,28 +15,30 @@ import Navbar from "components/Navbar";
 function App() {
   return (
     <UserProvider>
-      <Box minH="100vh">
-        <Navbar />
+      <StudySessionProvider>
+        <Box minH="100vh">
+          <Navbar />
 
-        <Box position="relative">
-          <Routes>
-            <Route path="/" element={<Home />} />
+          <Box position="relative">
+            <Routes>
+              <Route path="/" element={<Home />} />
 
-            <Route path="/create" element={<Create />} />
-            <Route path="/create/:id" element={<Create />} />
+              <Route path="/create" element={<Create />} />
+              <Route path="/create/:id" element={<Create />} />
 
-            <Route path="/study" element={<Study />} />
+              <Route path="/study" element={<Study />} />
 
-            <Route path="/study/:id" element={<StudySession />} />
+              <Route path="/study/:id" element={<StudySession />} />
 
-            <Route path="/manage-sets" element={<ManageSets />} />
+              <Route path="/manage-sets" element={<ManageSets />} />
 
-            <Route path="/account" element={<Account />} />
+              <Route path="/account" element={<Account />} />
 
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Box>
         </Box>
-      </Box>
+      </StudySessionProvider>
     </UserProvider>
   );
 }

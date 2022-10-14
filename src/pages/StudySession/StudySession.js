@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import {
   Button,
   Flex,
@@ -11,11 +11,11 @@ import {
 import { useParams, Link } from "react-router-dom";
 
 import api from "api";
-import { getUnixTimestamp } from "utils/helpers";
 import { ChevronIcon } from "utils/icons";
 import Timer from "./Timer";
 import CurrentCard from "./CurrentCard";
 import AllCards from "./AllCards";
+import StudySessionContext from "store/StudySessionContext";
 
 const StudySession = () => {
   const [currentCard, setCurrentCard] = useState(0);
@@ -23,13 +23,30 @@ const StudySession = () => {
   const [flashcards, setFlashcards] = useState();
   const [title, setTitle] = useState("");
   const [hideAllCards, setHideAllCards] = useState(false);
-  const [duration, setDuration] = useState({ hours: 0, minutes: 0 });
-  const [sessionId, setSessionId] = useState();
+
+  const { createStudySession } = useContext(StudySessionContext);
 
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
 
   const params = useParams();
+
+  const didMount = useRef(false);
+  useEffect(() => {
+    if (didMount.current && params && params.id) return;
+    didMount.current = true;
+
+    const createSession = async (setId) => {
+      try {
+        const createRes = await createStudySession(setId);
+        console.log("CREATE RES:", createRes);
+      } catch (e) {
+        console.error("FAILED TO CREATE STUDY SESSION:", e);
+      }
+    };
+
+    createSession(params.id);
+  }, [params]);
 
   useEffect(() => {
     const fetchSet = async (setId) => {
@@ -54,29 +71,29 @@ const StudySession = () => {
     }
   }, [params]);
 
-  const sessionCreated = useRef(false);
-  useEffect(() => {
-    const createStudySession = async (setId) => {
-      try {
-        const response = await api.post("/study_session", {
-          flashcard_set: setId,
-          start_time: getUnixTimestamp(),
-        });
-        console.log("RESPONSE:", response.data);
-        if (response.data && response.data.study_session) {
-          const { _id } = response.data.study_session;
-          setSessionId(_id);
-        }
-      } catch (e) {
-        console.log("FAILED TO CREATE SESfSION:", e);
-      }
-    };
+  // const sessionCreated = useRef(false);
+  // useEffect(() => {
+  //   const createStudySession = async (setId) => {
+  //     try {
+  //       const response = await api.post("/study_session", {
+  //         flashcard_set: setId,
+  //         start_time: getUnixTimestamp(),
+  //       });
+  //       console.log("RESPONSE:", response.data);
+  //       if (response.data && response.data.study_session) {
+  //         const { _id } = response.data.study_session;
+  //         setSessionId(_id);
+  //       }
+  //     } catch (e) {
+  //       console.log("FAILED TO CREATE SESfSION:", e);
+  //     }
+  //   };
 
-    if (params && params.id && !sessionCreated.current) {
-      sessionCreated.current = true;
-      createStudySession(params.id);
-    }
-  }, [params]);
+  //   if (params && params.id && !sessionCreated.current) {
+  //     sessionCreated.current = true;
+  //     createStudySession(params.id);
+  //   }
+  // }, [params]);
 
   const shuffle = (cardsArray) => {
     const copy = [...cardsArray];
@@ -117,7 +134,7 @@ const StudySession = () => {
       overflowY="hidden"
     >
       <Flex w="100%" maxW={{ base: "90%" }} direction="column" align="center">
-        <Timer setDuration={setDuration} />
+        <Timer />
 
         <Heading
           mt=".5rem"

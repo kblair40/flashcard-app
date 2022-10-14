@@ -1,34 +1,20 @@
-import React, { useEffect, useRef, useCallback } from "react";
+import React, { useEffect, useContext, useRef } from "react";
 import { Box, Flex, Text, IconButton } from "@chakra-ui/react";
-import { useStopwatch } from "react-timer-hook";
 
+import StudySessionContext from "store/StudySessionContext";
 import { PlayIcon, PauseIcon } from "utils/icons";
 
-const Timer = ({ setDuration }) => {
-  const { seconds, minutes, hours, isRunning, start, pause } = useStopwatch({
-    autoStart: true,
-  });
+const Timer = () => {
+  const { seconds, minutes, hours, isRunning, start, pause, reset } =
+    useContext(StudySessionContext);
 
+  const didMount = useRef();
   useEffect(() => {
-    if (minutes > 0 || hours > 0) {
-      setDuration({ hours, minutes });
-    }
-  }, [minutes, hours]);
+    if (didMount.current) return;
 
-  useEffect(() => {
-    if (seconds % 3 === 0) {
-      updateDurationInLocalStorage({ seconds, minutes, hours, saved: false });
-    }
-  }, [seconds, minutes, hours]);
-
-  const updateDurationInLocalStorage = useCallback(
-    (dur) => {
-      const duration = dur ? dur : { hours, minutes, seconds, saved: false };
-      console.log("DURATION UPDATE:", JSON.stringify(duration));
-      localStorage.setItem("sessionDuration", JSON.stringify(duration));
-    },
-    [hours, minutes, seconds]
-  );
+    reset(0, true);
+    didMount.current = true;
+  }, [reset]);
 
   const padTime = (num) => {
     return String(num).length === 2 ? num : `0${num}`;
