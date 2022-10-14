@@ -10,11 +10,12 @@ import {
 } from "@chakra-ui/react";
 import { useParams, Link } from "react-router-dom";
 
+import api from "api";
 import { getUnixTimestamp } from "utils/helpers";
 import { ChevronIcon } from "utils/icons";
+import Timer from "./Timer";
 import CurrentCard from "./CurrentCard";
 import AllCards from "./AllCards";
-import api from "api";
 
 const StudySession = () => {
   const [currentCard, setCurrentCard] = useState(0);
@@ -109,13 +110,19 @@ const StudySession = () => {
   return (
     <Flex
       justify="center"
-      pt="2rem"
+      pt="1.5rem"
       h="calc(100vh - 60px)"
       position="relative"
       overflowY="hidden"
     >
       <Flex w="100%" maxW={{ base: "90%" }} direction="column" align="center">
-        <Heading mb="1.5rem" textAlign="center" textTransform="capitalize">
+        <Timer />
+        <Heading
+          mt=".5rem"
+          mb="1.5rem"
+          textAlign="center"
+          textTransform="capitalize"
+        >
           {title}
         </Heading>
 
@@ -137,17 +144,6 @@ const StudySession = () => {
         showSelf={() => setHideAllCards(false)}
       />
 
-      {/* {hideAllCards && (
-        <Button
-          size="sm"
-          onClick={() => setHideAllCards(!hideAllCards)}
-          position="fixed"
-          bottom=".25rem"
-          right=".5rem"
-        >
-          Show Cards
-        </Button>
-      )} */}
       <GoBack isDark={isDark} />
     </Flex>
   );
