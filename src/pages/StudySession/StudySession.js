@@ -11,11 +11,14 @@ import {
 import { useParams, Link } from "react-router-dom";
 
 import api from "api";
+import { useBlocker } from "hooks/useBlocker";
+import { useCallbackPrompt } from "hooks/useCallbackPrompt";
 import { getUnixTimestamp } from "utils/helpers";
 import { ChevronIcon } from "utils/icons";
 import Timer from "./Timer";
 import CurrentCard from "./CurrentCard";
 import AllCards from "./AllCards";
+import ConfirmLeaveModal from "components/Modals/ConfirmLeaveModal";
 
 const StudySession = () => {
   const [currentCard, setCurrentCard] = useState(0);
@@ -25,6 +28,9 @@ const StudySession = () => {
   const [hideAllCards, setHideAllCards] = useState(false);
   const [duration, setDuration] = useState({ hours: 0, minutes: 0 });
   const [sessionId, setSessionId] = useState();
+  const [showConfirmModal, setShowConfirmModal] = useState();
+
+  // const [showPrompt, confirmNavigation, cancelNavigation] = useCallbackPrompt();
 
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
@@ -147,6 +153,13 @@ const StudySession = () => {
       />
 
       <GoBack isDark={isDark} />
+
+      <ConfirmLeaveModal
+        isOpen={showConfirmModal}
+        onClose={() => setShowConfirmModal(false)}
+        onCancel={() => setShowConfirmModal(false)}
+        onConfirm={() => setShowConfirmModal(false)}
+      />
     </Flex>
   );
 };
