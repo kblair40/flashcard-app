@@ -57,6 +57,13 @@ const AllSets = () => {
     return null;
   }
 
+  const headingStyles = {
+    textTransform: "capitalize",
+    fontWeight: "700",
+    pl: "16px",
+    fontSize: { base: "xl", sm: "2xl" },
+  };
+
   return (
     <Flex justify="center" pt="32px">
       <Flex
@@ -66,13 +73,14 @@ const AllSets = () => {
         maxW={{ base: "100%", sm: "440px", md: "600px" }}
         position="relative"
       >
-        <Flex w="100%" justify="space-between" mb="1rem">
-          <Heading
-            textTransform="capitalize"
-            fontWeight="700"
-            pl="16px"
-            fontSize="2xl"
-          >
+        <Flex
+          w="100%"
+          justify="space-between"
+          mb="1rem"
+          pr="8px"
+          align="center"
+        >
+          <Heading {...headingStyles} noOfLines={2}>
             {userData ? `${makeDisplayName(userData)}'s` : ""} Flashcard Sets
           </Heading>
 
@@ -131,13 +139,20 @@ const AllSets = () => {
                     }}
                   >
                     <Flex justify="space-between" align="center">
-                      <Box w="100%" h="100%">
-                        <Text fontSize="lg" fontWeight="600" lineHeight={1}>
-                          {set.title}
+                      <Box w="100%" mr="24px" h="100%">
+                        <Text
+                          fontSize="lg"
+                          fontWeight="600"
+                          lineHeight={1.3}
+                          noOfLines={2}
+                        >
+                          {i !== 1
+                            ? set.title
+                            : " Very Long Set Title That issss won't fit on mobile"}
                         </Text>
 
                         <Text
-                          mt="4px"
+                          // mt="4px"
                           lineHeight={1}
                           fontSize="sm"
                           fontWeight="500"
