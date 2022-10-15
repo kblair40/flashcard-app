@@ -11,7 +11,7 @@ import {
   Box,
   Text,
 } from "@chakra-ui/react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 import api from "api";
 
@@ -19,7 +19,6 @@ const SetSearch = () => {
   const [value, setValue] = useState("");
   const [borderColor, setBorderColor] = useState("gray.300");
   const [results, setResults] = useState([]);
-  const [showResults, setShowResults] = useState(false);
 
   const inputRef = useRef();
 
@@ -28,6 +27,7 @@ const SetSearch = () => {
   useEffect(() => {
     // Clear input if user changes path
     setValue("");
+    setResults("");
   }, [pathname]);
 
   const handleChange = async (e) => {
@@ -92,24 +92,24 @@ const SetSearch = () => {
 export default SetSearch;
 
 const Result = ({ result }) => {
-  const handleClick = () => {};
-
   return (
-    <Flex
-      py="8px"
-      px="12px"
-      w="100%"
-      align="end"
-      cursor="pointer"
-      transition="background 0.3s"
-      _hover={{ bg: "gray.100" }}
-    >
-      <Text lineHeight={1} mr="6px" fontWeight="600">
-        {result.title}
-      </Text>
-      <Text fontSize="sm" color="gray.500" lineHeight={1}>
-        {result.flashcards.length} cards
-      </Text>
-    </Flex>
+    <Link to={`/study/${result._id}/`}>
+      <Flex
+        py="8px"
+        px="12px"
+        w="100%"
+        align="end"
+        cursor="pointer"
+        transition="background 0.3s"
+        _hover={{ bg: "gray.100" }}
+      >
+        <Text lineHeight={1} mr="6px" fontWeight="600">
+          {result.title}
+        </Text>
+        <Text fontSize="sm" color="gray.500" lineHeight={1}>
+          {result.flashcards.length} cards
+        </Text>
+      </Flex>
+    </Link>
   );
 };
