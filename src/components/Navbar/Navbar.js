@@ -107,7 +107,7 @@ export default function WithSubnavigation() {
           direction={"row"}
           spacing={6}
         >
-          <SetSearch />
+          <SetSearch isDisabled={!isSignedIn} />
 
           <ThemeToggle display={{ base: "none", md: "block" }} />
 

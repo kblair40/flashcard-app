@@ -14,7 +14,7 @@ import { useLocation, Link } from "react-router-dom";
 
 import api from "api";
 
-const SetSearch = () => {
+const SetSearch = ({ isDisabled }) => {
   const [value, setValue] = useState("");
   const [borderColor, setBorderColor] = useState("gray.300");
   const [results, setResults] = useState([]);
@@ -69,6 +69,7 @@ const SetSearch = () => {
     >
       <PopoverTrigger>
         <Input
+          isDisabled={isDisabled}
           ref={inputRef}
           value={value}
           onBlur={() => setShowResults(false)}
