@@ -19,7 +19,7 @@ import api from "api";
 
 const SetSearch = ({ isDisabled }) => {
   const [value, setValue] = useState("");
-  const [borderColor, setBorderColor] = useState("gray.300");
+  // const [borderColor, setBorderColor] = useState("gray.300");
   const [results, setResults] = useState([]);
   const [showResults, setShowResults] = useState(true);
 
@@ -49,7 +49,6 @@ const SetSearch = ({ isDisabled }) => {
 
   const search = async (searchValue) => {
     console.log("SEARCH VALUE:", searchValue);
-    setBorderColor("red.600");
     try {
       const response = await api.get("/search", {
         params: { title: searchValue },
@@ -61,7 +60,6 @@ const SetSearch = ({ isDisabled }) => {
     } catch (e) {
       console.log("SEARCH FAILED:", e);
     }
-    setBorderColor("gray.600");
   };
 
   return (
@@ -76,6 +74,7 @@ const SetSearch = ({ isDisabled }) => {
             children={<SearchIcon boxSize="18px" fill="gray.400" />}
           />
           <Input
+            _focusVisible={{ outline: "none" }}
             isDisabled={isDisabled}
             ref={inputRef}
             value={value}
@@ -83,7 +82,10 @@ const SetSearch = ({ isDisabled }) => {
             onFocus={() => setShowResults(true)}
             onChange={handleChange}
             w="100%"
-            borderColor={borderColor}
+            border="1px solid"
+            borderColor="gray.300"
+            _hover={{ bordercolor: "gray.400" }}
+            _focus={{ borderColor: "gray.500" }}
             placeholder="Search"
           />
         </InputGroup>
