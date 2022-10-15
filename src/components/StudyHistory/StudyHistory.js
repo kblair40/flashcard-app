@@ -11,20 +11,25 @@ import api from "api";
 import { TrashIcon } from "utils/icons";
 import { getCleanDuration } from "utils/helpers";
 import ConfirmDeleteModal from "components/Modals/ConfirmDeleteModal";
+import HistoryFilters from "./HistoryFilters";
 
 const StudyHistory = () => {
   const [history, setHistory] = useState();
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState();
   const [deleting, setDeleting] = useState(false);
+  const [sortBy, setSortBy] = useState("newest");
 
   useEffect(() => {
     const fetchHistory = async () => {
       try {
         const response = await api.get("/history");
-        console.log("RESPONSE:", response.data);
         if (response.data && response.data.history) {
-          setHistory(response.data.history);
+          const { history } = response.data;
+          const sortedHistory = history.sort((a, b) => {
+            return b.start_time - a.start_time;
+          });
+          setHistory(sortedHistory);
         }
       } catch (e) {
         console.error("FAILED FETCHING HISTORY:", e);
@@ -33,6 +38,22 @@ const StudyHistory = () => {
 
     fetchHistory();
   }, []);
+
+  // new set 10/15/2022 is the most recent
+  const handleChangeSortBy = (sortBy) => {
+    console.log("NEW SORTBY:", sortBy);
+    setSortBy(sortBy);
+    let histCopy = [...history];
+    console.log("\nHISTORY BEFORE:", histCopy);
+    histCopy = histCopy.sort((a, b) => {
+      a = a.start_time;
+      b = b.start_time;
+      return sortBy === "newest" ? b - a : a - b;
+    });
+
+    console.log("SORTED:", histCopy);
+    setHistory(histCopy);
+  };
 
   const deleteItem = async () => {
     try {
@@ -54,9 +75,13 @@ const StudyHistory = () => {
   return (
     <Flex justify="center" mt="2rem" w="100%">
       <Flex w="100%" direction="column" align="center">
-        <Heading mb=".75rem" w="100%" fontSize={{ base: "xl", sm: "2xl" }}>
-          History
-        </Heading>
+        <Flex w="100%" justify="space-between" pr="8px" align="center">
+          <Heading mb=".75rem" w="100%" fontSize={{ base: "xl", sm: "2xl" }}>
+            History
+          </Heading>
+
+          <HistoryFilters sortBy={sortBy} onChange={handleChangeSortBy} />
+        </Flex>
 
         {history &&
           history.map((histItem, idx) => {
