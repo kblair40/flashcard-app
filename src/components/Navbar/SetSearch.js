@@ -69,13 +69,15 @@ const SetSearch = ({ isDisabled }) => {
     >
       <PopoverTrigger>
         <Input
+          // borderRadius={{ base: "16px", md: undefined }}
           isDisabled={isDisabled}
           ref={inputRef}
           value={value}
           onBlur={() => setShowResults(false)}
           onFocus={() => setShowResults(true)}
           onChange={handleChange}
-          minW="200px"
+          w="100%"
+          minW={{ base: "140px", md: "200px" }}
           borderColor={borderColor}
           placeholder="Search"
         />

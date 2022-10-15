@@ -9,6 +9,7 @@ import {
   Collapse,
   Link,
   useColorMode,
+  useBreakpointValue,
   useColorModeValue,
   useDisclosure,
   Image,
@@ -18,6 +19,7 @@ import { Link as RRLink, useLocation } from "react-router-dom";
 import { HamburgerIcon, ChevronIcon, CloseIcon } from "utils/icons";
 import logo from "assets/images/logo.svg";
 import logo_dk from "assets/images/logo-dk.svg";
+import logo_sm from "assets/images/logo-sm.svg";
 import UserContext from "store/UserContext";
 import AvatarMenu from "./AvatarMenu";
 import SetSearch from "./SetSearch";
@@ -53,6 +55,11 @@ export default function WithSubnavigation() {
     }
   };
 
+  const logo_img = useBreakpointValue({
+    base: logo_sm,
+    md: isDark ? logo_dk : logo,
+  });
+
   return (
     <Box>
       <Flex
@@ -64,11 +71,13 @@ export default function WithSubnavigation() {
         align={"center"}
       >
         <Flex
-          flex={{ base: 1, md: "auto" }}
+          // flex={{ base: 1, md: "auto" }}
+          // border="1px solid #ccc"
           ml={{ base: -2 }}
           display={{ base: "flex", md: "none" }}
         >
           <IconButton
+            mr={{ base: 2, sm: 3 }}
             onClick={onToggle}
             icon={
               isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
@@ -77,16 +86,18 @@ export default function WithSubnavigation() {
             aria-label={"Toggle Navigation"}
           />
         </Flex>
+
         <Flex
           align="center"
           flex={{ base: 1 }}
-          justify={{ base: "center", md: "start" }}
+          mr={{ base: 2 }}
+          // justify={{ base: "center", md: "start" }}
         >
           <RRLink to="/">
             <Image
               maxWidth={"243px"}
-              src={isDark ? logo_dk : logo}
-              w={{ base: "119px", sm: "140px" }}
+              src={logo_img}
+              w={{ base: "32px", md: "119px", lg: "140px" }}
             />
           </RRLink>
 
@@ -104,6 +115,7 @@ export default function WithSubnavigation() {
         <Stack
           flex={{ base: 1, md: 0 }}
           justify={"flex-end"}
+          align="center"
           direction={"row"}
           spacing={6}
         >
