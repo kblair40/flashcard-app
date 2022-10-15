@@ -149,7 +149,7 @@ export default function WithSubnavigation() {
           direction={"row"}
           spacing={6}
         >
-          <Box w="100%" border="1px solid transparent">
+          <Box ml="1rem" w="100%" border="1px solid transparent">
             <SetSearch isDisabled={!isSignedIn} />
           </Box>
 
