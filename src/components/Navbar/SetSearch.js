@@ -83,9 +83,9 @@ const SetSearch = ({ isDisabled }) => {
             onChange={handleChange}
             w="100%"
             border="1px solid"
-            borderColor="gray.300"
-            _hover={{ bordercolor: "gray.400" }}
-            _focus={{ borderColor: "gray.500" }}
+            borderColor="gray.200"
+            _hover={{ borderColor: "gray.300" }}
+            _focus={{ borderColor: "gray.400" }}
             placeholder="Search"
           />
         </InputGroup>
