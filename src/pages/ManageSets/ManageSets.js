@@ -14,6 +14,7 @@ import {
   Checkbox,
   useColorMode,
   Text,
+  Tooltip,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
@@ -121,7 +122,9 @@ const ManageSets = () => {
                       <Tr key={i}>
                         <Td>{title}</Td>
                         <Td>{flashcards.length}</Td>
-                        <Td>{lastUpdated.toLocaleString()}</Td>
+                        <Tooltip label={lastUpdated.toLocaleTimeString()}>
+                          <Td>{lastUpdated.toLocaleDateString()}</Td>
+                        </Tooltip>
                         <Td>
                           <Flex justify="center">
                             {changingPublicStatus ? (
