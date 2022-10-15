@@ -10,13 +10,14 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-const ConfirmLeaveModal = ({ isOpen, onClose, onConfirm, onCancel }) => {
+const ConfirmDeleteModal = ({ isOpen, onClose, onConfirm, onCancel }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent p={0} m={0}>
         <ModalHeader>
-          Are you sure you want to leave? Leaving will end the session.
+          Are you sure you want to delete this? You will not be able to undo
+          this action.
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody p="24px">
@@ -30,4 +31,4 @@ const ConfirmLeaveModal = ({ isOpen, onClose, onConfirm, onCancel }) => {
   );
 };
 
-export default ConfirmLeaveModal;
+export default ConfirmDeleteModal;
