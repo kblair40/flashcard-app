@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Stack, Select, FormControl, FormLabel } from "@chakra-ui/react";
+import { Stack, Select } from "@chakra-ui/react";
 
 const HistoryFilters = ({ onChange, sortBy }) => {
   const handleChange = (e) => {
@@ -10,10 +10,13 @@ const HistoryFilters = ({ onChange, sortBy }) => {
   return (
     <Stack direction={{ base: "row" }} align="center">
       <Select
+        w="max-content"
         value={sortBy}
         size="sm"
-        placeholder="Sort By"
         onChange={handleChange}
+        _focus={{ borderColor: "gray.500" }}
+        _focusVisible={{ outline: "none" }}
+        rounded="md"
       >
         <option value="newest">Most Recent</option>
         <option value="oldest">Oldest</option>
