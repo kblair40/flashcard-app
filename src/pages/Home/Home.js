@@ -10,14 +10,17 @@ import UserContext from "store/UserContext";
 const Home = () => {
   const { isSignedIn } = useContext(UserContext);
   return (
-    <div>
+    <Flex justify="center">
       <Hero />
-      <AllSets />
 
-      <StudyHistory />
+      <Box w="100%" maxW={{ base: "340px", sm: "440px", md: "640px" }}>
+        <AllSets />
+
+        <StudyHistory />
+      </Box>
 
       {/* {isSignedIn && <Text textAlign="center">Signed In!</Text>} */}
-    </div>
+    </Flex>
   );
 };
 

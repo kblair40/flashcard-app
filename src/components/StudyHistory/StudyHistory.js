@@ -24,14 +24,9 @@ const StudyHistory = () => {
   }, []);
 
   return (
-    <Flex justify="center" mt="2rem">
-      <Flex
-        w="100%"
-        maxW={{ base: "340px", sm: "400px", md: "440px" }}
-        direction="column"
-        align="center"
-      >
-        <Heading w="100%" fontSize="2xl">
+    <Flex justify="center" mt="2rem" w="100%">
+      <Flex w="100%" direction="column" align="center">
+        <Heading mb=".75rem" w="100%" fontSize={{ base: "xl", sm: "2xl" }}>
           History
         </Heading>
 
@@ -50,13 +45,7 @@ const HistoryItem = ({ item }) => {
   const duration = getCleanDuration(item.duration);
 
   return (
-    <Flex
-      direction="column"
-      w="100%"
-      py="8px"
-      borderRadius="4px"
-      // border="1px solid #ddd"
-    >
+    <Flex direction="column" w="100%" py="8px" borderRadius="4px">
       <Flex w="100%" align="end" mb="6px">
         <Text mr="6px" fontSize="lg" fontWeight="600" lineHeight={1}>
           {item.flashcard_set.title}

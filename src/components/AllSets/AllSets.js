@@ -60,23 +60,22 @@ const AllSets = () => {
   const headingStyles = {
     textTransform: "capitalize",
     fontWeight: "700",
-    pl: "16px",
+    // pl: "16px",
     fontSize: { base: "xl", sm: "2xl" },
   };
 
   return (
-    <Flex justify="center" pt="32px">
+    <Flex justify="center" pt="32px" w="100%">
       <Flex
         direction="column"
         w="100%"
         justify="space-between"
-        maxW={{ base: "100%", sm: "440px", md: "600px" }}
         position="relative"
       >
         <Flex
           w="100%"
           justify="space-between"
-          mb="1rem"
+          mb=".75rem"
           pr="8px"
           align="center"
         >
@@ -121,7 +120,7 @@ const AllSets = () => {
                     direction="column"
                     cursor="pointer"
                     w="100%"
-                    p="8px 16px 10px 16px"
+                    py="8px"
                     transition="background 0.2s"
                     _hover={{
                       bg: !isDark ? "gray.50" : "gray.700",
