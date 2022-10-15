@@ -16,10 +16,7 @@ const StudySessionProvider = ({ children }) => {
 
   const params = useParams();
   const { pathname } = useLocation();
-  // console.log("PATHNAME:", pathname);
-  // console.log("split:", pathname.split("/"));
 
-  const inSession = useRef(pathname.startsWith("/study"));
   const patchedSession = useRef(false);
 
   useEffect(() => {

@@ -71,35 +71,11 @@ const StudySession = () => {
     }
   }, [params]);
 
-  // const sessionCreated = useRef(false);
-  // useEffect(() => {
-  //   const createStudySession = async (setId) => {
-  //     try {
-  //       const response = await api.post("/study_session", {
-  //         flashcard_set: setId,
-  //         start_time: getUnixTimestamp(),
-  //       });
-  //       console.log("RESPONSE:", response.data);
-  //       if (response.data && response.data.study_session) {
-  //         const { _id } = response.data.study_session;
-  //         setSessionId(_id);
-  //       }
-  //     } catch (e) {
-  //       console.log("FAILED TO CREATE SESfSION:", e);
-  //     }
-  //   };
-
-  //   if (params && params.id && !sessionCreated.current) {
-  //     sessionCreated.current = true;
-  //     createStudySession(params.id);
-  //   }
-  // }, [params]);
-
   const shuffle = (cardsArray) => {
     const copy = [...cardsArray];
-    console.log("CARDS BEFORE:", copy);
     copy.sort(() => Math.random() - 0.5);
     console.log("CARDS AFTER:", copy);
+
     setCurrentCard(0);
     setFlashcards(copy);
   };

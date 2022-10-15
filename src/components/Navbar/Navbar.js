@@ -76,12 +76,16 @@ export default function WithSubnavigation() {
             aria-label={"Toggle Navigation"}
           />
         </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
+        <Flex
+          align="center"
+          flex={{ base: 1 }}
+          justify={{ base: "center", md: "start" }}
+        >
           <RRLink to="/">
             <Image
               maxWidth={"243px"}
               src={isDark ? logo_dk : logo}
-              w={{ base: "170px", sm: "200px" }}
+              w={{ base: "119px", sm: "140px" }}
             />
           </RRLink>
 
@@ -266,7 +270,7 @@ const MobileNavItem = ({ label, children, href }) => {
 
 const NAV_ITEMS = [
   {
-    label: "Create New Set",
+    label: "Create Set",
     href: "/create",
   },
   {
