@@ -6,6 +6,8 @@ import api from "api";
 
 const SetSearch = () => {
   const [value, setValue] = useState("");
+  const [borderColor, setBorderColor] = useState("gray.300");
+  const [results, setResults] = useState([]);
 
   const { pathname } = useLocation();
 
@@ -25,14 +27,20 @@ const SetSearch = () => {
   };
 
   const search = async (searchValue) => {
+    console.log("SEARCH VALUE:", searchValue);
+    setBorderColor("red.600");
     try {
       const response = await api.get("/search", {
-        query: { title: searchValue },
+        params: { title: searchValue },
       });
-      console.log("RESPONSE:", response);
+      console.log("RESPONSE:", response.data);
+      if (response.data) {
+        setResults(response.data);
+      }
     } catch (e) {
       console.log("SEARCH FAILED:", e);
     }
+    setBorderColor("gray.600");
   };
 
   return (
@@ -40,7 +48,7 @@ const SetSearch = () => {
       value={value}
       onChange={handleChange}
       minW="200px"
-      borderColor="gray.300"
+      borderColor={borderColor}
       placeholder="Search"
     />
   );
