@@ -14,3 +14,34 @@ export const quillSettings = {
     ],
   },
 };
+
+export const categories = [
+  {
+    label: "Finance",
+    value: "finance",
+  },
+  {
+    label: "Computer Science",
+    value: "computer science",
+  },
+  {
+    label: "Programming",
+    value: "programming",
+  },
+  {
+    label: "History",
+    value: "history",
+  },
+  {
+    label: "Science",
+    value: "science",
+  },
+  {
+    label: "Biology",
+    value: "biology",
+  },
+  {
+    label: "Chemistry",
+    value: "chemistry",
+  },
+];

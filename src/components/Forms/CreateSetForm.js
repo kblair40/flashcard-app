@@ -7,9 +7,11 @@ import {
   Flex,
   Button,
   Checkbox,
+  Select,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
+import { categories } from "utils/constants";
 import api from "api";
 
 const INITIAL_ERROR_STATE = { title: false };
@@ -20,6 +22,7 @@ const CreateSetForm = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
+    category: "",
     is_public: true,
   });
   const [loading, setLoading] = useState(false);
@@ -27,7 +30,7 @@ const CreateSetForm = () => {
 
   const handleSubmit = async () => {
     setLoading(true);
-    const { title, description, is_public } = formData;
+    const { title, description, is_public, category } = formData;
 
     if (!title) {
       setErrors({ ...errors, title: true });
@@ -39,6 +42,7 @@ const CreateSetForm = () => {
       const response = await api.post("/flashcard_set", {
         title,
         description,
+        category,
         public: is_public,
       });
       console.log("\nCREATE RESPONSE:", response.data);
@@ -81,6 +85,21 @@ const CreateSetForm = () => {
           />
         </FormControl>
 
+        <FormControl isRequired>
+          <FormLabel>Category</FormLabel>
+          <Select
+            onChange={(e) => {
+              setFormData({ ...formData, category: e.target.value });
+            }}
+            placeholder="Select Category"
+            value={formData.category}
+          >
+            {categories.map((cat, i) => {
+              return <option value={cat.value}>{cat.label}</option>;
+            })}
+          </Select>
+        </FormControl>
+
         <Checkbox
           spacing=".75rem"
           isChecked={formData.is_public}
@@ -92,7 +111,12 @@ const CreateSetForm = () => {
           Make Set Public
         </Checkbox>
 
-        <Button w="100%" onClick={handleSubmit} isLoading={loading}>
+        <Button
+          isDisabled={!formData.category || !formData.title}
+          w="100%"
+          onClick={handleSubmit}
+          isLoading={loading}
+        >
           Create
         </Button>
       </VStack>
