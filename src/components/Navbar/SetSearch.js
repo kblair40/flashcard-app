@@ -8,7 +8,6 @@ import {
   PopoverBody,
   PopoverArrow,
   Flex,
-  Box,
   Text,
 } from "@chakra-ui/react";
 import { useLocation, Link } from "react-router-dom";
@@ -19,6 +18,7 @@ const SetSearch = () => {
   const [value, setValue] = useState("");
   const [borderColor, setBorderColor] = useState("gray.300");
   const [results, setResults] = useState([]);
+  const [showResults, setShowResults] = useState(true);
 
   const inputRef = useRef();
 
@@ -37,7 +37,9 @@ const SetSearch = () => {
     if (value.length > 2) {
       // must have at least 3 chars entered
       search(value);
+      setShowResults(true);
     } else {
+      setShowResults(false);
       setResults([]);
     }
   };
@@ -60,11 +62,17 @@ const SetSearch = () => {
   };
 
   return (
-    <Popover initialFocusRef={inputRef} isOpen={results && results.length}>
+    <Popover
+      initialFocusRef={inputRef}
+      returnFocusOnClose={false}
+      isOpen={results && results.length && showResults}
+    >
       <PopoverTrigger>
         <Input
           ref={inputRef}
           value={value}
+          onBlur={() => setShowResults(false)}
+          onFocus={() => setShowResults(true)}
           onChange={handleChange}
           minW="200px"
           borderColor={borderColor}
