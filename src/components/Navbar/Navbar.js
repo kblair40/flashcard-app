@@ -20,6 +20,7 @@ import logo from "assets/images/logo.svg";
 import logo_dk from "assets/images/logo-dk.svg";
 import UserContext from "store/UserContext";
 import AvatarMenu from "./AvatarMenu";
+import SetSearch from "./SetSearch";
 import ThemeToggle from "./ThemeToggle";
 import AuthModal from "components/Modals/AuthModal";
 
@@ -106,6 +107,8 @@ export default function WithSubnavigation() {
           direction={"row"}
           spacing={6}
         >
+          <SetSearch />
+
           <ThemeToggle display={{ base: "none", md: "block" }} />
 
           {!isSignedIn && (
