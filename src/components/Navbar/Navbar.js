@@ -43,7 +43,6 @@ export default function WithSubnavigation() {
 
   const handleClickSignInOrSignOut = (signInOrSignOut) => {
     if (signInOrSignOut === "signin" || signInOrSignOut === "signup") {
-      // TODO: add/pass arg to modal to tell it which tab to show onMount
       let defaultTab = signInOrSignOut === "signin" ? 1 : 0;
       setAuthModalDefaultTab(defaultTab);
 
@@ -69,29 +68,59 @@ export default function WithSubnavigation() {
         px={{ base: 4 }}
         shadow="sm"
         align={"center"}
+        position="relative"
+        justify={{ base: "space-between", md: "unset" }}
       >
-        <Flex
-          // flex={{ base: 1, md: "auto" }}
-          // border="1px solid #ccc"
-          ml={{ base: -2 }}
-          display={{ base: "flex", md: "none" }}
-        >
-          <IconButton
-            mr={{ base: 2, sm: 3 }}
-            onClick={onToggle}
-            icon={
-              isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
-            }
-            variant={"ghost"}
-            aria-label={"Toggle Navigation"}
-          />
-        </Flex>
+        <IconButton
+          mr={{ base: 2, sm: 6 }}
+          onClick={onToggle}
+          icon={
+            isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
+          }
+          variant={"ghost"}
+          aria-label={"Toggle Navigation"}
+        />
 
         <Flex
+          display={{ base: "flex", md: "none" }}
+          justify="center"
+          align="center"
+          w="100%"
+          position="absolute"
+          top={0}
+          left={0}
+          right={0}
+          bottom={0}
+        >
+          <RRLink to="/">
+            <Image
+              maxWidth={"243px"}
+              src={logo_img}
+              w={{ base: "32px", md: "119px", lg: "140px" }}
+            />
+          </RRLink>
+
+          <Box
+            ml="1.5rem"
+            w={{ base: "100%" }}
+            maxW={{ base: "180px", sm: "240px" }}
+          >
+            <SetSearch isDisabled={!isSignedIn} />
+          </Box>
+        </Flex>
+
+        <Box display={{ md: "none" }}>
+          <AuthButtons
+            isSignedIn={isSignedIn}
+            onClick={handleClickSignInOrSignOut}
+          />
+        </Box>
+
+        <Flex
+          display={{ base: "none", md: "flex" }}
           align="center"
           flex={{ base: 1 }}
           mr={{ base: 2 }}
-          // justify={{ base: "center", md: "start" }}
         >
           <RRLink to="/">
             <Image
@@ -113,13 +142,16 @@ export default function WithSubnavigation() {
         </Flex>
 
         <Stack
-          flex={{ base: 1, md: 0 }}
+          display={{ base: "none", md: "flex" }}
+          flex={{ base: 1, md: 1 }}
           justify={"flex-end"}
           align="center"
           direction={"row"}
           spacing={6}
         >
-          <SetSearch isDisabled={!isSignedIn} />
+          <Box w="100%" border="1px solid transparent">
+            <SetSearch isDisabled={!isSignedIn} />
+          </Box>
 
           <ThemeToggle display={{ base: "none", md: "block" }} />
 
@@ -169,6 +201,31 @@ export default function WithSubnavigation() {
   );
 }
 
+const AuthButtons = ({ isSignedIn, handleClickSignInOrSignOut }) => {
+  return isSignedIn ? (
+    <AvatarMenu
+      handleClickSignout={() => handleClickSignInOrSignOut("signout")}
+    />
+  ) : (
+    <Button
+      display={{ base: "none", md: "inline-flex" }}
+      fontSize={"sm"}
+      fontWeight={600}
+      color={"white"}
+      bg={"blue.400"}
+      href={"#"}
+      _hover={{
+        bg: "blue.500",
+      }}
+      onClick={() =>
+        handleClickSignInOrSignOut(isSignedIn ? "signout" : "signup")
+      }
+    >
+      {isSignedIn ? "Sign Out" : "Sign Up"}
+    </Button>
+  );
+};
+
 const DesktopNav = ({ isSignedIn, isDark }) => {
   const linkColor = useColorModeValue("gray.700", "gray.100");
   const linkHoverColor = useColorModeValue("gray.900", "white");
@@ -208,6 +265,7 @@ const DesktopNav = ({ isSignedIn, isDark }) => {
               height: "1px",
               bg: isDark ? "gray.100" : "gray.700",
             }}
+            whiteSpace="nowrap"
           >
             {navItem.label}
           </Link>
@@ -292,8 +350,4 @@ const NAV_ITEMS = [
     label: "Manage Sets",
     href: "/manage-sets",
   },
-  // {
-  //   label: "Study",
-  //   href: "/study",
-  // },
 ];

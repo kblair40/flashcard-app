@@ -77,7 +77,8 @@ const SetSearch = ({ isDisabled }) => {
           onFocus={() => setShowResults(true)}
           onChange={handleChange}
           w="100%"
-          minW={{ base: "140px", md: "200px" }}
+          // maxW="240px"
+          // minW={{ base: "140px", md: "200px" }}
           borderColor={borderColor}
           placeholder="Search"
         />
