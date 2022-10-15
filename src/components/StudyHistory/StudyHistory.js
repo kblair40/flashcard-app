@@ -10,9 +10,12 @@ import {
 import api from "api";
 import { TrashIcon } from "utils/icons";
 import { getCleanDuration } from "utils/helpers";
+import ConfirmDeleteModal from "components/Modals/ConfirmDeleteModal";
 
 const StudyHistory = () => {
   const [history, setHistory] = useState();
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState();
 
   useEffect(() => {
     const fetchHistory = async () => {
@@ -30,6 +33,16 @@ const StudyHistory = () => {
     fetchHistory();
   }, []);
 
+  const deleteItem = async () => {
+    try {
+      const response = await api.delete(`/study_history/${itemToDelete}`);
+      console.log("RESPONSE:", response);
+    } catch (e) {
+      console.error("FAILED TO DELETE:", e);
+    }
+    setItemToDelete(undefined);
+  };
+
   return (
     <Flex justify="center" mt="2rem" w="100%">
       <Flex w="100%" direction="column" align="center">
@@ -39,9 +52,22 @@ const StudyHistory = () => {
 
         {history &&
           history.map((histItem, idx) => {
-            return <HistoryItem item={histItem} key={idx} />;
+            return (
+              <HistoryItem
+                onClick={() => setItemToDelete(histItem._id)}
+                item={histItem}
+                key={idx}
+              />
+            );
           })}
       </Flex>
+
+      <ConfirmDeleteModal
+        isOpen={confirmModalOpen}
+        onClose={() => setConfirmModalOpen(false)}
+        onCancel={() => setConfirmModalOpen(false)}
+        onConfirm={deleteItem}
+      />
     </Flex>
   );
 };
