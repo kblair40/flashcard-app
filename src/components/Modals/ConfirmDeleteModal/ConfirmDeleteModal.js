@@ -8,22 +8,58 @@ import {
   ModalCloseButton,
   Flex,
   Button,
+  Text,
 } from "@chakra-ui/react";
 
-const ConfirmDeleteModal = ({ isOpen, onClose, onConfirm, onCancel }) => {
+const ConfirmDeleteModal = ({
+  isOpen,
+  onClose,
+  onConfirm,
+  onCancel,
+  confirming,
+}) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal
+      size={{ base: "xs", sm: "sm", md: "md" }}
+      isOpen={isOpen}
+      onClose={onClose}
+      isCentered
+    >
       <ModalOverlay />
-      <ModalContent p={0} m={0}>
-        <ModalHeader>
-          Are you sure you want to delete this? You will not be able to undo
-          this action.
+      <ModalContent>
+        <ModalHeader pt="2rem">
+          <Text textAlign="center" fontSize="xl" fontWeight="600">
+            Are you sure you want to delete?
+          </Text>
+          <Text fontSize="md" fontWeight="500" textAlign="center">
+            This cannot be undone.
+          </Text>
         </ModalHeader>
         <ModalCloseButton />
-        <ModalBody p="24px">
-          <Flex w="100%" align="center">
-            <Button onClick={onCancel}>Cancel</Button>
-            <Button onClick={onConfirm}>Confirm</Button>
+        <ModalBody p="8px 24px 24px">
+          <Flex
+            w="100%"
+            align="center"
+            direction={{ base: "column", sm: "row-reverse" }}
+          >
+            <Button
+              w={{ base: "100%", sm: "50%" }}
+              mb={{ base: "1rem", sm: 0 }}
+              ml={{ sm: "1rem" }}
+              // size="sm"
+              isLoading={confirming}
+              onClick={onConfirm}
+            >
+              Confirm
+            </Button>
+
+            <Button
+              w={{ base: "100%", sm: "50%" }}
+              // size="sm"
+              onClick={onCancel}
+            >
+              Cancel
+            </Button>
           </Flex>
         </ModalBody>
       </ModalContent>

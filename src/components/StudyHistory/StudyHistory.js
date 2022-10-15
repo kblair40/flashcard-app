@@ -16,6 +16,7 @@ const StudyHistory = () => {
   const [history, setHistory] = useState();
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState();
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     const fetchHistory = async () => {
@@ -35,12 +36,19 @@ const StudyHistory = () => {
 
   const deleteItem = async () => {
     try {
-      const response = await api.delete(`/study_history/${itemToDelete}`);
-      console.log("RESPONSE:", response);
+      const response = await api.delete(`/history/${itemToDelete}`);
+      console.log("RESPONSE:", response.data);
+
+      if (response.data && response.data.history) {
+        console.log("SETTING HISTORY:", response.data.history);
+        setHistory(response.data.history);
+      }
     } catch (e) {
       console.error("FAILED TO DELETE:", e);
     }
     setItemToDelete(undefined);
+    setDeleting(false);
+    setConfirmModalOpen(false);
   };
 
   return (
@@ -54,7 +62,10 @@ const StudyHistory = () => {
           history.map((histItem, idx) => {
             return (
               <HistoryItem
-                onClick={() => setItemToDelete(histItem._id)}
+                onClick={() => {
+                  setItemToDelete(histItem._id);
+                  setConfirmModalOpen(true);
+                }}
                 item={histItem}
                 key={idx}
               />
@@ -67,6 +78,7 @@ const StudyHistory = () => {
         onClose={() => setConfirmModalOpen(false)}
         onCancel={() => setConfirmModalOpen(false)}
         onConfirm={deleteItem}
+        confirming={deleting}
       />
     </Flex>
   );
@@ -74,7 +86,7 @@ const StudyHistory = () => {
 
 export default StudyHistory;
 
-const HistoryItem = ({ item }) => {
+const HistoryItem = ({ item, onClick }) => {
   const duration = getCleanDuration(item.duration);
 
   const { colorMode } = useColorMode();
@@ -105,6 +117,7 @@ const HistoryItem = ({ item }) => {
       </Flex>
 
       <IconButton
+        onClick={onClick}
         size="sm"
         bg={isDark ? "gray.800" : "#fff"}
         variant="ghost"
