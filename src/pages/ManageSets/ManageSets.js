@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-import { AddIcon } from "utils/icons";
+import { AddIcon, EditIcon } from "utils/icons";
 import api from "api";
 
 const ManageSets = () => {
@@ -143,7 +143,15 @@ const ManageSets = () => {
 
                         <Td>
                           <Link to={`/create/${_id}`}>
-                            <Button w="100%">Edit</Button>
+                            <Button
+                              leftIcon={
+                                <EditIcon boxSize="14px" fill="gray.700" />
+                              }
+                              size="sm"
+                              w="100%"
+                            >
+                              Edit
+                            </Button>
                           </Link>
                         </Td>
                       </Tr>
