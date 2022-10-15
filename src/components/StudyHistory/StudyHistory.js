@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Box, Flex, Text, Heading } from "@chakra-ui/react";
+import {
+  IconButton,
+  Flex,
+  Text,
+  Heading,
+  useColorMode,
+} from "@chakra-ui/react";
 
 import api from "api";
+import { TrashIcon } from "utils/icons";
 import { getCleanDuration } from "utils/helpers";
 
 const StudyHistory = () => {
@@ -44,21 +51,41 @@ export default StudyHistory;
 const HistoryItem = ({ item }) => {
   const duration = getCleanDuration(item.duration);
 
-  return (
-    <Flex direction="column" w="100%" py="8px" borderRadius="4px">
-      <Flex w="100%" align="end" mb="6px">
-        <Text mr="6px" fontSize="lg" fontWeight="600" lineHeight={1}>
-          {item.flashcard_set.title}
-        </Text>
+  const { colorMode } = useColorMode();
+  const isDark = colorMode === "dark";
 
-        <Text lineHeight={1} fontSize="sm">
-          {new Date(item.start_time).toLocaleDateString()}
+  return (
+    <Flex
+      justify="space-between"
+      align="center"
+      py="8px"
+      borderRadius="4px"
+      w="100%"
+    >
+      <Flex direction="column" w="100%">
+        <Flex w="100%" align="end" mb="6px">
+          <Text mr="6px" fontSize="lg" fontWeight="600" lineHeight={1}>
+            {item.flashcard_set.title}
+          </Text>
+
+          <Text lineHeight={1} fontSize="sm">
+            {new Date(item.start_time).toLocaleDateString()}
+          </Text>
+        </Flex>
+
+        <Text fontSize="sm" fontStyle="italic" color="gray.600" lineHeight={1}>
+          {duration}
         </Text>
       </Flex>
 
-      <Text fontSize="sm" fontStyle="italic" color="gray.600" lineHeight={1}>
-        {duration}
-      </Text>
+      <IconButton
+        size="sm"
+        bg={isDark ? "gray.800" : "#fff"}
+        variant="ghost"
+        rounded="full"
+        aria-label="Delete Button"
+        icon={<TrashIcon boxSize="18px" />}
+      />
     </Flex>
   );
 };
