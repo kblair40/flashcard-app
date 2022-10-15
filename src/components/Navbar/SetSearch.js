@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import {
   Input,
+  InputLeftElement,
+  InputGroup,
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -12,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { useLocation, Link } from "react-router-dom";
 
+import { SearchIcon } from "utils/icons";
 import api from "api";
 
 const SetSearch = ({ isDisabled }) => {
@@ -68,17 +71,22 @@ const SetSearch = ({ isDisabled }) => {
       isOpen={results && results.length && showResults}
     >
       <PopoverTrigger>
-        <Input
-          isDisabled={isDisabled}
-          ref={inputRef}
-          value={value}
-          onBlur={() => setShowResults(false)}
-          onFocus={() => setShowResults(true)}
-          onChange={handleChange}
-          w="100%"
-          borderColor={borderColor}
-          placeholder="Search"
-        />
+        <InputGroup>
+          <InputLeftElement
+            children={<SearchIcon boxSize="18px" fill="gray.400" />}
+          />
+          <Input
+            isDisabled={isDisabled}
+            ref={inputRef}
+            value={value}
+            onBlur={() => setShowResults(false)}
+            onFocus={() => setShowResults(true)}
+            onChange={handleChange}
+            w="100%"
+            borderColor={borderColor}
+            placeholder="Search"
+          />
+        </InputGroup>
       </PopoverTrigger>
 
       <PopoverContent p={0}>
