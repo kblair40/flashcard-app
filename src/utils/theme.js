@@ -30,6 +30,13 @@ const theme = extendTheme({
     "dm-secondary": { color: "gray.200" },
     "dm-tertiary": { color: "gray.400" },
   },
+  components: {
+    Icon: {
+      baseStyle: {
+        fill: mode("gray.700", "gray.50"),
+      },
+    },
+  },
   fonts: {
     body: "Open Sans, sans-serif",
     heading: "Open Sans, sans-serif",
