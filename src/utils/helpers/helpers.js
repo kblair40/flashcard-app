@@ -2,8 +2,8 @@ export const getUnixTimestamp = () => {
   return new Date().getTime();
 };
 
-export const convertFromUnix = () => {
-  //
+export const convertFromUnix = (timestamp) => {
+  return new Date(timestamp);
 };
 
 export const makeDisplayName = (userData) => {

@@ -33,7 +33,12 @@ const theme = extendTheme({
   components: {
     Icon: {
       baseStyle: {
-        fill: mode("gray.700", "gray.50"),
+        fill: mode("gray.700", "gray.100"),
+      },
+    },
+    Text: {
+      defaultProps: {
+        textStyle: mode("lm-primary", "dm-primary"),
       },
     },
   },

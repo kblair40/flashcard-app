@@ -2,3 +2,8 @@
 2. Pomodoro clock timer could be cool
 3. Add api call to patch last_studied_timestamp when a set is studied
 4. Detect refresh on StudySession page and save timer duration to localStorage before allowing
+
+
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.2.1",

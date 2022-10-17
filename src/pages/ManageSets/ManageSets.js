@@ -97,7 +97,7 @@ const ManageSets = () => {
         <TableContainer>
           <Table size="sm">
             <Thead>
-              <Tr sx={{ "& th": { color: isDark ? "gray.50" : "gray.900" } }}>
+              <Tr sx={{ "& th": { color: isDark ? "gray.50" : "gray.800" } }}>
                 <Th>Title</Th>
                 <Th># of Cards</Th>
                 <Th>Last Updated</Th>
