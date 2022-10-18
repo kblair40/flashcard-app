@@ -47,11 +47,13 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
       left={0}
       pt="8px"
       px="8px"
-      // border="1px solid #ccc"
-      // borderBottom="1px solid #ececec"
     >
       <VStack w="100%" spacing=".5rem">
-        <ControlButton label="New Card" onClick={addCard} />
+        <ControlButton
+          isDisabled={activeCard.id === undefined}
+          label="New Card"
+          onClick={addCard}
+        />
         <ControlButton
           onClick={handleClickSave}
           label="Save Card"
@@ -63,7 +65,7 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
           label="Delete Card"
           loading={deleting}
         />
-        <ControlButton onClick={handleClickExit} label="Save & Exit" />
+        <ControlButton onClick={handleClickExit} label="Exit" />
       </VStack>
     </Flex>
   );
