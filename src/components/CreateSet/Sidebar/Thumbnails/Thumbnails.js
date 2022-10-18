@@ -104,9 +104,9 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
       pb="32px"
     >
       <Heading
-        size="sm"
-        textAlign="left"
-        pl="8px"
+        fontSize="xl"
+        textAlign="center"
+        // pl="8px"
         borderBottom="1px solid #cacaca"
       >
         Cards
@@ -150,7 +150,15 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
               );
             })
           ) : (
-            <Text>No Cards</Text>
+            <Text
+              textAlign="center"
+              pt="8px"
+              fontWeight="600"
+              fontSize="sm"
+              // textTransform={"uppercase"}
+            >
+              No Cards
+            </Text>
           )}
         </Reorder.Group>
       </Box>
