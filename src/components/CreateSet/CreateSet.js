@@ -35,13 +35,13 @@ const SetMeta = ({ setData, height = "100%", width = "100%" }) => {
     title = setData.title;
   }
   return (
-    <Flex height={height} width={width}>
-      <Box>
+    <Flex height={height} width={width} px="1rem" flexWrap="wrap">
+      <Box mr="1rem">
         <Text fontWeight={600}>Category:</Text>
         <Text>{category}</Text>
       </Box>
 
-      <Box ml="1rem">
+      <Box>
         <Text fontWeight={600}>Title:</Text>
         <Text>{title}</Text>
       </Box>
