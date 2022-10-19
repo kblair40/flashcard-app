@@ -4,13 +4,8 @@ import {
   Center,
   Flex,
   Button,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableContainer,
+  Grid,
+  GridItem,
   Checkbox,
   useColorMode,
   Text,
@@ -94,9 +89,70 @@ const ManageSets = () => {
         maxW={{ base: "98%", sm: "90%", md: "720px" }}
         mt="2rem"
       >
-        <TableContainer>
-          <Table size="sm">
-            <Thead>
+        <Grid
+          templateRows="auto"
+          templateColumns="repeat(5, max-content)"
+          columnGap="8"
+          rowGap="4"
+          w="100%"
+        >
+          {["Title", "# of Cards", "Last Updated", "Public", ""].map(
+            (header, i) => {
+              return <Text fontWeight="600">{header}</Text>;
+            }
+          )}
+
+          {flashcardSets && flashcardSets.length
+            ? flashcardSets.map((set, i) => {
+                const {
+                  updatedAt,
+                  title,
+                  flashcards,
+                  _id,
+                  public: isPublic,
+                } = set;
+
+                const lastUpdated = new Date(updatedAt).toLocaleDateString();
+
+                let vals = [
+                  <GridItem>
+                    <Text fontWeight="500">{title}</Text>
+                  </GridItem>,
+
+                  <GridItem>
+                    <Text fontWeight="500">{flashcards.length}</Text>
+                  </GridItem>,
+
+                  <GridItem>
+                    <Text fontWeight="500">{lastUpdated}</Text>
+                  </GridItem>,
+
+                  <GridItem>
+                    <Checkbox
+                      isDisabled={changingPublicStatus}
+                      isChecked={isPublic}
+                      onChange={(e) => handleChangePublicStatus(e, _id)}
+                    />
+                  </GridItem>,
+
+                  <GridItem>
+                    <Link to={`/create/${_id}`}>
+                      <Button
+                        leftIcon={<EditIcon boxSize="14px" fill="gray.700" />}
+                        size="sm"
+                        w="100%"
+                      >
+                        Edit
+                      </Button>
+                    </Link>
+                  </GridItem>,
+                ];
+
+                return vals;
+              })
+            : null}
+
+          {/* <Thead>
               <Tr sx={{ "& th": { color: isDark ? "gray.50" : "gray.800" } }}>
                 <Th>Title</Th>
                 <Th># of Cards</Th>
@@ -104,9 +160,9 @@ const ManageSets = () => {
                 <Th>Public</Th>
                 <Th></Th>
               </Tr>
-            </Thead>
+            </Thead> */}
 
-            <Tbody>
+          {/* <Tbody>
               {flashcardSets && flashcardSets.length
                 ? flashcardSets.map((set, i) => {
                     const {
@@ -158,13 +214,12 @@ const ManageSets = () => {
                     );
                   })
                 : null}
-            </Tbody>
-          </Table>
+            </Tbody> */}
 
           {flashcardSets && !flashcardSets.length ? (
             <NoSets isDark={isDark} />
           ) : null}
-        </TableContainer>
+        </Grid>
       </Flex>
     </Flex>
   );

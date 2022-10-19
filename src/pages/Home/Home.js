@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 // import Editor from "components/Editor";
 // import ManageSets from "pages/ManageSets";
-import StudyHistory from "components/StudyHistory";
+// import StudyHistory from "components/StudyHistory";
 import AllSets from "components/AllSets";
 import CommunitySets from "components/CommunitySets";
 import Hero from "components/Hero";
