@@ -4,7 +4,7 @@ import {
   Flex,
   Heading,
   Spinner,
-  useColorMode,
+  // useColorMode,
   IconButton,
   Menu,
   MenuButton,
@@ -25,7 +25,7 @@ import api from "api";
 const headingStyles = {
   textTransform: "capitalize",
   fontWeight: "700",
-  fontSize: { base: "xl", sm: "2xl" },
+  fontSize: { base: "xl", sm: "2xl", md: "xl" },
 };
 
 const CommunitySets = () => {
@@ -34,7 +34,7 @@ const CommunitySets = () => {
   const [favSets, setFavSets] = useState([]);
 
   let { userData, loading: ctxLoading } = useContext(UserContext);
-  console.log("USER DATA:", userData);
+  // console.log("USER DATA:", userData);
 
   useEffect(() => {
     if (userData && !loading) {
@@ -61,13 +61,17 @@ const CommunitySets = () => {
   }, []);
 
   return (
-    <Flex justify="center" pt="32px" w="100%">
-      <Flex
-        direction="column"
-        w="100%"
-        justify="space-between"
-        position="relative"
-      >
+    <Flex
+      justify="center"
+      w="100%"
+      borderLeft={{ md: "1px solid" }}
+      borderColor={{ md: "#e5e5e5" }}
+      maxH={{ md: "50%" }}
+      overflowY={{ md: "scroll" }}
+      h={{ md: "fit-content" }}
+      p={{ base: "32px 0 0", md: "32px 8px 0" }}
+    >
+      <Flex direction="column" w="100%" position="relative">
         <Flex
           w="100%"
           justify="space-between"

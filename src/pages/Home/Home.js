@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
 import { Box, Flex } from "@chakra-ui/react";
-// import Editor from "components/Editor";
-// import ManageSets from "pages/ManageSets";
-// import StudyHistory from "components/StudyHistory";
+
 import AllSets from "components/AllSets";
 import CommunitySets from "components/CommunitySets";
 import Hero from "components/Hero";
@@ -12,17 +10,25 @@ const Home = () => {
   const { isSignedIn } = useContext(UserContext);
 
   return (
-    <Flex justify="center">
+    <Flex justify="center" w="100%">
       <Hero />
 
-      <Box w="100%" maxW={{ base: "340px", sm: "440px", md: "640px" }}>
-        <AllSets />
+      {isSignedIn && (
+        <Flex
+          direction={{ base: "column", md: "row" }}
+          w="100%"
+          maxW={{ base: "340px", sm: "440px", md: "960px" }}
+          height={{ md: "calc(100vh - 60px)" }}
+        >
+          <Box w={{ base: "100%", md: "65%" }} ml={{ md: "1rem" }}>
+            <AllSets />
+          </Box>
 
-        {/* <StudyHistory /> */}
-        <CommunitySets />
-      </Box>
-
-      {/* {isSignedIn && <Text textAlign="center">Signed In!</Text>} */}
+          <Box w={{ base: "100%", md: "35%" }} ml={{ md: "2.5rem" }}>
+            <CommunitySets />
+          </Box>
+        </Flex>
+      )}
     </Flex>
   );
 };
