@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
 import {
-  Box,
   Text,
   Flex,
   Heading,
   Spinner,
   useColorMode,
   IconButton,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-import { TrashIcon } from "utils/icons";
+import { MoreHorizontalIcon } from "utils/icons";
 import api from "api";
 
 const headingStyles = {
@@ -109,15 +112,20 @@ const CommunitySet = ({ set, onClick }) => {
         </Text>
       </Flex>
 
-      <IconButton
-        onClick={onClick}
-        size="sm"
-        bg={isDark ? "gray.800" : "#fff"}
-        variant="ghost"
-        rounded="full"
-        aria-label="Delete Button"
-        icon={<TrashIcon boxSize="18px" />}
-      />
+      <Menu>
+        <MenuButton
+          size="sm"
+          rounded="full"
+          as={IconButton}
+          icon={<MoreHorizontalIcon boxSize="18px" />}
+          variant="ghost"
+        />
+
+        <MenuList>
+          <MenuItem>Study</MenuItem>
+          <MenuItem>Favorite</MenuItem>
+        </MenuList>
+      </Menu>
     </Flex>
   );
 };
