@@ -81,99 +81,110 @@ const ManageSets = () => {
   }
 
   return (
-    <Flex justify="center">
+    <Flex justify="center" border="1px solid red">
       <Flex
-        direction="column"
-        align="center"
+        direction={{ base: "column" }}
+        align={{ base: "center" }}
         w="100%"
         maxW={{ base: "98%", sm: "90%", md: "720px" }}
         mt="2rem"
       >
-        <Grid
-          templateRows="auto"
-          templateColumns="repeat(5, max-content)"
-          columnGap="8"
-          rowGap="4"
-          w="100%"
-          alignItems="center"
-        >
-          {["Title", "# of Cards", "Last Updated", "Public", ""].map(
-            (header, i) => {
-              return (
-                <GridItem key={i}>
-                  <Text fontWeight="600">{header}</Text>
-                </GridItem>
-              );
-            }
-          )}
-
-          {flashcardSets && flashcardSets.length
-            ? flashcardSets.map((set, i) => {
-                const {
-                  updatedAt,
-                  title,
-                  flashcards,
-                  _id,
-                  public: isPublic,
-                } = set;
-
-                const lastUpdated = new Date(updatedAt).toLocaleDateString();
-
-                let vals = [
-                  <GridItem>
-                    <Text fontWeight="500">{title}</Text>
-                  </GridItem>,
-
-                  <GridItem display="flex" justifyContent="center">
-                    <Text fontWeight="500">{flashcards.length}</Text>
-                  </GridItem>,
-
-                  <GridItem display="flex" justifyContent="center">
-                    <Text fontWeight="500">{lastUpdated}</Text>
-                  </GridItem>,
-
-                  <GridItem display="flex" justifyContent="center">
-                    {changingPublicStatus === _id ? (
-                      <Center>
-                        <Spinner />
-                      </Center>
-                    ) : (
-                      <Checkbox
-                        isDisabled={changingPublicStatus === _id}
-                        isChecked={isPublic}
-                        onChange={(e) => handleChangePublicStatus(e, _id)}
-                      />
-                    )}
-                  </GridItem>,
-
-                  <GridItem>
-                    <Link to={`/create/${_id}`}>
-                      <Button
-                        variant="ghost"
-                        leftIcon={<EditIcon boxSize="14px" fill="gray.700" />}
-                        size="sm"
-                        w="100%"
-                      >
-                        Edit
-                      </Button>
-                    </Link>
-                  </GridItem>,
-                ];
-
-                return <React.Fragment key={i}>{vals}</React.Fragment>;
-              })
-            : null}
-
-          {flashcardSets && !flashcardSets.length ? (
-            <NoSets isDark={isDark} />
-          ) : null}
-        </Grid>
+        <AllSets
+          changingPublicStatus={changingPublicStatus}
+          flashcardSets={flashcardSets}
+          handleChangePublicStatus={handleChangePublicStatus}
+          isDark={isDark}
+        />
       </Flex>
     </Flex>
   );
 };
 
 export default ManageSets;
+
+const AllSets = ({
+  changingPublicStatus,
+  flashcardSets,
+  handleChangePublicStatus,
+  isDark,
+}) => {
+  return (
+    <Grid
+      templateRows="auto"
+      templateColumns="repeat(5, max-content)"
+      columnGap="8"
+      rowGap="4"
+      // w="100%"
+      alignItems="center"
+      border="1px solid green"
+    >
+      {["Title", "# of Cards", "Last Updated", "Public", ""].map(
+        (header, i) => {
+          return (
+            <GridItem key={i}>
+              <Text fontWeight="600">{header}</Text>
+            </GridItem>
+          );
+        }
+      )}
+
+      {flashcardSets && flashcardSets.length
+        ? flashcardSets.map((set, i) => {
+            const { updatedAt, title, flashcards, _id, public: isPublic } = set;
+
+            const lastUpdated = new Date(updatedAt).toLocaleDateString();
+
+            let vals = [
+              <GridItem>
+                <Text fontWeight="500">{title}</Text>
+              </GridItem>,
+
+              <GridItem display="flex" justifyContent="center">
+                <Text fontWeight="500">{flashcards.length}</Text>
+              </GridItem>,
+
+              <GridItem display="flex" justifyContent="center">
+                <Text fontWeight="500">{lastUpdated}</Text>
+              </GridItem>,
+
+              <GridItem display="flex" justifyContent="center">
+                {changingPublicStatus === _id ? (
+                  <Center>
+                    <Spinner />
+                  </Center>
+                ) : (
+                  <Checkbox
+                    isDisabled={changingPublicStatus === _id}
+                    isChecked={isPublic}
+                    onChange={(e) => handleChangePublicStatus(e, _id)}
+                  />
+                )}
+              </GridItem>,
+
+              <GridItem>
+                <Link to={`/create/${_id}`}>
+                  <Button
+                    variant="ghost"
+                    leftIcon={<EditIcon boxSize="14px" fill="gray.700" />}
+                    size="sm"
+                    w="100%"
+                  >
+                    Edit
+                  </Button>
+                </Link>
+              </GridItem>,
+            ];
+
+            return <React.Fragment key={i}>{vals}</React.Fragment>;
+          })
+        : null}
+
+      {flashcardSets && !flashcardSets.length ? (
+        <NoSets isDark={isDark} />
+      ) : null}
+    </Grid>
+  );
+};
 
 const NoSets = ({ isDark }) => {
   return (
