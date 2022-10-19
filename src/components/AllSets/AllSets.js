@@ -60,7 +60,6 @@ const AllSets = () => {
   const headingStyles = {
     textTransform: "capitalize",
     fontWeight: "700",
-    // pl: "16px",
     fontSize: { base: "xl", sm: "2xl" },
   };
 
