@@ -9,7 +9,9 @@ import {
   Checkbox,
   useColorMode,
   Text,
+  Heading,
   Tooltip,
+  Box,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
@@ -83,7 +85,7 @@ const ManageSets = () => {
   }
 
   return (
-    <Flex justify="center" border="1px solid red">
+    <Flex justify="center">
       <Flex
         direction={{ base: "column" }}
         align={{ base: "center" }}
@@ -91,14 +93,18 @@ const ManageSets = () => {
         maxW={{ base: "98%", sm: "90%", md: "720px" }}
         mt="2rem"
       >
-        <AllSets
-          changingPublicStatus={changingPublicStatus}
-          flashcardSets={flashcardSets}
-          handleChangePublicStatus={handleChangePublicStatus}
-          isDark={isDark}
-        />
+        <Box>
+          <AllSets
+            changingPublicStatus={changingPublicStatus}
+            flashcardSets={flashcardSets}
+            handleChangePublicStatus={handleChangePublicStatus}
+            isDark={isDark}
+          />
+        </Box>
 
-        <FavoriteSets />
+        <Box mt={{ base: "2.5rem" }}>
+          <FavoriteSets />
+        </Box>
         {/* <StudyHistory /> */}
       </Flex>
     </Flex>
@@ -114,80 +120,90 @@ const AllSets = ({
   isDark,
 }) => {
   return (
-    <Grid
-      templateRows="auto"
-      templateColumns="repeat(5, max-content)"
-      columnGap="8"
-      rowGap="4"
-      // w="100%"
-      alignItems="center"
-      border="1px solid green"
-    >
-      {["Title", "# of Cards", "Last Updated", "Public", ""].map(
-        (header, i) => {
-          return (
-            <GridItem key={i}>
-              <Text fontWeight="600">{header}</Text>
-            </GridItem>
-          );
-        }
-      )}
+    <React.Fragment>
+      <Heading fontSize="2xl" mb="1.5rem" textAlign="center">
+        Your Created Sets
+      </Heading>
 
-      {flashcardSets && flashcardSets.length
-        ? flashcardSets.map((set, i) => {
-            const { updatedAt, title, flashcards, _id, public: isPublic } = set;
+      <Grid
+        templateRows="auto"
+        templateColumns="repeat(5, max-content)"
+        columnGap="8"
+        rowGap="3"
+        alignItems="center"
+      >
+        {["Title", "# of Cards", "Last Updated", "Public", ""].map(
+          (header, i) => {
+            return (
+              <GridItem key={i}>
+                <Text fontWeight="600">{header}</Text>
+              </GridItem>
+            );
+          }
+        )}
 
-            const lastUpdated = new Date(updatedAt).toLocaleDateString();
+        {flashcardSets && flashcardSets.length
+          ? flashcardSets.map((set, i) => {
+              const {
+                updatedAt,
+                title,
+                flashcards,
+                _id,
+                public: isPublic,
+              } = set;
 
-            let vals = [
-              <GridItem>
-                <Text fontWeight="500">{title}</Text>
-              </GridItem>,
+              const lastUpdated = new Date(updatedAt).toLocaleDateString();
 
-              <GridItem display="flex" justifyContent="center">
-                <Text fontWeight="500">{flashcards.length}</Text>
-              </GridItem>,
+              let vals = [
+                <GridItem>
+                  <Text fontWeight="500">{title}</Text>
+                </GridItem>,
 
-              <GridItem display="flex" justifyContent="center">
-                <Text fontWeight="500">{lastUpdated}</Text>
-              </GridItem>,
+                <GridItem display="flex" justifyContent="center">
+                  <Text fontWeight="500">{flashcards.length}</Text>
+                </GridItem>,
 
-              <GridItem display="flex" justifyContent="center">
-                {changingPublicStatus === _id ? (
-                  <Center>
-                    <Spinner />
-                  </Center>
-                ) : (
-                  <Checkbox
-                    isDisabled={changingPublicStatus === _id}
-                    isChecked={isPublic}
-                    onChange={(e) => handleChangePublicStatus(e, _id)}
-                  />
-                )}
-              </GridItem>,
+                <GridItem display="flex" justifyContent="center">
+                  <Text fontWeight="500">{lastUpdated}</Text>
+                </GridItem>,
 
-              <GridItem>
-                <Link to={`/create/${_id}`}>
-                  <Button
-                    variant="ghost"
-                    leftIcon={<EditIcon boxSize="14px" fill="gray.700" />}
-                    size="sm"
-                    w="100%"
-                  >
-                    Edit
-                  </Button>
-                </Link>
-              </GridItem>,
-            ];
+                <GridItem display="flex" justifyContent="center">
+                  {changingPublicStatus === _id ? (
+                    <Center>
+                      <Spinner />
+                    </Center>
+                  ) : (
+                    <Checkbox
+                      isDisabled={changingPublicStatus === _id}
+                      isChecked={isPublic}
+                      onChange={(e) => handleChangePublicStatus(e, _id)}
+                    />
+                  )}
+                </GridItem>,
 
-            return <React.Fragment key={i}>{vals}</React.Fragment>;
-          })
-        : null}
+                <GridItem>
+                  <Link to={`/create/${_id}`}>
+                    <Button
+                      variant="ghost"
+                      leftIcon={<EditIcon boxSize="14px" fill="gray.700" />}
+                      size="sm"
+                      w="100%"
+                    >
+                      Edit
+                    </Button>
+                  </Link>
+                </GridItem>,
+              ];
 
-      {flashcardSets && !flashcardSets.length ? (
-        <NoSets isDark={isDark} />
-      ) : null}
-    </Grid>
+              return <React.Fragment key={i}>{vals}</React.Fragment>;
+            })
+          : null}
+
+        {flashcardSets && !flashcardSets.length ? (
+          <NoSets isDark={isDark} />
+        ) : null}
+      </Grid>
+    </React.Fragment>
   );
 };
 
