@@ -19,7 +19,7 @@ import api from "api";
 const ManageSets = () => {
   const [loading, setLoading] = useState(true);
   const [flashcardSets, setFlashcardSets] = useState();
-  const [changingPublicStatus, setChangingPublicStatus] = useState(false);
+  const [changingPublicStatus, setChangingPublicStatus] = useState();
 
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
@@ -46,7 +46,7 @@ const ManageSets = () => {
   }, []);
 
   const handleChangePublicStatus = async (e, id) => {
-    setChangingPublicStatus(true);
+    setChangingPublicStatus(id);
     const { checked } = e.target;
 
     try {
@@ -69,7 +69,7 @@ const ManageSets = () => {
       console.error("FAILED PATCHING PUBLIC STATUS:", e);
     }
 
-    setChangingPublicStatus(false);
+    setChangingPublicStatus(undefined);
   };
 
   if (loading) {
@@ -95,10 +95,15 @@ const ManageSets = () => {
           columnGap="8"
           rowGap="4"
           w="100%"
+          alignItems="center"
         >
           {["Title", "# of Cards", "Last Updated", "Public", ""].map(
             (header, i) => {
-              return <Text fontWeight="600">{header}</Text>;
+              return (
+                <GridItem key={i}>
+                  <Text fontWeight="600">{header}</Text>
+                </GridItem>
+              );
             }
           )}
 
@@ -119,25 +124,32 @@ const ManageSets = () => {
                     <Text fontWeight="500">{title}</Text>
                   </GridItem>,
 
-                  <GridItem>
+                  <GridItem display="flex" justifyContent="center">
                     <Text fontWeight="500">{flashcards.length}</Text>
                   </GridItem>,
 
-                  <GridItem>
+                  <GridItem display="flex" justifyContent="center">
                     <Text fontWeight="500">{lastUpdated}</Text>
                   </GridItem>,
 
-                  <GridItem>
-                    <Checkbox
-                      isDisabled={changingPublicStatus}
-                      isChecked={isPublic}
-                      onChange={(e) => handleChangePublicStatus(e, _id)}
-                    />
+                  <GridItem display="flex" justifyContent="center">
+                    {changingPublicStatus === _id ? (
+                      <Center>
+                        <Spinner />
+                      </Center>
+                    ) : (
+                      <Checkbox
+                        isDisabled={changingPublicStatus === _id}
+                        isChecked={isPublic}
+                        onChange={(e) => handleChangePublicStatus(e, _id)}
+                      />
+                    )}
                   </GridItem>,
 
                   <GridItem>
                     <Link to={`/create/${_id}`}>
                       <Button
+                        variant="ghost"
                         leftIcon={<EditIcon boxSize="14px" fill="gray.700" />}
                         size="sm"
                         w="100%"
@@ -148,73 +160,9 @@ const ManageSets = () => {
                   </GridItem>,
                 ];
 
-                return vals;
+                return <React.Fragment key={i}>{vals}</React.Fragment>;
               })
             : null}
-
-          {/* <Thead>
-              <Tr sx={{ "& th": { color: isDark ? "gray.50" : "gray.800" } }}>
-                <Th>Title</Th>
-                <Th># of Cards</Th>
-                <Th>Last Updated</Th>
-                <Th>Public</Th>
-                <Th></Th>
-              </Tr>
-            </Thead> */}
-
-          {/* <Tbody>
-              {flashcardSets && flashcardSets.length
-                ? flashcardSets.map((set, i) => {
-                    const {
-                      updatedAt,
-                      title,
-                      flashcards,
-                      _id,
-                      public: isPublic,
-                    } = set;
-                    const lastUpdated = new Date(updatedAt);
-
-                    return (
-                      <Tr key={i}>
-                        <Td>{title}</Td>
-                        <Td>{flashcards.length}</Td>
-                        <Tooltip label={lastUpdated.toLocaleTimeString()}>
-                          <Td>{lastUpdated.toLocaleDateString()}</Td>
-                        </Tooltip>
-                        <Td>
-                          <Flex justify="center">
-                            {changingPublicStatus ? (
-                              <Spinner />
-                            ) : (
-                              <Checkbox
-                                isDisabled={changingPublicStatus}
-                                isChecked={isPublic}
-                                onChange={(e) =>
-                                  handleChangePublicStatus(e, _id)
-                                }
-                              />
-                            )}
-                          </Flex>
-                        </Td>
-
-                        <Td>
-                          <Link to={`/create/${_id}`}>
-                            <Button
-                              leftIcon={
-                                <EditIcon boxSize="14px" fill="gray.700" />
-                              }
-                              size="sm"
-                              w="100%"
-                            >
-                              Edit
-                            </Button>
-                          </Link>
-                        </Td>
-                      </Tr>
-                    );
-                  })
-                : null}
-            </Tbody> */}
 
           {flashcardSets && !flashcardSets.length ? (
             <NoSets isDark={isDark} />
