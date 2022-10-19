@@ -127,9 +127,11 @@ const CommunitySet = ({ set, onClick }) => {
         />
 
         <MenuList>
-          <MenuItem fontWeight="500" icon={<StudyIcon boxSize="18px" />}>
-            Study
-          </MenuItem>
+          <Link to={`/study/${set._id}`}>
+            <MenuItem fontWeight="500" icon={<StudyIcon boxSize="18px" />}>
+              Study
+            </MenuItem>
+          </Link>
           <MenuItem fontWeight="500" icon={<StarOutlineIcon boxSize="18px" />}>
             Favorite
           </MenuItem>
