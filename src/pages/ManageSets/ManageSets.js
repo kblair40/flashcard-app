@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
+import FavoriteSets from "components/FavoriteSets";
 import StudyHistory from "components/StudyHistory";
 import { AddIcon, EditIcon } from "utils/icons";
 import api from "api";
@@ -97,7 +98,8 @@ const ManageSets = () => {
           isDark={isDark}
         />
 
-        <StudyHistory />
+        <FavoriteSets />
+        {/* <StudyHistory /> */}
       </Flex>
     </Flex>
   );
