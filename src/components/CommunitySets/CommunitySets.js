@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Text,
   Flex,
@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
+import UserContext from "store/UserContext";
 import {
   MoreHorizontalIcon,
   StarOutlineIcon,
@@ -30,6 +31,16 @@ const headingStyles = {
 const CommunitySets = () => {
   const [loading, setLoading] = useState(true);
   const [communitySets, setCommunitySets] = useState();
+  const [favSets, setFavSets] = useState([]);
+
+  let { userData, loading: ctxLoading } = useContext(UserContext);
+  console.log("USER DATA:", userData);
+
+  useEffect(() => {
+    if (userData && !loading) {
+      setFavSets(userData?.favorite_flashcard_sets || []);
+    }
+  }, [ctxLoading, userData]);
 
   useEffect(() => {
     const fetchHistory = async () => {
@@ -75,8 +86,10 @@ const CommunitySets = () => {
           </Flex>
         ) : communitySets && communitySets.length ? (
           communitySets.reverse().map((set, idx) => {
+            console.log("FAV SETS / SET ID", { favSets, setId: set._id });
             return (
               <CommunitySet
+                isFavorited={favSets.includes(set._id)}
                 key={idx}
                 set={set}
                 onClick={() => console.log("clicked")}
@@ -91,9 +104,35 @@ const CommunitySets = () => {
 
 export default CommunitySets;
 
-const CommunitySet = ({ set, onClick }) => {
-  const { colorMode } = useColorMode();
-  const isDark = colorMode === "dark";
+const CommunitySet = ({ set, isFavorited }) => {
+  const [loading, setLoading] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(isFavorited);
+
+  // const { colorMode } = useColorMode();
+  // const isDark = colorMode === "dark";
+
+  useEffect(() => {
+    if (typeof isFavorited === "boolean") {
+      setIsFavorite(isFavorited);
+    }
+  }, [isFavorited]);
+
+  const handleClickFavorite = async () => {
+    try {
+      setLoading(true);
+      const response = await api.patch(
+        `/user/${isFavorite ? "remove" : "add"}`,
+        {
+          favorite_set: set._id,
+        }
+      );
+      console.log("RESPONSE:", response.data);
+      setIsFavorite((prev) => !prev);
+    } catch (e) {
+      console.error("FAILED TO ADD/REMOVE SET AS FAVORITE:", e);
+    }
+    setLoading(false);
+  };
 
   if (!set) {
     return null;
@@ -128,12 +167,28 @@ const CommunitySet = ({ set, onClick }) => {
 
         <MenuList>
           <Link to={`/study/${set._id}`}>
-            <MenuItem fontWeight="500" icon={<StudyIcon boxSize="18px" />}>
+            <MenuItem
+              closeOnSelect={true}
+              fontWeight="500"
+              icon={<StudyIcon boxSize="18px" />}
+            >
               Study
             </MenuItem>
           </Link>
-          <MenuItem fontWeight="500" icon={<StarOutlineIcon boxSize="18px" />}>
-            Favorite
+          <MenuItem
+            closeOnSelect={true}
+            isDisabled={loading}
+            onClick={handleClickFavorite}
+            fontWeight="500"
+            icon={
+              !isFavorite ? (
+                <StarOutlineIcon boxSize="18px" />
+              ) : (
+                <StarFilledIcon boxSize="18px" />
+              )
+            }
+          >
+            {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
           </MenuItem>
         </MenuList>
       </Menu>
