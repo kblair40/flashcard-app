@@ -64,10 +64,15 @@ const FavoriteSets = () => {
     textTransform: "capitalize",
     fontWeight: "700",
     fontSize: { base: "xl", sm: "2xl" },
+    // textAlign: { sm: "center" },
   };
 
   return (
-    <Flex direction="column">
+    <Flex
+      direction="column"
+      w="100%"
+      // border="1px solid blue"
+    >
       <Heading {...headingStyles} noOfLines={2} mb="1.5rem">
         Your Favorite Sets
       </Heading>
@@ -80,18 +85,22 @@ const FavoriteSets = () => {
         favSets.map((set, i) => {
           return (
             <Flex
-              w="max-content"
+              // w="max-content"
+              w={{ base: "100%" }}
               key={i}
               justify="space-between"
               mb="1rem"
-              pr="8px"
               align="center"
+              pr={{ base: "1rem", sm: 0 }}
               // border="1px solid #ccc"
             >
-              <Flex align="center" mr="2rem">
+              <Flex
+                align="center"
+                mr="2rem"
+                // border="1px solid green"
+              >
                 <Text
-                  w={{ base: "180px" }}
-                  // maxW={{ base: "180px" }}
+                  // w={{ base: "180px" }}
                   noOfLines={1}
                   fontWeight="500"
                 >
@@ -110,6 +119,7 @@ const FavoriteSets = () => {
               </Flex>
 
               <IconButton
+                variant="ghost"
                 isLoading={removingFavorite === set._id}
                 onClick={() => handleClickUnfavorite(set._id)}
                 icon={<StarFilledIcon boxSize="14px" />}

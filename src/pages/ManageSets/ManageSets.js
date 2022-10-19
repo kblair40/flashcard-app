@@ -85,15 +85,16 @@ const ManageSets = () => {
   }
 
   return (
-    <Flex justify="center">
+    <Flex justify="center" w="100%" px={{ base: "16px" }}>
       <Flex
         direction={{ base: "column" }}
         align={{ base: "center" }}
         w="100%"
-        maxW={{ base: "98%", sm: "90%", md: "720px" }}
+        maxW={{ base: "98%", sm: "420px", md: "720px" }}
         mt="2rem"
+        // border="1px solid red"
       >
-        <Box>
+        <Box w={{ base: "100%", md: "max-content" }}>
           <CreatedSets
             changingPublicStatus={changingPublicStatus}
             flashcardSets={flashcardSets}
@@ -103,16 +104,25 @@ const ManageSets = () => {
         </Box>
 
         <Flex
+          w={{ base: "100%" }}
           mt={{ base: "2.5rem" }}
-          direction={{ base: "column" }}
-          align={{ base: "center" }}
+          direction={{ base: "column", md: "row" }}
+          align={{ base: "center", md: "start" }}
         >
-          <Box w={{ base: "100%" }}>
-            <FavoriteSets />
+          <Box w={{ base: "100%", md: "50%" }}>
+            <Box w={{ md: "max-content" }}>
+              <FavoriteSets />
+            </Box>
           </Box>
 
-          <Box w={{ base: "100%" }} ml={{ base: "0" }} mt={{ base: "1.5rem" }}>
-            <StudyHistory />
+          <Box
+            w={{ base: "100%", md: "50%" }}
+            ml={{ base: "0" }}
+            mt={{ base: "1.5rem", md: "0" }}
+          >
+            <Box w={{ md: "max-content" }}>
+              <StudyHistory />
+            </Box>
           </Box>
         </Flex>
       </Flex>
@@ -128,12 +138,13 @@ const CreatedSets = ({
   handleChangePublicStatus,
   isDark,
 }) => {
-  const textStyles = {
-    fontWeight: 500,
-  };
   return (
     <React.Fragment>
-      <Heading fontSize="2xl" mb="1.5rem" textAlign="center">
+      <Heading
+        fontSize={{ base: "xl", sm: "2xl" }}
+        mb="1.5rem"
+        // textAlign={{ sm: "center" }}
+      >
         Your Created Sets
       </Heading>
 
@@ -141,7 +152,7 @@ const CreatedSets = ({
         templateRows="auto"
         templateColumns={{
           base: "repeat(4, max-content)",
-          sm: "repeat(5, max-content)",
+          md: "repeat(5, max-content)",
         }}
         columnGap={{ base: "4", sm: "8" }}
         rowGap="3"
@@ -153,7 +164,7 @@ const CreatedSets = ({
             return (
               <GridItem
                 key={i}
-                display={i === 2 ? { base: "none", sm: "block" } : "block"}
+                display={i === 2 ? { base: "none", md: "block" } : "block"}
               >
                 <Text fontWeight="600" fontSize={{ base: "sm" }}>
                   {header}
@@ -193,7 +204,7 @@ const CreatedSets = ({
 
                 <GridItem
                   justifyContent="center"
-                  display={{ base: "none", sm: "flex" }}
+                  display={{ base: "none", md: "flex" }}
                 >
                   <Text fontWeight="500">{lastUpdated}</Text>
                 </GridItem>,

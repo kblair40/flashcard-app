@@ -73,7 +73,11 @@ const StudyHistory = () => {
   };
 
   return (
-    <Flex justify="center" w="max-content">
+    <Flex
+      justify="center"
+      w={{ base: "100%" }}
+      // w="max-content"
+    >
       <Flex w="100%" direction="column" align="center">
         <Flex w="100%" justify="space-between" pr="8px" align="center">
           <Heading mb=".75rem" w="100%" fontSize={{ base: "xl", sm: "2xl" }}>
@@ -123,7 +127,9 @@ const HistoryItem = ({ item, onClick }) => {
       align="center"
       py="8px"
       borderRadius="4px"
-      w="100%"
+      w={{ base: "100%" }}
+      // border="1px solid orange"
+      pr={{ base: "1rem", sm: 0 }}
     >
       <Flex direction="column" w="100%">
         <Flex w="100%" align="end" mb="6px">
@@ -144,12 +150,12 @@ const HistoryItem = ({ item, onClick }) => {
       <IconButton
         ml="2rem"
         onClick={onClick}
-        size="sm"
+        size="xs"
         bg={isDark ? "gray.800" : "#fff"}
         variant="ghost"
         rounded="full"
         aria-label="Delete Button"
-        icon={<TrashIcon boxSize="16px" />}
+        icon={<TrashIcon boxSize="14px" />}
       />
     </Flex>
   );
