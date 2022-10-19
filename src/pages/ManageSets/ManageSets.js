@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
+import StudyHistory from "components/StudyHistory";
 import { AddIcon, EditIcon } from "utils/icons";
 import api from "api";
 
@@ -95,6 +96,8 @@ const ManageSets = () => {
           handleChangePublicStatus={handleChangePublicStatus}
           isDark={isDark}
         />
+
+        <StudyHistory />
       </Flex>
     </Flex>
   );

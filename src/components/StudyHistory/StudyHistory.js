@@ -73,7 +73,7 @@ const StudyHistory = () => {
   };
 
   return (
-    <Flex justify="center" mt="2rem" w="100%">
+    <Flex justify="center" mt="2rem" w="max-content">
       <Flex w="100%" direction="column" align="center">
         <Flex w="100%" justify="space-between" pr="8px" align="center">
           <Heading mb=".75rem" w="100%" fontSize={{ base: "xl", sm: "2xl" }}>
@@ -142,13 +142,14 @@ const HistoryItem = ({ item, onClick }) => {
       </Flex>
 
       <IconButton
+        ml="2rem"
         onClick={onClick}
         size="sm"
         bg={isDark ? "gray.800" : "#fff"}
         variant="ghost"
         rounded="full"
         aria-label="Delete Button"
-        icon={<TrashIcon boxSize="18px" />}
+        icon={<TrashIcon boxSize="16px" />}
       />
     </Flex>
   );
