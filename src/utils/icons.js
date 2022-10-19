@@ -288,3 +288,40 @@ export const SearchIcon = ({
     </Icon>
   );
 };
+
+export const StarFilledIcon = ({
+  fill = "#2D3748",
+  boxSize = "24px",
+  ...props
+}) => {
+  return (
+    <Icon boxSize={boxSize} viewBox="0 0 24 24" fill={fill} {...props}>
+      <path
+        d="M12 17.75L5.828 20.995L7.007 14.122L2.007 9.25501L8.907 8.25501L11.993 2.00201L15.079 8.25501L21.979 9.25501L16.979 14.122L18.158 20.995L12 17.75Z"
+        fill={fill}
+        stroke={fill}
+        strokeWidth="3.9879"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Icon>
+  );
+};
+
+export const StarOutlineIcon = ({
+  fill = "#2D3748",
+  boxSize = "24px",
+  ...props
+}) => {
+  return (
+    <Icon boxSize={boxSize} viewBox="0 0 24 24" fill="none" {...props}>
+      <path
+        d="M12 17.75L5.828 20.995L7.007 14.122L2.007 9.25501L8.907 8.25501L11.993 2.00201L15.079 8.25501L21.979 9.25501L16.979 14.122L18.158 20.995L12 17.75Z"
+        stroke={fill}
+        strokeWidth="3.9879"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Icon>
+  );
+};
