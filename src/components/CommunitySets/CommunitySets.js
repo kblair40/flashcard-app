@@ -48,7 +48,7 @@ const CommunitySets = () => {
         const response = await api.get("/community_sets");
 
         if (response.data) {
-          console.log("COMMUNITY RESPONSE:", response.data);
+          // console.log("COMMUNITY RESPONSE:", response.data);
           setCommunitySets(response.data);
         }
       } catch (e) {
@@ -90,7 +90,6 @@ const CommunitySets = () => {
           </Flex>
         ) : communitySets && communitySets.length ? (
           communitySets.reverse().map((set, idx) => {
-            console.log("FAV SETS / SET ID", { favSets, setId: set._id });
             return (
               <CommunitySet
                 isFavorited={favSets.includes(set._id)}
@@ -130,7 +129,7 @@ const CommunitySet = ({ set, isFavorited }) => {
           favorite_set: set._id,
         }
       );
-      console.log("RESPONSE:", response.data);
+      // console.log("RESPONSE:", response.data);
       setIsFavorite((prev) => !prev);
     } catch (e) {
       console.error("FAILED TO ADD/REMOVE SET AS FAVORITE:", e);

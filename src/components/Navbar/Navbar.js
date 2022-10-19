@@ -72,6 +72,8 @@ export default function WithSubnavigation() {
         justify={{ base: "space-between", md: "unset" }}
       >
         <IconButton
+          zIndex={100000}
+          display={{ md: "none" }}
           mr={{ base: 2, sm: 6 }}
           onClick={onToggle}
           icon={
@@ -101,7 +103,7 @@ export default function WithSubnavigation() {
           </RRLink>
 
           <Box
-            ml="1.5rem"
+            ml={{ base: "1.5rem", sm: "3.5rem" }}
             w={{ base: "100%" }}
             maxW={{ base: "180px", sm: "240px" }}
           >
