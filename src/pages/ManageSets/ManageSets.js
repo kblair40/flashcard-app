@@ -94,7 +94,7 @@ const ManageSets = () => {
         mt="2rem"
       >
         <Box>
-          <AllSets
+          <CreatedSets
             changingPublicStatus={changingPublicStatus}
             flashcardSets={flashcardSets}
             handleChangePublicStatus={handleChangePublicStatus}
@@ -102,10 +102,19 @@ const ManageSets = () => {
           />
         </Box>
 
-        <Box mt={{ base: "2.5rem" }}>
-          <FavoriteSets />
-        </Box>
-        {/* <StudyHistory /> */}
+        <Flex
+          mt={{ base: "2.5rem" }}
+          direction={{ base: "column" }}
+          align={{ base: "center" }}
+        >
+          <Box w={{ base: "100%" }}>
+            <FavoriteSets />
+          </Box>
+
+          <Box w={{ base: "100%" }} ml={{ base: "0" }} mt={{ base: "1.5rem" }}>
+            <StudyHistory />
+          </Box>
+        </Flex>
       </Flex>
     </Flex>
   );
@@ -113,12 +122,15 @@ const ManageSets = () => {
 
 export default ManageSets;
 
-const AllSets = ({
+const CreatedSets = ({
   changingPublicStatus,
   flashcardSets,
   handleChangePublicStatus,
   isDark,
 }) => {
+  const textStyles = {
+    fontWeight: 500,
+  };
   return (
     <React.Fragment>
       <Heading fontSize="2xl" mb="1.5rem" textAlign="center">
@@ -127,16 +139,25 @@ const AllSets = ({
 
       <Grid
         templateRows="auto"
-        templateColumns="repeat(5, max-content)"
-        columnGap="8"
+        templateColumns={{
+          base: "repeat(4, max-content)",
+          sm: "repeat(5, max-content)",
+        }}
+        columnGap={{ base: "4", sm: "8" }}
         rowGap="3"
         alignItems="center"
+        // border="1px solid #ccc"
       >
         {["Title", "# of Cards", "Last Updated", "Public", ""].map(
           (header, i) => {
             return (
-              <GridItem key={i}>
-                <Text fontWeight="600">{header}</Text>
+              <GridItem
+                key={i}
+                display={i === 2 ? { base: "none", sm: "block" } : "block"}
+              >
+                <Text fontWeight="600" fontSize={{ base: "sm" }}>
+                  {header}
+                </Text>
               </GridItem>
             );
           }
@@ -155,15 +176,25 @@ const AllSets = ({
               const lastUpdated = new Date(updatedAt).toLocaleDateString();
 
               let vals = [
-                <GridItem>
-                  <Text fontWeight="500">{title}</Text>
+                <GridItem w="100%" maxW={{ base: "100px", sm: "140px" }}>
+                  <Text
+                    noOfLines={1}
+                    fontWeight="500"
+                    w="100%"
+                    // whiteSpace="nowrap"
+                  >
+                    {title}
+                  </Text>
                 </GridItem>,
 
                 <GridItem display="flex" justifyContent="center">
                   <Text fontWeight="500">{flashcards.length}</Text>
                 </GridItem>,
 
-                <GridItem display="flex" justifyContent="center">
+                <GridItem
+                  justifyContent="center"
+                  display={{ base: "none", sm: "flex" }}
+                >
                   <Text fontWeight="500">{lastUpdated}</Text>
                 </GridItem>,
 
