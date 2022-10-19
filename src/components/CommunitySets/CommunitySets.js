@@ -13,7 +13,12 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-import { MoreHorizontalIcon } from "utils/icons";
+import {
+  MoreHorizontalIcon,
+  StarOutlineIcon,
+  StudyIcon,
+  StarFilledIcon,
+} from "utils/icons";
 import api from "api";
 
 const headingStyles = {
@@ -122,8 +127,12 @@ const CommunitySet = ({ set, onClick }) => {
         />
 
         <MenuList>
-          <MenuItem>Study</MenuItem>
-          <MenuItem>Favorite</MenuItem>
+          <MenuItem fontWeight="500" icon={<StudyIcon boxSize="18px" />}>
+            Study
+          </MenuItem>
+          <MenuItem fontWeight="500" icon={<StarOutlineIcon boxSize="18px" />}>
+            Favorite
+          </MenuItem>
         </MenuList>
       </Menu>
     </Flex>
