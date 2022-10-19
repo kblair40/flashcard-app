@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  Box,
   Flex,
   Text,
   Heading,
@@ -10,7 +9,7 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 
-import { StarFilledIcon, StarOutlineIcon } from "utils/icons";
+import { StarFilledIcon } from "utils/icons";
 import api from "api";
 
 const FavoriteSets = () => {
@@ -25,7 +24,7 @@ const FavoriteSets = () => {
     const fetchFavSets = async () => {
       try {
         const response = await api.get("/favorite_sets");
-        console.log("FAV SETS RESPONSE.DATA:", response.data);
+        // console.log("FAV SETS RESPONSE.DATA:", response.data);
         setFavSets(response.data);
       } catch (e) {
         console.error("FAILED FETCHING SETS:", e);
@@ -64,15 +63,10 @@ const FavoriteSets = () => {
     textTransform: "capitalize",
     fontWeight: "700",
     fontSize: { base: "xl", sm: "2xl" },
-    // textAlign: { sm: "center" },
   };
 
   return (
-    <Flex
-      direction="column"
-      w="100%"
-      // border="1px solid blue"
-    >
+    <Flex direction="column" w="100%">
       <Heading {...headingStyles} noOfLines={2} mb="1.5rem">
         Your Favorite Sets
       </Heading>
@@ -85,25 +79,15 @@ const FavoriteSets = () => {
         favSets.map((set, i) => {
           return (
             <Flex
-              // w="max-content"
               w={{ base: "100%" }}
               key={i}
               justify="space-between"
               mb="1rem"
               align="center"
               pr={{ base: "1rem", sm: 0 }}
-              // border="1px solid #ccc"
             >
-              <Flex
-                align="center"
-                mr="2rem"
-                // border="1px solid green"
-              >
-                <Text
-                  // w={{ base: "180px" }}
-                  noOfLines={1}
-                  fontWeight="500"
-                >
+              <Flex align="center" mr="2rem">
+                <Text noOfLines={1} fontWeight="500">
                   {set.title}
                 </Text>
 

@@ -41,27 +41,23 @@ const StudyHistory = () => {
 
   // new set 10/15/2022 is the most recent
   const handleChangeSortBy = (sortBy) => {
-    console.log("NEW SORTBY:", sortBy);
     setSortBy(sortBy);
     let histCopy = [...history];
-    console.log("\nHISTORY BEFORE:", histCopy);
+
     histCopy = histCopy.sort((a, b) => {
       a = a.start_time;
       b = b.start_time;
       return sortBy === "newest" ? b - a : a - b;
     });
 
-    console.log("SORTED:", histCopy);
     setHistory(histCopy);
   };
 
   const deleteItem = async () => {
     try {
       const response = await api.delete(`/history/${itemToDelete}`);
-      console.log("RESPONSE:", response.data);
 
       if (response.data && response.data.history) {
-        console.log("SETTING HISTORY:", response.data.history);
         setHistory(response.data.history);
       }
     } catch (e) {
@@ -73,11 +69,7 @@ const StudyHistory = () => {
   };
 
   return (
-    <Flex
-      justify="center"
-      w={{ base: "100%" }}
-      // w="max-content"
-    >
+    <Flex justify="center" w={{ base: "100%" }}>
       <Flex w="100%" direction="column" align="center">
         <Flex w="100%" justify="space-between" pr="8px" align="center">
           <Heading mb=".75rem" w="100%" fontSize={{ base: "xl", sm: "2xl" }}>
@@ -128,7 +120,6 @@ const HistoryItem = ({ item, onClick }) => {
       py="8px"
       borderRadius="4px"
       w={{ base: "100%" }}
-      // border="1px solid orange"
       pr={{ base: "1rem", sm: 0 }}
     >
       <Flex direction="column" w="100%">

@@ -10,7 +10,6 @@ import {
   useColorMode,
   Text,
   Heading,
-  Tooltip,
   Box,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
@@ -92,7 +91,6 @@ const ManageSets = () => {
         w="100%"
         maxW={{ base: "98%", sm: "420px", md: "720px" }}
         mt="2rem"
-        // border="1px solid red"
       >
         <Box w={{ base: "100%", md: "max-content" }}>
           <CreatedSets
@@ -140,11 +138,7 @@ const CreatedSets = ({
 }) => {
   return (
     <React.Fragment>
-      <Heading
-        fontSize={{ base: "xl", sm: "2xl" }}
-        mb="1.5rem"
-        // textAlign={{ sm: "center" }}
-      >
+      <Heading fontSize={{ base: "xl", sm: "2xl" }} mb="1.5rem">
         Your Created Sets
       </Heading>
 
@@ -157,7 +151,6 @@ const CreatedSets = ({
         columnGap={{ base: "4", sm: "8" }}
         rowGap="3"
         alignItems="center"
-        // border="1px solid #ccc"
       >
         {["Title", "# of Cards", "Last Updated", "Public", ""].map(
           (header, i) => {
@@ -188,12 +181,7 @@ const CreatedSets = ({
 
               let vals = [
                 <GridItem w="100%" maxW={{ base: "100px", sm: "140px" }}>
-                  <Text
-                    noOfLines={1}
-                    fontWeight="500"
-                    w="100%"
-                    // whiteSpace="nowrap"
-                  >
+                  <Text noOfLines={1} fontWeight="500" w="100%">
                     {title}
                   </Text>
                 </GridItem>,
