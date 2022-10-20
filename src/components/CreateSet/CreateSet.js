@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Flex, Text, Box } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 
 import SetContext from "store/SetContext";
 import Sidebar from "./Sidebar";
@@ -7,10 +7,9 @@ import Editors from "./Editors";
 
 const CreateSet = () => {
   const { flashcardSetData: setData } = useContext(SetContext);
-  // console.log("SET CTX:", setData);
 
   return (
-    <Flex justify="center" w="100%" h="calc(100vh - 60px)" overflowY="hidden">
+    <Flex justify="center" w="100%" h="calc(100vh - 64px)" overflowY="hidden">
       <Sidebar width={{ base: "100%", sm: "30%", md: "25%" }} />
 
       <Flex
@@ -27,7 +26,7 @@ const CreateSet = () => {
 
 export default CreateSet;
 
-const SetMeta = ({ setData, height = "100%", width = "100%" }) => {
+const SetMeta = ({ setData, height = "max-content", width = "100%" }) => {
   let category, title;
 
   if (setData) {
@@ -35,16 +34,46 @@ const SetMeta = ({ setData, height = "100%", width = "100%" }) => {
     title = setData.title;
   }
   return (
-    <Flex height={height} width={width} px="1rem" flexWrap="wrap">
-      <Box mr="1rem">
-        <Text fontWeight={600}>Category:</Text>
-        <Text>{category}</Text>
-      </Box>
+    <Flex
+      mt="1rem"
+      height={height}
+      width={width}
+      px={{ base: "8px", md: "16px" }}
+      flexWrap="wrap"
+      justifyContent="center"
+    >
+      <Flex w="100%" maxWidth="700px">
+        <Flex
+          direction={{ base: "column", md: "row" }}
+          mr="1.25rem"
+          align={{ base: "start", md: "center" }}
+        >
+          <Text fontWeight={600}>Category:</Text>
+          <Text
+            fontWeight={500}
+            fontSize="sm"
+            textTransform="capitalize"
+            ml={{ base: 0, md: "6px" }}
+          >
+            {category}
+          </Text>
+        </Flex>
 
-      <Box>
-        <Text fontWeight={600}>Title:</Text>
-        <Text>{title}</Text>
-      </Box>
+        <Flex
+          direction={{ base: "column", md: "row" }}
+          align={{ base: "start", md: "center" }}
+        >
+          <Text fontWeight={600}>Title:</Text>
+          <Text
+            fontWeight={500}
+            fontSize="sm"
+            textTransform="capitalize"
+            ml={{ base: 0, md: "6px" }}
+          >
+            {title}
+          </Text>
+        </Flex>
+      </Flex>
     </Flex>
   );
 };
