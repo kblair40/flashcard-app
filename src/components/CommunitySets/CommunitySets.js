@@ -67,7 +67,8 @@ const CommunitySets = () => {
       borderLeft={{ md: "1px solid" }}
       borderColor={{ md: "#e5e5e5" }}
       maxH={{ md: "50%" }}
-      overflowY={{ md: "scroll" }}
+      overflowY={{ md: "auto" }}
+      overflowX="hidden"
       h={{ md: "fit-content" }}
       p={{ base: "32px 0 0", md: "32px 8px 0" }}
     >
