@@ -72,7 +72,7 @@ const StudyHistory = () => {
   return (
     <Flex justify="center" w={{ base: "100%" }}>
       <Flex w="100%" direction="column" align="center">
-        <Flex w="100%" justify="space-between" pr="1.25rem" align="center">
+        <Flex w="100%" justify="space-between" pr="1rem" align="center">
           <Heading mb=".75rem" w="100%" fontSize={{ base: "xl", sm: "2xl" }}>
             History
           </Heading>
