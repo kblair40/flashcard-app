@@ -26,14 +26,26 @@ const StudySessionProvider = ({ children }) => {
         return;
       }
 
-      try {
-        const response = await api.patch(`/study_session/${sessionId}`, {
-          duration: { hours, minutes, seconds },
-        });
-        console.log("SESSION PATCH RESPONSE:", response.data);
-      } catch (e) {
-        console.error("FAILED PATCHING SESSION:", e);
-        return;
+      console.log("HOURS/MINUTES/SECONDS:", { hours, minutes, seconds });
+
+      if (hours || minutes) {
+        try {
+          const response = await api.patch(`/study_session/${sessionId}`, {
+            duration: { hours, minutes, seconds },
+          });
+          console.log("SESSION PATCH RESPONSE:", response.data);
+        } catch (e) {
+          console.error("FAILED PATCHING SESSION:", e);
+          return;
+        }
+      } else {
+        console.log("DELETING");
+        try {
+          const response = await api.get("/history");
+          console.log("DELETE RESPONSE:", response.data);
+        } catch (e) {
+          console.error("FAILED DELETING SESSION:", e);
+        }
       }
     };
 
