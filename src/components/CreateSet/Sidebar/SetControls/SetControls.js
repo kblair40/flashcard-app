@@ -16,6 +16,8 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
     saving,
     activeCard,
     patchCard,
+    frontCardContent,
+    backCardContent,
   } = useContext(SetContext);
 
   useEffect(() => {
@@ -33,6 +35,10 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
 
   const handleClickExit = () => {
     navigate("/account/sets");
+  };
+
+  const isEmpty = (val) => {
+    return val.replace(/<(.|\n)*?>/g, "").trim().length === 0;
   };
 
   return (
@@ -56,6 +62,7 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
         />
         <ControlButton
           onClick={handleClickSave}
+          isDisabled={isEmpty(frontCardContent) || isEmpty(backCardContent)}
           label="Save Card"
           loading={saving}
         />

@@ -84,8 +84,9 @@ const StudyHistory = () => {
           px={{ md: ".5rem" }}
           maxH={{ md: "35vh" }}
           overflowY="auto"
-          border="1px solid #efefef"
+          border={{ md: "1px solid #efefef" }}
           borderRight="none"
+          w="100%"
         >
           {history &&
             history.map((histItem, idx) => {
