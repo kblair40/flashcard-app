@@ -9,6 +9,7 @@ const StudySessionContext = createContext();
 
 const StudySessionProvider = ({ children }) => {
   const [sessionId, setSessionId] = useState();
+  const [setId, setSetId] = useState();
   const { seconds, minutes, hours, isRunning, start, pause, reset } =
     useStopwatch({
       autoStart: false,
@@ -32,6 +33,7 @@ const StudySessionProvider = ({ children }) => {
         try {
           const response = await api.patch(`/study_session/${sessionId}`, {
             duration: { hours, minutes, seconds },
+            set_id: setId,
           });
           console.log("SESSION PATCH RESPONSE:", response.data);
         } catch (e) {
@@ -70,6 +72,8 @@ const StudySessionProvider = ({ children }) => {
         flashcard_set: setId,
         start_time: getUnixTimestamp(),
       });
+
+      setSetId(setId);
       console.log("\n\n\nCREATE RESPONSE:", response.data);
       if (response.data && response.data.study_session) {
         const { _id } = response.data.study_session;
@@ -94,6 +98,7 @@ const StudySessionProvider = ({ children }) => {
         reset,
         sessionId,
         createStudySession,
+        setSetId,
       }}
     >
       {children}

@@ -153,7 +153,13 @@ const AllSets = () => {
                           fontWeight="500"
                           textStyle={isDark ? "dm-secondary" : "lm-secondary"}
                         >
-                          Last studied on 10/7
+                          {`Last studied on ${
+                            set.last_study_session_timestamp
+                              ? new Date(
+                                  set.last_study_session_timestamp
+                                ).toLocaleDateString()
+                              : ""
+                          }`}
                         </Text>
                       </Box>
 
