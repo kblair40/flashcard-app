@@ -7,6 +7,7 @@ import {
   Spinner,
   IconButton,
   useColorMode,
+  Box,
 } from "@chakra-ui/react";
 
 import { StarFilledIcon } from "utils/icons";
@@ -67,57 +68,65 @@ const FavoriteSets = () => {
 
   return (
     <Flex direction="column" w="100%">
-      <Heading {...headingStyles} noOfLines={2} mb="1.5rem">
+      <Heading {...headingStyles} noOfLines={2} mb=".75rem">
         Your Favorite Sets
       </Heading>
 
-      {loading ? (
-        <Center h="200px">
-          <Spinner />
-        </Center>
-      ) : favSets && favSets.length ? (
-        favSets.map((set, i) => {
-          return (
-            <Flex
-              w={{ base: "100%" }}
-              key={i}
-              justify="space-between"
-              mb="1rem"
-              align="center"
-              pr={{ base: "1rem", sm: 0 }}
-            >
-              <Flex align="center" mr="2rem">
-                <Text noOfLines={1} fontWeight="500">
-                  {set.title}
-                </Text>
+      <Box
+        px={{ md: ".5rem" }}
+        maxH={{ md: "35vh" }}
+        overflowY="auto"
+        border="1px solid #efefef"
+        borderRight="none"
+      >
+        {loading ? (
+          <Center h="200px">
+            <Spinner />
+          </Center>
+        ) : favSets && favSets.length ? (
+          favSets.map((set, i) => {
+            return (
+              <Flex
+                w={{ base: "100%" }}
+                key={i}
+                justify="space-between"
+                mb="1rem"
+                align="center"
+                pr={{ base: "1rem", sm: 0 }}
+              >
+                <Flex align="center" mr="2rem">
+                  <Text noOfLines={1} fontWeight="500">
+                    {set.title}
+                  </Text>
 
-                <Text
-                  whiteSpace={"nowrap"}
-                  ml=".75rem"
-                  fontStyle="italic"
-                  fontSize="sm"
-                  textStyle={isDark ? "dm-secondary" : "lm-secondary"}
-                >
-                  {set.flashcards.length} cards
-                </Text>
+                  <Text
+                    whiteSpace={"nowrap"}
+                    ml=".75rem"
+                    fontStyle="italic"
+                    fontSize="sm"
+                    textStyle={isDark ? "dm-secondary" : "lm-secondary"}
+                  >
+                    {set.flashcards.length} cards
+                  </Text>
+                </Flex>
+
+                <IconButton
+                  variant="ghost"
+                  isLoading={removingFavorite === set._id}
+                  onClick={() => handleClickUnfavorite(set._id)}
+                  icon={<StarFilledIcon boxSize="14px" />}
+                  size="xs"
+                  rounded="full"
+                />
               </Flex>
-
-              <IconButton
-                variant="ghost"
-                isLoading={removingFavorite === set._id}
-                onClick={() => handleClickUnfavorite(set._id)}
-                icon={<StarFilledIcon boxSize="14px" />}
-                size="xs"
-                rounded="full"
-              />
-            </Flex>
-          );
-        })
-      ) : favSets && !favSets.length ? (
-        <Text textAlign="center" fontWeight="600" fontSize="lg">
-          No Favorite Sets
-        </Text>
-      ) : null}
+            );
+          })
+        ) : favSets && !favSets.length ? (
+          <Text textAlign="center" fontWeight="600" fontSize="lg">
+            No Favorite Sets
+          </Text>
+        ) : null}
+      </Box>
     </Flex>
   );
 };

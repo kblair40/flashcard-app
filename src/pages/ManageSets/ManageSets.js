@@ -84,15 +84,16 @@ const ManageSets = () => {
   }
 
   return (
-    <Flex justify="center" w="100%" px={{ base: "16px" }}>
+    <Flex justify="center" w="100%" pr={{ base: "16px", md: 0 }} pl="16px">
       <Flex
-        direction={{ base: "column" }}
-        align={{ base: "center" }}
+        direction={{ base: "column", md: "row" }}
+        justify={{ md: "space-between" }}
+        align={{ base: "center", md: "start" }}
         w="100%"
-        maxW={{ base: "98%", sm: "420px", md: "720px" }}
+        maxW={{ base: "98%", sm: "420px", md: "none" }}
         mt="2rem"
       >
-        <Box w={{ base: "100%", md: "max-content" }}>
+        <Box w={{ base: "max-content", md: "max-content" }} mx={{ md: "auto" }}>
           <CreatedSets
             changingPublicStatus={changingPublicStatus}
             flashcardSets={flashcardSets}
@@ -102,23 +103,23 @@ const ManageSets = () => {
         </Box>
 
         <Flex
-          w={{ base: "100%" }}
-          mt={{ base: "2.5rem" }}
-          direction={{ base: "column", md: "row" }}
+          w={{ base: "100%", sm: "418px", md: "340px" }}
+          mt={{ base: "2.5rem", md: 0 }}
+          direction={{ base: "column" }}
           align={{ base: "center", md: "start" }}
         >
-          <Box w={{ base: "100%", md: "50%" }}>
-            <Box w={{ md: "max-content" }}>
+          <Box w={{ base: "100%", md: "340px" }} mb={{ md: "1.5rem" }}>
+            <Box w={{ base: "100%", md: "100%" }}>
               <FavoriteSets />
             </Box>
           </Box>
 
           <Box
-            w={{ base: "100%", md: "50%" }}
+            w={{ base: "100%", md: "340px" }}
             ml={{ base: "0" }}
             mt={{ base: "1.5rem", md: "0" }}
           >
-            <Box w={{ md: "max-content" }}>
+            <Box w={{ base: "100%", md: "100%" }}>
               <StudyHistory />
             </Box>
           </Box>
@@ -126,6 +127,49 @@ const ManageSets = () => {
       </Flex>
     </Flex>
   );
+  // return (
+  //   <Flex justify="center" w="100%" px={{ base: "16px" }}>
+  //     <Flex
+  //       direction={{ base: "column" }}
+  //       align={{ base: "center" }}
+  //       w="100%"
+  //       maxW={{ base: "98%", sm: "420px", md: "720px" }}
+  //       mt="2rem"
+  //     >
+  //       <Box w={{ base: "100%", md: "max-content" }}>
+  //         <CreatedSets
+  //           changingPublicStatus={changingPublicStatus}
+  //           flashcardSets={flashcardSets}
+  //           handleChangePublicStatus={handleChangePublicStatus}
+  //           isDark={isDark}
+  //         />
+  //       </Box>
+
+  //       <Flex
+  //         w={{ base: "100%" }}
+  //         mt={{ base: "2.5rem" }}
+  //         direction={{ base: "column", md: "row" }}
+  //         align={{ base: "center", md: "start" }}
+  //       >
+  //         <Box w={{ base: "100%", md: "50%" }}>
+  //           <Box w={{ md: "max-content" }}>
+  //             <FavoriteSets />
+  //           </Box>
+  //         </Box>
+
+  //         <Box
+  //           w={{ base: "100%", md: "50%" }}
+  //           ml={{ base: "0" }}
+  //           mt={{ base: "1.5rem", md: "0" }}
+  //         >
+  //           <Box w={{ md: "max-content" }}>
+  //             <StudyHistory />
+  //           </Box>
+  //         </Box>
+  //       </Flex>
+  //     </Flex>
+  //   </Flex>
+  // );
 };
 
 export default ManageSets;
@@ -146,7 +190,7 @@ const CreatedSets = ({
         templateRows="auto"
         templateColumns={{
           base: "repeat(4, max-content)",
-          md: "repeat(5, max-content)",
+          lg: "repeat(5, max-content)",
         }}
         columnGap={{ base: "4", sm: "8" }}
         rowGap="3"
@@ -157,7 +201,7 @@ const CreatedSets = ({
             return (
               <GridItem
                 key={i}
-                display={i === 2 ? { base: "none", md: "block" } : "block"}
+                display={i === 2 ? { base: "none", lg: "block" } : "block"}
               >
                 <Text fontWeight="600" fontSize={{ base: "sm" }}>
                   {header}
@@ -192,7 +236,7 @@ const CreatedSets = ({
 
                 <GridItem
                   justifyContent="center"
-                  display={{ base: "none", md: "flex" }}
+                  display={{ base: "none", lg: "flex" }}
                 >
                   <Text fontWeight="500">{lastUpdated}</Text>
                 </GridItem>,

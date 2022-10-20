@@ -5,6 +5,7 @@ import {
   Text,
   Heading,
   useColorMode,
+  Box,
 } from "@chakra-ui/react";
 
 import api from "api";
@@ -71,7 +72,7 @@ const StudyHistory = () => {
   return (
     <Flex justify="center" w={{ base: "100%" }}>
       <Flex w="100%" direction="column" align="center">
-        <Flex w="100%" justify="space-between" pr="8px" align="center">
+        <Flex w="100%" justify="space-between" pr="1.25rem" align="center">
           <Heading mb=".75rem" w="100%" fontSize={{ base: "xl", sm: "2xl" }}>
             History
           </Heading>
@@ -79,19 +80,27 @@ const StudyHistory = () => {
           <HistoryFilters sortBy={sortBy} onChange={handleChangeSortBy} />
         </Flex>
 
-        {history &&
-          history.map((histItem, idx) => {
-            return (
-              <HistoryItem
-                onClick={() => {
-                  setItemToDelete(histItem._id);
-                  setConfirmModalOpen(true);
-                }}
-                item={histItem}
-                key={idx}
-              />
-            );
-          })}
+        <Box
+          px={{ md: ".5rem" }}
+          maxH={{ md: "35vh" }}
+          overflowY="auto"
+          border="1px solid #efefef"
+          borderRight="none"
+        >
+          {history &&
+            history.map((histItem, idx) => {
+              return (
+                <HistoryItem
+                  onClick={() => {
+                    setItemToDelete(histItem._id);
+                    setConfirmModalOpen(true);
+                  }}
+                  item={histItem}
+                  key={idx}
+                />
+              );
+            })}
+        </Box>
       </Flex>
 
       <ConfirmDeleteModal
