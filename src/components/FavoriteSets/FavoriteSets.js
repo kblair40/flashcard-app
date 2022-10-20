@@ -8,9 +8,11 @@ import {
   IconButton,
   useColorMode,
   Box,
+  Tooltip,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
-import { StarFilledIcon } from "utils/icons";
+import { StarFilledIcon, StudyIcon } from "utils/icons";
 import api from "api";
 
 const FavoriteSets = () => {
@@ -76,7 +78,7 @@ const FavoriteSets = () => {
         px={{ md: ".5rem" }}
         maxH={{ md: "35vh" }}
         overflowY="auto"
-        border="1px solid #efefef"
+        border={{ md: "1px solid #efefef" }}
         borderRight="none"
       >
         {loading ? (
@@ -110,14 +112,31 @@ const FavoriteSets = () => {
                   </Text>
                 </Flex>
 
-                <IconButton
-                  variant="ghost"
-                  isLoading={removingFavorite === set._id}
-                  onClick={() => handleClickUnfavorite(set._id)}
-                  icon={<StarFilledIcon boxSize="14px" />}
-                  size="xs"
-                  rounded="full"
-                />
+                <Flex align="center">
+                  <Tooltip label="Start a new study session" placement="left">
+                    <Link to={`/study/${set._id}`}>
+                      <IconButton
+                        mr="4px"
+                        variant="ghost"
+                        isLoading={removingFavorite === set._id}
+                        icon={<StudyIcon boxSize="14px" />}
+                        size="xs"
+                        rounded="full"
+                      />
+                    </Link>
+                  </Tooltip>
+
+                  <Tooltip label="Remove from favorites" placement="left">
+                    <IconButton
+                      variant="ghost"
+                      isLoading={removingFavorite === set._id}
+                      onClick={() => handleClickUnfavorite(set._id)}
+                      icon={<StarFilledIcon boxSize="14px" />}
+                      size="xs"
+                      rounded="full"
+                    />
+                  </Tooltip>
+                </Flex>
               </Flex>
             );
           })
