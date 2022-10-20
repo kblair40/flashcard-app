@@ -95,7 +95,11 @@ const CreateSetForm = () => {
             value={formData.category}
           >
             {categories.map((cat, i) => {
-              return <option value={cat.value}>{cat.label}</option>;
+              return (
+                <option key={i} value={cat.value}>
+                  {cat.label}
+                </option>
+              );
             })}
           </Select>
         </FormControl>
