@@ -41,10 +41,13 @@ const StudySessionProvider = ({ children }) => {
       } else {
         console.log("DELETING");
         try {
-          const response = await api.get("/history");
-          console.log("DELETE RESPONSE:", response.data);
+          const response = await api.delete(`/history/${sessionId}`);
+
+          if (response.data && response.data) {
+            console.log("DELETE RESPONSE:", response.data);
+          }
         } catch (e) {
-          console.error("FAILED DELETING SESSION:", e);
+          console.error("FAILED TO DELETE:", e);
         }
       }
     };

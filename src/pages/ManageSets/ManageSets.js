@@ -127,49 +127,6 @@ const ManageSets = () => {
       </Flex>
     </Flex>
   );
-  // return (
-  //   <Flex justify="center" w="100%" px={{ base: "16px" }}>
-  //     <Flex
-  //       direction={{ base: "column" }}
-  //       align={{ base: "center" }}
-  //       w="100%"
-  //       maxW={{ base: "98%", sm: "420px", md: "720px" }}
-  //       mt="2rem"
-  //     >
-  //       <Box w={{ base: "100%", md: "max-content" }}>
-  //         <CreatedSets
-  //           changingPublicStatus={changingPublicStatus}
-  //           flashcardSets={flashcardSets}
-  //           handleChangePublicStatus={handleChangePublicStatus}
-  //           isDark={isDark}
-  //         />
-  //       </Box>
-
-  //       <Flex
-  //         w={{ base: "100%" }}
-  //         mt={{ base: "2.5rem" }}
-  //         direction={{ base: "column", md: "row" }}
-  //         align={{ base: "center", md: "start" }}
-  //       >
-  //         <Box w={{ base: "100%", md: "50%" }}>
-  //           <Box w={{ md: "max-content" }}>
-  //             <FavoriteSets />
-  //           </Box>
-  //         </Box>
-
-  //         <Box
-  //           w={{ base: "100%", md: "50%" }}
-  //           ml={{ base: "0" }}
-  //           mt={{ base: "1.5rem", md: "0" }}
-  //         >
-  //           <Box w={{ md: "max-content" }}>
-  //             <StudyHistory />
-  //           </Box>
-  //         </Box>
-  //       </Flex>
-  //     </Flex>
-  //   </Flex>
-  // );
 };
 
 export default ManageSets;
@@ -223,53 +180,53 @@ const CreatedSets = ({
 
               const lastUpdated = new Date(updatedAt).toLocaleDateString();
 
-              let vals = [
-                <GridItem w="100%" maxW={{ base: "100px", sm: "140px" }}>
-                  <Text noOfLines={1} fontWeight="500" w="100%">
-                    {title}
-                  </Text>
-                </GridItem>,
+              return (
+                <React.Fragment key={i}>
+                  <GridItem w="100%" maxW={{ base: "100px", sm: "140px" }}>
+                    <Text noOfLines={1} fontWeight="500" w="100%">
+                      {title}
+                    </Text>
+                  </GridItem>
 
-                <GridItem display="flex" justifyContent="center">
-                  <Text fontWeight="500">{flashcards.length}</Text>
-                </GridItem>,
+                  <GridItem display="flex" justifyContent="center">
+                    <Text fontWeight="500">{flashcards.length}</Text>
+                  </GridItem>
 
-                <GridItem
-                  justifyContent="center"
-                  display={{ base: "none", lg: "flex" }}
-                >
-                  <Text fontWeight="500">{lastUpdated}</Text>
-                </GridItem>,
+                  <GridItem
+                    justifyContent="center"
+                    display={{ base: "none", lg: "flex" }}
+                  >
+                    <Text fontWeight="500">{lastUpdated}</Text>
+                  </GridItem>
 
-                <GridItem display="flex" justifyContent="center">
-                  {changingPublicStatus === _id ? (
-                    <Center>
-                      <Spinner />
-                    </Center>
-                  ) : (
-                    <Checkbox
-                      isDisabled={changingPublicStatus === _id}
-                      isChecked={isPublic}
-                      onChange={(e) => handleChangePublicStatus(e, _id)}
-                    />
-                  )}
-                </GridItem>,
+                  <GridItem display="flex" justifyContent="center">
+                    {changingPublicStatus === _id ? (
+                      <Center>
+                        <Spinner />
+                      </Center>
+                    ) : (
+                      <Checkbox
+                        isDisabled={changingPublicStatus === _id}
+                        isChecked={isPublic}
+                        onChange={(e) => handleChangePublicStatus(e, _id)}
+                      />
+                    )}
+                  </GridItem>
 
-                <GridItem>
-                  <Link to={`/create/${_id}`}>
-                    <Button
-                      variant="ghost"
-                      leftIcon={<EditIcon boxSize="14px" fill="gray.700" />}
-                      size="sm"
-                      w="100%"
-                    >
-                      Edit
-                    </Button>
-                  </Link>
-                </GridItem>,
-              ];
-
-              return <React.Fragment key={i}>{vals}</React.Fragment>;
+                  <GridItem>
+                    <Link to={`/create/${_id}`}>
+                      <Button
+                        variant="ghost"
+                        leftIcon={<EditIcon boxSize="14px" fill="gray.700" />}
+                        size="sm"
+                        w="100%"
+                      >
+                        Edit
+                      </Button>
+                    </Link>
+                  </GridItem>
+                </React.Fragment>
+              );
             })
           : null}
 

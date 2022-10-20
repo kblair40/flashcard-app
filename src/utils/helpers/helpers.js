@@ -14,6 +14,8 @@ export const makeDisplayName = (userData) => {
 };
 
 export const getCleanDuration = (duration) => {
+  if (!duration) return null;
+
   const { hours, minutes, seconds } = duration;
 
   let res;
