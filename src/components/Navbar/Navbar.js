@@ -73,8 +73,6 @@ export default function WithSubnavigation() {
       >
         {/* START MOBILE NAV */}
         <Flex
-          // border="1px solid"
-          // borderColor={"rgba(0,0,255, 0.2)"}
           display={{ base: "flex", md: "none" }}
           justify="space-between"
           align="center"
@@ -102,20 +100,14 @@ export default function WithSubnavigation() {
 
           <RRLink to="/">
             <Image
-              // border="1px solid red"
               maxWidth={"243px"}
               src={logo_img}
               w={{ base: "32px", md: "119px", lg: "140px" }}
             />
           </RRLink>
         </Flex>
-        {/* END MOBILE NAV */}
 
-        <Box
-          display={{ md: "none" }}
-          // w="fit-content"
-          // border="1px solid #ccc"
-        >
+        <Box display={{ md: "none" }}>
           <AuthButtons
             isSignedIn={isSignedIn}
             onClick={handleClickSignInOrSignOut}
@@ -125,24 +117,17 @@ export default function WithSubnavigation() {
         <Flex
           display={{ base: "none", md: "flex" }}
           align="center"
-          // flex={{ base: 1, lg: 0.5 }}
           mr={{ base: 2 }}
-          // border="1px solid green"
         >
           <RRLink to="/">
             <Image
-              // border="1px solid green"
               maxWidth={"243px"}
               src={logo_img}
               w={{ base: "32px", md: "119px", lg: "140px" }}
             />
           </RRLink>
 
-          <Flex
-            // border="1px solid red"
-            display={{ base: "none", md: "flex" }}
-            ml={{ md: 6, lg: 10 }}
-          >
+          <Flex display={{ base: "none", md: "flex" }} ml={{ md: 6, lg: 10 }}>
             <DesktopNav isDark={isDark} isSignedIn={isSignedIn} />
           </Flex>
 
@@ -158,19 +143,21 @@ export default function WithSubnavigation() {
           flex={1}
           justify={"flex-end"}
           align="center"
-          // border="1px solid #ccc"
+          pr={{ lg: "1rem" }}
         >
           <Box
-            w={{ lg: "90%" }}
-            ml={{ md: ".5rem", lg: "2rem" }}
+            w={{ lg: "80%" }}
+            mx={{ md: "auto" }}
+            px={{ md: "1rem", lg: "4rem" }}
             border="1px solid transparent"
-            mr={{ md: "1rem", lg: "2rem" }}
           >
-            <SetSearch isDisabled={!isSignedIn} />
+            <Box w="100%" maxW={"400px"}>
+              <SetSearch isDisabled={!isSignedIn} />
+            </Box>
           </Box>
 
           <ThemeToggle
-            mr={{ md: "1rem" }}
+            mr={{ md: "1rem", lg: "2rem" }}
             display={{ base: "none", md: "block" }}
           />
 
@@ -194,7 +181,6 @@ export default function WithSubnavigation() {
             />
           ) : (
             <Button
-              // border="1px solid red"
               px="12px"
               size="sm"
               fontSize={"sm"}
