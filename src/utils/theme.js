@@ -49,27 +49,43 @@ const theme = extendTheme({
     },
     Button: {
       variants: {
-        "solid-primary": ({ colorMode: cm }) => ({
-          bg: cm === "dark" ? "primary.200" : "primary.300",
+        "solid-blue": ({ colorMode: cm }) => ({
+          bg: cm === "dark" ? "blue.400" : "blue.400",
           color: cm === "dark" ? "#fff" : "#fff",
+
+          _hover: {
+            bg: cm === "dark" ? "blue.500" : "blue.500",
+          },
+          _active: {
+            bg: cm === "dark" ? "blue.600" : "blue.600",
+          },
         }),
-        // primary: {
-        // baseStyle: ({ colorMode }) => ({
-        //   bg: colorMode === "dark" ? "primary.600" : "primary.200",
-        // }),
-        // baseStyle: ({ colorMode }) => {
-        //   const isDark = colorMode === "dark";
-        //   return {
-        //     bg: isDark ? "primary.800" : "primary.50",
-        //   };
-        // },
-        // },
+        "solid-red": ({ colorMode: cm }) => ({
+          bg: cm === "dark" ? "red.300" : "red.400",
+          color: cm === "dark" ? "#fff" : "#fff",
+
+          _hover: {
+            bg: cm === "dark" ? "red.400" : "red.500",
+          },
+          _active: {
+            bg: cm === "dark" ? "red.500" : "red.600",
+          },
+        }),
+        "solid-neutral": ({ colorMode: cm }) => ({
+          bg: cm === "dark" ? "gray.50" : "gray.900",
+          color: cm === "dark" ? "gray.800" : "#fff",
+
+          _hover: {
+            bg: cm === "dark" ? "gray.100" : "gray.800",
+          },
+          _active: {
+            bg: cm === "dark" ? "gray.200" : "gray.700",
+          },
+        }),
       },
-      // variants: {
-      //   "custom-primary": {
-      //     defaultProps: { colorScheme: "primary" },
-      //   },
-      // },
+      defaultProps: {
+        variant: "solid-neutral",
+      },
     },
   },
   fonts: {

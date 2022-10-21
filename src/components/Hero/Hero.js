@@ -62,14 +62,15 @@ const Hero = () => {
           rounded="full"
           size="lg"
           fontWeight="700"
-          color={isDark ? "#fff" : "#fff"}
-          bg={isDark ? "primary.400" : "blue.400"}
-          _hover={{
-            bg: isDark ? "primary.500" : "blue.500",
-          }}
-          _active={{
-            bg: isDark ? "primary.500" : "blue.600",
-          }}
+          variant="solid-blue"
+          // color={isDark ? "#fff" : "#fff"}
+          // bg={isDark ? "primary.400" : "blue.400"}
+          // _hover={{
+          //   bg: isDark ? "primary.500" : "blue.500",
+          // }}
+          // _active={{
+          //   bg: isDark ? "primary.500" : "blue.600",
+          // }}
           // bg={isDark ? "primary.600" : "gray.700"}
           // _hover={{
           //   bg: isDark ? "primary.500" : "gray.600",

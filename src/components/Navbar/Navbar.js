@@ -205,11 +205,7 @@ export default function WithSubnavigation() {
               size="sm"
               fontSize={"sm"}
               fontWeight={600}
-              color={"white"}
-              bg={"blue.400"}
-              _hover={{
-                bg: "blue.500",
-              }}
+              variant="solid-blue"
               onClick={() =>
                 handleClickSignInOrSignOut(isSignedIn ? "signout" : "signup")
               }
@@ -276,7 +272,6 @@ const MobileNav = ({ show, onToggle, signout, isSignedIn, onClose }) => {
         p={4}
         display={{ md: "none" }}
         w="100vw"
-        // border="1px solid green"
       >
         {MOBILE_NAV_ITEMS.map((navItem) => {
           if (isSignedIn && navItem.label === "Sign In") return null;
@@ -337,11 +332,7 @@ const AuthButtons = ({ isSignedIn, handleClickSignInOrSignOut }) => {
       display={{ base: "none", md: "block" }}
       fontSize={"sm"}
       fontWeight={600}
-      color={"white"}
-      bg={"blue.400"}
-      _hover={{
-        bg: "blue.500",
-      }}
+      variant="solid-blue"
       onClick={() =>
         handleClickSignInOrSignOut(isSignedIn ? "signout" : "signup")
       }

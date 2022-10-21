@@ -290,7 +290,7 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
             w="50%"
             isLoading={loading}
             onClick={handleSubmit}
-            variant="solid-primary"
+            variant="solid-blue"
             // colorMode={colorMode}
           >
             Submit

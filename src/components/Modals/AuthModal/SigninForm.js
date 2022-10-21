@@ -121,7 +121,12 @@ const SigninForm = ({ onClose, onAuthSuccess }) => {
           <Button w="50%" onClick={onClose}>
             Cancel
           </Button>
-          <Button w="50%" isLoading={loading} onClick={handleSubmit}>
+          <Button
+            variant="solid-blue"
+            w="50%"
+            isLoading={loading}
+            onClick={handleSubmit}
+          >
             Submit
           </Button>
         </HStack>
