@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { Box, Flex, Text } from "@chakra-ui/react";
 
-import UserContext, { UserProvider } from "store/UserContext";
+import { UserProvider } from "store/UserContext";
 import { StudySessionProvider } from "store/StudySessionContext";
 import Home from "pages/Home";
 import Create from "pages/Create";

@@ -12,6 +12,7 @@ import {
   InputGroup,
   InputRightElement,
   IconButton,
+  useColorMode,
 } from "@chakra-ui/react";
 
 import { VisibleIcon, NotVisibleIcon } from "utils/icons";
@@ -39,6 +40,8 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
   const [errors, setErrors] = useState(INITIAL_ERROR_STATE);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const colorMode = useColorMode();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -282,7 +285,14 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
           <Button w="50%" onClick={onClose}>
             Cancel
           </Button>
-          <Button w="50%" isLoading={loading} onClick={handleSubmit}>
+
+          <Button
+            w="50%"
+            isLoading={loading}
+            onClick={handleSubmit}
+            variant="solid-primary"
+            // colorMode={colorMode}
+          >
             Submit
           </Button>
         </HStack>

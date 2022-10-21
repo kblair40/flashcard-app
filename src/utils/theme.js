@@ -19,6 +19,12 @@ const theme = extendTheme({
       900: "#011136",
     },
   },
+  layerStyles: {
+    "lm-btn-primary": {
+      bg: "primary.400",
+    },
+    "dm-btn-primary": {},
+  },
   textStyles: {
     // primary: { color: mode("gray.800", "gray.50") },
     // secondary: { color: mode("gray.600", "gray.200") },
@@ -40,6 +46,30 @@ const theme = extendTheme({
       defaultProps: {
         textStyle: mode("lm-primary", "dm-primary"),
       },
+    },
+    Button: {
+      variants: {
+        "solid-primary": ({ colorMode: cm }) => ({
+          bg: cm === "dark" ? "primary.200" : "primary.300",
+          color: cm === "dark" ? "#fff" : "#fff",
+        }),
+        // primary: {
+        // baseStyle: ({ colorMode }) => ({
+        //   bg: colorMode === "dark" ? "primary.600" : "primary.200",
+        // }),
+        // baseStyle: ({ colorMode }) => {
+        //   const isDark = colorMode === "dark";
+        //   return {
+        //     bg: isDark ? "primary.800" : "primary.50",
+        //   };
+        // },
+        // },
+      },
+      // variants: {
+      //   "custom-primary": {
+      //     defaultProps: { colorScheme: "primary" },
+      //   },
+      // },
     },
   },
   fonts: {
