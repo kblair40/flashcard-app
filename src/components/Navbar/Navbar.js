@@ -111,7 +111,11 @@ export default function WithSubnavigation() {
         </Flex>
         {/* END MOBILE NAV */}
 
-        <Box display={{ md: "none" }}>
+        <Box
+          display={{ md: "none" }}
+          // w="fit-content"
+          // border="1px solid #ccc"
+        >
           <AuthButtons
             isSignedIn={isSignedIn}
             onClick={handleClickSignInOrSignOut}
@@ -121,8 +125,9 @@ export default function WithSubnavigation() {
         <Flex
           display={{ base: "none", md: "flex" }}
           align="center"
-          flex={{ base: 1 }}
+          // flex={{ base: 1, lg: 0.5 }}
           mr={{ base: 2 }}
+          // border="1px solid green"
         >
           <RRLink to="/">
             <Image
@@ -133,7 +138,11 @@ export default function WithSubnavigation() {
             />
           </RRLink>
 
-          <Flex display={{ base: "none", md: "flex" }} ml={10}>
+          <Flex
+            // border="1px solid red"
+            display={{ base: "none", md: "flex" }}
+            ml={{ md: 6, lg: 10 }}
+          >
             <DesktopNav isDark={isDark} isSignedIn={isSignedIn} />
           </Flex>
 
@@ -144,28 +153,35 @@ export default function WithSubnavigation() {
           />
         </Flex>
 
-        <Stack
+        <Flex
           display={{ base: "none", md: "flex" }}
-          flex={{ base: 1, md: 1 }}
+          flex={1}
           justify={"flex-end"}
           align="center"
-          direction={"row"}
-          spacing={6}
+          // border="1px solid #ccc"
         >
-          <Box ml="1rem" w="100%" border="1px solid transparent">
+          <Box
+            w={{ lg: "90%" }}
+            ml={{ md: ".5rem", lg: "2rem" }}
+            border="1px solid transparent"
+            mr={{ md: "1rem", lg: "2rem" }}
+          >
             <SetSearch isDisabled={!isSignedIn} />
           </Box>
 
-          <ThemeToggle display={{ base: "none", md: "block" }} />
+          <ThemeToggle
+            mr={{ md: "1rem" }}
+            display={{ base: "none", md: "block" }}
+          />
 
           {!isSignedIn && (
             <Button
-              as={"a"}
+              mr={{ md: "1.5rem", lg: "2rem" }}
+              size="sm"
               fontSize={"sm"}
               fontWeight={500}
               variant={"link"}
               color={isDark ? "gray.50" : "gray.800"}
-              href={"#"}
               onClick={() => handleClickSignInOrSignOut("signin")}
             >
               Sign In
@@ -173,19 +189,18 @@ export default function WithSubnavigation() {
           )}
 
           {isSignedIn ? (
-            // <Box display={{ base: "none", md: "block" }}>
             <AvatarMenu
               handleClickSignout={() => handleClickSignInOrSignOut("signout")}
             />
           ) : (
-            // </Box>
             <Button
-              display={{ base: "none", md: "inline-flex" }}
+              // border="1px solid red"
+              px="12px"
+              size="sm"
               fontSize={"sm"}
               fontWeight={600}
               color={"white"}
               bg={"blue.400"}
-              href={"#"}
               _hover={{
                 bg: "blue.500",
               }}
@@ -196,7 +211,7 @@ export default function WithSubnavigation() {
               {isSignedIn ? "Sign Out" : "Sign Up"}
             </Button>
           )}
-        </Stack>
+        </Flex>
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
@@ -208,14 +223,13 @@ export default function WithSubnavigation() {
 
 const AuthButtons = ({ isSignedIn, handleClickSignInOrSignOut }) => {
   return isSignedIn ? (
-    <Box display={{ base: "none", md: "block" }}>
-      <AvatarMenu
-        handleClickSignout={() => handleClickSignInOrSignOut("signout")}
-      />
-    </Box>
+    <AvatarMenu
+      handleClickSignout={() => handleClickSignInOrSignOut("signout")}
+    />
   ) : (
     <Button
-      display={{ base: "none", md: "inline-flex" }}
+      minW="max-content"
+      display={{ base: "none", md: "block" }}
       fontSize={"sm"}
       fontWeight={600}
       color={"white"}
