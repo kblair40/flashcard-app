@@ -74,7 +74,7 @@ const SetSearch = ({ isDisabled }) => {
             children={<SearchIcon boxSize="18px" fill="gray.400" />}
           />
           <Input
-            _focusVisible={{ outline: "none" }}
+            variant="neutral-outline"
             isDisabled={isDisabled}
             ref={inputRef}
             value={value}
@@ -82,10 +82,6 @@ const SetSearch = ({ isDisabled }) => {
             onFocus={() => setShowResults(true)}
             onChange={handleChange}
             w="100%"
-            border="1px solid"
-            borderColor="gray.200"
-            _hover={{ borderColor: "gray.300" }}
-            _focus={{ borderColor: "gray.400" }}
             placeholder="Search"
           />
         </InputGroup>

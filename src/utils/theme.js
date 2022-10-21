@@ -1,6 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
 import { createMultiStyleConfigHelpers } from "@chakra-ui/styled-system";
-import { mode } from "@chakra-ui/theme-tools";
 
 const inputHelpers = createMultiStyleConfigHelpers([
   "addon",
@@ -76,14 +75,14 @@ const theme = extendTheme({
           },
         }),
         "solid-neutral": ({ colorMode: cm }) => ({
-          bg: cm === "dark" ? "gray.500" : "gray.50",
+          bg: cm === "dark" ? "gray.600" : "gray.100",
           color: cm === "dark" ? "gray.50" : "gray.700",
 
           _hover: {
-            bg: cm === "dark" ? "gray.100" : "gray.100",
+            bg: cm === "dark" ? "gray.500" : "gray.200",
           },
           _active: {
-            bg: cm === "dark" ? "gray.200" : "gray.200",
+            bg: cm === "dark" ? "gray.400" : "gray.300",
           },
         }),
         "icon-button": ({ colorMode: cm }) => ({
@@ -109,12 +108,17 @@ const theme = extendTheme({
             borderWidth: "1px",
             borderStyle: "solid",
             borderColor: cm === "dark" ? "gray.500" : "gray.300",
+            color: cm === "dark" ? "gray.50" : "gray.800",
 
             _hover: {
               borderColor: cm === "dark" ? "gray.400" : "gray.400",
             },
             _focus: {
               borderColor: cm === "dark" ? "gray.300" : "gray.500",
+            },
+            _focusVisible: { outline: "none" },
+            _placeholder: {
+              color: cm === "dark" ? "gray.300" : "gray.500",
             },
           },
           element: {},

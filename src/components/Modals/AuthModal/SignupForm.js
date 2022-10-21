@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Box,
-  Heading,
   Button,
   VStack,
   HStack,
@@ -131,8 +130,6 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
   return (
     <Box>
       <VStack spacing="1rem">
-        <Heading mb="2rem">Sign Up</Heading>
-
         <HStack w="100%" spacing="1rem">
           <FormControl isRequired isInvalid={!!errors["first_name"]}>
             <FormLabel mb="4px" fontSize="sm">

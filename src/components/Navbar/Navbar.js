@@ -201,7 +201,7 @@ export default function WithSubnavigation() {
             />
           ) : (
             <Button
-              px="12px"
+              px="14px"
               size="sm"
               fontSize={"sm"}
               fontWeight={600}

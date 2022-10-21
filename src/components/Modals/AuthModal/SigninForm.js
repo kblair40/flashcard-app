@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Box,
-  Heading,
   Button,
   VStack,
   HStack,
@@ -40,7 +39,6 @@ const SigninForm = ({ onClose, onAuthSuccess }) => {
       const response = await api.post("/signin", {
         ...formData,
       });
-      // console.log("RESPONSE:", response.data);
 
       if (response && response.data) {
         onAuthSuccess(response.data.token);
@@ -53,23 +51,9 @@ const SigninForm = ({ onClose, onAuthSuccess }) => {
     setLoading(false);
   };
 
-  const iconButtonProps = {
-    size: "sm",
-    position: "relative",
-    bottom: "4px",
-    width: "100%",
-    borderRadius: "4px",
-    bg: "transparent",
-    transitionDuration: "0.3s",
-    _hover: { bg: "gray.50" },
-    _active: { bg: "gray.100" },
-  };
-
   return (
     <Box>
       <VStack spacing="1rem">
-        <Heading mb="2rem">Sign In</Heading>
-
         <FormControl isRequired>
           <FormLabel mb="4px" fontSize="sm">
             Username
@@ -97,7 +81,7 @@ const SigninForm = ({ onClose, onAuthSuccess }) => {
 
             <InputRightElement w="2.5rem">
               <IconButton
-                {...iconButtonProps}
+                variant="icon-button"
                 onClick={() => setShowPassword(!showPassword)}
                 icon={
                   showPassword ? (
