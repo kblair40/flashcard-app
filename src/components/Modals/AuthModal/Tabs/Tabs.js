@@ -13,10 +13,10 @@ const AuthModalTabs = ({ onClose, onAuthSuccess, defaultTab }) => {
       </TabList>
 
       <TabPanels>
-        <TabPanel>
+        <TabPanel px={0}>
           <SignupForm onClose={onClose} onAuthSuccess={onAuthSuccess} />
         </TabPanel>
-        <TabPanel>
+        <TabPanel px={0}>
           <SigninForm onClose={onClose} onAuthSuccess={onAuthSuccess} />
         </TabPanel>
       </TabPanels>

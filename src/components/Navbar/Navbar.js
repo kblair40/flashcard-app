@@ -34,7 +34,7 @@ export default function WithSubnavigation() {
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
 
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen, onToggle, onClose } = useDisclosure();
   const {
     isOpen: isAuthModalOpen,
     onClose: onAuthModalClose,
@@ -81,7 +81,7 @@ export default function WithSubnavigation() {
           w="100%"
         >
           <IconButton
-            // isDisabled={!isSignedIn}
+            isDisabled={!isSignedIn}
             zIndex={1000}
             display={{ md: "none" }}
             mr={{ base: 2, sm: 6 }}
@@ -101,13 +101,30 @@ export default function WithSubnavigation() {
             <SetSearch isDisabled={!isSignedIn} />
           </Box>
 
-          <RRLink to="/">
-            <Image
-              maxWidth={"243px"}
-              src={logo_img}
-              w={{ base: "32px", md: "119px", lg: "140px" }}
-            />
-          </RRLink>
+          <AvatarMenu
+            handleClickSignout={() => handleClickSignInOrSignOut("signout")}
+          />
+
+          {!isSignedIn ? (
+            <Button
+              color={"white"}
+              bg={"blue.400"}
+              _hover={{ bg: "blue.500" }}
+              _active={{ bg: "blue.600" }}
+              size="sm"
+              onClick={onAuthModalOpen}
+            >
+              Log In
+            </Button>
+          ) : (
+            <RRLink to="/">
+              <Image
+                maxWidth={"243px"}
+                src={logo_img}
+                w={{ base: "32px", md: "119px", lg: "140px" }}
+              />
+            </RRLink>
+          )}
         </Flex>
 
         <Box display={{ md: "none" }}>
@@ -206,9 +223,9 @@ export default function WithSubnavigation() {
       <MobileNav
         show={isOpen}
         onToggle={onToggle}
+        onClose={onClose}
         isSignedIn={isSignedIn}
-        handleClickSignInOrSignOut={handleClickSignInOrSignOut}
-        // signout={() => handleClickSignInOrSignOut("signout")}
+        signout={() => handleClickSignInOrSignOut("signout")}
       />
     </Box>
   );
@@ -228,25 +245,18 @@ const shadows = {
     "rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 5px 10px, rgba(0, 0, 0, 0.4) 0px 15px 40px",
 };
 
-const MobileNav = ({
-  show,
-  onToggle,
-  handleClickSignInOrSignOut,
-  isSignedIn,
-}) => {
+const MobileNav = ({ show, onToggle, signout, isSignedIn, onClose }) => {
   const isMd = useBreakpointValue({ base: false, md: true });
 
   useEffect(() => {
     if (isMd) {
-      if (show) {
-        onToggle();
-      }
+      if (show) onToggle();
     }
   }, [isMd, show, onToggle]);
 
-  let navItems = isSignedIn
-    ? MOBILE_NAV_ITEMS
-    : MOBILE_NAV_ITEMS.filter((item) => !item.href);
+  useEffect(() => {
+    if (!isSignedIn) onClose();
+  }, [onClose, isSignedIn]);
 
   return (
     <motion.div
@@ -268,19 +278,13 @@ const MobileNav = ({
         w="100vw"
         // border="1px solid green"
       >
-        {navItems.map((navItem) => {
+        {MOBILE_NAV_ITEMS.map((navItem) => {
           if (isSignedIn && navItem.label === "Sign In") return null;
           else if (!isSignedIn && navItem.label === "Sign Out") return null;
 
           return (
             <MobileNavItem
-              onClick={
-                navItem.label === "Sign Out"
-                  ? () => handleClickSignInOrSignOut("signout")
-                  : navItem.label === "Sign In"
-                  ? () => handleClickSignInOrSignOut("signin")
-                  : null
-              }
+              onClick={navItem.label === "Sign Out" ? signout : null}
               key={navItem.label}
               {...navItem}
             />
@@ -335,7 +339,6 @@ const AuthButtons = ({ isSignedIn, handleClickSignInOrSignOut }) => {
       fontWeight={600}
       color={"white"}
       bg={"blue.400"}
-      href={"#"}
       _hover={{
         bg: "blue.500",
       }}
@@ -408,8 +411,4 @@ const NAV_ITEMS = [
   },
 ];
 
-const MOBILE_NAV_ITEMS = [
-  ...NAV_ITEMS,
-  { label: "Sign Out", href: null },
-  { label: "Sign In", href: null },
-];
+const MOBILE_NAV_ITEMS = [...NAV_ITEMS, { label: "Sign Out", href: null }];

@@ -13,11 +13,7 @@ import { LogoutIcon } from "utils/icons";
 
 const AvatarMenu = ({ handleClickSignout }) => {
   return (
-    <Flex
-      alignItems={"center"}
-      display={{ base: "none", md: "flex" }}
-      //
-    >
+    <Flex alignItems={"center"} display={{ base: "none", md: "flex" }}>
       <Menu>
         <MenuButton
           as={Button}

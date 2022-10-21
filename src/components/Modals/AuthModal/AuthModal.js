@@ -5,7 +5,6 @@ import {
   ModalContent,
   ModalBody,
   ModalCloseButton,
-  Button,
 } from "@chakra-ui/react";
 
 import UserContext from "store/UserContext";
@@ -21,11 +20,16 @@ const AuthModal = ({ isOpen, onClose, defaultTab }) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="lg">
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      px={{ base: "1rem", sm: 0 }}
+      size={{ base: "xs", sm: "md", md: "lg" }}
+    >
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent px={{ base: "1.25rem", sm: "1.5rem" }} pt="2rem">
         <ModalCloseButton />
-        <ModalBody>
+        <ModalBody px={0}>
           <Tabs
             onClose={onClose}
             onAuthSuccess={onAuthSuccess}
