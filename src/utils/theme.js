@@ -1,5 +1,12 @@
 import { extendTheme } from "@chakra-ui/react";
+import { createMultiStyleConfigHelpers } from "@chakra-ui/styled-system";
 import { mode } from "@chakra-ui/theme-tools";
+
+const inputHelpers = createMultiStyleConfigHelpers([
+  "addon",
+  "field",
+  "element",
+]);
 
 const theme = extendTheme({
   initialColorMode: "light",
@@ -26,9 +33,6 @@ const theme = extendTheme({
     "dm-btn-primary": {},
   },
   textStyles: {
-    // primary: { color: mode("gray.800", "gray.50") },
-    // secondary: { color: mode("gray.600", "gray.200") },
-    // tertiary: { color: mode("gray.400", "gray.400") },
     "lm-primary": { color: "gray.800" },
     "lm-secondary": { color: "gray.600" },
     "lm-tertiary": { color: "gray.400" },
@@ -38,9 +42,9 @@ const theme = extendTheme({
   },
   components: {
     Icon: {
-      baseStyle: {
-        fill: mode("gray.700", "gray.100"),
-      },
+      baseStyle: ({ colorMode: cm }) => ({
+        fill: cm === "dark" ? "gray.50" : "gray.800",
+      }),
     },
     Text: {
       defaultProps: {
@@ -50,22 +54,22 @@ const theme = extendTheme({
     Button: {
       variants: {
         "solid-blue": ({ colorMode: cm }) => ({
-          bg: cm === "dark" ? "blue.400" : "blue.400",
+          bg: cm === "dark" ? "blue.700" : "blue.400",
           color: cm === "dark" ? "#fff" : "#fff",
 
           _hover: {
-            bg: cm === "dark" ? "blue.500" : "blue.500",
+            bg: cm === "dark" ? "blue.600" : "blue.500",
           },
           _active: {
-            bg: cm === "dark" ? "blue.600" : "blue.600",
+            bg: cm === "dark" ? "blue.500" : "blue.600",
           },
         }),
         "solid-red": ({ colorMode: cm }) => ({
-          bg: cm === "dark" ? "red.300" : "red.400",
+          bg: cm === "dark" ? "red.700" : "red.400",
           color: cm === "dark" ? "#fff" : "#fff",
 
           _hover: {
-            bg: cm === "dark" ? "red.400" : "red.500",
+            bg: cm === "dark" ? "red.600" : "red.500",
           },
           _active: {
             bg: cm === "dark" ? "red.500" : "red.600",
@@ -82,11 +86,50 @@ const theme = extendTheme({
             bg: cm === "dark" ? "gray.200" : "gray.700",
           },
         }),
+        "icon-button": ({ colorMode: cm }) => ({
+          transition: "background 0.2s",
+          bg: "transparent",
+          _hover: {
+            bg: cm === "dark" ? "gray.600" : "gray.800",
+          },
+          _active: {
+            bg: cm === "dark" ? "gray.200" : "gray.700",
+          },
+        }),
       },
       defaultProps: {
         variant: "solid-neutral",
       },
     },
+    Input: inputHelpers.defineMultiStyleConfig({
+      variants: {
+        "blue-outline": ({ colorMode: cm }) => ({
+          field: {
+            bg: "transparent",
+            borderWidth: "1px",
+            borderStyle: "solid",
+            borderColor: cm === "dark" ? "blue.300" : "blue.700",
+          },
+        }),
+        "neutral-outline": ({ colorMode: cm }) => ({
+          field: {
+            bg: "transparent",
+            borderWidth: "1px",
+            borderStyle: "solid",
+            borderColor: cm === "dark" ? "gray.500" : "gray.400",
+
+            _hover: {
+              borderColor: cm === "dark" ? "gray.400" : "gray.600",
+            },
+          },
+          element: {
+            height: "calc(100% - 8px)",
+            // zIndex: -1,
+          },
+          addon: {},
+        }),
+      },
+    }),
   },
   fonts: {
     body: "Open Sans, sans-serif",

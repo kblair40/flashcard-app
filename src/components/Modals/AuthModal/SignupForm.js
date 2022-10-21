@@ -41,7 +41,8 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const colorMode = useColorMode();
+  const { colorMode } = useColorMode();
+  const isDark = colorMode === "dark";
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -134,15 +135,16 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
   };
 
   const iconButtonProps = {
-    size: "sm",
-    position: "relative",
-    bottom: "4px",
-    width: "100%",
+    // size: "sm",
+    // position: "relative",
+    // bottom: "4px",
+    // width: "100%",
     borderRadius: "4px",
-    bg: "transparent",
-    transitionDuration: "0.3s",
-    _hover: { bg: "gray.50" },
-    _active: { bg: "gray.100" },
+    variant: "icon-button",
+    // bg: "transparent",
+    // transitionDuration: "0.3s",
+    // _hover: { bg: "gray.50" },
+    // _active: { bg: "gray.100" },
   };
 
   return (
@@ -152,9 +154,11 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
 
         <HStack w="100%" spacing="1rem">
           <FormControl isRequired isInvalid={!!errors["first_name"]}>
-            <FormLabel fontSize="sm">First Name</FormLabel>
+            <FormLabel mb="4px" fontSize="sm">
+              First Name
+            </FormLabel>
             <Input
-              size="sm"
+              variant="neutral-outline"
               w="100%"
               name="first_name"
               value={formData.first_name}
@@ -168,9 +172,11 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
           </FormControl>
 
           <FormControl isRequired isInvalid={!!errors["last_name"]}>
-            <FormLabel fontSize="sm">Last Name</FormLabel>
+            <FormLabel mb="4px" fontSize="sm">
+              Last Name
+            </FormLabel>
             <Input
-              size="sm"
+              variant="neutral-outline"
               name="last_name"
               value={formData.last_name}
               onChange={handleChange}
@@ -185,9 +191,11 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
         </HStack>
 
         <FormControl isRequired isInvalid={!!errors["email"]}>
-          <FormLabel fontSize="sm">Email address</FormLabel>
+          <FormLabel mb="4px" fontSize="sm">
+            Email address
+          </FormLabel>
           <Input
-            size="sm"
+            variant="neutral-outline"
             name="email"
             value={formData.email}
             onChange={handleChange}
@@ -201,9 +209,11 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
         </FormControl>
 
         <FormControl isRequired isInvalid={!!errors["username"]}>
-          <FormLabel fontSize="sm">Username</FormLabel>
+          <FormLabel mb="4px" fontSize="sm">
+            Username
+          </FormLabel>
           <Input
-            size="sm"
+            variant="neutral-outline"
             name="username"
             value={formData.username}
             onChange={handleChange}
@@ -216,10 +226,12 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
         </FormControl>
 
         <FormControl isRequired isInvalid={!!errors["password"]}>
-          <FormLabel fontSize="sm">Password</FormLabel>
+          <FormLabel mb="4px" fontSize="sm">
+            Password
+          </FormLabel>
           <InputGroup>
             <Input
-              size="sm"
+              variant="neutral-outline"
               type={showPassword ? "text" : "password"}
               name="password"
               value={formData.password}
@@ -232,9 +244,15 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
                 onClick={() => setShowPassword(!showPassword)}
                 icon={
                   showPassword ? (
-                    <NotVisibleIcon boxSize="20px" />
+                    <NotVisibleIcon
+                      boxSize="22px"
+                      fill={isDark ? "gray.50" : "gray.600"}
+                    />
                   ) : (
-                    <VisibleIcon boxSize="20px" />
+                    <VisibleIcon
+                      boxSize="22px"
+                      fill={isDark ? "#eee" : "gray.600"}
+                    />
                   )
                 }
               />
@@ -249,10 +267,13 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
         </FormControl>
 
         <FormControl isRequired isInvalid={!!errors["confirm_password"]}>
-          <FormLabel fontSize="sm">Confirm Password</FormLabel>
+          <FormLabel mb="4px" fontSize="sm">
+            Confirm Password
+          </FormLabel>
           <InputGroup>
             <Input
-              size="sm"
+              variant="neutral-outline"
+              // size="sm"
               type={showConfirmPassword ? "text" : "password"}
               name="confirm_password"
               value={formData.confirm_password}

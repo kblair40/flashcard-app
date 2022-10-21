@@ -21,7 +21,9 @@ const AuthModal = ({ isOpen, onClose, defaultTab }) => {
 
   return (
     <Modal
+      isCentered
       isOpen={isOpen}
+      // isOpen={true}
       onClose={onClose}
       px={{ base: "1rem", sm: 0 }}
       size={{ base: "xs", sm: "md", md: "lg" }}
