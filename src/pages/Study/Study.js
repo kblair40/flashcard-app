@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Spinner, Center, Flex, Button, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
+import useDetectLogout from "hooks/useDetectLogout";
 import api from "api";
 
 const Study = () => {
   const [loading, setLoading] = useState(true);
   const [flashcardSets, setFlashcardSets] = useState();
+
+  useDetectLogout();
 
   useEffect(() => {
     const fetchFlashcardData = async () => {

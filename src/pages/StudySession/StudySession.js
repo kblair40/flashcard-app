@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useParams, Link } from "react-router-dom";
 
+import useDetectLogout from "hooks/useDetectLogout";
 import api from "api";
 import { ChevronIcon } from "utils/icons";
 import Timer from "./Timer";
@@ -23,6 +24,8 @@ const StudySession = () => {
   const [flashcards, setFlashcards] = useState();
   const [title, setTitle] = useState("");
   const [hideAllCards, setHideAllCards] = useState(false);
+
+  useDetectLogout();
 
   const { createStudySession } = useContext(StudySessionContext);
 

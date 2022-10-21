@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
+import useDetectLogout from "hooks/useDetectLogout";
 import FavoriteSets from "components/FavoriteSets";
 import StudyHistory from "components/StudyHistory";
 import { AddIcon, EditIcon } from "utils/icons";
@@ -23,6 +24,8 @@ const ManageSets = () => {
   const [loading, setLoading] = useState(true);
   const [flashcardSets, setFlashcardSets] = useState();
   const [changingPublicStatus, setChangingPublicStatus] = useState();
+
+  useDetectLogout();
 
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";

@@ -81,6 +81,7 @@ export default function WithSubnavigation() {
           w="100%"
         >
           <IconButton
+            isDisabled={!isSignedIn}
             zIndex={1000}
             display={{ md: "none" }}
             mr={{ base: 2, sm: 6 }}
