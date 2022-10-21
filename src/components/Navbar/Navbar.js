@@ -81,7 +81,7 @@ export default function WithSubnavigation() {
           w="100%"
         >
           <IconButton
-            isDisabled={!isSignedIn}
+            // isDisabled={!isSignedIn}
             zIndex={1000}
             display={{ md: "none" }}
             mr={{ base: 2, sm: 6 }}
@@ -206,7 +206,9 @@ export default function WithSubnavigation() {
       <MobileNav
         show={isOpen}
         onToggle={onToggle}
-        signout={() => handleClickSignInOrSignOut("signout")}
+        isSignedIn={isSignedIn}
+        handleClickSignInOrSignOut={handleClickSignInOrSignOut}
+        // signout={() => handleClickSignInOrSignOut("signout")}
       />
     </Box>
   );
@@ -226,7 +228,12 @@ const shadows = {
     "rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 5px 10px, rgba(0, 0, 0, 0.4) 0px 15px 40px",
 };
 
-const MobileNav = ({ show, onToggle, signout }) => {
+const MobileNav = ({
+  show,
+  onToggle,
+  handleClickSignInOrSignOut,
+  isSignedIn,
+}) => {
   const isMd = useBreakpointValue({ base: false, md: true });
 
   useEffect(() => {
@@ -236,6 +243,10 @@ const MobileNav = ({ show, onToggle, signout }) => {
       }
     }
   }, [isMd, show, onToggle]);
+
+  let navItems = isSignedIn
+    ? MOBILE_NAV_ITEMS
+    : MOBILE_NAV_ITEMS.filter((item) => !item.href);
 
   return (
     <motion.div
@@ -257,10 +268,19 @@ const MobileNav = ({ show, onToggle, signout }) => {
         w="100vw"
         // border="1px solid green"
       >
-        {MOBILE_NAV_ITEMS.map((navItem) => {
+        {navItems.map((navItem) => {
+          if (isSignedIn && navItem.label === "Sign In") return null;
+          else if (!isSignedIn && navItem.label === "Sign Out") return null;
+
           return (
             <MobileNavItem
-              onClick={navItem.label === "Sign Out" ? signout : null}
+              onClick={
+                navItem.label === "Sign Out"
+                  ? () => handleClickSignInOrSignOut("signout")
+                  : navItem.label === "Sign In"
+                  ? () => handleClickSignInOrSignOut("signin")
+                  : null
+              }
               key={navItem.label}
               {...navItem}
             />
@@ -291,6 +311,7 @@ const MobileNavItem = ({ label, href, onClick }) => {
       w="100%"
       border="1px solid #ccc"
       cursor="pointer"
+      // isDisabled={!isSignedIn}
       // w={href ? undefined : "100%"}
       // variant={href ? "ghost" : undefined}
     >
@@ -387,4 +408,8 @@ const NAV_ITEMS = [
   },
 ];
 
-const MOBILE_NAV_ITEMS = [...NAV_ITEMS, { label: "Sign Out", href: null }];
+const MOBILE_NAV_ITEMS = [
+  ...NAV_ITEMS,
+  { label: "Sign Out", href: null },
+  { label: "Sign In", href: null },
+];
