@@ -71,45 +71,45 @@ export default function WithSubnavigation() {
         position="relative"
         justify={{ base: "space-between", md: "unset" }}
       >
-        <IconButton
-          zIndex={100000}
-          display={{ md: "none" }}
-          mr={{ base: 2, sm: 6 }}
-          onClick={onToggle}
-          icon={
-            isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
-          }
-          variant={"ghost"}
-          aria-label={"Toggle Navigation"}
-        />
-
+        {/* START MOBILE NAV */}
         <Flex
+          // border="1px solid"
+          // borderColor={"rgba(0,0,255, 0.2)"}
           display={{ base: "flex", md: "none" }}
-          justify="center"
+          justify="space-between"
           align="center"
           w="100%"
-          position="absolute"
-          top={0}
-          left={0}
-          right={0}
-          bottom={0}
         >
+          <IconButton
+            zIndex={100000}
+            display={{ md: "none" }}
+            mr={{ base: 2, sm: 6 }}
+            onClick={onToggle}
+            icon={
+              isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
+            }
+            variant={"ghost"}
+            aria-label={"Toggle Navigation"}
+          />
+
+          <Box
+            mx={{ base: "1.5rem", sm: "2.5rem" }}
+            w={{ base: "100%" }}
+            maxW={{ base: "220px", sm: "260px" }}
+          >
+            <SetSearch isDisabled={!isSignedIn} />
+          </Box>
+
           <RRLink to="/">
             <Image
+              // border="1px solid red"
               maxWidth={"243px"}
               src={logo_img}
               w={{ base: "32px", md: "119px", lg: "140px" }}
             />
           </RRLink>
-
-          <Box
-            ml={{ base: "1.5rem", sm: "3.5rem" }}
-            w={{ base: "100%" }}
-            maxW={{ base: "180px", sm: "240px" }}
-          >
-            <SetSearch isDisabled={!isSignedIn} />
-          </Box>
         </Flex>
+        {/* END MOBILE NAV */}
 
         <Box display={{ md: "none" }}>
           <AuthButtons
@@ -126,6 +126,7 @@ export default function WithSubnavigation() {
         >
           <RRLink to="/">
             <Image
+              // border="1px solid green"
               maxWidth={"243px"}
               src={logo_img}
               w={{ base: "32px", md: "119px", lg: "140px" }}
@@ -172,10 +173,12 @@ export default function WithSubnavigation() {
           )}
 
           {isSignedIn ? (
+            // <Box display={{ base: "none", md: "block" }}>
             <AvatarMenu
               handleClickSignout={() => handleClickSignInOrSignOut("signout")}
             />
           ) : (
+            // </Box>
             <Button
               display={{ base: "none", md: "inline-flex" }}
               fontSize={"sm"}
@@ -205,9 +208,11 @@ export default function WithSubnavigation() {
 
 const AuthButtons = ({ isSignedIn, handleClickSignInOrSignOut }) => {
   return isSignedIn ? (
-    <AvatarMenu
-      handleClickSignout={() => handleClickSignInOrSignOut("signout")}
-    />
+    <Box display={{ base: "none", md: "block" }}>
+      <AvatarMenu
+        handleClickSignout={() => handleClickSignInOrSignOut("signout")}
+      />
+    </Box>
   ) : (
     <Button
       display={{ base: "none", md: "inline-flex" }}
