@@ -1,11 +1,18 @@
 import React from "react";
 import { Flex } from "@chakra-ui/react";
-// import { Link } from "react-router-dom";
+// import { useLocation, useNavigate } from "react-router-dom";
 
-// import UserContext from "store/UserContext";
+import UserContext from "store/UserContext";
 
 const Account = () => {
-  // const { userData } = useContext(UserContext);
+  // const { isSignedIn } = useContext(UserContext);
+
+  // const { pathname } = useLocation();
+  // const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   if (!isSignedIn && !)
+  // }, [pathname, navigate, isSignedIn]);
 
   return (
     <Flex justify="center">

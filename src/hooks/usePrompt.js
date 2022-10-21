@@ -40,5 +40,6 @@ export function usePrompt(message, when = true) {
     const confirm = window.confirm(message);
     return confirm;
   }, [message]);
+
   useConfirmExit(confirmExit, when);
 }

@@ -20,7 +20,21 @@ function App() {
           <Navbar />
 
           <Box position="relative">
-            <Router />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/create" element={<Create />} />
+              <Route path="/create/:id" element={<Create />} />
+
+              <Route path="/study" element={<Study />} />
+
+              <Route path="/study/:id" element={<StudySession />} />
+
+              <Route path="/manage-sets" element={<ManageSets />} />
+
+              <Route path="/account" element={<Account />} />
+
+              <Route path="*" element={<NotFound />} />
+            </Routes>
           </Box>
         </Box>
       </StudySessionProvider>
@@ -29,33 +43,6 @@ function App() {
 }
 
 export default App;
-
-const Router = () => {
-  const { isSignedIn } = useContext(UserContext);
-
-  return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-
-      {isSignedIn && (
-        <React.Fragment>
-          <Route path="/create" element={<Create />} />
-          <Route path="/create/:id" element={<Create />} />
-
-          <Route path="/study" element={<Study />} />
-
-          <Route path="/study/:id" element={<StudySession />} />
-
-          <Route path="/manage-sets" element={<ManageSets />} />
-
-          <Route path="/account" element={<Account />} />
-
-          <Route path="*" element={<NotFound />} />
-        </React.Fragment>
-      )}
-    </Routes>
-  );
-};
 
 const NotFound = () => {
   return (
