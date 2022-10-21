@@ -246,12 +246,12 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
                   showPassword ? (
                     <NotVisibleIcon
                       boxSize="22px"
-                      fill={isDark ? "gray.50" : "gray.600"}
+                      // fill={isDark ? "gray.50" : "gray.600"}
                     />
                   ) : (
                     <VisibleIcon
                       boxSize="22px"
-                      fill={isDark ? "#eee" : "gray.600"}
+                      // fill={isDark ? "#eee" : "gray.600"}
                     />
                   )
                 }

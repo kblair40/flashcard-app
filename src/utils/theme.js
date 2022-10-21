@@ -93,7 +93,7 @@ const theme = extendTheme({
             bg: cm === "dark" ? "gray.600" : "gray.800",
           },
           _active: {
-            bg: cm === "dark" ? "gray.200" : "gray.700",
+            bg: cm === "dark" ? "gray.500" : "gray.700",
           },
         }),
       },
