@@ -4,7 +4,7 @@ import {
   Flex,
   Heading,
   Spinner,
-  // useColorMode,
+  useColorModeValue,
   IconButton,
   Menu,
   MenuButton,
@@ -60,17 +60,20 @@ const CommunitySets = () => {
     fetchHistory();
   }, []);
 
+  const borderColor = useColorModeValue("gray.600", "gray.600");
+
   return (
     <Flex
       justify="center"
       w="100%"
       borderLeft={{ md: "1px solid" }}
-      borderColor={{ md: "#e5e5e5" }}
-      maxH={{ md: "50%" }}
+      borderColor={{ md: borderColor }}
+      // maxH={{ md: "50%" }}
       overflowY={{ md: "auto" }}
       overflowX="hidden"
-      h={{ md: "fit-content" }}
-      p={{ base: "32px 0 0", md: "32px 8px 0" }}
+      // h={{ md: "fit-content" }}
+      h={{ md: "calc(100vh - 60px)" }}
+      p={{ base: "32px 0 0", md: "32px 8px 0 12px" }}
     >
       <Flex direction="column" w="100%" position="relative">
         <Flex

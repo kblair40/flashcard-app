@@ -33,7 +33,7 @@ const Home = () => {
 
           <Box
             w={{ base: "100%", md: "250px", lg: "300px" }}
-            ml={{ md: "2.5rem" }}
+            ml={{ md: "2rem" }}
           >
             <CommunitySets />
           </Box>
