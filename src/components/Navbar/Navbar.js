@@ -6,7 +6,6 @@ import {
   IconButton,
   Button,
   Stack,
-  Collapse,
   Link,
   useColorMode,
   useBreakpointValue,
@@ -17,7 +16,7 @@ import {
 import { Link as RRLink, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
-import { HamburgerIcon, ChevronIcon, CloseIcon } from "utils/icons";
+import { HamburgerIcon, CloseIcon } from "utils/icons";
 import logo from "assets/images/logo.svg";
 import logo_dk from "assets/images/logo-dk.svg";
 import logo_sm from "assets/images/logo-sm.svg";
@@ -49,6 +48,7 @@ export default function WithSubnavigation() {
 
       onAuthModalOpen();
     } else if (signInOrSignOut === "signout") {
+      console.log("SIGN OUT");
       handleSignOut();
     } else {
       throw new Error("Invalid value: must be 'signin' or 'signout'");
@@ -72,7 +72,6 @@ export default function WithSubnavigation() {
         position="relative"
         justify={{ base: "space-between", md: "unset" }}
         zIndex={1000}
-        // border="1px solid green"
       >
         {/* START MOBILE NAV */}
         <Flex
@@ -203,7 +202,11 @@ export default function WithSubnavigation() {
         </Flex>
       </Flex>
 
-      <MobileNav show={isOpen} onToggle={onToggle} />
+      <MobileNav
+        show={isOpen}
+        onToggle={onToggle}
+        signout={() => handleClickSignInOrSignOut("signout")}
+      />
     </Box>
   );
 }
@@ -222,7 +225,7 @@ const shadows = {
     "rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 5px 10px, rgba(0, 0, 0, 0.4) 0px 15px 40px",
 };
 
-const MobileNav = ({ show, onToggle }) => {
+const MobileNav = ({ show, onToggle, signout }) => {
   const isMd = useBreakpointValue({ base: false, md: true });
 
   useEffect(() => {
@@ -231,7 +234,7 @@ const MobileNav = ({ show, onToggle }) => {
         onToggle();
       }
     }
-  }, [isMd, show]);
+  }, [isMd, show, onToggle]);
 
   return (
     <motion.div
@@ -241,74 +244,59 @@ const MobileNav = ({ show, onToggle }) => {
         boxShadow: shadows["sm"],
         zIndex: 100,
       }}
-      animate={show && !isMd ? { y: 0 } : { y: -136 }}
+      initial={{ y: "-100%" }}
+      animate={show && !isMd ? { y: 0 } : { y: -180 }}
       transition={{ duration: 0.25 }}
     >
       <Stack
-        zIndex={100000000}
+        zIndex={10000000}
         bg={useColorModeValue("white", "gray.800")}
         p={4}
         display={{ md: "none" }}
         w="100vw"
-        border="1px solid green"
+        // border="1px solid green"
       >
-        {NAV_ITEMS.map((navItem) => (
-          <MobileNavItem key={navItem.label} {...navItem} />
-        ))}
+        {MOBILE_NAV_ITEMS.map((navItem) => {
+          return (
+            <MobileNavItem
+              onClick={navItem.label === "Sign Out" ? signout : null}
+              key={navItem.label}
+              {...navItem}
+            />
+          );
+        })}
       </Stack>
     </motion.div>
   );
 };
 
-const MobileNavItem = ({ label, children, href }) => {
-  const { isOpen, onToggle } = useDisclosure();
-
+const MobileNavItem = ({ label, href, onClick }) => {
   return (
-    <Stack spacing={4} onClick={children && onToggle}>
-      <Flex
-        py={2}
-        as={Link}
-        href={href ?? "#"}
-        justify={"space-between"}
-        align={"center"}
-        _hover={{
-          textDecoration: "none",
-        }}
-      >
-        <Text
-          fontWeight={600}
-          color={useColorModeValue("gray.600", "gray.200")}
-        >
-          {label}
-        </Text>
-        {children && (
-          <ChevronIcon
-            boxSize="20px"
-            transition={"all .25s ease-in-out"}
-            transform={isOpen ? "rotate(270deg)" : "rotate(90deg)"}
-            fill={"gray.600"}
-          />
-        )}
-      </Flex>
-
-      <Collapse in={isOpen} animateOpacity style={{ marginTop: "0!important" }}>
-        <Stack
-          mt={2}
-          pl={4}
-          borderLeft={1}
-          borderStyle={"solid"}
-          borderColor={useColorModeValue("gray.200", "gray.700")}
-          align={"start"}
-        >
-          {children &&
-            children.map((child) => (
-              <Link key={child.label} py={2} href={child.href}>
-                {child.label}
-              </Link>
-            ))}
-        </Stack>
-      </Collapse>
-    </Stack>
+    <Flex
+      py={2}
+      as={href ? Link : undefined}
+      href={href ?? "#"}
+      justify={"center"}
+      align={"center"}
+      onClick={onClick ? onClick : null}
+      _hover={{
+        textDecoration: "none",
+        bg: "gray.50",
+      }}
+      _active={{
+        // textDecoration: "none",
+        bg: "gray.100",
+      }}
+      w="100%"
+      border="1px solid #ccc"
+      cursor="pointer"
+      // w={href ? undefined : "100%"}
+      // variant={href ? "ghost" : undefined}
+    >
+      <Text fontWeight={600} color={useColorModeValue("gray.600", "gray.200")}>
+        {label}
+      </Text>
+    </Flex>
   );
 };
 
@@ -397,3 +385,5 @@ const NAV_ITEMS = [
     href: "/manage-sets",
   },
 ];
+
+const MOBILE_NAV_ITEMS = [...NAV_ITEMS, { label: "Sign Out", href: null }];

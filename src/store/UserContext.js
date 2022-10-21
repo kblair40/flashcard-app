@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import api from "api";
 
@@ -10,6 +11,8 @@ const UserProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState();
   const [isSignedIn, setIsSignedIn] = useState(isAuthenticated);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -34,6 +37,8 @@ const UserProvider = ({ children }) => {
   const handleSignIn = () => setIsSignedIn(true);
   const handleSignOut = () => {
     window.localStorage.removeItem("auth-token");
+
+    navigate("/");
 
     setIsSignedIn(false);
   };
