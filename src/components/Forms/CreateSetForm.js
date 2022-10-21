@@ -8,6 +8,7 @@ import {
   Button,
   Checkbox,
   Select,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
@@ -69,6 +70,7 @@ const CreateSetForm = () => {
         <FormControl isRequired>
           <FormLabel>Set Title</FormLabel>
           <Input
+            variant="neutral-outline"
             onChange={(e) => {
               setFormData({ ...formData, title: e.target.value });
               if (errors.title) setErrors(INITIAL_ERROR_STATE);
@@ -79,6 +81,7 @@ const CreateSetForm = () => {
         <FormControl>
           <FormLabel>Description</FormLabel>
           <Input
+            variant="neutral-outline"
             onChange={(e) =>
               setFormData({ ...formData, description: e.target.value })
             }
@@ -88,6 +91,7 @@ const CreateSetForm = () => {
         <FormControl isRequired>
           <FormLabel>Category</FormLabel>
           <Select
+            variant="neutral-outline"
             onChange={(e) => {
               setFormData({ ...formData, category: e.target.value });
             }}
@@ -105,6 +109,7 @@ const CreateSetForm = () => {
         </FormControl>
 
         <Checkbox
+          colorScheme="gray"
           spacing=".75rem"
           isChecked={formData.is_public}
           onChange={(e) =>
@@ -120,6 +125,7 @@ const CreateSetForm = () => {
           w="100%"
           onClick={handleSubmit}
           isLoading={loading}
+          variant="solid-blue"
         >
           Create
         </Button>

@@ -6,6 +6,7 @@ const inputHelpers = createMultiStyleConfigHelpers([
   "field",
   "element",
 ]);
+const selectHelpers = createMultiStyleConfigHelpers(["icon", "field"]);
 
 const theme = extendTheme({
   initialColorMode: "light",
@@ -62,6 +63,9 @@ const theme = extendTheme({
           _active: {
             bg: cm === "dark" ? "blue.500" : "blue.600",
           },
+          _disabled: {
+            _hover: { bg: cm === "dark" ? "blue.600" : "blue.500" },
+          },
         }),
         "solid-red": ({ colorMode: cm }) => ({
           bg: cm === "dark" ? "red.700" : "red.400",
@@ -83,6 +87,9 @@ const theme = extendTheme({
           },
           _active: {
             bg: cm === "dark" ? "gray.400" : "gray.300",
+          },
+          _disabled: {
+            _hover: { bg: cm === "dark" ? "gray.500" : "gray.200" },
           },
         }),
         "icon-button": ({ colorMode: cm }) => ({
@@ -106,10 +113,38 @@ const theme = extendTheme({
           },
         }),
       },
+      baseStyle: {
+        _disabled: { _hover: { bg: "unset" } },
+      },
       defaultProps: {
         variant: "solid-neutral",
       },
     },
+    Select: selectHelpers.defineMultiStyleConfig({
+      variants: {
+        "neutral-outline": ({ colorMode: cm }) => ({
+          field: {
+            bg: "transparent",
+            borderWidth: "1px",
+            borderStyle: "solid",
+            borderColor: cm === "dark" ? "gray.500" : "gray.300",
+            color: cm === "dark" ? "gray.50" : "gray.800",
+
+            _hover: {
+              borderColor: cm === "dark" ? "gray.400" : "gray.400",
+            },
+            _focus: {
+              borderColor: cm === "dark" ? "gray.300" : "gray.500",
+            },
+            _focusVisible: { outline: "none" },
+            _placeholder: {
+              color: cm === "dark" ? "gray.300" : "gray.500",
+            },
+          },
+          icon: {},
+        }),
+      },
+    }),
     Input: inputHelpers.defineMultiStyleConfig({
       variants: {
         "neutral-outline": ({ colorMode: cm }) => ({
