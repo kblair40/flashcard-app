@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import {
   Box,
   Flex,
@@ -15,6 +15,7 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { Link as RRLink, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 
 import { HamburgerIcon, ChevronIcon, CloseIcon } from "utils/icons";
 import logo from "assets/images/logo.svg";
@@ -70,6 +71,8 @@ export default function WithSubnavigation() {
         align={"center"}
         position="relative"
         justify={{ base: "space-between", md: "unset" }}
+        zIndex={1000}
+        // border="1px solid green"
       >
         {/* START MOBILE NAV */}
         <Flex
@@ -79,7 +82,7 @@ export default function WithSubnavigation() {
           w="100%"
         >
           <IconButton
-            zIndex={100000}
+            zIndex={1000}
             display={{ md: "none" }}
             mr={{ base: 2, sm: 6 }}
             onClick={onToggle}
@@ -200,12 +203,140 @@ export default function WithSubnavigation() {
         </Flex>
       </Flex>
 
-      <Collapse in={isOpen} animateOpacity>
-        <MobileNav />
-      </Collapse>
+      {/* <Collapse unmountOnExit in={isOpen} animateOpacity={false}> */}
+
+      <MobileNav show={isOpen} />
+      {/* </Collapse> */}
+
+      {/* <Collapse
+        unmountOnExit
+        in={isOpen}
+        // startingHeight={0}
+        // endingHeight={"120px"}
+        // animateOpacity={isOpen}
+        // style={{ position: "absolute" }}
+      >
+        <Box
+          bg="white"
+          border="1px solid red"
+          position="absolute"
+          top={"60px"}
+          left={0}
+          right={0}
+        >
+          <MobileNav />
+        </Box>
+      </Collapse> */}
     </Box>
   );
 }
+
+const shadows = {
+  xs: "0 0 0 1px rgba(0, 0, 0, 0.05)",
+  sm: "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+  base: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
+  md: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+  lg: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+  xl: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+  "2xl": "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+  outline: "0 0 0 3px rgba(66, 153, 225, 0.6)",
+  inner: "inset 0 2px 4px 0 rgba(0,0,0,0.06)",
+  none: "none",
+  "dark-lg":
+    "rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 5px 10px, rgba(0, 0, 0, 0.4) 0px 15px 40px",
+};
+
+const MobileNav = ({ show }) => {
+  return (
+    <motion.div
+      style={{
+        position: "fixed",
+        width: "100vw",
+        backgroundColor: "white",
+        boxShadow: shadows["sm"],
+        zIndex: 100,
+      }}
+      animate={
+        show
+          ? {
+              y: 0,
+              // opacity: [0, 0.25, 0.5, 1],
+              // duration: "4.5s",
+            }
+          : {
+              y: -120,
+              // opacity: [1, 0.5, 0, 0]
+            }
+      }
+      transition={{ duration: 0.25 }}
+    >
+      <Stack
+        zIndex={100000000}
+        bg={useColorModeValue("white", "gray.800")}
+        p={4}
+        display={{ md: "none" }}
+        // position="fixed"
+        w="100vw"
+      >
+        {NAV_ITEMS.map((navItem) => (
+          <MobileNavItem key={navItem.label} {...navItem} />
+        ))}
+      </Stack>
+    </motion.div>
+  );
+};
+
+const MobileNavItem = ({ label, children, href }) => {
+  const { isOpen, onToggle } = useDisclosure();
+
+  return (
+    <Stack spacing={4} onClick={children && onToggle}>
+      <Flex
+        py={2}
+        as={Link}
+        href={href ?? "#"}
+        justify={"space-between"}
+        align={"center"}
+        _hover={{
+          textDecoration: "none",
+        }}
+      >
+        <Text
+          fontWeight={600}
+          color={useColorModeValue("gray.600", "gray.200")}
+        >
+          {label}
+        </Text>
+        {children && (
+          <ChevronIcon
+            boxSize="20px"
+            transition={"all .25s ease-in-out"}
+            transform={isOpen ? "rotate(270deg)" : "rotate(90deg)"}
+            fill={"gray.600"}
+          />
+        )}
+      </Flex>
+
+      <Collapse in={isOpen} animateOpacity style={{ marginTop: "0!important" }}>
+        <Stack
+          mt={2}
+          pl={4}
+          borderLeft={1}
+          borderStyle={"solid"}
+          borderColor={useColorModeValue("gray.200", "gray.700")}
+          align={"start"}
+        >
+          {children &&
+            children.map((child) => (
+              <Link key={child.label} py={2} href={child.href}>
+                {child.label}
+              </Link>
+            ))}
+        </Stack>
+      </Collapse>
+    </Stack>
+  );
+};
 
 const AuthButtons = ({ isSignedIn, handleClickSignInOrSignOut }) => {
   return isSignedIn ? (
@@ -278,72 +409,6 @@ const DesktopNav = ({ isSignedIn, isDark }) => {
           </Link>
         </Box>
       ))}
-    </Stack>
-  );
-};
-
-const MobileNav = () => {
-  return (
-    <Stack
-      bg={useColorModeValue("white", "gray.800")}
-      p={4}
-      display={{ md: "none" }}
-    >
-      {NAV_ITEMS.map((navItem) => (
-        <MobileNavItem key={navItem.label} {...navItem} />
-      ))}
-    </Stack>
-  );
-};
-
-const MobileNavItem = ({ label, children, href }) => {
-  const { isOpen, onToggle } = useDisclosure();
-
-  return (
-    <Stack spacing={4} onClick={children && onToggle}>
-      <Flex
-        py={2}
-        as={Link}
-        href={href ?? "#"}
-        justify={"space-between"}
-        align={"center"}
-        _hover={{
-          textDecoration: "none",
-        }}
-      >
-        <Text
-          fontWeight={600}
-          color={useColorModeValue("gray.600", "gray.200")}
-        >
-          {label}
-        </Text>
-        {children && (
-          <ChevronIcon
-            boxSize="20px"
-            transition={"all .25s ease-in-out"}
-            transform={isOpen ? "rotate(270deg)" : "rotate(90deg)"}
-            fill={"gray.600"}
-          />
-        )}
-      </Flex>
-
-      <Collapse in={isOpen} animateOpacity style={{ marginTop: "0!important" }}>
-        <Stack
-          mt={2}
-          pl={4}
-          borderLeft={1}
-          borderStyle={"solid"}
-          borderColor={useColorModeValue("gray.200", "gray.700")}
-          align={"start"}
-        >
-          {children &&
-            children.map((child) => (
-              <Link key={child.label} py={2} href={child.href}>
-                {child.label}
-              </Link>
-            ))}
-        </Stack>
-      </Collapse>
     </Stack>
   );
 };
