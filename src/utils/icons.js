@@ -162,26 +162,32 @@ export const MoonIcon = ({ fill = "black", boxSize = "24px" }) => {
   );
 };
 
-export const MoreHorizontalIcon = ({ fill = "black", boxSize = "24px" }) => {
+export const MoreHorizontalIcon = ({ boxSize = "24px", ...props }) => {
+  const {
+    colors: { gray },
+  } = useTheme();
+
+  const modeBg = useColorModeValue(gray["700"], gray["50"]);
+  const activeFill = props.fill ? props.fill : modeBg;
   return (
-    <Icon boxSize={boxSize} viewBox="0 0 24 24" fill={fill}>
+    <Icon boxSize={boxSize} viewBox="0 0 24 24" fill={"none"}>
       <path
         d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z"
-        stroke={fill}
+        stroke={activeFill}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12C18 12.5523 18.4477 13 19 13Z"
-        stroke={fill}
+        stroke={activeFill}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12C4 12.5523 4.44772 13 5 13Z"
-        stroke={fill}
+        stroke={activeFill}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -190,25 +196,43 @@ export const MoreHorizontalIcon = ({ fill = "black", boxSize = "24px" }) => {
   );
 };
 
-export const StudyIcon = ({ fill = "black", boxSize = "24px", ...props }) => {
+export const StudyIcon = ({ boxSize = "24px", ...props }) => {
+  const {
+    colors: { gray },
+  } = useTheme();
+
+  const modeBg = useColorModeValue(gray["700"], gray["50"]);
+  const activeFill = props.fill ? props.fill : modeBg;
   return (
-    <Icon boxSize={boxSize} viewBox="0 0 24 24" fill={fill} {...props}>
+    <Icon boxSize={boxSize} viewBox="0 0 24 24" fill={activeFill} {...props}>
       <path d="M22.5925 2.66874C20.3092 2.79832 15.7708 3.26999 12.9692 4.98499C12.7758 5.10332 12.6662 5.31374 12.6662 5.53374V20.695C12.6662 21.1762 13.1925 21.4804 13.6362 21.2571C16.5187 19.8062 20.6875 19.4104 22.7487 19.3021C23.4525 19.265 23.9996 18.7008 23.9996 18.0246V3.9479C24 3.20999 23.36 2.6254 22.5925 2.66874ZM11.0304 4.98499C8.22917 3.26999 3.69083 2.79874 1.4075 2.66874C0.64 2.6254 0 3.20999 0 3.9479V18.025C0 18.7017 0.547083 19.2658 1.25083 19.3025C3.31292 19.4108 7.48375 19.8071 10.3662 21.2587C10.8087 21.4816 11.3333 21.1779 11.3333 20.6979V5.52624C11.3333 5.30582 11.2242 5.10374 11.0304 4.98499Z" />
     </Icon>
   );
 };
 
-export const AddIcon = ({ fill = "black", boxSize = "24px" }) => {
+export const AddIcon = ({ boxSize = "24px", ...props }) => {
+  const {
+    colors: { gray },
+  } = useTheme();
+
+  const modeBg = useColorModeValue(gray["700"], gray["50"]);
+  const activeFill = props.fill ? props.fill : modeBg;
   return (
-    <Icon boxSize={boxSize} viewBox="0 0 24 24" fill={fill}>
+    <Icon boxSize={boxSize} viewBox="0 0 24 24" fill={activeFill}>
       <path d="M21 9.75H14.25V3C14.25 2.17172 13.5783 1.5 12.75 1.5H11.25C10.4217 1.5 9.75 2.17172 9.75 3V9.75H3C2.17172 9.75 1.5 10.4217 1.5 11.25V12.75C1.5 13.5783 2.17172 14.25 3 14.25H9.75V21C9.75 21.8283 10.4217 22.5 11.25 22.5H12.75C13.5783 22.5 14.25 21.8283 14.25 21V14.25H21C21.8283 14.25 22.5 13.5783 22.5 12.75V11.25C22.5 10.4217 21.8283 9.75 21 9.75Z" />
     </Icon>
   );
 };
 
-export const LogoutIcon = ({ fill = "black", boxSize = "24px" }) => {
+export const LogoutIcon = ({ boxSize = "24px", ...props }) => {
+  const {
+    colors: { gray },
+  } = useTheme();
+
+  const modeBg = useColorModeValue(gray["700"], gray["50"]);
+  const activeFill = props.fill ? props.fill : modeBg;
   return (
-    <Icon boxSize={boxSize} viewBox="0 0 24 24" fill={fill}>
+    <Icon boxSize={boxSize} viewBox="0 0 24 24" fill={activeFill}>
       <g clipPath="url(#clip0_22_19)">
         <path d="M17 7L15.59 8.41L18.17 11H8V13H18.17L15.59 15.58L17 17L22 12L17 7ZM4 5H12V3H4C2.9 3 2 3.9 2 5V19C2 20.1 2.9 21 4 21H12V19H4V5Z" />
       </g>
@@ -303,17 +327,20 @@ export const SearchIcon = ({
   );
 };
 
-export const StarFilledIcon = ({
-  fill = "#2D3748",
-  boxSize = "24px",
-  ...props
-}) => {
+export const StarFilledIcon = ({ boxSize = "24px", ...props }) => {
+  const {
+    colors: { gray },
+  } = useTheme();
+
+  const modeBg = useColorModeValue(gray["700"], gray["50"]);
+  const activeFill = props.fill ? props.fill : modeBg;
+
   return (
-    <Icon boxSize={boxSize} viewBox="0 0 24 24" fill={fill} {...props}>
+    <Icon boxSize={boxSize} viewBox="0 0 24 24" fill={activeFill} {...props}>
       <path
         d="M12 17.75L5.828 20.995L7.007 14.122L2.007 9.25501L8.907 8.25501L11.993 2.00201L15.079 8.25501L21.979 9.25501L16.979 14.122L18.158 20.995L12 17.75Z"
-        fill={fill}
-        stroke={fill}
+        fill={activeFill}
+        stroke={activeFill}
         strokeWidth="3.9879"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -322,16 +349,18 @@ export const StarFilledIcon = ({
   );
 };
 
-export const StarOutlineIcon = ({
-  fill = "#2D3748",
-  boxSize = "24px",
-  ...props
-}) => {
+export const StarOutlineIcon = ({ boxSize = "24px", ...props }) => {
+  const {
+    colors: { gray },
+  } = useTheme();
+
+  const modeBg = useColorModeValue(gray["700"], gray["50"]);
+  const activeFill = props.fill ? props.fill : modeBg;
   return (
     <Icon boxSize={boxSize} viewBox="0 0 24 24" fill="none" {...props}>
       <path
         d="M12 17.75L5.828 20.995L7.007 14.122L2.007 9.25501L8.907 8.25501L11.993 2.00201L15.079 8.25501L21.979 9.25501L16.979 14.122L18.158 20.995L12 17.75Z"
-        stroke={fill}
+        stroke={activeFill}
         strokeWidth="3.9879"
         strokeLinecap="round"
         strokeLinejoin="round"
