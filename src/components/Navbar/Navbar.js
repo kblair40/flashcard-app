@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useRef } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   Box,
   Flex,
@@ -203,30 +203,7 @@ export default function WithSubnavigation() {
         </Flex>
       </Flex>
 
-      {/* <Collapse unmountOnExit in={isOpen} animateOpacity={false}> */}
-
-      <MobileNav show={isOpen} />
-      {/* </Collapse> */}
-
-      {/* <Collapse
-        unmountOnExit
-        in={isOpen}
-        // startingHeight={0}
-        // endingHeight={"120px"}
-        // animateOpacity={isOpen}
-        // style={{ position: "absolute" }}
-      >
-        <Box
-          bg="white"
-          border="1px solid red"
-          position="absolute"
-          top={"60px"}
-          left={0}
-          right={0}
-        >
-          <MobileNav />
-        </Box>
-      </Collapse> */}
+      <MobileNav show={isOpen} onToggle={onToggle} />
     </Box>
   );
 }
@@ -241,33 +218,30 @@ const shadows = {
   "2xl": "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
   outline: "0 0 0 3px rgba(66, 153, 225, 0.6)",
   inner: "inset 0 2px 4px 0 rgba(0,0,0,0.06)",
-  none: "none",
   "dark-lg":
     "rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 5px 10px, rgba(0, 0, 0, 0.4) 0px 15px 40px",
 };
 
-const MobileNav = ({ show }) => {
+const MobileNav = ({ show, onToggle }) => {
+  const isMd = useBreakpointValue({ base: false, md: true });
+
+  useEffect(() => {
+    if (isMd) {
+      if (show) {
+        onToggle();
+      }
+    }
+  }, [isMd, show]);
+
   return (
     <motion.div
       style={{
         position: "fixed",
-        width: "100vw",
         backgroundColor: "white",
         boxShadow: shadows["sm"],
         zIndex: 100,
       }}
-      animate={
-        show
-          ? {
-              y: 0,
-              // opacity: [0, 0.25, 0.5, 1],
-              // duration: "4.5s",
-            }
-          : {
-              y: -120,
-              // opacity: [1, 0.5, 0, 0]
-            }
-      }
+      animate={show && !isMd ? { y: 0 } : { y: -136 }}
       transition={{ duration: 0.25 }}
     >
       <Stack
@@ -275,8 +249,8 @@ const MobileNav = ({ show }) => {
         bg={useColorModeValue("white", "gray.800")}
         p={4}
         display={{ md: "none" }}
-        // position="fixed"
         w="100vw"
+        border="1px solid green"
       >
         {NAV_ITEMS.map((navItem) => (
           <MobileNavItem key={navItem.label} {...navItem} />
@@ -369,7 +343,7 @@ const DesktopNav = ({ isSignedIn, isDark }) => {
   const linkHoverColor = useColorModeValue("gray.900", "white");
 
   const { pathname } = useLocation();
-  console.log("PATHNAME:", pathname);
+  // console.log("PATHNAME:", pathname);
 
   return (
     <Stack align="center" direction={"row"} spacing={{ base: 2, sm: 4 }}>
