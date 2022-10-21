@@ -12,7 +12,6 @@ import {
   InputGroup,
   InputRightElement,
   IconButton,
-  useColorMode,
 } from "@chakra-ui/react";
 
 import { VisibleIcon, NotVisibleIcon } from "utils/icons";
@@ -40,9 +39,6 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
   const [errors, setErrors] = useState(INITIAL_ERROR_STATE);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-  const { colorMode } = useColorMode();
-  const isDark = colorMode === "dark";
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -112,7 +108,6 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
       const response = await api.post("/signup", {
         ...formData,
       });
-      // console.log("RESPONSE:", response.data);
 
       if (response && response.data) {
         onAuthSuccess(response.data.token);
@@ -135,16 +130,8 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
   };
 
   const iconButtonProps = {
-    // size: "sm",
-    // position: "relative",
-    // bottom: "4px",
-    // width: "100%",
     borderRadius: "4px",
     variant: "icon-button",
-    // bg: "transparent",
-    // transitionDuration: "0.3s",
-    // _hover: { bg: "gray.50" },
-    // _active: { bg: "gray.100" },
   };
 
   return (
@@ -244,15 +231,9 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
                 onClick={() => setShowPassword(!showPassword)}
                 icon={
                   showPassword ? (
-                    <NotVisibleIcon
-                      boxSize="22px"
-                      // fill={isDark ? "gray.50" : "gray.600"}
-                    />
+                    <NotVisibleIcon boxSize="22px" />
                   ) : (
-                    <VisibleIcon
-                      boxSize="22px"
-                      // fill={isDark ? "#eee" : "gray.600"}
-                    />
+                    <VisibleIcon boxSize="22px" />
                   )
                 }
               />
@@ -312,7 +293,6 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
             isLoading={loading}
             onClick={handleSubmit}
             variant="solid-blue"
-            // colorMode={colorMode}
           >
             Submit
           </Button>

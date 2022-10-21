@@ -47,9 +47,9 @@ const theme = extendTheme({
       }),
     },
     Text: {
-      defaultProps: {
-        textStyle: mode("lm-primary", "dm-primary"),
-      },
+      baseStyle: ({ colorMode: cm }) => ({
+        color: cm === "dark" ? "gray.50" : "gray.800",
+      }),
     },
     Button: {
       variants: {
@@ -76,24 +76,24 @@ const theme = extendTheme({
           },
         }),
         "solid-neutral": ({ colorMode: cm }) => ({
-          bg: cm === "dark" ? "gray.50" : "gray.900",
-          color: cm === "dark" ? "gray.800" : "#fff",
+          bg: cm === "dark" ? "gray.500" : "gray.50",
+          color: cm === "dark" ? "gray.50" : "gray.700",
 
           _hover: {
-            bg: cm === "dark" ? "gray.100" : "gray.800",
+            bg: cm === "dark" ? "gray.100" : "gray.100",
           },
           _active: {
-            bg: cm === "dark" ? "gray.200" : "gray.700",
+            bg: cm === "dark" ? "gray.200" : "gray.200",
           },
         }),
         "icon-button": ({ colorMode: cm }) => ({
           transition: "background 0.2s",
           bg: "transparent",
           _hover: {
-            bg: cm === "dark" ? "gray.600" : "gray.800",
+            bg: cm === "dark" ? "gray.600" : "gray.100",
           },
           _active: {
-            bg: cm === "dark" ? "gray.500" : "gray.700",
+            bg: cm === "dark" ? "gray.500" : "gray.200",
           },
         }),
       },
@@ -103,29 +103,21 @@ const theme = extendTheme({
     },
     Input: inputHelpers.defineMultiStyleConfig({
       variants: {
-        "blue-outline": ({ colorMode: cm }) => ({
-          field: {
-            bg: "transparent",
-            borderWidth: "1px",
-            borderStyle: "solid",
-            borderColor: cm === "dark" ? "blue.300" : "blue.700",
-          },
-        }),
         "neutral-outline": ({ colorMode: cm }) => ({
           field: {
             bg: "transparent",
             borderWidth: "1px",
             borderStyle: "solid",
-            borderColor: cm === "dark" ? "gray.500" : "gray.400",
+            borderColor: cm === "dark" ? "gray.500" : "gray.300",
 
             _hover: {
-              borderColor: cm === "dark" ? "gray.400" : "gray.600",
+              borderColor: cm === "dark" ? "gray.400" : "gray.400",
+            },
+            _focus: {
+              borderColor: cm === "dark" ? "gray.300" : "gray.500",
             },
           },
-          element: {
-            height: "calc(100% - 8px)",
-            // zIndex: -1,
-          },
+          element: {},
           addon: {},
         }),
       },
