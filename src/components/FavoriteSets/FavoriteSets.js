@@ -78,8 +78,9 @@ const FavoriteSets = () => {
         px={{ md: ".5rem" }}
         maxH={{ md: "35vh" }}
         overflowY="auto"
-        border={{ md: "1px solid #efefef" }}
-        borderRight="none"
+        borderLeft={{ md: "1px solid" }}
+        borderBottom={{ md: "1px solid" }}
+        borderColor={{ md: isDark ? "gray.600" : "gray.200" }}
       >
         {loading ? (
           <Center h="200px">

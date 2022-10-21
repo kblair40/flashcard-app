@@ -95,6 +95,16 @@ const theme = extendTheme({
             bg: cm === "dark" ? "gray.500" : "gray.200",
           },
         }),
+        "icon-button-red": ({ colorMode: cm }) => ({
+          transition: "background 0.2s",
+          bg: "transparent",
+          _hover: {
+            bg: cm === "dark" ? "red.400" : "red.50",
+          },
+          _active: {
+            bg: cm === "dark" ? "red.500" : "red.100",
+          },
+        }),
       },
       defaultProps: {
         variant: "solid-neutral",

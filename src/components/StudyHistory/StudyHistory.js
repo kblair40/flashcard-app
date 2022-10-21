@@ -21,6 +21,9 @@ const StudyHistory = () => {
   const [deleting, setDeleting] = useState(false);
   const [sortBy, setSortBy] = useState("newest");
 
+  const { colorMode } = useColorMode();
+  const isDark = colorMode === "dark";
+
   useEffect(() => {
     const fetchHistory = async () => {
       try {
@@ -84,8 +87,9 @@ const StudyHistory = () => {
           px={{ md: ".5rem" }}
           maxH={{ md: "35vh" }}
           overflowY="auto"
-          border={{ md: "1px solid #efefef" }}
-          borderRight="none"
+          borderLeft={{ md: "1px solid" }}
+          borderBottom={{ md: "1px solid" }}
+          borderColor={{ md: isDark ? "gray.600" : "gray.200" }}
           w="100%"
         >
           {history &&
@@ -143,7 +147,12 @@ const HistoryItem = ({ item, onClick }) => {
           </Text>
         </Flex>
 
-        <Text fontSize="sm" fontStyle="italic" color="gray.600" lineHeight={1}>
+        <Text
+          fontSize="sm"
+          fontStyle="italic"
+          color={!isDark ? "dm-secondary" : "lm-secondary"}
+          lineHeight={1}
+        >
           {duration}
         </Text>
       </Flex>
@@ -151,9 +160,9 @@ const HistoryItem = ({ item, onClick }) => {
       <IconButton
         ml="2rem"
         onClick={onClick}
-        size="xs"
+        size={{ base: "xs", md: "xs" }}
         bg={isDark ? "gray.800" : "#fff"}
-        variant="ghost"
+        variant="icon-button-red"
         rounded="full"
         aria-label="Delete Button"
         icon={<TrashIcon boxSize="14px" />}

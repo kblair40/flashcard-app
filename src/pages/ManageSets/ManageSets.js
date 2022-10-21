@@ -186,20 +186,20 @@ const CreatedSets = ({
               return (
                 <React.Fragment key={i}>
                   <GridItem w="100%" maxW={{ base: "100px", sm: "140px" }}>
-                    <Text noOfLines={1} fontWeight="500" w="100%">
+                    <Text noOfLines={1} fontWeight="600" w="100%">
                       {title}
                     </Text>
                   </GridItem>
 
                   <GridItem display="flex" justifyContent="center">
-                    <Text fontWeight="500">{flashcards.length}</Text>
+                    <Text fontWeight="600">{flashcards.length}</Text>
                   </GridItem>
 
                   <GridItem
                     justifyContent="center"
                     display={{ base: "none", lg: "flex" }}
                   >
-                    <Text fontWeight="500">{lastUpdated}</Text>
+                    <Text fontWeight="600">{lastUpdated}</Text>
                   </GridItem>
 
                   <GridItem display="flex" justifyContent="center">
@@ -209,6 +209,7 @@ const CreatedSets = ({
                       </Center>
                     ) : (
                       <Checkbox
+                        colorScheme="gray"
                         isDisabled={changingPublicStatus === _id}
                         isChecked={isPublic}
                         onChange={(e) => handleChangePublicStatus(e, _id)}
@@ -219,8 +220,8 @@ const CreatedSets = ({
                   <GridItem>
                     <Link to={`/create/${_id}`}>
                       <Button
-                        variant="ghost"
-                        leftIcon={<EditIcon boxSize="14px" fill="gray.700" />}
+                        variant="icon-button"
+                        leftIcon={<EditIcon boxSize="14px" />}
                         size="sm"
                         w="100%"
                       >
@@ -257,7 +258,7 @@ const NoSets = ({ isDark }) => {
           mt="2rem"
           rounded="full"
           size="lg"
-          leftIcon={<AddIcon fill="white" boxSize="16px" />}
+          leftIcon={<AddIcon boxSize="16px" />}
           _hover={{ bg: "primary.500" }}
           _active={{ bg: "primary.500" }}
           bg="primary.400"
