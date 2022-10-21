@@ -85,14 +85,15 @@ const AllSets = () => {
           <Link to="/manage-sets">
             <Tooltip label="Manage and Edit Sets">
               <IconButton
+                variant="icon-buttons"
                 rounded="full"
-                variant="ghost"
-                transition="all 0.3s"
                 _hover={{
-                  bg: "primary.300",
-                  "& svg": { fill: "#fff" },
+                  bg: isDark ? "gray.700" : "gray.100",
+                  "& svg": isDark ? { fill: "#fff" } : undefined,
                 }}
-                _active={{ bg: "primary.400" }}
+                _active={{
+                  bg: isDark ? "gray.600" : "gray.200",
+                }}
                 icon={
                   <SettingsIcon
                     boxSize="22px"
