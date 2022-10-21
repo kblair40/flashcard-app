@@ -71,9 +71,11 @@ const SigninForm = ({ onClose, onAuthSuccess }) => {
         <Heading mb="2rem">Sign In</Heading>
 
         <FormControl isRequired>
-          <FormLabel fontSize="sm">Username</FormLabel>
+          <FormLabel mb="4px" fontSize="sm">
+            Username
+          </FormLabel>
           <Input
-            size="sm"
+            variant="neutral-outline"
             name="username"
             value={formData.username}
             onChange={handleChange}
@@ -81,10 +83,12 @@ const SigninForm = ({ onClose, onAuthSuccess }) => {
         </FormControl>
 
         <FormControl isRequired>
-          <FormLabel fontSize="sm">Password</FormLabel>
+          <FormLabel mb="4px" fontSize="sm">
+            Password
+          </FormLabel>
           <InputGroup>
             <Input
-              size="sm"
+              variant="neutral-outline"
               type={showPassword ? "text" : "password"}
               name="password"
               value={formData.password}

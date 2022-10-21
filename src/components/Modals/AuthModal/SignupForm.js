@@ -113,7 +113,6 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
         onAuthSuccess(response.data.token);
       }
     } catch (e) {
-      console.error("FAILED SIGNING UP:", e.response);
       if (e.response.data) {
         const { error_field, error_msg } = e.response.data;
 
@@ -127,11 +126,6 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
     }
 
     setLoading(false);
-  };
-
-  const iconButtonProps = {
-    borderRadius: "4px",
-    variant: "icon-button",
   };
 
   return (
@@ -227,7 +221,7 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
 
             <InputRightElement w="2.5rem">
               <IconButton
-                {...iconButtonProps}
+                variant="icon-button"
                 onClick={() => setShowPassword(!showPassword)}
                 icon={
                   showPassword ? (
@@ -254,7 +248,6 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
           <InputGroup>
             <Input
               variant="neutral-outline"
-              // size="sm"
               type={showConfirmPassword ? "text" : "password"}
               name="confirm_password"
               value={formData.confirm_password}
@@ -262,7 +255,7 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
             />
             <InputRightElement w="2.5rem">
               <IconButton
-                {...iconButtonProps}
+                variant="icon-button"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 icon={
                   showConfirmPassword ? (
