@@ -6,6 +6,7 @@ import {
   Center,
   Spinner,
   Box,
+  Text,
   useColorMode,
 } from "@chakra-ui/react";
 import { useParams, Link } from "react-router-dom";
@@ -101,6 +102,37 @@ const StudySession = () => {
       <Center h="calc(100vh - 60px)" overflowY="hidden">
         <Spinner />
       </Center>
+    );
+  }
+
+  if (flashcards && flashcards.length === 0) {
+    return (
+      <Flex
+        align="center"
+        justify="center"
+        direction="column"
+        h="calc(100vh - 60px)"
+        overflowY="hidden"
+      >
+        <Text fontSize="lg" fontWeight={600}>
+          No cards in this set
+        </Text>
+
+        <Link to="/">
+          <Flex align="center" pt="8px">
+            <Box
+              transform="rotate(180deg)"
+              mr="4px"
+              position="relative"
+              top="2px"
+            >
+              <ChevronIcon boxSize="18px" />
+            </Box>
+
+            <Text fontWeight={500}>Go back to home</Text>
+          </Flex>
+        </Link>
+      </Flex>
     );
   }
 
