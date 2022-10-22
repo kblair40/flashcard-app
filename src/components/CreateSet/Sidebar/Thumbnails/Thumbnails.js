@@ -100,14 +100,14 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
       position="absolute"
       bottom={0}
       left={0}
-      pt="8px"
+      pt="16px"
       pb="32px"
     >
       <Heading
         fontSize="xl"
         textAlign="center"
-        // pl="8px"
-        borderBottom="1px solid #cacaca"
+        borderBottom="1px solid"
+        borderColor={isDark ? "gray.400" : "gray.300"}
       >
         Cards
       </Heading>
