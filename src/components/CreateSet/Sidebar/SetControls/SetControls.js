@@ -34,7 +34,7 @@ const SetControls = ({ isDark, height = "100%", width = "100%" }) => {
   };
 
   const handleClickExit = () => {
-    navigate("/account/sets");
+    navigate("/manage-sets");
   };
 
   const isEmpty = (val) => {

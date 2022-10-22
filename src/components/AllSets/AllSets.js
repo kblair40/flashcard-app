@@ -69,7 +69,7 @@ const AllSets = () => {
         // border="1px solid green"
         // p=".5rem"
         // rounded="lg"
-        // bg="blue.400"
+        // bg="blue.50"
         direction="column"
         w="100%"
         justify="space-between"
