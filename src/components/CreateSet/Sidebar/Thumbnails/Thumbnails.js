@@ -196,7 +196,15 @@ const Thumbnail = ({
       w="100%"
       borderWidth={1}
       borderStyle="solid"
-      borderColor={isActive ? "green.500" : isDark ? "gray.500" : "gray.300"}
+      borderColor={
+        isActive && isDark
+          ? "gray.100"
+          : isActive
+          ? "gray.800"
+          : isDark
+          ? "gray.500"
+          : "gray.300"
+      }
       borderRadius="4px"
       justify="center"
       align="center"

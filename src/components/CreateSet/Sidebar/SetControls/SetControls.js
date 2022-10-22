@@ -56,24 +56,27 @@ const SetControls = ({ isDark, height = "100%", width = "100%" }) => {
     >
       <VStack w="100%" spacing=".5rem">
         <ControlButton
+          isDark={isDark}
           isDisabled={activeCard.id === undefined}
           label="New Card"
           onClick={addCard}
         />
         <ControlButton
+          isDark={isDark}
           onClick={handleClickSave}
           isDisabled={isEmpty(frontCardContent) || isEmpty(backCardContent)}
           label="Save Card"
           loading={saving}
         />
         <ControlButton
+          isDark={isDark}
           isDisabled={!isEditing}
           onClick={deleteCard}
           label="Delete Card"
           loading={deleting}
           variant="solid-red"
         />
-        <ControlButton onClick={handleClickExit} label="Exit" />
+        <ControlButton isDark={isDark} onClick={handleClickExit} label="Exit" />
       </VStack>
     </Flex>
   );
@@ -81,12 +84,18 @@ const SetControls = ({ isDark, height = "100%", width = "100%" }) => {
 
 export default SetControls;
 
-const ControlButton = ({ label, onClick, loading, isDisabled, variant }) => {
+const ControlButton = ({
+  isDark,
+  label,
+  onClick,
+  loading,
+  isDisabled,
+  variant,
+}) => {
   return (
     <Button
       w="100%"
       size="sm"
-      colorScheme={label.startsWith("Delete") ? "red" : "blue"}
       onClick={onClick}
       isLoading={loading}
       isDisabled={isDisabled}
