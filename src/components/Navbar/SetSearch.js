@@ -17,9 +17,8 @@ import { useLocation, Link } from "react-router-dom";
 import { SearchIcon } from "utils/icons";
 import api from "api";
 
-const SetSearch = ({ isDisabled }) => {
+const SetSearch = ({ isDisabled, isDark }) => {
   const [value, setValue] = useState("");
-  // const [borderColor, setBorderColor] = useState("gray.300");
   const [results, setResults] = useState([]);
   const [showResults, setShowResults] = useState(true);
 
@@ -87,7 +86,7 @@ const SetSearch = ({ isDisabled }) => {
         </InputGroup>
       </PopoverTrigger>
 
-      <PopoverContent p={0}>
+      <PopoverContent p={0} bg={isDark ? "gray.700" : "#fff"}>
         <PopoverArrow />
         <PopoverHeader fontWeight="600" p="8px 16px 8px 12px">
           Results
@@ -95,7 +94,7 @@ const SetSearch = ({ isDisabled }) => {
         <PopoverBody p={0}>
           {results
             ? results.map((result, i) => {
-                return <Result key={i} result={result} />;
+                return <Result key={i} result={result} isDark={isDark} />;
               })
             : null}
         </PopoverBody>
@@ -106,7 +105,7 @@ const SetSearch = ({ isDisabled }) => {
 
 export default SetSearch;
 
-const Result = ({ result }) => {
+const Result = ({ result, isDark }) => {
   return (
     <Link to={`/study/${result._id}/`}>
       <Flex
@@ -116,7 +115,7 @@ const Result = ({ result }) => {
         align="end"
         cursor="pointer"
         transition="background 0.3s"
-        _hover={{ bg: "gray.100" }}
+        _hover={{ bg: isDark ? "gray.600" : "gray.100" }}
       >
         <Text lineHeight={1} mr="6px" fontWeight="600">
           {result.title}

@@ -98,7 +98,7 @@ export default function WithSubnavigation() {
             w={{ base: "100%" }}
             maxW={{ base: "220px", sm: "260px" }}
           >
-            <SetSearch isDisabled={!isSignedIn} />
+            <SetSearch isDark={isDark} isDisabled={!isSignedIn} />
           </Box>
 
           <AvatarMenu
@@ -172,7 +172,7 @@ export default function WithSubnavigation() {
             border="1px solid transparent"
           >
             <Box w="100%" maxW={"400px"}>
-              <SetSearch isDisabled={!isSignedIn} />
+              <SetSearch isDark={isDark} isDisabled={!isSignedIn} />
             </Box>
           </Box>
 
