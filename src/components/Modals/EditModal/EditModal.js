@@ -10,11 +10,14 @@ import {
   Select,
   Input,
   useColorMode,
+  Flex,
 } from "@chakra-ui/react";
 
 import { categories } from "utils/constants";
+import api from "api";
 
-const EditModal = ({ isOpen, onClose }) => {
+const EditModal = ({ isOpen, onClose, setData }) => {
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     desc: "",
@@ -24,12 +27,30 @@ const EditModal = ({ isOpen, onClose }) => {
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
 
+  useEffect(() => {
+    // if (setData) {
+    //   setFormData(setData);
+    // }
+  }, [setData]);
+
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData({
       ...formData,
       [`${id}`]: value,
     });
+  };
+
+  const handleSubmit = async () => {
+    setLoading(true);
+    try {
+      const response = await api.patch(`/flashcard_set/patch/${setData.id}`);
+      console.log("\nPATCH RESPONSE:", response.data);
+    } catch (e) {
+      console.error("FAILED TO PATCH SET:", e);
+    }
+    setLoading(false);
+    onClose();
   };
 
   return (
@@ -72,7 +93,15 @@ const EditModal = ({ isOpen, onClose }) => {
                 );
               })}
             </Select>
-            {/* <Input id="title" onChange={handleChange} placeholder="Set Title" /> */}
+
+            <Flex>
+              <Button pt="8px" variant="ghost">
+                Cancel
+              </Button>
+              <Button isLoading={loading} pt="8px" onClick={handleSubmit}>
+                Save Changes
+              </Button>
+            </Flex>
           </VStack>
         </ModalBody>
       </ModalContent>
