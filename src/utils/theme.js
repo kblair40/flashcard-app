@@ -77,19 +77,22 @@ const theme = extendTheme({
           _active: {
             bg: cm === "dark" ? "red.500" : "red.600",
           },
+          _disabled: {
+            pointerEvents: "none",
+          },
         }),
         "solid-neutral": ({ colorMode: cm }) => ({
-          bg: cm === "dark" ? "gray.600" : "gray.100",
+          bg: cm === "dark" ? "gray.700" : "gray.200",
           color: cm === "dark" ? "gray.50" : "gray.700",
 
           _hover: {
-            bg: cm === "dark" ? "gray.500" : "gray.200",
+            bg: cm === "dark" ? "gray.600" : "gray.300",
           },
           _active: {
-            bg: cm === "dark" ? "gray.400" : "gray.300",
+            bg: cm === "dark" ? "gray.500" : "gray.400",
           },
           _disabled: {
-            _hover: { bg: cm === "dark" ? "gray.500" : "gray.200" },
+            pointerEvents: "none",
           },
         }),
         "icon-button": ({ colorMode: cm }) => ({
