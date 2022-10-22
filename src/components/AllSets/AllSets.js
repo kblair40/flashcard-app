@@ -66,6 +66,10 @@ const AllSets = () => {
   return (
     <Flex justify="center" pt="32px" w="100%">
       <Flex
+        // border="1px solid green"
+        // p=".5rem"
+        // rounded="lg"
+        // bg="blue.400"
         direction="column"
         w="100%"
         justify="space-between"
