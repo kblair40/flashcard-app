@@ -76,7 +76,7 @@ const StudyHistory = () => {
     <Flex
       h="100%"
       bg={isDark ? "gray.800" : "gray.50"}
-      rounded="lg"
+      borderRadius={{ base: "8px", md: "8px 0 0 8px" }}
       justify="center"
       w={{ base: "100%" }}
     >
