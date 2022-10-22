@@ -142,7 +142,7 @@ const AllSets = () => {
                       "& .chev_icon": { opacity: 1, right: "4px" },
                     }}
                     _active={{
-                      bg: !isDark ? "gray.200" : "gray.600",
+                      bg: !isDark ? "gray.200" : "gray.700",
                       "& button": {
                         bg: !isDark ? "gray.200" : "gray.700",
                       },

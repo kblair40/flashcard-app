@@ -61,7 +61,7 @@ const CommunitySets = () => {
   }, []);
 
   const borderColor = useColorModeValue("gray.200", "gray.600");
-  const bgMain = useColorModeValue("blue.50", "blue.900");
+  const bgMain = useColorModeValue("gray.50", "gray.800");
 
   return (
     <Flex
@@ -154,7 +154,7 @@ const CommunitySet = ({ set, isFavorited }) => {
     setLoading(false);
   };
 
-  const menuBg = useColorModeValue("blue.50", "blue.900");
+  const menuBg = useColorModeValue("gray.50", "gray.700");
 
   if (!set) {
     return null;
