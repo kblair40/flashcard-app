@@ -1,60 +1,82 @@
 import React, { useContext } from "react";
-import {
-  Flex,
-  Text,
-  Editable,
-  EditableInput,
-  EditableTextarea,
-  EditablePreview,
-} from "@chakra-ui/react";
+import { Flex, Text, IconButton } from "@chakra-ui/react";
 
+import { EditIcon } from "utils/icons";
 import SetContext from "store/SetContext";
 import Sidebar from "./Sidebar";
 import Editors from "./Editors";
 
-const SetMeta = ({ setData, height = "max-content", width = "100%" }) => {
+const SetMeta = ({ setData, width = "100%" }) => {
   let category, title;
 
   if (setData) {
     category = setData.category;
     title = setData.title;
   }
-  console.log("category:", category);
   return (
     <Flex
       mt="1rem"
-      height={height}
+      h="70px"
       width={width}
       px={{ base: "8px", md: "16px" }}
       flexWrap="wrap"
       justifyContent="center"
     >
-      <Flex w="100%" maxWidth="700px">
+      <Flex h="max-content" w="100%" maxWidth="700px">
         <Flex
-          direction={{ base: "column", sm: "row" }}
+          w={{ base: "35%" }}
+          direction="row"
+          flexWrap="wrap"
+          align="center"
           mr="1.25rem"
-          align={{ base: "start", sm: "center" }}
         >
-          <Text fontWeight={600}>Category:</Text>
-          {category && (
-            <Editable ml="4px" defaultValue={category}>
-              <EditablePreview />
-              <EditableInput />
-            </Editable>
+          <Text fontWeight={600} mr="6px" noOfLines={1}>
+            Category:
+          </Text>
+          <Text
+            fontWeight={500}
+            fontSize="sm"
+            textTransform="capitalize"
+            noOfLines={1}
+          >
+            {category}
+          </Text>
+        </Flex>
+
+        <Flex
+          w={{ base: "35%" }}
+          direction="row"
+          flexWrap="wrap"
+          align="center"
+        >
+          <Text fontWeight={600} mr="6px" noOfLines={1}>
+            Title:
+          </Text>
+          {title && (
+            <Text
+              fontWeight={500}
+              fontSize="sm"
+              textTransform="capitalize"
+              ml={{ base: 0, md: "6px" }}
+              noOfLines={1}
+            >
+              {title}
+            </Text>
           )}
         </Flex>
 
         <Flex
-          direction={{ base: "column", sm: "row" }}
-          align={{ base: "start", sm: "center" }}
+          w={{ base: "30%" }}
+          direction="row"
+          flexWrap="wrap"
+          align="center"
+          justify="center"
         >
-          <Text fontWeight={600}>Title:</Text>
-          {title && (
-            <Editable ml="4px" defaultValue={title}>
-              <EditablePreview />
-              <EditableInput />
-            </Editable>
-          )}
+          <IconButton
+            variant="icon-button"
+            // size="md"
+            icon={<EditIcon boxSize="18px" />}
+          />
         </Flex>
       </Flex>
     </Flex>
