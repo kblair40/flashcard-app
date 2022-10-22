@@ -67,7 +67,13 @@ const AllSets = () => {
   const mainBg = isDark ? "blue.900" : "blue.50";
 
   return (
-    <Flex justify="center" pt="32px" w="100%">
+    <Flex
+      justify="center"
+      pt="32px"
+      w="100%"
+      // position="fixed"
+      // top=""
+    >
       <Flex
         // border="1px solid green"
         // p=".5rem"
@@ -77,15 +83,19 @@ const AllSets = () => {
         w="100%"
         justify="space-between"
         position="relative"
+        // maxH="calc(100vh - 92px)"
+        // overflowY="auto"
+        // pb="8px"
       >
         <Flex
+          // border="1px solid #ccc"
           w="100%"
           justify="space-between"
-          mb=".75rem"
-          p="1rem 1rem 0"
+          // pb=".75rem"
+          p="1rem 1rem .75rem"
           align="center"
         >
-          <Heading {...headingStyles} noOfLines={2}>
+          <Heading {...headingStyles} noOfLines={1}>
             {userData ? `${makeDisplayName(userData)}'s` : ""} Flashcard Sets
           </Heading>
 
@@ -113,7 +123,14 @@ const AllSets = () => {
           </Link>
         </Flex>
 
-        <Flex h="100%" w="100%" direction="column">
+        <Flex
+          h="100%"
+          w="100%"
+          direction="column"
+          maxH={{ base: "50vh", md: "calc(100vh - 160px)" }}
+          overflowY={{ base: "auto" }}
+          pb={{ md: "1rem" }}
+        >
           {loading ? (
             <Loading h="100px" />
           ) : !isSignedIn ? (

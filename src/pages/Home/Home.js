@@ -10,7 +10,7 @@ const Home = () => {
   const { isSignedIn } = useContext(UserContext);
 
   return (
-    <Flex justify="center" w="100%">
+    <Flex justify="center" w="100%" pt="60px" pb={{ base: "2rem", md: 0 }}>
       <Hero />
 
       {isSignedIn && (
@@ -27,6 +27,11 @@ const Home = () => {
             w={{ base: "100%", md: "100%" }}
             ml={{ md: "1.5rem" }}
             mx={{ lg: "auto" }}
+            //
+            // position={{ md: "fixed" }}
+            // top={{ md: "84px" }}
+            // left={{ md: "0" }}
+            // right={{ md: "0" }}
           >
             <AllSets />
           </Box>

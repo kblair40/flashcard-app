@@ -4,6 +4,7 @@
 4. Study sessions for empty sets should be prevented
     - If somehow still accessed, friendly error msg of some kind should be shown
 5. react-quill size and alignment settings
+6. Ability to edit title, category and public status of a set
 
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.4.0",

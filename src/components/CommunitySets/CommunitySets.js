@@ -84,9 +84,7 @@ const CommunitySets = () => {
         <Flex
           w="100%"
           justify="space-between"
-          mb=".75rem"
-          p="1rem 1rem 0"
-          // pr="8px"
+          p="1rem 1rem .75rem"
           align="center"
         >
           <Heading {...headingStyles} noOfLines={2}>
@@ -94,22 +92,31 @@ const CommunitySets = () => {
           </Heading>
         </Flex>
 
-        {loading ? (
-          <Flex h="200px" w="100%" justify="center" align="center">
-            <Spinner />
-          </Flex>
-        ) : communitySets && communitySets.length ? (
-          communitySets.reverse().map((set, idx) => {
-            return (
-              <CommunitySet
-                isFavorited={favSets.includes(set._id)}
-                key={idx}
-                set={set}
-                onClick={() => console.log("clicked")}
-              />
-            );
-          })
-        ) : null}
+        <Flex
+          h="100%"
+          w="100%"
+          direction="column"
+          maxH={{ base: "30vh", md: "calc(100vh - 160px)" }}
+          overflowY={{ base: "auto" }}
+          pb={{ md: "1rem" }}
+        >
+          {loading ? (
+            <Flex h="200px" w="100%" justify="center" align="center">
+              <Spinner />
+            </Flex>
+          ) : communitySets && communitySets.length ? (
+            communitySets.reverse().map((set, idx) => {
+              return (
+                <CommunitySet
+                  isFavorited={favSets.includes(set._id)}
+                  key={idx}
+                  set={set}
+                  onClick={() => console.log("clicked")}
+                />
+              );
+            })
+          ) : null}
+        </Flex>
       </Flex>
     </Flex>
   );
