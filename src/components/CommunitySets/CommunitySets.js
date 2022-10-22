@@ -71,7 +71,7 @@ const CommunitySets = () => {
       borderColor={{ md: borderColor }}
       overflowY={{ md: "auto" }}
       overflowX="hidden"
-      h={{ md: "calc(100vh - 60px)" }}
+      h={{ md: "calc(100vh - 76px)" }}
       p={{ base: "32px 0 0", md: "32px 8px 0 12px" }}
     >
       <Flex
