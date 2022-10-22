@@ -61,7 +61,13 @@ export default function WithSubnavigation() {
   });
 
   return (
-    <Box>
+    <Box
+    // position="fixed"
+    // top={0}
+    // left={0}
+    // right={0}
+    //
+    >
       <Flex
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}
@@ -69,7 +75,11 @@ export default function WithSubnavigation() {
         px={{ base: 4 }}
         shadow="sm"
         align={"center"}
-        position="relative"
+        // position="relative"
+        position="fixed"
+        top={0}
+        left={0}
+        right={0}
         justify={{ base: "space-between", md: "unset" }}
         zIndex={1000}
       >
@@ -138,6 +148,7 @@ export default function WithSubnavigation() {
           display={{ base: "none", md: "flex" }}
           align="center"
           mr={{ base: 2 }}
+          // border="1px solid white"
         >
           <RRLink to="/">
             <Image

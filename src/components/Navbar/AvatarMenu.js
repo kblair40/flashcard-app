@@ -7,11 +7,13 @@ import {
   MenuList,
   Button,
   Avatar,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
 import { LogoutIcon } from "utils/icons";
 
 const AvatarMenu = ({ handleClickSignout }) => {
+  const bg = useColorModeValue("blue.100", "blue.800");
   return (
     <Flex alignItems={"center"} display={{ base: "none", md: "flex" }}>
       <Menu>
@@ -22,7 +24,7 @@ const AvatarMenu = ({ handleClickSignout }) => {
           cursor={"pointer"}
           minW={0}
         >
-          <Avatar size={"sm"} bg="primary.300" />
+          <Avatar size={"sm"} bg={bg} />
         </MenuButton>
 
         <MenuList py={0}>
