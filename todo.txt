@@ -1,6 +1,8 @@
 1. Detect refresh on StudySession page and save timer duration to localStorage before allowing
 2. Add more categories for flashcard sets
 3. Navbar needs to be fixed
+4. Study sessions for empty sets should be prevented
+    - If somehow still accessed, friendly error msg of some kind should be shown
 
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.4.0",

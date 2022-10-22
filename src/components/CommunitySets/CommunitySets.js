@@ -61,6 +61,7 @@ const CommunitySets = () => {
   }, []);
 
   const borderColor = useColorModeValue("gray.200", "gray.600");
+  const bgMain = useColorModeValue("blue.50", "blue.900");
 
   return (
     <Flex
@@ -73,12 +74,19 @@ const CommunitySets = () => {
       h={{ md: "calc(100vh - 60px)" }}
       p={{ base: "32px 0 0", md: "32px 8px 0 12px" }}
     >
-      <Flex direction="column" w="100%" position="relative">
+      <Flex
+        direction="column"
+        w="100%"
+        position="relative"
+        bg={bgMain}
+        rounded="lg"
+      >
         <Flex
           w="100%"
           justify="space-between"
           mb=".75rem"
-          pr="8px"
+          p="1rem 1rem 0"
+          // pr="8px"
           align="center"
         >
           <Heading {...headingStyles} noOfLines={2}>
@@ -139,6 +147,8 @@ const CommunitySet = ({ set, isFavorited }) => {
     setLoading(false);
   };
 
+  const menuBg = useColorModeValue("blue.50", "blue.900");
+
   if (!set) {
     return null;
   }
@@ -150,6 +160,7 @@ const CommunitySet = ({ set, isFavorited }) => {
       py="8px"
       borderRadius="4px"
       w="100%"
+      px="1rem"
     >
       <Flex direction="column" w="100%">
         <Text mr="6px" mb="6px" fontSize="lg" fontWeight="600" lineHeight={1}>
@@ -170,7 +181,7 @@ const CommunitySet = ({ set, isFavorited }) => {
           variant="ghost"
         />
 
-        <MenuList>
+        <MenuList bg={menuBg}>
           <Link to={`/study/${set._id}`}>
             <MenuItem
               closeOnSelect={true}
