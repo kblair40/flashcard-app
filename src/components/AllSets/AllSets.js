@@ -213,7 +213,7 @@ const AllSets = () => {
               );
             })
           ) : flashcardSets && !flashcardSets.length ? (
-            <NoSets />
+            <NoSets isDark={isDark} />
           ) : null}
         </Flex>
       </Flex>
@@ -223,11 +223,11 @@ const AllSets = () => {
 
 export default AllSets;
 
-const NoSets = () => {
+const NoSets = ({ isDark }) => {
   return (
     <Flex w="100%" direction="column" justify="center" align="center" pt="1rem">
-      <Text textAlign="center" fontWeight="700">
-        NO SETS FOUND
+      <Text textAlign="center" fontWeight="700" fontSize="lg">
+        No Sets Found
       </Text>
 
       <Link to="/create">
@@ -236,9 +236,10 @@ const NoSets = () => {
           rounded="full"
           size="lg"
           leftIcon={<AddIcon fill="white" boxSize="16px" />}
-          _hover={{ bg: "blue.400" }}
-          _active={{ bg: "blue.400" }}
-          bg="blue.300"
+          fontWeight="700"
+          bg={isDark ? "blue.700" : "blue.300"}
+          _hover={{ bg: isDark ? "blue.600" : "blue.400" }}
+          _active={{ bg: isDark ? "blue.500" : "blue.500" }}
           color="white"
         >
           Create a Set
