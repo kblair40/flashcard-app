@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import SetContext from "store/SetContext";
 
-const SetControls = ({ height = "100%", width = "100%" }) => {
+const SetControls = ({ isDark, height = "100%", width = "100%" }) => {
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
 
@@ -71,6 +71,7 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
           onClick={deleteCard}
           label="Delete Card"
           loading={deleting}
+          variant="solid-red"
         />
         <ControlButton onClick={handleClickExit} label="Exit" />
       </VStack>
@@ -80,7 +81,7 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
 
 export default SetControls;
 
-const ControlButton = ({ label, onClick, loading, isDisabled }) => {
+const ControlButton = ({ label, onClick, loading, isDisabled, variant }) => {
   return (
     <Button
       w="100%"
@@ -89,6 +90,7 @@ const ControlButton = ({ label, onClick, loading, isDisabled }) => {
       onClick={onClick}
       isLoading={loading}
       isDisabled={isDisabled}
+      variant={variant}
     >
       {label}
     </Button>

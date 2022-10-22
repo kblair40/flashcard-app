@@ -5,7 +5,7 @@ import { Reorder, useDragControls } from "framer-motion";
 import api from "api";
 import SetContext from "store/SetContext";
 
-const Thumbnails = ({ height = "100%", width = "100%" }) => {
+const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
   // add some kind of overlay with spinner while saving new order
   const [saving, setSaving] = useState(false);
   const [cards, setCards] = useState([]);
@@ -120,7 +120,9 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
         overflowY="auto"
         p="4px 12px 0 8px"
         mt="4px"
-        background={saving ? "rgba(10,20,240,0.02)" : "#fff"}
+        background={
+          saving ? "rgba(10,20,240,0.02)" : isDark ? "gray.800" : "#fff"
+        }
         transition={"background 0.2s"}
         zIndex={-1}
       >
@@ -140,6 +142,7 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
                     frontContent={card.front_content}
                     id={card._id}
                     index={i}
+                    isDark={isDark}
                     isActive={
                       activeCard && activeCard.id
                         ? activeCard.id === card._id
@@ -169,7 +172,14 @@ const Thumbnails = ({ height = "100%", width = "100%" }) => {
 
 export default Thumbnails;
 
-const Thumbnail = ({ frontContent, index, id, updateActiveCard, isActive }) => {
+const Thumbnail = ({
+  isDark,
+  frontContent,
+  index,
+  id,
+  updateActiveCard,
+  isActive,
+}) => {
   const handleClick = () => {
     updateActiveCard({ index, id });
   };
@@ -186,15 +196,15 @@ const Thumbnail = ({ frontContent, index, id, updateActiveCard, isActive }) => {
       w="100%"
       borderWidth={1}
       borderStyle="solid"
-      borderColor={isActive ? "green.500" : "#ccc"}
+      borderColor={isActive ? "green.500" : isDark ? "gray.500" : "gray.300"}
       borderRadius="4px"
       justify="center"
       align="center"
       cursor="pointer"
       position="relative"
       transition={"background 0.3s"}
-      bg="#fff"
-      _hover={{ background: "#eee" }}
+      bg={isDark ? "gray.700" : "gray.50"}
+      _hover={{ background: isDark ? "gray.600" : "gray.100" }}
     >
       <Box dangerouslySetInnerHTML={{ __html: frontContent }} />
 
