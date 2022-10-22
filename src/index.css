@@ -8,6 +8,12 @@ body {
 
 /* OVERRIDES */
 
+/* EDITABLE INPUT OVERRIDES */
+.chakra-editable__input {
+  box-shadow: none !important;
+  border: 1px solid #CBD5E0;
+}
+
 /* Quill Overrides */
 .ql-container {
   min-height: 200px !important;

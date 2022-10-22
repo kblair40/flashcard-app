@@ -6,6 +6,7 @@
 6. Ability to edit title, category and public status of a set
 7. Better logo
 8. Responsiveness for CreateSet and StudySession
+9. Under history, add button to view all.  Let them know in a tooltip this option is comming soon
 
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.4.0",

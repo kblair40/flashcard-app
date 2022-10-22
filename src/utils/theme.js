@@ -174,6 +174,13 @@ const theme = extendTheme({
         }),
       },
     }),
+    EditableInput: {
+      baseStyle: ({ colorMode: cm }) => ({
+        border: "1px solid",
+        borderColor: "gray.500",
+        // borderColor: cm === "dark" ? "gray.500" : "gray.300",
+      }),
+    },
   },
   fonts: {
     body: "Open Sans, sans-serif",

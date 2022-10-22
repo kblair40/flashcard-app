@@ -1,9 +1,65 @@
 import React, { useContext } from "react";
-import { Flex, Text } from "@chakra-ui/react";
+import {
+  Flex,
+  Text,
+  Editable,
+  EditableInput,
+  EditableTextarea,
+  EditablePreview,
+} from "@chakra-ui/react";
 
 import SetContext from "store/SetContext";
 import Sidebar from "./Sidebar";
 import Editors from "./Editors";
+
+const SetMeta = ({ setData, height = "max-content", width = "100%" }) => {
+  let category, title;
+
+  if (setData) {
+    category = setData.category;
+    title = setData.title;
+  }
+  console.log("category:", category);
+  return (
+    <Flex
+      mt="1rem"
+      height={height}
+      width={width}
+      px={{ base: "8px", md: "16px" }}
+      flexWrap="wrap"
+      justifyContent="center"
+    >
+      <Flex w="100%" maxWidth="700px">
+        <Flex
+          direction={{ base: "column", sm: "row" }}
+          mr="1.25rem"
+          align={{ base: "start", sm: "center" }}
+        >
+          <Text fontWeight={600}>Category:</Text>
+          {category && (
+            <Editable ml="4px" defaultValue={category}>
+              <EditablePreview />
+              <EditableInput />
+            </Editable>
+          )}
+        </Flex>
+
+        <Flex
+          direction={{ base: "column", sm: "row" }}
+          align={{ base: "start", sm: "center" }}
+        >
+          <Text fontWeight={600}>Title:</Text>
+          {title && (
+            <Editable ml="4px" defaultValue={title}>
+              <EditablePreview />
+              <EditableInput />
+            </Editable>
+          )}
+        </Flex>
+      </Flex>
+    </Flex>
+  );
+};
 
 const CreateSet = () => {
   const { flashcardSetData: setData } = useContext(SetContext);
@@ -25,55 +81,3 @@ const CreateSet = () => {
 };
 
 export default CreateSet;
-
-const SetMeta = ({ setData, height = "max-content", width = "100%" }) => {
-  let category, title;
-
-  if (setData) {
-    category = setData.category;
-    title = setData.title;
-  }
-  return (
-    <Flex
-      mt="1rem"
-      height={height}
-      width={width}
-      px={{ base: "8px", md: "16px" }}
-      flexWrap="wrap"
-      justifyContent="center"
-    >
-      <Flex w="100%" maxWidth="700px">
-        <Flex
-          direction={{ base: "column", md: "row" }}
-          mr="1.25rem"
-          align={{ base: "start", md: "center" }}
-        >
-          <Text fontWeight={600}>Category:</Text>
-          <Text
-            fontWeight={500}
-            fontSize="sm"
-            textTransform="capitalize"
-            ml={{ base: 0, md: "6px" }}
-          >
-            {category}
-          </Text>
-        </Flex>
-
-        <Flex
-          direction={{ base: "column", md: "row" }}
-          align={{ base: "start", md: "center" }}
-        >
-          <Text fontWeight={600}>Title:</Text>
-          <Text
-            fontWeight={500}
-            fontSize="sm"
-            textTransform="capitalize"
-            ml={{ base: 0, md: "6px" }}
-          >
-            {title}
-          </Text>
-        </Flex>
-      </Flex>
-    </Flex>
-  );
-};
