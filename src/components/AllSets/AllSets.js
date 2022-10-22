@@ -26,8 +26,7 @@ const AllSets = () => {
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
 
-  // const studyButtonBg = isDark ? "gray.800" : "#fff";
-  const studyButtonBg = isDark ? "blue.900" : "blue.50";
+  const studyButtonBg = isDark ? "gray.800" : "gray.50";
 
   useEffect(() => {
     const fetchFlashcardData = async () => {
@@ -64,7 +63,7 @@ const AllSets = () => {
     fontSize: { base: "xl", sm: "2xl" },
   };
 
-  const mainBg = isDark ? "blue.900" : "blue.50";
+  const mainBg = isDark ? "gray.800" : "gray.50";
 
   return (
     <Flex justify="center" pt="32px" w="100%">
@@ -92,7 +91,7 @@ const AllSets = () => {
                 variant="icon-buttons"
                 rounded="full"
                 _hover={{
-                  bg: isDark ? "blue.800" : "blue.100",
+                  bg: isDark ? "gray.700" : "gray.100",
                   "& svg": isDark ? { fill: "#fff" } : undefined,
                 }}
                 _active={{
@@ -135,17 +134,17 @@ const AllSets = () => {
                     px="1rem"
                     transition="background 0.2s"
                     _hover={{
-                      bg: !isDark ? "blue.100" : "blue.800",
+                      bg: !isDark ? "gray.100" : "gray.700",
                       "& button": {
                         transform: "translateX(-16px)",
-                        bg: !isDark ? "blue.100" : "blue.800",
+                        bg: !isDark ? "gray.100" : "gray.700",
                       },
                       "& .chev_icon": { opacity: 1, right: "4px" },
                     }}
                     _active={{
-                      bg: !isDark ? "blue.200" : "blue.700",
+                      bg: !isDark ? "gray.200" : "gray.600",
                       "& button": {
-                        bg: !isDark ? "blue.200" : "blue.700",
+                        bg: !isDark ? "gray.200" : "gray.700",
                       },
                     }}
                   >
@@ -237,9 +236,9 @@ const NoSets = ({ isDark }) => {
           size="lg"
           leftIcon={<AddIcon fill="white" boxSize="16px" />}
           fontWeight="700"
-          bg={isDark ? "blue.700" : "blue.300"}
-          _hover={{ bg: isDark ? "blue.600" : "blue.400" }}
-          _active={{ bg: isDark ? "blue.500" : "blue.500" }}
+          bg={isDark ? "gray.700" : "gray.300"}
+          _hover={{ bg: isDark ? "gray.600" : "gray.400" }}
+          _active={{ bg: isDark ? "gray.500" : "gray.500" }}
           color="white"
         >
           Create a Set

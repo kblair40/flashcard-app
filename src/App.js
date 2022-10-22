@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 
 import { UserProvider } from "store/UserContext";
 import { StudySessionProvider } from "store/StudySessionContext";
@@ -13,10 +13,11 @@ import ManageSets from "pages/ManageSets";
 import Navbar from "components/Navbar";
 
 function App() {
+  const mainBg = useColorModeValue("#fff", "gray.900");
   return (
     <UserProvider>
       <StudySessionProvider>
-        <Box minH="100vh">
+        <Box minH="100vh" bg={mainBg}>
           <Navbar />
 
           <Box position="relative">

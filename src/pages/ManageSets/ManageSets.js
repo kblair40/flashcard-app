@@ -87,7 +87,13 @@ const ManageSets = () => {
   }
 
   return (
-    <Flex justify="center" w="100%" pr={{ base: "16px", md: 0 }} pl="16px">
+    <Flex
+      pt="60px"
+      justify="center"
+      w="100%"
+      pr={{ base: "16px", md: 0 }}
+      pl="16px"
+    >
       <Flex
         direction={{ base: "column", md: "row" }}
         justify={{ md: "space-between" }}

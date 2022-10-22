@@ -12,7 +12,7 @@ const Create = () => {
   useDetectLogout();
 
   return (
-    <Box border="1px solid transparent" h="100%">
+    <Box border="1px solid transparent" h="100%" pt="60px">
       {!params.id ? <CreateSetForm /> : <CreateSet />}
     </Box>
   );
