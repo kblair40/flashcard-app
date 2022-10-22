@@ -141,7 +141,7 @@ const theme = extendTheme({
             },
             _focusVisible: { outline: "none" },
             _placeholder: {
-              color: cm === "dark" ? "gray.300" : "gray.500",
+              color: cm === "dark" ? "gray.300" : "gray.400",
             },
           },
           icon: {},
