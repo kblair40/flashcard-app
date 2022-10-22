@@ -14,6 +14,7 @@ import { LogoutIcon } from "utils/icons";
 
 const AvatarMenu = ({ handleClickSignout }) => {
   const bg = useColorModeValue("blue.100", "blue.800");
+  const menuBg = useColorModeValue("gray.50", "gray.700");
   return (
     <Flex alignItems={"center"} display={{ base: "none", md: "flex" }}>
       <Menu>
@@ -27,7 +28,7 @@ const AvatarMenu = ({ handleClickSignout }) => {
           <Avatar size={"sm"} bg={bg} />
         </MenuButton>
 
-        <MenuList py={0}>
+        <MenuList py={0} bg={menuBg}>
           <MenuItem
             fontWeight="600"
             icon={<LogoutIcon boxSize="18px" />}
