@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Flex, Text, IconButton } from "@chakra-ui/react";
+import React, { useContext, useEffect, useState } from "react";
+import { Flex, Text, IconButton, Box } from "@chakra-ui/react";
 
 import { EditIcon } from "utils/icons";
 import SetContext from "store/SetContext";
@@ -30,13 +30,31 @@ export default CreateSet;
 
 const SetMeta = ({ setData, width = "100%" }) => {
   const [showEditModal, setShowEditModal] = useState(false);
+  const [localData, setLocalData] = useState();
 
   let category, title;
+  let data = {};
 
-  if (setData) {
-    category = setData.category;
-    title = setData.title;
+  useEffect(() => {
+    if (setData) setLocalData(setData);
+  }, [setData]);
+
+  if (!localData) {
+    return <Box h="70px" />;
   }
+
+  if (localData) {
+    category = localData.category;
+    title = localData.title;
+
+    data = {
+      category: localData.category,
+      title: localData.title,
+      desc: localData.description,
+      id: localData._id,
+    };
+  }
+
   return (
     <Flex
       mt="1rem"
@@ -104,7 +122,16 @@ const SetMeta = ({ setData, width = "100%" }) => {
         </Flex>
       </Flex>
 
-      {showEditModal && <EditModal isOpen={showEditModal} />}
+      {showEditModal && (
+        <EditModal
+          setData={data}
+          onPatchSuccess={({ category, title }) => {
+            setLocalData({ ...localData, category, title });
+          }}
+          isOpen={showEditModal}
+          onClose={() => setShowEditModal(false)}
+        />
+      )}
     </Flex>
   );
 };

@@ -9,14 +9,13 @@ import {
   Button,
   Select,
   Input,
-  useColorMode,
-  Flex,
+  HStack,
 } from "@chakra-ui/react";
 
 import { categories } from "utils/constants";
 import api from "api";
 
-const EditModal = ({ isOpen, onClose, setData }) => {
+const EditModal = ({ isOpen, onClose, setData, onPatchSuccess }) => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
@@ -24,13 +23,10 @@ const EditModal = ({ isOpen, onClose, setData }) => {
     category: "",
   });
 
-  const { colorMode } = useColorMode();
-  const isDark = colorMode === "dark";
-
   useEffect(() => {
-    // if (setData) {
-    //   setFormData(setData);
-    // }
+    if (setData) {
+      setFormData(setData);
+    }
   }, [setData]);
 
   const handleChange = (e) => {
@@ -44,8 +40,14 @@ const EditModal = ({ isOpen, onClose, setData }) => {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      const response = await api.patch(`/flashcard_set/patch/${setData.id}`);
+      const response = await api.patch(`/flashcard_set/patch/${setData.id}`, {
+        description: formData.desc,
+        title: formData.title,
+        category: formData.category,
+      });
       console.log("\nPATCH RESPONSE:", response.data);
+
+      onPatchSuccess(response.data.set);
     } catch (e) {
       console.error("FAILED TO PATCH SET:", e);
     }
@@ -94,14 +96,16 @@ const EditModal = ({ isOpen, onClose, setData }) => {
               })}
             </Select>
 
-            <Flex>
-              <Button pt="8px" variant="ghost">
-                Cancel
-              </Button>
-              <Button isLoading={loading} pt="8px" onClick={handleSubmit}>
+            <HStack w="100%" justify="end" pt="8px">
+              <Button variant="icon-button">Cancel</Button>
+              <Button
+                isLoading={loading}
+                onClick={handleSubmit}
+                variant="solid-blue"
+              >
                 Save Changes
               </Button>
-            </Flex>
+            </HStack>
           </VStack>
         </ModalBody>
       </ModalContent>
