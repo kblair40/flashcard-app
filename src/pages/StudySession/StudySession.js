@@ -1,4 +1,9 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
+import React, {
+  useEffect,
+  useState,
+  useContext,
+  // useRef
+} from "react";
 import {
   Button,
   Flex,
@@ -35,24 +40,33 @@ const StudySession = () => {
 
   const params = useParams();
 
-  const didMount = useRef(false);
-  useEffect(() => {
-    if (didMount.current && params && params.id) return;
-    didMount.current = true;
+  // const didMount = useRef(false);
+  // useEffect(() => {
+  //   if (didMount.current && params && params.id) return;
+  //   didMount.current = true;
 
-    const createSession = async (setId) => {
+  //   const createSession = async (setId) => {
+  //     try {
+  //       const createRes = await createStudySession(setId);
+  //       console.log("CREATE RES:", createRes);
+  //     } catch (e) {
+  //       console.error("FAILED TO CREATE STUDY SESSION:", e);
+  //     }
+  //   };
+
+  //   createSession(params.id);
+  // }, [params]);
+
+  useEffect(() => {
+    const createSession = async (cardCount) => {
       try {
-        const createRes = await createStudySession(setId);
+        const createRes = await createStudySession(params.id, cardCount);
         console.log("CREATE RES:", createRes);
       } catch (e) {
         console.error("FAILED TO CREATE STUDY SESSION:", e);
       }
     };
 
-    createSession(params.id);
-  }, [params]);
-
-  useEffect(() => {
     const fetchSet = async (setId) => {
       try {
         const response = await api.get(`/flashcard_set/${setId}`);
@@ -62,6 +76,8 @@ const StudySession = () => {
           const { flashcards, title } = response.data.set;
           setFlashcards(flashcards);
           setTitle(title);
+
+          createSession(flashcards.length);
         }
       } catch (e) {
         console.error("FAILED FETCHING SET:", e);

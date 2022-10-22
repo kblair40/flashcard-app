@@ -8,6 +8,7 @@ import api from "api";
 const StudySessionContext = createContext();
 
 const StudySessionProvider = ({ children }) => {
+  const [badSession, setBadSession] = useState(false);
   const [sessionId, setSessionId] = useState();
   const [setId, setSetId] = useState();
   const { seconds, minutes, hours, isRunning, start, pause, reset } =
@@ -22,8 +23,9 @@ const StudySessionProvider = ({ children }) => {
 
   useEffect(() => {
     const patchSessionDuration = async () => {
-      if (!sessionId) {
+      if (!sessionId || badSession) {
         console.log("NO SESSION ID IN STATE - UNABLE TO PATCH");
+        setBadSession(false);
         return;
       }
 
@@ -64,21 +66,28 @@ const StudySessionProvider = ({ children }) => {
     }
   }, [params, pathname]);
 
-  const createStudySession = async (setId) => {
+  const createStudySession = async (setId, cardCount) => {
     console.log("CREATE STUDY SESSION");
+    // if cardCount === 0, don't create a study session.
     patchedSession.current = false; // start with this, called onMount in StudySession component
     try {
-      const response = await api.post("/study_session", {
-        flashcard_set: setId,
-        start_time: getUnixTimestamp(),
-      });
+      if (cardCount) {
+        const response = await api.post("/study_session", {
+          flashcard_set: setId,
+          start_time: getUnixTimestamp(),
+        });
 
-      setSetId(setId);
-      console.log("\n\n\nCREATE RESPONSE:", response.data);
-      if (response.data && response.data.study_session) {
-        const { _id } = response.data.study_session;
-        setSessionId(_id);
+        setSetId(setId);
+        console.log("\n\n\nCREATE RESPONSE:", response.data);
+        if (response.data && response.data.study_session) {
+          const { _id } = response.data.study_session;
+          setSessionId(_id);
+        }
+        setBadSession(false);
+      } else {
+        setBadSession(true);
       }
+
       return true;
     } catch (e) {
       console.log("FAILED TO CREATE SESfSION:", e);
