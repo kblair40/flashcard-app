@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import {
   IconButton,
+  Button,
   Flex,
   Text,
   Heading,
   useColorMode,
   Box,
+  Tooltip,
 } from "@chakra-ui/react";
 
 import api from "api";
@@ -113,6 +115,19 @@ const StudyHistory = () => {
                 />
               );
             })}
+
+          {history && history.length > 20 ? (
+            <Tooltip
+              label="Only the last 20 sessions from your history are shown here.  A page where your full history can be seen is in progress."
+              placement="top"
+            >
+              <Box>
+                <Button my="8px" size="sm" w="100%" isDisabled={true}>
+                  See All
+                </Button>
+              </Box>
+            </Tooltip>
+          ) : null}
         </Box>
       </Flex>
 
