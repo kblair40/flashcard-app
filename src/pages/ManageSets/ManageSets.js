@@ -241,7 +241,10 @@ const CreatedSets = ({
                   <GridItem>
                     <Link to={`/create/${_id}`}>
                       <Button
-                        variant="icon-button"
+                        bg="transparent"
+                        transition="background-color 0.2s"
+                        _hover={{ bg: isDark ? "gray.700" : "gray.100" }}
+                        _active={{ bg: isDark ? "gray.600" : "gray.200" }}
                         leftIcon={<EditIcon boxSize="14px" />}
                         size="sm"
                         w="100%"
