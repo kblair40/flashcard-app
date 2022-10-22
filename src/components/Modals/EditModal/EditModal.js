@@ -10,6 +10,7 @@ import {
   Select,
   Input,
   HStack,
+  Text,
 } from "@chakra-ui/react";
 
 import { categories } from "utils/constants";
@@ -64,37 +65,46 @@ const EditModal = ({ isOpen, onClose, setData, onPatchSuccess }) => {
 
         <ModalBody p={"3rem 1rem 2rem"}>
           <VStack spacing="1rem">
-            <Input
-              variant="neutral-outline"
-              value={formData.title}
-              id="title"
-              onChange={handleChange}
-              placeholder="Set Title"
-            />
+            <VStack spacing="4px" w="100%" align="start">
+              <Text fontWeight="500">Set Title</Text>
+              <Input
+                variant="neutral-outline"
+                value={formData.title}
+                id="title"
+                onChange={handleChange}
+                placeholder="Set Title"
+              />
+            </VStack>
 
-            <Input
-              variant="neutral-outline"
-              value={formData.desc}
-              id="desc"
-              onChange={handleChange}
-              placeholder="Description"
-            />
+            <VStack spacing="4px" w="100%" align="start">
+              <Text fontWeight="500">Set Description</Text>
+              <Input
+                variant="neutral-outline"
+                value={formData.desc}
+                id="desc"
+                onChange={handleChange}
+                placeholder="Description"
+              />
+            </VStack>
 
-            <Select
-              id="category"
-              variant="neutral-outline"
-              onChange={handleChange}
-              placeholder="Category"
-              value={formData.category}
-            >
-              {categories.map((cat, i) => {
-                return (
-                  <option key={i} value={cat.value}>
-                    {cat.label}
-                  </option>
-                );
-              })}
-            </Select>
+            <VStack spacing="4px" w="100%" align="start">
+              <Text fontWeight="500">Set Description</Text>
+              <Select
+                id="category"
+                variant="neutral-outline"
+                onChange={handleChange}
+                placeholder="Category"
+                value={formData.category}
+              >
+                {categories.map((cat, i) => {
+                  return (
+                    <option key={i} value={cat.value}>
+                      {cat.label}
+                    </option>
+                  );
+                })}
+              </Select>
+            </VStack>
 
             <HStack w="100%" justify="end" pt="8px">
               <Button variant="icon-button">Cancel</Button>
