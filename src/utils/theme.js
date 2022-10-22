@@ -99,10 +99,10 @@ const theme = extendTheme({
           transition: "background 0.2s",
           bg: "transparent",
           _hover: {
-            bg: cm === "dark" ? "gray.600" : "gray.100",
+            bg: cm === "dark" ? "gray.700" : "gray.100",
           },
           _active: {
-            bg: cm === "dark" ? "gray.500" : "gray.200",
+            bg: cm === "dark" ? "gray.600" : "gray.200",
           },
         }),
         "icon-button-red": ({ colorMode: cm }) => ({
