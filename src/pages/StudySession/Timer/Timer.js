@@ -25,28 +25,24 @@ const Timer = () => {
       <Flex align="center">
         <Flex align="center">
           <IconButton
-            variant="ghost"
-            size="xs"
+            variant="icon-button"
+            size="sm"
             rounded="full"
-            bg="transparent"
-            transition="background 0.3s"
-            _hover={{ bg: "gray.100" }}
-            _active={{ bg: "gray.200" }}
             onClick={() => {
               if (isRunning) pause();
               else start();
             }}
             icon={
               !isRunning ? (
-                <PlayIcon boxSize="13px" />
+                <PlayIcon boxSize="15px" />
               ) : (
-                <PauseIcon boxSize="14px" />
+                <PauseIcon boxSize="16px" />
               )
             }
           />
         </Flex>
 
-        <Flex align="center" ml="6px">
+        <Flex align="center" ml="6px" fontWeight="500">
           {hours > 0 && <Text>{hours}:</Text>}
           <Text>{padTime(minutes)}:</Text>
           <Text>{padTime(seconds)}</Text>

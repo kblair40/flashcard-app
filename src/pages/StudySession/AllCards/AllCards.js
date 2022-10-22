@@ -22,15 +22,16 @@ const AllCards = ({
         in={show}
         direction="bottom"
         style={{
-          position: "absolute",
+          position: "fixed",
           bottom: 0,
           left: 0,
           right: 0,
           overflowX: "auto",
           overflowY: "hidden",
-          width: { base: "100vw" },
+          minWidth: { base: "100vw" },
+          width: "100%",
           boxShadow: "inset 0 2px 4px 0 rgba(0,0,0,0.09)",
-          padding: "8px 8px 8px 8px",
+          padding: "2px",
         }}
         unmountOnExit
       >
@@ -75,22 +76,24 @@ const Card = ({ content, onClick }) => {
   const isDark = colorMode === "dark";
 
   return (
-    <Flex
-      onClick={onClick}
-      justify="center"
-      align="center"
-      h="100px"
-      minW="180px"
-      mr="8px"
-      boxShadow="md"
-      borderRadius="4px"
-      cursor="pointer"
-      transition="background 0.3s"
-      bg={isDark ? "gray.700" : undefined}
-      _hover={{ bg: isDark ? "gray.600" : "gray.50" }}
-      _active={{ bg: isDark ? "gray.600" : "gray.100" }}
-    >
-      {content ? <Box dangerouslySetInnerHTML={{ __html: content }} /> : null}
-    </Flex>
+    <Box p="8px" bg={isDark ? "gray.900" : "gray.50"}>
+      <Flex
+        onClick={onClick}
+        justify="center"
+        align="center"
+        h="100px"
+        minW="180px"
+        mr="8px"
+        boxShadow="md"
+        borderRadius="4px"
+        cursor="pointer"
+        transition="background 0.3s"
+        bg={isDark ? "gray.800" : undefined}
+        _hover={{ bg: isDark ? "gray.700" : "gray.50" }}
+        _active={{ bg: isDark ? "gray.600" : "gray.100" }}
+      >
+        {content ? <Box dangerouslySetInnerHTML={{ __html: content }} /> : null}
+      </Flex>
+    </Box>
   );
 };

@@ -60,51 +60,30 @@ const CurrentCard = ({
         <Button
           rounded="full"
           onClick={handleClickPrev}
-          variant="ghost"
+          variant="icon-button"
           size="sm"
           pointerEvents={currentCard === 0 ? "none" : undefined}
           isDisabled={currentCard === 0}
-          transition="all 0.3s"
           leftIcon={
             <ChevronIcon
               boxSize="14px"
               transform="rotate(180deg)"
               transition="all 0.3s"
-              fill={isDark ? "gray.50" : "gray.700"}
             />
           }
-          _hover={{
-            bg: "primary.300",
-            color: "white",
-            "& svg": { fill: "#fff" },
-          }}
-          _active={{ bg: "primary.400" }}
         >
           Last Card
         </Button>
         <Button
           rounded="full"
+          variant="icon-button"
           pointerEvents={
             currentCard === flashcards.length - 1 ? "none" : undefined
           }
           isDisabled={currentCard === flashcards.length - 1}
           onClick={handleClickNext}
-          transition="all 0.3s"
-          rightIcon={
-            <ChevronIcon
-              fill={isDark ? "gray.50" : "gray.700"}
-              boxSize="14px"
-              transition="all 0.3s"
-            />
-          }
-          variant="ghost"
+          rightIcon={<ChevronIcon boxSize="14px" transition="all 0.3s" />}
           size="sm"
-          _hover={{
-            bg: "primary.300",
-            color: "white",
-            "& svg": { fill: "#fff" },
-          }}
-          _active={{ bg: "primary.400" }}
         >
           Next Card
         </Button>
@@ -157,7 +136,6 @@ const FlipContainer = ({ children }) => {
           _hover={{
             "& svg": {
               transform: "rotate(180deg)",
-              fill: "#fff",
             },
           }}
         >
@@ -165,20 +143,9 @@ const FlipContainer = ({ children }) => {
             rounded="full"
             mx="auto"
             mt="1rem"
-            variant="ghost"
-            transition={"all 0.3s"}
+            variant="icon-button"
             onClick={() => setSide(side === "back" ? "front" : "back")}
-            leftIcon={
-              <FlipIcon
-                transition={"all 0.3s"}
-                fill={isDark ? "gray.50" : "gray.700"}
-              />
-            }
-            _hover={{
-              bg: "primary.300",
-              color: "white",
-            }}
-            _active={{ bg: "primary.400" }}
+            leftIcon={<FlipIcon transition={"all 0.3s"} />}
           >
             Flip
           </Button>
@@ -200,7 +167,7 @@ const Flashcard = ({ content }) => {
       w={{ base: "340px", sm: "440px", md: "520px" }}
       borderRadius="2px"
       shadow="md"
-      bg={isDark ? "gray.700" : "gray.50"}
+      bg={isDark ? "gray.800" : "gray.50"}
     >
       <Box
         dangerouslySetInnerHTML={{

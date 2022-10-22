@@ -107,8 +107,8 @@ const StudySession = () => {
   return (
     <Flex
       justify="center"
-      pt="1.5rem"
-      h="calc(100vh - 60px)"
+      pt="84px"
+      h="calc(100vh)"
       position="relative"
       overflowY="hidden"
     >
@@ -149,27 +149,14 @@ const StudySession = () => {
 
 export default StudySession;
 
-const GoBack = ({ isDark }) => {
+const GoBack = () => {
   return (
-    <Box position="absolute" top="1rem" left="1rem">
+    <Box position="absolute" top="5rem" left="1rem">
       <Link to="/">
         <Button
-          variant="ghost"
-          leftIcon={
-            <ChevronIcon
-              transform="rotate(180deg)"
-              transition="all 0.3s"
-              boxSize="20px"
-              fill={isDark ? "gray.50" : "gray.700"}
-            />
-          }
-          _hover={{
-            bg: "primary.300",
-            color: "white",
-            "& svg": { fill: "#fff" },
-          }}
-          _active={{ bg: "primary.400" }}
-          transition="all 0.3s"
+          variant="icon-button"
+          leftIcon={<ChevronIcon transform="rotate(180deg)" boxSize="18px" />}
+          rounded="full"
         >
           Back to My Sets
         </Button>
