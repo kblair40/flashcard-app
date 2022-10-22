@@ -9,13 +9,19 @@ const Editor = ({ value, onChange }) => {
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
 
+  const iconStroke = isDark ? "gray.50" : "gray.700";
   return (
     <Flex justify="center" w="100%">
       <Box
         w="100%"
-        className={isDark ? "custom-editor-dark" : "custom-editor-light"}
+        sx={{
+          "& svg path, line, rect, circle, polyline": {
+            stroke: isDark ? "#F7FAFC !important" : "#2D3748 !important",
+          },
+        }}
       >
         <ReactQuill
+          className={isDark ? "custom-editor-dark" : "custom-editor-light"}
           theme="snow"
           modules={quillSettings.modules}
           value={value}

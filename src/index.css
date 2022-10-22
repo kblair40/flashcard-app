@@ -29,7 +29,6 @@ body {
   border: 1px solid #e2e8f0 !important; /* gray.200 */
   background: #f7fafc !important; /* gray.50 */
 }
-
 .custom-editor-dark .ql-snow {
   border: 1px solid #718096 !important; /* gray.500 */
   background: #2d3748 !important; /* gray.700 */
@@ -38,11 +37,6 @@ body {
   border: 1px solid #718096 !important; /* gray.500 */
   background: #4A5568 !important; /* gray.600 */
 }
-
-.custom-editor-dark svg, path, line, rect, circle, polyline {
-  stroke: #f7fafc !important; /* gray.50 */
-}
-
 .custom-editor-dark .ql-formats span.ql-picker-label {
   color: #f7fafc !important; /* gray.50 */
   border: 1px solid #718096 !important;
@@ -72,7 +66,6 @@ body {
 .custom-editor-dark .ql-formats .ql-align {
   transition: border-color 0.2s !important;
   border-bottom: 1px solid !important;
-  /* gray.500 */
   border-color: #718096 !important;
 }
 .custom-editor-dark .ql-formats .ql-align:hover {
@@ -83,7 +76,7 @@ body {
 }
 .custom-editor-dark .ql-formats .ql-align .ql-picker-options span {
   padding: 4px 6px !important;
-  width: 100%;
+  width: 100% !important;
 }
 
 
@@ -91,18 +84,12 @@ body {
 /* EDF2F7 gray.100 */
 /* E2E8F0 gray.200 */
 /* CBD5E0 gray.300 */
-
 /* 2D3748 gray.700 */
 
 .custom-editor-light .ql-toolbar button.ql-active {
   border: 1px solid #CBD5E0 !important; 
   background: #E2E8F0 !important;
 }
-
-.custom-editor-light svg, path, line, rect, circle, polyline {
-  stroke: #2D3748 !important; 
-}
-
 .custom-editor-light .ql-formats span.ql-picker-label {
   color: #2D3748 !important; 
   border: 1px solid #CBD5E0 !important;
@@ -116,7 +103,6 @@ body {
   color: #2d3748 !important;
   border: 1px solid #E2E8F0 !important;
 }
-
 .custom-editor-light .ql-formats span.ql-picker-options .ql-picker-item:hover {
   background: #EDF2F7 !important;
   color: #2D3748 !important;
