@@ -26,7 +26,8 @@ const AllSets = () => {
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
 
-  const studyButtonBg = isDark ? "gray.800" : "#fff";
+  // const studyButtonBg = isDark ? "gray.800" : "#fff";
+  const studyButtonBg = isDark ? "blue.900" : "blue.50";
 
   useEffect(() => {
     const fetchFlashcardData = async () => {
@@ -63,13 +64,15 @@ const AllSets = () => {
     fontSize: { base: "xl", sm: "2xl" },
   };
 
+  const mainBg = isDark ? "blue.900" : "blue.50";
+
   return (
     <Flex justify="center" pt="32px" w="100%">
       <Flex
         // border="1px solid green"
         // p=".5rem"
-        // rounded="lg"
-        // bg="blue.50"
+        rounded="lg"
+        bg={mainBg}
         direction="column"
         w="100%"
         justify="space-between"
@@ -79,7 +82,7 @@ const AllSets = () => {
           w="100%"
           justify="space-between"
           mb=".75rem"
-          pr="8px"
+          p="1rem 1rem 0"
           align="center"
         >
           <Heading {...headingStyles} noOfLines={2}>
@@ -92,7 +95,7 @@ const AllSets = () => {
                 variant="icon-buttons"
                 rounded="full"
                 _hover={{
-                  bg: isDark ? "gray.700" : "gray.100",
+                  bg: isDark ? "blue.800" : "blue.100",
                   "& svg": isDark ? { fill: "#fff" } : undefined,
                 }}
                 _active={{
@@ -125,19 +128,20 @@ const AllSets = () => {
                     cursor="pointer"
                     w="100%"
                     py="8px"
+                    px="1rem"
                     transition="background 0.2s"
                     _hover={{
-                      bg: !isDark ? "gray.50" : "gray.700",
+                      bg: !isDark ? "blue.100" : "blue.800",
                       "& button": {
                         transform: "translateX(-16px)",
-                        bg: !isDark ? "gray.50" : "gray.700",
+                        bg: !isDark ? "blue.100" : "blue.800",
                       },
                       "& .chev_icon": { opacity: 1, right: "4px" },
                     }}
                     _active={{
-                      bg: !isDark ? "gray.100" : "gray.600",
+                      bg: !isDark ? "blue.200" : "blue.700",
                       "& button": {
-                        bg: !isDark ? "gray.100" : "gray.600",
+                        bg: !isDark ? "blue.200" : "blue.700",
                       },
                     }}
                   >
@@ -178,7 +182,8 @@ const AllSets = () => {
                           zIndex={2}
                           leftIcon={
                             <StudyIcon
-                              fill={isDark ? "gray.50" : "gray.700"}
+                              // fill={isDark ? "gray.50" : "gray.700"}
+                              // fill={isDark ? "gray.50" : "gray.700"}
                               boxSize="18px"
                               mr="4px"
                             />
@@ -227,9 +232,9 @@ const NoSets = () => {
           rounded="full"
           size="lg"
           leftIcon={<AddIcon fill="white" boxSize="16px" />}
-          _hover={{ bg: "primary.500" }}
-          _active={{ bg: "primary.500" }}
-          bg="primary.400"
+          _hover={{ bg: "blue.400" }}
+          _active={{ bg: "blue.400" }}
+          bg="blue.300"
           color="white"
         >
           Create a Set
