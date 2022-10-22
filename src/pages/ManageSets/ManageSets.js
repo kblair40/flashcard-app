@@ -91,6 +91,7 @@ const ManageSets = () => {
       pt="60px"
       justify="center"
       w="100%"
+      maxW={{ base: "98%", sm: "100vw", md: "100vw" }}
       pr={{ base: "16px", md: 0 }}
       pl="16px"
     >
@@ -99,10 +100,13 @@ const ManageSets = () => {
         justify={{ md: "space-between" }}
         align={{ base: "center", md: "start" }}
         w="100%"
-        maxW={{ base: "98%", sm: "420px", md: "none" }}
         mt="2rem"
       >
-        <Box w={{ base: "max-content", md: "max-content" }} mx={{ md: "auto" }}>
+        <Box
+          pr={{ md: "1rem" }}
+          w={{ base: "max-content", md: "max-content" }}
+          mx={{ md: "auto" }}
+        >
           <CreatedSets
             changingPublicStatus={changingPublicStatus}
             flashcardSets={flashcardSets}
@@ -116,19 +120,25 @@ const ManageSets = () => {
           mt={{ base: "2.5rem", md: 0 }}
           direction={{ base: "column" }}
           align={{ base: "center", md: "start" }}
+          h={{ md: "calc(100vh - 106px)" }}
         >
-          <Box w={{ base: "100%", md: "340px" }} mb={{ md: "1.5rem" }}>
-            <Box w={{ base: "100%", md: "100%" }}>
+          <Box
+            h={{ md: "50%" }}
+            w={{ base: "100%", md: "340px" }}
+            mb={{ md: "1.5rem" }}
+          >
+            <Box h={{ md: "100%" }} w={{ base: "100%", md: "100%" }}>
               <FavoriteSets />
             </Box>
           </Box>
 
           <Box
+            h={{ md: "50%" }}
             w={{ base: "100%", md: "340px" }}
             ml={{ base: "0" }}
             mt={{ base: "1.5rem", md: "0" }}
           >
-            <Box w={{ base: "100%", md: "100%" }}>
+            <Box h={{ md: "100%" }} w={{ base: "100%", md: "100%" }}>
               <StudyHistory />
             </Box>
           </Box>
@@ -147,12 +157,17 @@ const CreatedSets = ({
   isDark,
 }) => {
   return (
-    <React.Fragment>
-      <Heading fontSize={{ base: "xl", sm: "2xl" }} mb="1.5rem">
-        Your Created Sets
-      </Heading>
+    <Box bg={isDark ? "gray.800" : "gray.50"} rounded="lg" w="100%">
+      <Box p={{ base: "1.5rem 1rem .5rem" }}>
+        <Heading fontSize={{ base: "xl", sm: "2xl" }} pb="1rem">
+          Your Created Sets
+        </Heading>
+      </Box>
 
       <Grid
+        p={{ base: "0 1rem .5rem" }}
+        maxH={{ base: "45vh", md: "calc(100vh - 186px)" }}
+        overflowY="auto"
         templateRows="auto"
         templateColumns={{
           base: "repeat(4, max-content)",
@@ -244,7 +259,7 @@ const CreatedSets = ({
           <NoSets isDark={isDark} />
         ) : null}
       </Grid>
-    </React.Fragment>
+    </Box>
   );
 };
 

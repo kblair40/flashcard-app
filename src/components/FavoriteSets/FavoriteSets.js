@@ -69,18 +69,24 @@ const FavoriteSets = () => {
   };
 
   return (
-    <Flex direction="column" w="100%">
-      <Heading {...headingStyles} noOfLines={2} mb=".75rem">
-        Your Favorite Sets
-      </Heading>
+    <Flex
+      direction="column"
+      w="100%"
+      bg={isDark ? "gray.800" : "gray.50"}
+      rounded="lg"
+      // new
+      h="100%"
+    >
+      <Box p={{ base: "1.5rem 1rem .5rem" }}>
+        <Heading {...headingStyles} noOfLines={2} pb="1rem">
+          Your Favorite Sets
+        </Heading>
+      </Box>
 
       <Box
-        px={{ md: ".5rem" }}
-        maxH={{ md: "35vh" }}
+        px={{ base: "1rem" }}
+        maxH={{ base: "40vh", md: "unset" }}
         overflowY="auto"
-        borderLeft={{ md: "1px solid" }}
-        borderBottom={{ md: "1px solid" }}
-        borderColor={{ md: isDark ? "gray.600" : "gray.200" }}
       >
         {loading ? (
           <Center h="200px">

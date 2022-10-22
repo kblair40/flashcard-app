@@ -73,10 +73,21 @@ const StudyHistory = () => {
   };
 
   return (
-    <Flex justify="center" w={{ base: "100%" }}>
+    <Flex
+      h="100%"
+      bg={isDark ? "gray.800" : "gray.50"}
+      rounded="lg"
+      justify="center"
+      w={{ base: "100%" }}
+    >
       <Flex w="100%" direction="column" align="center">
-        <Flex w="100%" justify="space-between" pr="1rem" align="center">
-          <Heading mb=".75rem" w="100%" fontSize={{ base: "xl", sm: "2xl" }}>
+        <Flex
+          w="100%"
+          justify="space-between"
+          p={{ base: "1.5rem 1rem .5rem" }}
+          align="center"
+        >
+          <Heading pb=".75rem" w="100%" fontSize={{ base: "xl", sm: "2xl" }}>
             History
           </Heading>
 
@@ -84,13 +95,10 @@ const StudyHistory = () => {
         </Flex>
 
         <Box
-          px={{ md: ".5rem" }}
-          maxH={{ md: "35vh" }}
+          px={{ base: "1rem" }}
           overflowY="auto"
-          borderLeft={{ md: "1px solid" }}
-          borderBottom={{ md: "1px solid" }}
-          borderColor={{ md: isDark ? "gray.600" : "gray.200" }}
           w="100%"
+          maxH={{ base: "50vh", md: "unset" }}
         >
           {history &&
             history.map((histItem, idx) => {
