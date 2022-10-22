@@ -9,7 +9,6 @@ const Editor = ({ value, onChange }) => {
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
 
-  const iconStroke = isDark ? "gray.50" : "gray.700";
   return (
     <Flex justify="center" w="100%">
       <Box
