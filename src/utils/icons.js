@@ -285,26 +285,46 @@ export const GlobeNetworkIcon = ({ fill = "#2D3748", boxSize = "72px" }) => {
   );
 };
 
-export const FlipIcon = ({ fill = "#2D3748", boxSize = "24px", ...props }) => {
+export const FlipIcon = ({ boxSize = "24px", ...props }) => {
+  const {
+    colors: { gray },
+  } = useTheme();
+
+  const modeBg = useColorModeValue(gray["700"], gray["50"]);
+  const activeFill = props.fill ? props.fill : modeBg;
   return (
-    <Icon boxSize={boxSize} viewBox="0 0 24 24" fill={fill} {...props}>
+    <Icon boxSize={boxSize} viewBox="0 0 24 24" fill={activeFill} {...props}>
       <path d="M9 12C9 13.66 10.34 15 12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9C10.34 9 9 10.34 9 12ZM13 12C13 12.55 12.55 13 12 13C11.45 13 11 12.55 11 12C11 11.45 11.45 11 12 11C12.55 11 13 11.45 13 12Z" />
       <path d="M8 10V8H5.09C6.47 5.61 9.05 4 12 4C15.72 4 18.85 6.56 19.74 10H21.8C20.87 5.44 16.84 2 12 2C8.73 2 5.82 3.58 4 6.01V4H2V10H8ZM16 14V16H18.91C17.53 18.39 14.95 20 12 20C8.28 20 5.15 17.44 4.26 14H2.2C3.13 18.56 7.16 22 12 22C15.27 22 18.18 20.42 20 17.99V20H22V14H16Z" />
     </Icon>
   );
 };
 
-export const PauseIcon = ({ fill = "#2D3748", boxSize = "25px", ...props }) => {
+export const PauseIcon = ({ boxSize = "25px", ...props }) => {
+  const {
+    colors: { gray },
+  } = useTheme();
+
+  const modeBg = useColorModeValue(gray["700"], gray["50"]);
+  const activeFill = props.fill ? props.fill : modeBg;
+
   return (
-    <Icon boxSize={boxSize} viewBox="0 0 25 25" fill={fill} {...props}>
+    <Icon boxSize={boxSize} viewBox="0 0 25 25" fill={activeFill} {...props}>
       <path d="M8.38513 23.1378H3.88513C2.64294 23.1378 1.63513 22.13 1.63513 20.8878V4.38782C1.63513 3.14563 2.64294 2.13782 3.88513 2.13782H8.38513C9.62732 2.13782 10.6351 3.14563 10.6351 4.38782V20.8878C10.6351 22.13 9.62732 23.1378 8.38513 23.1378ZM22.6351 20.8878V4.38782C22.6351 3.14563 21.6273 2.13782 20.3851 2.13782H15.8851C14.6429 2.13782 13.6351 3.14563 13.6351 4.38782V20.8878C13.6351 22.13 14.6429 23.1378 15.8851 23.1378H20.3851C21.6273 23.1378 22.6351 22.13 22.6351 20.8878Z" />
     </Icon>
   );
 };
 
-export const PlayIcon = ({ fill = "#2D3748", boxSize = "24px", ...props }) => {
+export const PlayIcon = ({ boxSize = "24px", ...props }) => {
+  const {
+    colors: { gray },
+  } = useTheme();
+
+  const modeBg = useColorModeValue(gray["700"], gray["50"]);
+  const activeFill = props.fill ? props.fill : modeBg;
+
   return (
-    <Icon boxSize={boxSize} viewBox="0 0 24 24" fill={fill} {...props}>
+    <Icon boxSize={boxSize} viewBox="0 0 24 24" fill={activeFill} {...props}>
       <g clipPath="url(#clip0_38_4)">
         <path d="M21.3937 10.0641L4.89375 0.309429C3.55313 -0.482759 1.5 0.285991 1.5 2.24537V21.7501C1.5 23.5079 3.40781 24.5672 4.89375 23.686L21.3937 13.936C22.8656 13.0688 22.8703 10.9313 21.3937 10.0641V10.0641Z" />
       </g>
