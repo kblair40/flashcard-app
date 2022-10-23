@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useRef } from "react";
 import { Box, Flex, Text, IconButton } from "@chakra-ui/react";
+import { useBeforeunload } from "react-beforeunload";
 
 import StudySessionContext from "store/StudySessionContext";
 import { PlayIcon, PauseIcon } from "utils/icons";
@@ -8,11 +9,34 @@ const Timer = () => {
   const { seconds, minutes, hours, isRunning, start, pause, reset } =
     useContext(StudySessionContext);
 
+  console.log("type:", typeof seconds, typeof minutes, typeof hours);
+
+  useBeforeunload(async (e) => {
+    e.preventDefault();
+    if (seconds || minutes || hours) {
+      console.log("Dur:", { seconds, minutes, hours });
+      const numOfSeconds = seconds + minutes * 60 + hours * 60 * 60;
+      console.log("NUM OF SECONDS:", numOfSeconds);
+      localStorage.setItem("ellapsed_time", numOfSeconds);
+    }
+  });
+
   const didMount = useRef();
   useEffect(() => {
     if (didMount.current) return;
-
-    reset(0, true);
+    let ellapsed_seconds = localStorage.getItem("ellapsed_time");
+    let offset = 0;
+    if (ellapsed_seconds) {
+      console.log("YES ELLAPSED SECONDS:", ellapsed_seconds);
+      offset = new Date();
+      // offset.setSeconds(offset.getSeconds() + ellapsed_seconds);
+      offset.setSeconds(ellapsed_seconds);
+      // reset(ellapsed_seconds, true);
+      reset(offset, true);
+      localStorage.removeItem("ellapsed_time");
+    } else {
+      reset(0, true);
+    }
     didMount.current = true;
   }, [reset]);
 

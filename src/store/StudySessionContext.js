@@ -11,9 +11,17 @@ const StudySessionProvider = ({ children }) => {
   const [badSession, setBadSession] = useState(false);
   const [sessionId, setSessionId] = useState();
   const [setId, setSetId] = useState();
+
+  // let offset = localStorage.getItem("curent_session_timestamp");
+  // if (localStorage.getItem("curent_session_timestamp")) {
+  //   offset =
+  // }
+  // console.log("OFFSET:", offset);
+
   const { seconds, minutes, hours, isRunning, start, pause, reset } =
     useStopwatch({
       autoStart: false,
+      // offsetTimestamp: offset,
     });
 
   const params = useParams();

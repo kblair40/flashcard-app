@@ -77,7 +77,10 @@ const StudySession = () => {
           setFlashcards(flashcards);
           setTitle(title);
 
-          createSession(flashcards.length);
+          let ellapsed_time = localStorage.get_item("ellapsed_time");
+          if (!ellapsed_time) {
+            createSession(flashcards.length);
+          }
         }
       } catch (e) {
         console.error("FAILED FETCHING SET:", e);
