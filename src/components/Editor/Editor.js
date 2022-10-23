@@ -2,6 +2,7 @@ import React from "react";
 import { Flex, Box, useColorMode } from "@chakra-ui/react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import "editor.css";
 
 import { quillSettings } from "utils/constants";
 
