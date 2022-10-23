@@ -3,4 +3,3 @@
 3. react-quill size and alignment settings
 4. Better logo
 5. Responsiveness for CreateSet and StudySession
-6. Under history, add button to view all.  Let them know in a tooltip this option is comming soon
