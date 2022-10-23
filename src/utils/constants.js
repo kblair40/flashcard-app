@@ -1,8 +1,8 @@
 export const quillSettings = {
   modules: {
     toolbar: [
-      // [{ size: ["small", "medium", "large"] }],
-      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      [{ size: ["small", false, "large", "huge"] }],
+      // [{ header: [1, 2, 3, 4, 5, 6, false] }],
       ["bold", "italic", "underline"],
       [
         { list: "ordered" },
@@ -10,7 +10,13 @@ export const quillSettings = {
         { indent: "-1" },
         { indent: "+1" },
       ],
-      [{ align: [] }],
+      [{ align: ["", "center", "right", "justify"] }],
+      // [
+      //   { align: "" },
+      //   { align: "center" },
+      //   { align: "right" },
+      //   { align: "justify" },
+      // ],
       ["link", "image"],
     ],
   },
