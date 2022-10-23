@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { FlipIcon, ChevronIcon } from "utils/icons";
 import { Box, Flex, Button, useColorMode } from "@chakra-ui/react";
+import "./CurrentCard.css";
 
 const CurrentCard = ({
   flashcards,
@@ -155,21 +156,35 @@ const FlipContainer = ({ children }) => {
   );
 };
 
-const Flashcard = ({ content }) => {
+const Flashcard = ({ content, side }) => {
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
 
+  let classes = [
+    "custom-flashcard",
+    side === "front" ? "card-front" : "card-back",
+    isDark ? "card-dark" : "card-light",
+  ];
+
   return (
     <Flex
-      justify="center"
+      className={classes.join(" ")}
+      position="relative"
       align="center"
       h={{ base: "250px", sm: "260px", md: "310px" }}
-      w={{ base: "340px", sm: "440px", md: "520px" }}
+      w={{ base: "340px", sm: "440px", md: "560px" }}
       borderRadius="2px"
       shadow="md"
       bg={isDark ? "gray.800" : "gray.50"}
     >
-      <Box
+      <Flex
+        direction="column"
+        justify={side === "front" ? "center" : "start"}
+        h="100%"
+        w="100%"
+        p="1rem"
+        position="relative"
+        overflowY="auto"
         dangerouslySetInnerHTML={{
           __html: content ? content : "<div />",
         }}

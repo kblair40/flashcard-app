@@ -135,3 +135,12 @@
     width: 100%;
   }
   
+
+
+
+  /* BUILT-IN FORMAT CLASSES */
+  p {
+    /* align-left by default */
+    text-align: left;
+    font-size: 14px;
+  }
