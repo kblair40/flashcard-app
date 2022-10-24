@@ -1,4 +1,5 @@
-1. Detect refresh on StudySession page and save timer duration to localStorage before allowing
+1. Responsiveness for CreateSet and StudySession
 2. Add more categories for flashcard sets
 3. Better logo
-4. Responsiveness for CreateSet and StudySession
+4. Detect refresh on StudySession page and save timer duration to localStorage before allowing
+    - needs improvement
