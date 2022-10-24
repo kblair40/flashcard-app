@@ -17,7 +17,7 @@ import {
 import { Link as RRLink, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
-import { HamburgerIcon, CloseIcon } from "utils/icons";
+import { HamburgerIcon, CloseIcon, LogoutIcon } from "utils/icons";
 import logo_lg_light from "assets/images/logo_lg_light.png";
 import logo_lg_dark from "assets/images/logo_lg_dark.png";
 import logo_sm from "assets/images/logo_sm.png";
@@ -303,9 +303,7 @@ const MobileNav = ({ show, onToggle, signout, isSignedIn, onClose }) => {
         })}
 
         <Stack
-          // border="1px solid #ccc"
           direction="row"
-          // w="100%"
           justify={"center"}
           spacing={{ base: "1rem", sm: "1.5rem" }}
           align="center"
@@ -317,7 +315,11 @@ const MobileNav = ({ show, onToggle, signout, isSignedIn, onClose }) => {
           >
             <ThemeToggle />
           </Box>
-          <Button onClick={signout} variant="icon-button">
+          <Button
+            rightIcon={<LogoutIcon boxSize="22px" />}
+            onClick={signout}
+            variant="icon-button"
+          >
             Sign Out
           </Button>
         </Stack>
