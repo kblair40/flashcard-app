@@ -3,7 +3,7 @@ import { Flex, Text, Button, useColorMode } from "@chakra-ui/react";
 
 import UserContext from "store/UserContext";
 import AuthModal from "components/Modals/AuthModal";
-import { SmartIcon, GlobeNetworkIcon } from "utils/icons";
+import { SmartIcon, GlobeNetworkIcon, FlashIcon } from "utils/icons";
 
 const Hero = () => {
   const [authModalOpen, setAuthModalOpen] = useState(false);
@@ -19,9 +19,12 @@ const Hero = () => {
         direction="column"
         maxWidth={{ base: "300px", sm: "400px", md: "600px" }}
       >
-        <Text textAlign="center" fontWeight="700" fontSize="5xl">
-          FlashCards+
-        </Text>
+        <Flex align="center" justify="center" w="100%" mb=".5rem">
+          <FlashIcon />
+          <Text fontWeight="600" fontSize="5xl">
+            Cards
+          </Text>
+        </Flex>
 
         <Text textAlign="center" fontWeight="500" fontSize="2xl">
           Study & share flashcard sets made around the world
