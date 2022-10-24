@@ -55,7 +55,7 @@ const StudySession = () => {
           setFlashcards(flashcards);
           setTitle(title);
 
-          let ellapsed_time = localStorage.get_item("ellapsed_time");
+          let ellapsed_time = localStorage.getItem("ellapsed_time");
           if (!ellapsed_time) {
             createSession(flashcards.length);
           }

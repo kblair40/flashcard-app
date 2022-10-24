@@ -27,6 +27,15 @@ const StudySessionProvider = ({ children }) => {
   const params = useParams();
   const { pathname } = useLocation();
 
+  useEffect(() => {
+    console.log("\nPATHNAME:", pathname, "\n");
+    if (!pathname.startsWith("/study")) {
+      setBadSession(false);
+      setSessionId(undefined);
+      setSetId(undefined);
+    }
+  }, [pathname]);
+
   const patchedSession = useRef(false);
 
   useEffect(() => {
