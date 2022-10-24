@@ -1,5 +1,4 @@
-1. Better logo
-4. Detect refresh on StudySession page and save timer duration to localStorage before allowing
+1. Detect refresh on StudySession page and save timer duration to localStorage before allowing
     - needs improvement
 
 
