@@ -234,11 +234,12 @@ const NoSets = ({ isDark }) => {
           mt="1rem"
           rounded="full"
           size="lg"
-          leftIcon={<AddIcon boxSize="16px" />}
+          leftIcon={<AddIcon fill="#fff" boxSize="16px" />}
           fontWeight="700"
-          bg={isDark ? "gray.700" : "gray.300"}
-          _hover={{ bg: isDark ? "gray.600" : "gray.400" }}
-          _active={{ bg: isDark ? "gray.500" : "gray.500" }}
+          variant={isDark ? "solid-blue" : "solid-blue"}
+          // bg={isDark ? "gray.700" : "gray.300"}
+          // _hover={{ bg: isDark ? "gray.600" : "gray.400" }}
+          // _active={{ bg: isDark ? "gray.500" : "gray.500" }}
           color="white"
         >
           Create a Set
