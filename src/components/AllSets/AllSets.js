@@ -234,7 +234,7 @@ const NoSets = ({ isDark }) => {
           mt="1rem"
           rounded="full"
           size="lg"
-          leftIcon={<AddIcon fill="white" boxSize="16px" />}
+          leftIcon={<AddIcon boxSize="16px" />}
           fontWeight="700"
           bg={isDark ? "gray.700" : "gray.300"}
           _hover={{ bg: isDark ? "gray.600" : "gray.400" }}

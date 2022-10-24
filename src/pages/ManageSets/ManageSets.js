@@ -301,7 +301,7 @@ const NoSets = ({ isDark }) => {
           mt="1.5rem"
           rounded="full"
           size="lg"
-          leftIcon={<AddIcon boxSize="16px" />}
+          leftIcon={<AddIcon fill="#fff" boxSize="16px" />}
         >
           Create a Set
         </Button>
