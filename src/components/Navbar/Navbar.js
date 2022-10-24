@@ -70,7 +70,6 @@ export default function WithSubnavigation() {
         px={{ base: 4 }}
         shadow="sm"
         align={"center"}
-        // position="relative"
         position="fixed"
         top={0}
         left={0}
@@ -123,11 +122,7 @@ export default function WithSubnavigation() {
             </Button>
           ) : (
             <RRLink to="/">
-              <Image
-                maxWidth={"243px"}
-                src={logo_img}
-                w={{ base: "32px", md: "119px", lg: "140px" }}
-              />
+              <Image src={logo_img} minW="36px" w="36px" />
             </RRLink>
           )}
         </Flex>
@@ -145,11 +140,7 @@ export default function WithSubnavigation() {
           mr={{ base: 2 }}
         >
           <RRLink to="/">
-            <Image
-              maxWidth={"243px"}
-              src={logo_img}
-              w={{ base: "32px", md: "119px", lg: "140px" }}
-            />
+            <Image maxWidth={"173px"} w={{ md: "108px" }} src={logo_img} />
           </RRLink>
 
           <Flex display={{ base: "none", md: "flex" }} ml={{ md: 6, lg: 10 }}>
