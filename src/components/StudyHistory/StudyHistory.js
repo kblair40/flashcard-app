@@ -108,7 +108,7 @@ const StudyHistory = () => {
           w="100%"
           maxH={{ base: "50vh", md: "unset" }}
         >
-          {history &&
+          {history && history.length ? (
             history.map((histItem, idx) => {
               return (
                 <HistoryItem
@@ -120,7 +120,10 @@ const StudyHistory = () => {
                   key={idx}
                 />
               );
-            })}
+            })
+          ) : (
+            <NoHistory />
+          )}
 
           {moreThan20 ? (
             <Tooltip
@@ -196,6 +199,30 @@ const HistoryItem = ({ item, onClick }) => {
         aria-label="Delete Button"
         icon={<TrashIcon boxSize="14px" />}
       />
+    </Flex>
+  );
+};
+
+const NoHistory = () => {
+  return (
+    <Flex
+      pb="1rem"
+      w="100%"
+      direction="column"
+      justify="center"
+      align="center"
+      pt="1rem"
+    >
+      <Text textAlign="center" fontWeight="600" fontSize="lg">
+        You haven't studied a set yet
+      </Text>
+
+      <Box mt=".5rem" px={{ base: "16px", sm: "32px", md: "16px" }}>
+        <Text textAlign={"center"} fontWeight="500">
+          Data on sets you study for at least 1 minute will show up here. Note
+          that study sessions lasting less than 1 minute will not be shown here.
+        </Text>
+      </Box>
     </Flex>
   );
 };

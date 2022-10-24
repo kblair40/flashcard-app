@@ -285,14 +285,7 @@ const CreatedSets = ({
 
 const NoSets = ({ isDark }) => {
   return (
-    <Flex
-      direction="column"
-      w="100%"
-      justify="center"
-      align="center"
-      pb="1rem"
-      // border="1px solid red"
-    >
+    <Flex direction="column" w="100%" justify="center" align="center" pb="1rem">
       <Text
         textAlign="center"
         fontSize="lg"
