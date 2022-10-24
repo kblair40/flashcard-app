@@ -49,7 +49,7 @@ const CommunitySets = () => {
 
         if (response.data) {
           // console.log("COMMUNITY RESPONSE:", response.data);
-          setCommunitySets(response.data);
+          setCommunitySets(response.data.reverse());
         }
       } catch (e) {
         console.error("FAILED FETCHING HISTORY:", e);
@@ -105,7 +105,7 @@ const CommunitySets = () => {
               <Spinner />
             </Flex>
           ) : communitySets && communitySets.length ? (
-            communitySets.reverse().map((set, idx) => {
+            communitySets.map((set, idx) => {
               return (
                 <CommunitySet
                   isFavorited={favSets.includes(set._id)}
