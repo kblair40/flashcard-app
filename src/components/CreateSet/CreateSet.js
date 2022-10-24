@@ -44,7 +44,7 @@ const CreateSet = () => {
         <SetMeta setData={setData} width="100%" />
       </GridItem>
 
-      <GridItem area="editors">
+      <GridItem area="editors" h="100%" overflowY="auto" mb="8px">
         <Editors />
       </GridItem>
     </Grid>

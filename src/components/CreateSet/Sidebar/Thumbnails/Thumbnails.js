@@ -220,6 +220,7 @@ const Thumbnail = ({
       h="100%"
       minH={{ base: "50px", sm: "60px" }}
       maxH="120px"
+      overflow={{ base: "hidden" }}
       minW={{ base: "120px", sm: "unset" }}
       w="100%"
       borderWidth={1}
@@ -241,8 +242,15 @@ const Thumbnail = ({
       transition={"background 0.3s"}
       bg={isDark ? "gray.700" : "gray.50"}
       _hover={{ background: isDark ? "gray.600" : "gray.100" }}
+      pb={{ base: ".75rem", sm: "0" }}
     >
-      <Box dangerouslySetInnerHTML={{ __html: frontContent }} />
+      <Box
+        p=".75rem 1rem"
+        textAlign="center"
+        maxH={{ base: "120px", sm: "90px" }}
+        overflow={{ base: "hidden" }}
+        dangerouslySetInnerHTML={{ __html: frontContent }}
+      />
 
       <Text
         position="absolute"
