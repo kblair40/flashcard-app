@@ -10,7 +10,7 @@ const Sidebar = ({ width = "100%" }) => {
 
   return (
     <Box
-      bg={isDark ? "gray.800" : "gray.50"}
+      bg={isDark ? "gray.800" : "#fff"}
       width={width}
       h="100%"
       display={{ base: "none", sm: "block" }}

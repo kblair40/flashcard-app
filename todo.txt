@@ -3,3 +3,7 @@
 3. Better logo
 4. Detect refresh on StudySession page and save timer duration to localStorage before allowing
     - needs improvement
+5. Have separate toolbar module for front of card editor.
+    Default to center, Huge text, and bold
+6. Make sure large front card contents fit ok
+
