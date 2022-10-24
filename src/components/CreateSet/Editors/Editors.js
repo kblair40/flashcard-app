@@ -17,7 +17,8 @@ const Editors = ({ width = "100%", height = "100%" }) => {
       spacing={{ base: "1rem", sm: "2rem" }}
       w={width}
       h={height}
-      px={{ base: "8px", md: "16px" }}
+      pr={{ base: "8px", sm: "16px" }}
+      pl={{ base: "8px", sm: "0" }}
     >
       <Box w="100%" maxWidth="700px">
         <Editor value={frontCardContent} onChange={setFrontCardContent} />

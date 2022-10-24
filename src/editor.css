@@ -9,7 +9,7 @@
   
   /* Quill Overrides */
   .ql-container {
-    min-height: 150px !important;
+    min-height: 120px !important;
   }
   .ql-editor {
     /* height: 200px !important; */
@@ -18,11 +18,21 @@
     height: 100% !important;
   }
   .ql-blank {
-    min-height: 150px !important;
+    min-height: 120px !important;
+    /* min-height: 100%; */
     /* height: 200px !important; */
   }
   .ql-size-large {
     font-size: 20px;
+  }
+
+  @media screen and (min-width: 480px) {
+    .ql-container {
+      min-height: 200px !important;
+    }
+    .ql-blank{
+      min-height: 200px !important;
+    }
   }
   
   /* gray.500 - 718096 */

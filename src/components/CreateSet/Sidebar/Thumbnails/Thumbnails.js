@@ -108,6 +108,7 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
 
   return (
     <Box
+      mt={{ base: "4px", sm: 0 }}
       height={height}
       width={width}
       maxHeight="100%"
@@ -135,7 +136,7 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
         onPointerDown={startDrag}
         onPointerUp={endDrag}
         w="100%"
-        height="100%"
+        height={{ base: "calc(100% - 16px)", sm: "100%" }}
         overflowY={{ sm: "auto" }}
         p={{ sm: "4px 6px 0 6px", md: "4px 8px 0 8px" }}
         mt="4px"

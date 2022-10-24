@@ -16,7 +16,6 @@ const Sidebar = ({ width = "100%" }) => {
         width="100%"
         position="relative"
         borderRight={{ base: "none", sm: "1px solid" }}
-        // borderRight={{ base: "none", sm: "none" }}
         borderColor={{ sm: isDark ? "gray.500" : "gray.200" }}
       >
         <SetControls

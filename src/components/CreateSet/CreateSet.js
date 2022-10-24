@@ -13,14 +13,13 @@ const CreateSet = () => {
   return (
     <Grid
       boxSizing="border-box"
-      // border="1px solid #222"
       w="100vw"
       maxW="100vw"
       h="calc(100vh - 62px)"
-      overflowY="auto"
+      overflow="hidden"
       justifyContent="center"
       templateRows={{
-        base: "1fr 10fr 3fr",
+        base: "1fr 6fr 3fr",
         sm: "1fr 8fr",
       }}
       templateColumns={{
@@ -34,24 +33,18 @@ const CreateSet = () => {
         sm: `"sidebar meta"
              "sidebar editors"`,
       }}
-      rowGap="1rem"
+      rowGap={{ base: "8px", sm: "1rem" }}
       columnGap={{ base: "8px", sm: "16px" }}
     >
       <GridItem area="sidebar">
         <Sidebar />
       </GridItem>
 
-      <GridItem
-        area="meta"
-        // border="1px solid blue"
-      >
+      <GridItem area="meta">
         <SetMeta setData={setData} width="100%" />
       </GridItem>
 
-      <GridItem
-        area="editors"
-        // border="1px solid red"
-      >
+      <GridItem area="editors">
         <Editors />
       </GridItem>
     </Grid>
@@ -91,15 +84,15 @@ const SetMeta = ({ setData, width = "100%" }) => {
 
   return (
     <Flex
-      // border={border}
       h={{ base: "100%", sm: "70px" }}
       align="center"
       width={width}
-      px={{ base: "8px", md: "16px" }}
+      pr={{ base: "8px", sm: "16px" }}
+      pl={{ base: "8px", sm: "0" }}
       flexWrap="wrap"
       justifyContent="center"
     >
-      <Flex h={{ sm: "max-content" }} w="100%" maxWidth="700px">
+      <Flex h={{ base: "max-content" }} w="100%" maxWidth="700px">
         <Flex
           w={{ base: "35%" }}
           direction="row"
