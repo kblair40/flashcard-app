@@ -1,10 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Flex, Button, VStack } from "@chakra-ui/react";
+import { Flex, Button, Stack } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 import SetContext from "store/SetContext";
 
-const SetControls = ({ isDark, height = "100%", width = "100%" }) => {
+const SetControls = ({ height = "100%", width = "100%" }) => {
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
 
@@ -43,55 +43,48 @@ const SetControls = ({ isDark, height = "100%", width = "100%" }) => {
 
   return (
     <Flex
-      direction="column"
+      direction={{ sm: "column" }}
       justify="center"
       align="center"
       height={height}
       width={width}
-      position="absolute"
-      top={0}
-      left={0}
-      pt="8px"
+      position={{ sm: "absolute" }}
+      top={{ sm: 0 }}
+      left={{ sm: 0 }}
       px="8px"
     >
-      <VStack w="100%" spacing=".5rem">
+      <Stack
+        w="100%"
+        spacing={{ base: ".25rem", sm: ".5rem" }}
+        direction={{ base: "row-reverse", sm: "column" }}
+      >
         <ControlButton
-          isDark={isDark}
           isDisabled={activeCard.id === undefined}
           label="New Card"
           onClick={addCard}
         />
         <ControlButton
-          isDark={isDark}
           onClick={handleClickSave}
           isDisabled={isEmpty(frontCardContent) || isEmpty(backCardContent)}
           label="Save Card"
           loading={saving}
         />
         <ControlButton
-          isDark={isDark}
           isDisabled={!isEditing}
           onClick={deleteCard}
           label="Delete Card"
           loading={deleting}
           variant="solid-red"
         />
-        <ControlButton isDark={isDark} onClick={handleClickExit} label="Exit" />
-      </VStack>
+        <ControlButton onClick={handleClickExit} label="Exit" />
+      </Stack>
     </Flex>
   );
 };
 
 export default SetControls;
 
-const ControlButton = ({
-  isDark,
-  label,
-  onClick,
-  loading,
-  isDisabled,
-  variant,
-}) => {
+const ControlButton = ({ label, onClick, loading, isDisabled, variant }) => {
   return (
     <Button
       w="100%"

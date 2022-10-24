@@ -9,16 +9,17 @@
   
   /* Quill Overrides */
   .ql-container {
-    min-height: 200px !important;
+    min-height: 150px !important;
   }
   .ql-editor {
-    height: 200px !important;
+    /* height: 200px !important; */
   }
   .ql-snow {
     height: 100% !important;
   }
   .ql-blank {
-    height: 200px !important;
+    min-height: 150px !important;
+    /* height: 200px !important; */
   }
   .ql-size-large {
     font-size: 20px;

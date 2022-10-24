@@ -9,22 +9,24 @@ const Sidebar = ({ width = "100%" }) => {
   const isDark = colorMode === "dark";
 
   return (
-    <Box
-      bg={isDark ? "gray.800" : "#fff"}
-      width={width}
-      h="100%"
-      display={{ base: "none", sm: "block" }}
-    >
+    <Box bg={isDark ? "gray.800" : "#fff"} width={width} h="100%">
       <Flex
         direction="column"
         h="100%"
         width="100%"
         position="relative"
-        borderRight="1px solid"
+        borderRight={{ base: "none", sm: "1px solid" }}
         borderColor={isDark ? "gray.500" : "gray.200"}
       >
-        <SetControls height="25%" isDark={isDark} />
-        <Thumbnails height="75%" isDark={isDark} />
+        <SetControls
+          height={{ base: "30%", sm: "25%" }}
+          width={{ base: "100%", sm: "100%" }}
+        />
+        <Thumbnails
+          height={{ base: "70%", sm: "75%" }}
+          width={{ base: "100%", sm: "100%" }}
+          isDark={isDark}
+        />
       </Flex>
     </Box>
   );

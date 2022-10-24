@@ -4,6 +4,7 @@ import { Flex, Text, IconButton, Box, Grid, GridItem } from "@chakra-ui/react";
 import { EditIcon } from "utils/icons";
 import SetContext from "store/SetContext";
 import Sidebar from "./Sidebar";
+// import BottomBar from "./BottomBar";
 import Editors from "./Editors";
 import EditModal from "components/Modals/EditModal";
 
@@ -13,41 +14,55 @@ const CreateSet = () => {
   return (
     <Grid
       boxSizing="border-box"
-      border="1px solid #222"
+      // border="1px solid #222"
       w="100vw"
+      maxW="100vw"
       h="calc(100vh - 62px)"
-      overflowY="hidden"
+      overflowY="auto"
       justifyContent="center"
       templateRows={{
-        base: "70px calc(100vh - 62px - 70px)",
-        sm: "70px calc(100vh - 62px - 70px)",
+        base: "1fr 10fr 3fr",
+        sm: "1fr 8fr",
       }}
       templateColumns={{
-        base: "1fr 3fr",
+        base: "1fr",
         sm: "1fr 3fr",
       }}
       templateAreas={{
-        base: `"sidebar meta"
-               "sidebar editors"`,
+        base: `"meta"
+               "editors"
+               "sidebar"`,
         sm: `"sidebar meta"
-               "sidebar editors"`,
+             "sidebar editors"`,
       }}
-      pr={{ base: "8px", sm: "16px" }}
       rowGap="1rem"
       columnGap={{ base: "8px", sm: "16px" }}
     >
-      <GridItem area="sidebar" border="1px solid green">
+      <GridItem area="sidebar">
         <Sidebar />
-        {/* <Sidebar width={{ base: "100%", sm: "30%", md: "25%" }} /> */}
       </GridItem>
 
-      <GridItem area="meta" border="1px solid blue">
+      <GridItem
+        area="meta"
+        // border="1px solid blue"
+      >
         <SetMeta setData={setData} width="100%" />
       </GridItem>
 
-      <GridItem area="editors" border="1px solid red">
+      <GridItem
+        area="editors"
+        // border="1px solid red"
+      >
         <Editors />
       </GridItem>
+
+      {/* <GridItem
+        area="bottombar"
+        border="1px solid red"
+        display={{ sm: "none" }}
+      >
+        <BottomBar />
+      </GridItem> */}
     </Grid>
   );
   // return (
@@ -99,15 +114,15 @@ const SetMeta = ({ setData, width = "100%" }) => {
 
   return (
     <Flex
-      border={border}
-      h="70px"
+      // border={border}
+      h={{ base: "100%", sm: "70px" }}
       align="center"
       width={width}
-      // px={{ base: "8px", md: "16px" }}
+      px={{ base: "8px", md: "16px" }}
       flexWrap="wrap"
       justifyContent="center"
     >
-      <Flex h="max-content" w="100%" maxWidth="700px">
+      <Flex h={{ sm: "max-content" }} w="100%" maxWidth="700px">
         <Flex
           w={{ base: "35%" }}
           direction="row"

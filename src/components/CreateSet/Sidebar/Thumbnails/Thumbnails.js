@@ -1,12 +1,18 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-import { Box, Heading, Text, Flex, Spinner } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Text,
+  Flex,
+  Spinner,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { Reorder, useDragControls } from "framer-motion";
 
 import api from "api";
 import SetContext from "store/SetContext";
 
 const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
-  // add some kind of overlay with spinner while saving new order
   const [saving, setSaving] = useState(false);
   const [cards, setCards] = useState([]);
 
@@ -92,18 +98,27 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
     setSaving(false);
   };
 
+  const reorderAxis = useBreakpointValue({ base: "x", sm: "y" });
+  const cardsDisplay = useBreakpointValue({ base: "flex", sm: "block" });
+  const cardMargin = useBreakpointValue({
+    base: { left: "4px", right: "4px" },
+    sm: { left: 0, right: 0 },
+  });
+  const cardsOverflow = useBreakpointValue({ base: "scroll", sm: "hidden" });
+
   return (
     <Box
       height={height}
       width={width}
       maxHeight="100%"
-      position="absolute"
-      bottom={0}
-      left={0}
-      pt="16px"
-      pb="32px"
+      position={{ sm: "absolute" }}
+      bottom={{ sm: 0 }}
+      left={{ sm: 0 }}
+      pt={{ sm: "16px" }}
+      pb={{ sm: "32px" }}
     >
       <Heading
+        display={{ base: "none", sm: "block" }}
         fontSize="xl"
         textAlign="center"
         borderBottom="1px solid"
@@ -113,12 +128,16 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
       </Heading>
 
       <Box
+        display={{ base: "flex", sm: "block" }}
+        flexDirection={{ base: "row", sm: "unset" }}
+        flexWrap={{ base: "wrap", sm: "unset" }}
+        alignItems={{ base: "center", sm: "unset" }}
         onPointerDown={startDrag}
         onPointerUp={endDrag}
         w="100%"
-        h="100%"
-        overflowY="auto"
-        p="4px 12px 0 8px"
+        height="100%"
+        overflowY={{ sm: "auto" }}
+        p={{ sm: "4px 12px 0 8px" }}
         mt="4px"
         background={
           saving ? "rgba(10,20,240,0.02)" : isDark ? "gray.800" : "#fff"
@@ -126,7 +145,17 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
         transition={"background 0.2s"}
         zIndex={-1}
       >
-        <Reorder.Group onReorder={handleChangeOrder} values={cards} axis="y">
+        <Reorder.Group
+          onReorder={handleChangeOrder}
+          values={cards}
+          axis={reorderAxis}
+          style={{
+            height: "100%",
+            maxWidth: "100vw",
+            display: cardsDisplay,
+            overflowX: cardsOverflow,
+          }}
+        >
           {cards && cards.length ? (
             cards.map((card, i) => {
               console.log("\nCARD:", card);
@@ -135,6 +164,9 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
                   key={card._id}
                   value={card}
                   dragControls={dragControls}
+                  style={{
+                    margin: `0 ${cardMargin.right} 0 ${cardMargin.left}`,
+                  }}
                 >
                   <Thumbnail
                     updateActiveCard={updateActiveCard}
@@ -153,13 +185,7 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
               );
             })
           ) : (
-            <Text
-              textAlign="center"
-              pt="8px"
-              fontWeight="600"
-              fontSize="sm"
-              // textTransform={"uppercase"}
-            >
+            <Text textAlign="center" pt="8px" fontWeight="600" fontSize="sm">
               No Cards
             </Text>
           )}
@@ -189,10 +215,11 @@ const Thumbnail = ({
       zIndex={1}
       onClick={handleClick}
       mx="auto"
-      mb="8px"
-      // py="8px"
-      minH="60px"
+      mb={{ sm: "8px" }}
+      h="100%"
+      minH={{ base: "50px", sm: "60px" }}
       maxH="120px"
+      minW={{ base: "120px", sm: "unset" }}
       w="100%"
       borderWidth={1}
       borderStyle="solid"
