@@ -118,11 +118,12 @@ const ManageSets = () => {
         </Box>
 
         <Flex
-          w={{ base: "100%", sm: "418px", md: "340px" }}
+          w={{ base: "100%", md: "340px" }}
           mt={{ base: "2.5rem", md: 0 }}
           direction={{ base: "column" }}
           align={{ base: "center", md: "start" }}
           h={{ md: "calc(100vh - 106px)" }}
+          pb={{ base: "1rem", md: 0 }}
         >
           <Box
             h={{ md: "50%" }}
