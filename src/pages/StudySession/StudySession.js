@@ -158,19 +158,26 @@ const StudySession = () => {
   return (
     <Flex
       justify="center"
-      pt="84px"
+      pt={{ base: "124px", sm: "84px" }}
       h="calc(100vh)"
       position="relative"
       overflowY="hidden"
     >
-      <Flex w="100%" maxW={{ base: "90%" }} direction="column" align="center">
+      <Flex
+        // pt={{ base: "2rem" }}
+        w="100%"
+        maxW={{ base: "90%" }}
+        direction="column"
+        align="center"
+      >
         <Timer />
 
         <Heading
-          mt=".5rem"
+          mt={{ base: "1rem", sm: ".5rem" }}
           mb="1.5rem"
           textAlign="center"
           textTransform="capitalize"
+          fontSize={{ base: "2xl", sm: "3xl" }}
         >
           {title}
         </Heading>
@@ -202,11 +209,18 @@ export default StudySession;
 
 const GoBack = () => {
   return (
-    <Box position="absolute" top="5rem" left="1rem">
+    <Box position="absolute" top="5rem" left={{ base: ".5rem", md: "1rem" }}>
       <Link to="/">
         <Button
           variant="icon-button"
-          leftIcon={<ChevronIcon transform="rotate(180deg)" boxSize="18px" />}
+          leftIcon={
+            <ChevronIcon
+              transform="rotate(180deg)"
+              boxSize={{ base: "15px", sm: "18px" }}
+            />
+          }
+          size={{ base: "sm", md: "md" }}
+          px={{ base: "8px", md: "16px" }}
           rounded="full"
         >
           Back to My Sets

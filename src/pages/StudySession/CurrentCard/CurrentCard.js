@@ -14,8 +14,8 @@ const CurrentCard = ({
 }) => {
   const [flipCards, setFlipCards] = useState();
 
-  const { colorMode } = useColorMode();
-  const isDark = colorMode === "dark";
+  // const { colorMode } = useColorMode();
+  // const isDark = colorMode === "dark";
 
   const didMount = useRef(false);
   useEffect(() => {
@@ -115,8 +115,8 @@ export default CurrentCard;
 const FlipContainer = ({ children }) => {
   const [side, setSide] = useState("front");
 
-  const { colorMode } = useColorMode();
-  const isDark = colorMode === "dark";
+  // const { colorMode } = useColorMode();
+  // const isDark = colorMode === "dark";
 
   if (!children) return null;
 
@@ -171,8 +171,9 @@ const Flashcard = ({ content, side }) => {
       className={classes.join(" ")}
       position="relative"
       align="center"
-      h={{ base: "250px", sm: "260px", md: "310px" }}
-      w={{ base: "340px", sm: "440px", md: "560px" }}
+      h={{ base: "230px", sm: "272px", md: "321px" }}
+      w={{ base: "340px", sm: "460px", md: "580px" }}
+      maxW={{ base: "calc(100vw - 16px)" }}
       borderRadius="2px"
       shadow="md"
       bg={isDark ? "gray.800" : "gray.50"}

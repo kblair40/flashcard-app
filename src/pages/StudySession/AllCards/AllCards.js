@@ -35,7 +35,7 @@ const AllCards = ({
         }}
         unmountOnExit
       >
-        <Flex align="center" justify="start" mr="8px">
+        <Flex align="center" justify="start" mx="8px">
           {flashcards && flashcards.length
             ? flashcards.map((card, i) => {
                 return (
@@ -54,7 +54,7 @@ const AllCards = ({
         transition="all 0.4s ease"
         position="fixed"
         right="1rem"
-        bottom={show ? "8.5rem" : "1rem"}
+        bottom={show ? { base: "7rem", sm: "8.5rem" } : { base: "1rem" }}
         zIndex={10}
       >
         <Button onClick={show ? hideSelf : showSelf} size="xs">
@@ -76,14 +76,18 @@ const Card = ({ content, onClick }) => {
   const isDark = colorMode === "dark";
 
   return (
-    <Box p="8px" bg={isDark ? "gray.900" : "gray.50"}>
+    <Box
+      // p="8px"
+      py="8px"
+      bg={isDark ? "gray.900" : "gray.50"}
+    >
       <Flex
         onClick={onClick}
         justify="center"
         align="center"
-        h="100px"
-        minW="180px"
-        mr="8px"
+        h={{ base: "80px", sm: "100px" }}
+        minW={{ base: "150px", sm: "180px" }}
+        mr={{ base: "8px", sm: "12px" }}
         boxShadow="md"
         borderRadius="4px"
         cursor="pointer"
