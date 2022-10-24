@@ -226,7 +226,7 @@ const NoSets = ({ isDark }) => {
       pt="1rem"
     >
       <Text textAlign="center" fontWeight="600" fontSize="lg">
-        You havent' created a set yet
+        You haven't created a set yet
       </Text>
 
       <Link to="/create">

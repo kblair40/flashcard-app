@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import api from "api";
 
@@ -12,27 +12,59 @@ const UserProvider = ({ children }) => {
   const [userData, setUserData] = useState();
   const [isSignedIn, setIsSignedIn] = useState(isAuthenticated);
 
+  const { pathname } = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await api.get("/user", {
-          params: { flashcard_sets: true },
-        });
-        console.log("\nUSER RESPONSE:", response.data);
-        setUserData(response.data.user);
-      } catch (e) {
-        console.error("FAILED FETCHING USER:", e);
-      }
+    let authToken = window.localStorage.getItem("auth-token");
+    if (!authToken) {
+      setUserData(undefined);
+    }
+  }, [pathname]);
 
-      setLoading(false);
-    };
+  const fetchUser = async () => {
+    try {
+      const response = await api.get("/user", {
+        params: { flashcard_sets: true },
+      });
+      console.log("\nUSER RESPONSE:", response.data);
+      setUserData(response.data.user);
+    } catch (e) {
+      console.error("FAILED FETCHING USER:", e);
+    }
+
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    // const fetchUser = async () => {
+    //   try {
+    //     const response = await api.get("/user", {
+    //       params: { flashcard_sets: true },
+    //     });
+    //     console.log("\nUSER RESPONSE:", response.data);
+    //     setUserData(response.data.user);
+    //   } catch (e) {
+    //     console.error("FAILED FETCHING USER:", e);
+    //   }
+
+    //   setLoading(false);
+    // };
 
     if (isAuthenticated) {
       fetchUser();
     }
   }, []);
+
+  useEffect(() => {
+    if (!isSignedIn) {
+      setUserData(undefined);
+    } else {
+      if (isAuthenticated) {
+        fetchUser();
+      }
+    }
+  }, [isSignedIn]);
 
   const handleSignIn = () => setIsSignedIn(true);
   const handleSignOut = () => {
