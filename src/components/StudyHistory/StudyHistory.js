@@ -22,6 +22,7 @@ const StudyHistory = () => {
   const [itemToDelete, setItemToDelete] = useState();
   const [deleting, setDeleting] = useState(false);
   const [sortBy, setSortBy] = useState("newest");
+  const [moreThan20, setMoreThan20] = useState(false);
 
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
@@ -31,7 +32,12 @@ const StudyHistory = () => {
       try {
         const response = await api.get("/history");
         if (response.data && response.data.history) {
-          const { history } = response.data;
+          const { history, moreThan20 } = response.data;
+          if (typeof moreThan20 === "boolean") {
+            setMoreThan20(moreThan20);
+          }
+
+          console.log("\nMORE THAN 20:", moreThan20, "N");
           const sortedHistory = history.sort((a, b) => {
             return b.start_time - a.start_time;
           });
@@ -116,7 +122,7 @@ const StudyHistory = () => {
               );
             })}
 
-          {history && history.length > 20 ? (
+          {moreThan20 ? (
             <Tooltip
               label="Only the last 20 sessions from your history are shown here.  A page where your full history can be seen is in progress."
               placement="top"
