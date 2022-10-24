@@ -1,26 +1,23 @@
 
 /* OVERRIDES */
 
-/* EDITABLE INPUT OVERRIDES */
-.chakra-editable__input {
-    box-shadow: none !important;
-    border: 1px solid #CBD5E0;
-  }
   
   /* Quill Overrides */
-  .ql-container {
+.quill {
+  border-radius: 6px !important;
+}
+
+  pre.ql-container {
     min-height: 120px !important;
-  }
-  .ql-editor {
-    /* height: 200px !important; */
+    border-radius: 0 0 6px 6px !important;
+    border: 1px solid red !important;
   }
   .ql-snow {
+    border-radius: 6px 6px 0 0 !important;
     height: 100% !important;
   }
   .ql-blank {
     min-height: 120px !important;
-    /* min-height: 100%; */
-    /* height: 200px !important; */
   }
   .ql-size-large {
     font-size: 20px;
