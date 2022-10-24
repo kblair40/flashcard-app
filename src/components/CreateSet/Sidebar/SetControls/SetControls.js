@@ -51,7 +51,7 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
       position={{ sm: "absolute" }}
       top={{ sm: 0 }}
       left={{ sm: 0 }}
-      px="8px"
+      p={{ base: "0 6px 0 6px", md: "0 8px 0 8px" }}
     >
       <Stack
         w="100%"

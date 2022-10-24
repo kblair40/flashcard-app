@@ -4,7 +4,6 @@ import { Flex, Text, IconButton, Box, Grid, GridItem } from "@chakra-ui/react";
 import { EditIcon } from "utils/icons";
 import SetContext from "store/SetContext";
 import Sidebar from "./Sidebar";
-// import BottomBar from "./BottomBar";
 import Editors from "./Editors";
 import EditModal from "components/Modals/EditModal";
 
@@ -55,30 +54,8 @@ const CreateSet = () => {
       >
         <Editors />
       </GridItem>
-
-      {/* <GridItem
-        area="bottombar"
-        border="1px solid red"
-        display={{ sm: "none" }}
-      >
-        <BottomBar />
-      </GridItem> */}
     </Grid>
   );
-  // return (
-  //   <Flex justify="center" w="100%" h="calc(100vh - 64px)" overflowY="hidden">
-  //     <Sidebar width={{ base: "100%", sm: "30%", md: "25%" }} />
-
-  //     <Flex
-  //       direction="column"
-  //       h="100%"
-  //       width={{ base: "100%", sm: "70%", md: "75%" }}
-  //     >
-  //       <SetMeta setData={setData} />
-  //       <Editors width={{ base: "100%" }} />
-  //     </Flex>
-  //   </Flex>
-  // );
 };
 
 export default CreateSet;

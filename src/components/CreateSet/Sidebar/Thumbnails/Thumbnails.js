@@ -137,7 +137,7 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
         w="100%"
         height="100%"
         overflowY={{ sm: "auto" }}
-        p={{ sm: "4px 12px 0 8px" }}
+        p={{ sm: "4px 6px 0 6px", md: "4px 8px 0 8px" }}
         mt="4px"
         background={
           saving ? "rgba(10,20,240,0.02)" : isDark ? "gray.800" : "#fff"
