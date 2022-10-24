@@ -1,3 +1,5 @@
+import { toTitleCase } from "./helpers";
+
 export const quillSettings = {
   modules: {
     toolbar: [
@@ -53,7 +55,7 @@ const CATEGORIES = [
   "history",
   "immunology",
   "insurance",
-  "internet/new media",
+  "internet",
   "journalism",
   "language",
   "law",
@@ -65,6 +67,7 @@ const CATEGORIES = [
   "microbiology",
   "military",
   "music",
+  "new media",
   "nursing",
   "nutrition",
   "organic chemistry",
@@ -82,7 +85,7 @@ const CATEGORIES = [
   "social studies",
   "sociology",
   "software",
-  "speech-language pathology",
+  "speech language pathology",
   "sports",
   "travel",
   "veterinary medicine",
@@ -91,37 +94,9 @@ const CATEGORIES = [
   "other",
 ];
 
-export const categories = [
-  {
-    label: "Accounting",
-    value: "Accounting",
-  },
-  {
-    label: "Finance",
-    value: "finance",
-  },
-  {
-    label: "Computer Science",
-    value: "computer science",
-  },
-  {
-    label: "Programming",
-    value: "programming",
-  },
-  {
-    label: "History",
-    value: "history",
-  },
-  {
-    label: "Science",
-    value: "science",
-  },
-  {
-    label: "Biology",
-    value: "biology",
-  },
-  {
-    label: "Chemistry",
-    value: "chemistry",
-  },
-];
+export const categories = CATEGORIES.map((cat) => {
+  return {
+    label: toTitleCase(cat),
+    value: cat,
+  };
+});
