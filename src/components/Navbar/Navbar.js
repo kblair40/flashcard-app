@@ -12,6 +12,7 @@ import {
   useColorModeValue,
   useDisclosure,
   Image,
+  useOutsideClick,
 } from "@chakra-ui/react";
 import { Link as RRLink, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -142,7 +143,6 @@ export default function WithSubnavigation() {
           display={{ base: "none", md: "flex" }}
           align="center"
           mr={{ base: 2 }}
-          // border="1px solid white"
         >
           <RRLink to="/">
             <Image
@@ -249,6 +249,9 @@ const shadows = {
 const MobileNav = ({ show, onToggle, signout, isSignedIn, onClose }) => {
   const isMd = useBreakpointValue({ base: false, md: true });
 
+  const { colorMode } = useColorMode();
+  const isDark = colorMode === "dark";
+
   useEffect(() => {
     if (isMd) {
       if (show) onToggle();
@@ -264,17 +267,18 @@ const MobileNav = ({ show, onToggle, signout, isSignedIn, onClose }) => {
       style={{
         position: "fixed",
         backgroundColor: "white",
-        boxShadow: shadows["sm"],
+        boxShadow: isDark ? shadows["xl"] : shadows["sm"],
         zIndex: 100,
       }}
       initial={{ y: "-100%" }}
-      animate={show && !isMd ? { y: 0 } : { y: -180 }}
+      animate={show && !isMd ? { y: 60 } : { y: -180 }}
       transition={{ duration: 0.25 }}
     >
       <Stack
         zIndex={10000000}
         bg={useColorModeValue("white", "gray.800")}
-        p={4}
+        py={4}
+        px={{ base: "36px", sm: "80px" }}
         display={{ md: "none" }}
         w="100vw"
       >
@@ -290,14 +294,36 @@ const MobileNav = ({ show, onToggle, signout, isSignedIn, onClose }) => {
             />
           );
         })}
+
+        <Stack
+          // border="1px solid #ccc"
+          direction="row"
+          // w="100%"
+          justify={"center"}
+          spacing={{ base: "1rem", sm: "1.5rem" }}
+          align="center"
+        >
+          <Box
+            borderRadius="full"
+            border={"1px solid"}
+            borderColor={isDark ? "gray.600" : "gray.100"}
+          >
+            <ThemeToggle />
+          </Box>
+          <Button variant="icon-button">Sign Out</Button>
+        </Stack>
       </Stack>
     </motion.div>
   );
 };
 
 const MobileNavItem = ({ label, href, onClick }) => {
+  const { colorMode } = useColorMode();
+  const isDark = colorMode === "dark";
+
   return (
     <Flex
+      borderRadius="6px"
       py={2}
       as={href ? Link : undefined}
       href={href ?? "#"}
@@ -306,20 +332,23 @@ const MobileNavItem = ({ label, href, onClick }) => {
       onClick={onClick ? onClick : null}
       _hover={{
         textDecoration: "none",
-        bg: "gray.50",
+        bg: isDark ? "gray.700" : "gray.50",
       }}
       _active={{
-        // textDecoration: "none",
         bg: "gray.100",
       }}
       w="100%"
-      border="1px solid #ccc"
+      // mx={{ base: "36px", sm: "80px" }}
+      // mx="auto"
+      // maxW={{ base: "300px", sm: "400px" }}
+      // border="1px solid #ccc"
       cursor="pointer"
-      // isDisabled={!isSignedIn}
-      // w={href ? undefined : "100%"}
-      // variant={href ? "ghost" : undefined}
     >
-      <Text fontWeight={600} color={useColorModeValue("gray.600", "gray.200")}>
+      <Text
+        fontSize="lg"
+        fontWeight={600}
+        color={useColorModeValue("gray.600", "gray.100")}
+      >
         {label}
       </Text>
     </Flex>
@@ -407,4 +436,8 @@ const NAV_ITEMS = [
   },
 ];
 
-const MOBILE_NAV_ITEMS = [...NAV_ITEMS, { label: "Sign Out", href: null }];
+const MOBILE_NAV_ITEMS = [
+  ...NAV_ITEMS,
+  // { label: null, href: null },
+  // { label: "Sign Out", href: null },
+];
