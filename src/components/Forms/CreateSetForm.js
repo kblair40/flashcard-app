@@ -8,6 +8,8 @@ import {
   Button,
   Checkbox,
   Select,
+  Heading,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
@@ -18,6 +20,9 @@ const INITIAL_ERROR_STATE = { title: false };
 
 const CreateSetForm = () => {
   const navigate = useNavigate();
+
+  const { colorMode } = useColorMode();
+  const isDark = colorMode === "dark";
 
   const [formData, setFormData] = useState({
     title: "",
@@ -59,13 +64,22 @@ const CreateSetForm = () => {
   };
 
   return (
-    <Flex w="100%" justify="center" pt="2rem">
+    <Flex w="100%" justify="center" align="center" h={"calc(100vh - 64px)"}>
       <VStack
+        p={{ base: "1.5rem 1rem", sm: "1.5rem" }}
+        bg={isDark ? "gray.800" : "#fff"}
+        borderRadius="10px"
+        // borderRadius={{ base: "10px", sm: "12px" }}
+        boxShadow="md"
         align="start"
+        justify="center"
         w="100%"
         spacing="1.5rem"
         maxW={{ base: "90%", sm: "450px", md: "540px" }}
       >
+        <Heading textAlign="center" w="100%" mb="1.5rem">
+          Create a new set
+        </Heading>
         <FormControl isRequired>
           <FormLabel>Set Title</FormLabel>
           <Input
@@ -121,6 +135,9 @@ const CreateSetForm = () => {
 
         <Button
           isDisabled={!formData.category || !formData.title}
+          pointerEvents={
+            !formData.category || !formData.title ? "none" : "auto"
+          }
           w="100%"
           onClick={handleSubmit}
           isLoading={loading}
