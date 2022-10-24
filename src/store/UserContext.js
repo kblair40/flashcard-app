@@ -37,20 +37,6 @@ const UserProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    // const fetchUser = async () => {
-    //   try {
-    //     const response = await api.get("/user", {
-    //       params: { flashcard_sets: true },
-    //     });
-    //     console.log("\nUSER RESPONSE:", response.data);
-    //     setUserData(response.data.user);
-    //   } catch (e) {
-    //     console.error("FAILED FETCHING USER:", e);
-    //   }
-
-    //   setLoading(false);
-    // };
-
     if (isAuthenticated) {
       fetchUser();
     }
