@@ -91,7 +91,8 @@ const ManageSets = () => {
       pt="60px"
       justify="center"
       w="100%"
-      maxW={{ base: "98%", sm: "100vw", md: "100vw" }}
+      // maxW={{ base: "98%", sm: "100vw", md: "100vw" }}
+      maxW={{ base: "100vw" }}
       pr={{ base: "16px", md: 0 }}
       pl="16px"
     >
@@ -104,7 +105,8 @@ const ManageSets = () => {
       >
         <Box
           pr={{ md: "1rem" }}
-          w={{ base: "max-content", md: "max-content" }}
+          w={{ base: "100%" }}
+          // w={{ base: "max-content", md: "max-content" }}
           mx={{ md: "auto" }}
         >
           <CreatedSets
@@ -157,21 +159,28 @@ const CreatedSets = ({
   isDark,
 }) => {
   return (
-    <Box bg={isDark ? "gray.800" : "gray.50"} rounded="lg" w="100%">
-      <Box p={{ base: "1.5rem 1rem .5rem" }}>
+    <Box
+      // border="1px solid white"
+      bg={isDark ? "gray.800" : "gray.50"}
+      rounded="lg"
+      w="100%"
+    >
+      <Box p={{ base: "1.5rem .5rem .5rem", sm: "1.5rem 1rem .5rem" }}>
         <Heading fontSize={{ base: "xl", sm: "2xl" }} pb="1rem">
           Your Created Sets
         </Heading>
       </Box>
 
       <Grid
-        p={{ base: "0 1rem .5rem" }}
+        p={{ base: "0 .5rem .5rem", sm: "0 1rem .5rem" }}
         maxH={{ base: "45vh", md: "calc(100vh - 186px)" }}
         overflowY="auto"
         templateRows="auto"
+        w="100%"
         templateColumns={{
-          base: "repeat(4, max-content)",
-          lg: "repeat(5, max-content)",
+          base: "3fr 2.5fr 1fr 2fr",
+          sm: "2fr 1.5fr 1fr 1fr",
+          lg: "2fr 1fr 1.5fr 1fr 1fr",
         }}
         columnGap={{ base: "4", sm: "8" }}
         rowGap="3"
@@ -181,6 +190,8 @@ const CreatedSets = ({
           (header, i) => {
             return (
               <GridItem
+                justifySelf={[1, 2, 3].includes(i) ? "center" : undefined}
+                // border=".1px solid #fff"
                 key={i}
                 display={i === 2 ? { base: "none", lg: "block" } : "block"}
               >
@@ -237,7 +248,7 @@ const CreatedSets = ({
                       />
                     )}
                   </GridItem>
-
+                  {/* 5hr 53min */}
                   <GridItem>
                     <Link to={`/create/${_id}`}>
                       <Button

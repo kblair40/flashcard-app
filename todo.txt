@@ -7,5 +7,5 @@
     Default to center, Huge text, and bold
 6. Make sure large front card contents fit ok
 7. User shouldn't be able to "save" after 'editing' unless a change was made to the card
-
+8. Limit study history to last 20 items
 
