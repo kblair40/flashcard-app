@@ -127,7 +127,6 @@ const SetMeta = ({ setData, width = "100%" }) => {
               fontWeight={500}
               fontSize="sm"
               textTransform="capitalize"
-              ml={{ base: 0, md: "6px" }}
               noOfLines={1}
             >
               {title}
@@ -140,7 +139,7 @@ const SetMeta = ({ setData, width = "100%" }) => {
           direction="row"
           flexWrap="wrap"
           align="center"
-          justify="center"
+          justify="end"
         >
           <IconButton
             onClick={() => setShowEditModal((prev) => !prev)}
