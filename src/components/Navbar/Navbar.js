@@ -313,7 +313,7 @@ const MobileNav = ({ show, onToggle, signout, isSignedIn, onClose }) => {
             border={"1px solid"}
             borderColor={isDark ? "gray.600" : "gray.100"}
           >
-            <ThemeToggle />
+            <ThemeToggle loc="mobile" />
           </Box>
           <Button
             rightIcon={<LogoutIcon boxSize="22px" />}

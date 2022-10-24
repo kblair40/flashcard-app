@@ -5,7 +5,10 @@
 
 
 
+
 NICE TO HAVE(s)
 1. User shouldn't be able to "save" after 'editing' unless a change was made to the card
 2. Have separate toolbar module for front of card editor.
     Default to center, Huge text, and bold
+4. Social Auth 
+  - At least facebook, maybe google
