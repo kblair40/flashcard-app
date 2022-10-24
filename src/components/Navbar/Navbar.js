@@ -17,9 +17,9 @@ import { Link as RRLink, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import { HamburgerIcon, CloseIcon } from "utils/icons";
-import logo from "assets/images/logo.svg";
-import logo_dk from "assets/images/logo-dk.svg";
-import logo_sm from "assets/images/logo-sm.svg";
+import logo_lg_light from "assets/images/logo_lg_light.png";
+import logo_lg_dark from "assets/images/logo_lg_dark.png";
+import logo_sm from "assets/images/logo_sm.png";
 import UserContext from "store/UserContext";
 import AvatarMenu from "./AvatarMenu";
 import SetSearch from "./SetSearch";
@@ -57,17 +57,11 @@ export default function WithSubnavigation() {
 
   const logo_img = useBreakpointValue({
     base: logo_sm,
-    md: isDark ? logo_dk : logo,
+    md: isDark ? logo_lg_dark : logo_lg_light,
   });
 
   return (
-    <Box
-    // position="fixed"
-    // top={0}
-    // left={0}
-    // right={0}
-    //
-    >
+    <Box>
       <Flex
         bg={useColorModeValue("white", "gray.800")}
         color={useColorModeValue("gray.600", "white")}

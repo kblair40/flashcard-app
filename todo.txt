@@ -1,9 +1,10 @@
-3. Better logo
+1. Better logo
 4. Detect refresh on StudySession page and save timer duration to localStorage before allowing
     - needs improvement
-5. Have separate toolbar module for front of card editor.
-    Default to center, Huge text, and bold
-6. Make sure large front card contents fit ok
-7. User shouldn't be able to "save" after 'editing' unless a change was made to the card
-8. Limit study history to last 20 items
 
+
+
+NICE TO HAVE(s)
+1. User shouldn't be able to "save" after 'editing' unless a change was made to the card
+2. Have separate toolbar module for front of card editor.
+    Default to center, Huge text, and bold
