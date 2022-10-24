@@ -225,7 +225,7 @@ const NoSets = ({ isDark }) => {
       align="center"
       pt="1rem"
     >
-      <Text textAlign="center" fontWeight="700" fontSize="lg">
+      <Text textAlign="center" fontWeight="600" fontSize="lg">
         You havent' created a set yet
       </Text>
 
@@ -237,9 +237,6 @@ const NoSets = ({ isDark }) => {
           leftIcon={<AddIcon fill="#fff" boxSize="16px" />}
           fontWeight="700"
           variant={isDark ? "solid-blue" : "solid-blue"}
-          // bg={isDark ? "gray.700" : "gray.300"}
-          // _hover={{ bg: isDark ? "gray.600" : "gray.400" }}
-          // _active={{ bg: isDark ? "gray.500" : "gray.500" }}
           color="white"
         >
           Create a Set
