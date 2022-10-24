@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Flex, Text, IconButton, Box } from "@chakra-ui/react";
+import { Flex, Text, IconButton, Box, Grid, GridItem } from "@chakra-ui/react";
 
 import { EditIcon } from "utils/icons";
 import SetContext from "store/SetContext";
@@ -11,19 +11,59 @@ const CreateSet = () => {
   const { flashcardSetData: setData } = useContext(SetContext);
 
   return (
-    <Flex justify="center" w="100%" h="calc(100vh - 64px)" overflowY="hidden">
-      <Sidebar width={{ base: "100%", sm: "30%", md: "25%" }} />
+    <Grid
+      boxSizing="border-box"
+      border="1px solid #222"
+      w="100vw"
+      h="calc(100vh - 62px)"
+      overflowY="hidden"
+      justifyContent="center"
+      templateRows={{
+        base: "70px calc(100vh - 62px - 70px)",
+        sm: "70px calc(100vh - 62px - 70px)",
+      }}
+      templateColumns={{
+        base: "1fr 3fr",
+        sm: "1fr 3fr",
+      }}
+      templateAreas={{
+        base: `"sidebar meta"
+               "sidebar editors"`,
+        sm: `"sidebar meta"
+               "sidebar editors"`,
+      }}
+      pr={{ base: "8px", sm: "16px" }}
+      rowGap="1rem"
+      columnGap={{ base: "8px", sm: "16px" }}
+    >
+      <GridItem area="sidebar" border="1px solid green">
+        <Sidebar />
+        {/* <Sidebar width={{ base: "100%", sm: "30%", md: "25%" }} /> */}
+      </GridItem>
 
-      <Flex
-        direction="column"
-        h="100%"
-        width={{ base: "100%", sm: "70%", md: "75%" }}
-      >
-        <SetMeta setData={setData} />
-        <Editors width={{ base: "100%" }} />
-      </Flex>
-    </Flex>
+      <GridItem area="meta" border="1px solid blue">
+        <SetMeta setData={setData} width="100%" />
+      </GridItem>
+
+      <GridItem area="editors" border="1px solid red">
+        <Editors />
+      </GridItem>
+    </Grid>
   );
+  // return (
+  //   <Flex justify="center" w="100%" h="calc(100vh - 64px)" overflowY="hidden">
+  //     <Sidebar width={{ base: "100%", sm: "30%", md: "25%" }} />
+
+  //     <Flex
+  //       direction="column"
+  //       h="100%"
+  //       width={{ base: "100%", sm: "70%", md: "75%" }}
+  //     >
+  //       <SetMeta setData={setData} />
+  //       <Editors width={{ base: "100%" }} />
+  //     </Flex>
+  //   </Flex>
+  // );
 };
 
 export default CreateSet;
@@ -35,12 +75,14 @@ const SetMeta = ({ setData, width = "100%" }) => {
   let category, title;
   let data = {};
 
+  let border = "1px solid #ccc";
+
   useEffect(() => {
     if (setData) setLocalData(setData);
   }, [setData]);
 
   if (!localData) {
-    return <Box h="70px" />;
+    return <Box h="70px" border={border} />;
   }
 
   if (localData) {
@@ -57,10 +99,11 @@ const SetMeta = ({ setData, width = "100%" }) => {
 
   return (
     <Flex
-      mt="1rem"
+      border={border}
       h="70px"
+      align="center"
       width={width}
-      px={{ base: "8px", md: "16px" }}
+      // px={{ base: "8px", md: "16px" }}
       flexWrap="wrap"
       justifyContent="center"
     >
