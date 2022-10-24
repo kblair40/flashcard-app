@@ -14,11 +14,11 @@ const Editors = ({ width = "100%", height = "100%" }) => {
 
   return (
     <VStack
-      mt="1.5rem"
+      // mt="1.5rem"
       spacing="2rem"
       w={width}
       h={height}
-      px={{ base: "8px", md: "16px" }}
+      // px={{ base: "8px", md: "16px" }}
     >
       <Box w="100%" maxWidth="700px">
         <Editor value={frontCardContent} onChange={setFrontCardContent} />
