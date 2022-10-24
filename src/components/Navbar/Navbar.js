@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import {
   Box,
   Flex,
@@ -249,6 +249,12 @@ const shadows = {
 const MobileNav = ({ show, onToggle, signout, isSignedIn, onClose }) => {
   const isMd = useBreakpointValue({ base: false, md: true });
 
+  const outsideClickRef = useRef();
+  useOutsideClick({
+    ref: outsideClickRef,
+    handler: onClose,
+  });
+
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
 
@@ -275,6 +281,7 @@ const MobileNav = ({ show, onToggle, signout, isSignedIn, onClose }) => {
       transition={{ duration: 0.25 }}
     >
       <Stack
+        ref={outsideClickRef}
         zIndex={10000000}
         bg={useColorModeValue("white", "gray.800")}
         py={4}
@@ -310,7 +317,9 @@ const MobileNav = ({ show, onToggle, signout, isSignedIn, onClose }) => {
           >
             <ThemeToggle />
           </Box>
-          <Button variant="icon-button">Sign Out</Button>
+          <Button onClick={signout} variant="icon-button">
+            Sign Out
+          </Button>
         </Stack>
       </Stack>
     </motion.div>
