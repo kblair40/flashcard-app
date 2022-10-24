@@ -76,11 +76,7 @@ const Card = ({ content, onClick }) => {
   const isDark = colorMode === "dark";
 
   return (
-    <Box
-      // p="8px"
-      py="8px"
-      bg={isDark ? "gray.900" : "gray.50"}
-    >
+    <Box py="8px" bg={isDark ? "gray.900" : "gray.50"}>
       <Flex
         onClick={onClick}
         justify="center"

@@ -14,9 +14,6 @@ const CurrentCard = ({
 }) => {
   const [flipCards, setFlipCards] = useState();
 
-  // const { colorMode } = useColorMode();
-  // const isDark = colorMode === "dark";
-
   const didMount = useRef(false);
   useEffect(() => {
     // if (didMount.current || !flashcards) return;
@@ -114,9 +111,6 @@ export default CurrentCard;
 
 const FlipContainer = ({ children }) => {
   const [side, setSide] = useState("front");
-
-  // const { colorMode } = useColorMode();
-  // const isDark = colorMode === "dark";
 
   if (!children) return null;
 

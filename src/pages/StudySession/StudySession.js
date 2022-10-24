@@ -1,9 +1,4 @@
-import React, {
-  useEffect,
-  useState,
-  useContext,
-  // useRef
-} from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   Button,
   Flex,
@@ -39,23 +34,6 @@ const StudySession = () => {
   const isDark = colorMode === "dark";
 
   const params = useParams();
-
-  // const didMount = useRef(false);
-  // useEffect(() => {
-  //   if (didMount.current && params && params.id) return;
-  //   didMount.current = true;
-
-  //   const createSession = async (setId) => {
-  //     try {
-  //       const createRes = await createStudySession(setId);
-  //       console.log("CREATE RES:", createRes);
-  //     } catch (e) {
-  //       console.error("FAILED TO CREATE STUDY SESSION:", e);
-  //     }
-  //   };
-
-  //   createSession(params.id);
-  // }, [params]);
 
   useEffect(() => {
     const createSession = async (cardCount) => {
@@ -163,13 +141,7 @@ const StudySession = () => {
       position="relative"
       overflowY="hidden"
     >
-      <Flex
-        // pt={{ base: "2rem" }}
-        w="100%"
-        maxW={{ base: "90%" }}
-        direction="column"
-        align="center"
-      >
+      <Flex w="100%" maxW={{ base: "90%" }} direction="column" align="center">
         <Timer />
 
         <Heading
