@@ -147,13 +147,26 @@ const FavoriteSets = () => {
             );
           })
         ) : favSets && !favSets.length ? (
-          <Text textAlign="center" fontWeight="600" fontSize="lg">
-            No Favorite Sets
-          </Text>
+          <Flex direction="column" align="center" pb={{ base: "1rem", md: 0 }}>
+            <Text
+              textAlign="center"
+              fontWeight="600"
+              fontSize="lg"
+              color={isDark ? "gray.50" : "gray.700"}
+            >
+              No Favorite Sets
+            </Text>
+
+            <Box mt=".5rem" px={{ base: "16px", sm: "32px", md: "16px" }}>
+              <Text textAlign={"center"} fontWeight="500">
+                Click the star icon next to any set from the community or that
+                you created to add it to your favorites
+              </Text>
+            </Box>
+          </Flex>
         ) : null}
       </Box>
     </Flex>
   );
 };
-
 export default FavoriteSets;
