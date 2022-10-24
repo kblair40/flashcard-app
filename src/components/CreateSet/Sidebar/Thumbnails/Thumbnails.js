@@ -104,14 +104,16 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
     base: { left: "4px", right: "4px" },
     sm: { left: 0, right: 0 },
   });
-  const cardsOverflow = useBreakpointValue({ base: "scroll", sm: "hidden" });
+  const cardsOverflow = useBreakpointValue({ base: "auto", sm: "hidden" });
+  const cardHeight = useBreakpointValue({ base: "100%", sm: undefined });
 
   return (
     <Box
-      mt={{ base: "4px", sm: 0 }}
+      // border="1px solid white"
+      // mt={{ base: "4px", sm: 0 }}
       height={height}
       width={width}
-      maxHeight="100%"
+      // maxHeight="100%"
       position={{ sm: "absolute" }}
       bottom={{ sm: 0 }}
       left={{ sm: 0 }}
@@ -129,6 +131,7 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
       </Heading>
 
       <Box
+        // border="1px solid blue"
         display={{ base: "flex", sm: "block" }}
         flexDirection={{ base: "row", sm: "unset" }}
         flexWrap={{ base: "wrap", sm: "unset" }}
@@ -136,10 +139,10 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
         onPointerDown={startDrag}
         onPointerUp={endDrag}
         w="100%"
-        height={{ base: "calc(100% - 16px)", sm: "100%" }}
+        height={{ base: "calc(100% - 0px)", sm: "100%" }}
         overflowY={{ sm: "auto" }}
         p={{ sm: "4px 6px 0 6px", md: "4px 8px 0 8px" }}
-        mt="4px"
+        // mt="4px"
         background={
           saving ? "rgba(10,20,240,0.02)" : isDark ? "gray.800" : "#fff"
         }
@@ -151,10 +154,14 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
           values={cards}
           axis={reorderAxis}
           style={{
-            height: "100%",
+            height: cardHeight,
+            // height: "100%",
             maxWidth: "100vw",
             display: cardsDisplay,
+            // overflowY: "hidden",
+            overflowY: "auto",
             overflowX: cardsOverflow,
+            // border: "1px solid red",
           }}
         >
           {cards && cards.length ? (
@@ -166,6 +173,7 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
                   value={card}
                   dragControls={dragControls}
                   style={{
+                    // height: "100%",
                     margin: `0 ${cardMargin.right} 0 ${cardMargin.left}`,
                   }}
                 >
@@ -219,7 +227,7 @@ const Thumbnail = ({
       mb={{ sm: "8px" }}
       h="100%"
       minH={{ base: "50px", sm: "60px" }}
-      maxH="120px"
+      maxH={{ base: "120px", sm: "100px" }}
       overflow={{ base: "hidden" }}
       minW={{ base: "120px", sm: "unset" }}
       w="100%"
@@ -245,9 +253,9 @@ const Thumbnail = ({
       pb={{ base: ".75rem", sm: "0" }}
     >
       <Box
-        p=".75rem 1rem"
+        p={{ base: ".5rem 1rem", sm: ".25rem 1rem .25rem" }}
         textAlign="center"
-        maxH={{ base: "120px", sm: "90px" }}
+        maxH={{ base: "120px", sm: "100px" }}
         overflow={{ base: "hidden" }}
         dangerouslySetInnerHTML={{ __html: frontContent }}
       />

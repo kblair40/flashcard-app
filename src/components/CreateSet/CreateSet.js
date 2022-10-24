@@ -19,7 +19,7 @@ const CreateSet = () => {
       overflow="hidden"
       justifyContent="center"
       templateRows={{
-        base: "1fr 6fr 3fr",
+        base: "1fr 6fr 2.5fr",
         sm: "1fr 8fr",
       }}
       templateColumns={{

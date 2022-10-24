@@ -8,7 +8,7 @@
 }
 
   pre.ql-container {
-    min-height: 120px !important;
+    min-height: 132px !important;
     border-radius: 0 0 6px 6px !important;
     border: 1px solid red !important;
   }
@@ -17,18 +17,27 @@
     height: 100% !important;
   }
   .ql-blank {
-    min-height: 120px !important;
+    min-height: 130px !important;
   }
   .ql-size-large {
     font-size: 20px;
   }
 
   @media screen and (min-width: 480px) {
-    .ql-container {
-      min-height: 200px !important;
+    pre.ql-container {
+      min-height: 202px !important;
     }
     .ql-blank{
       min-height: 200px !important;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    pre.ql-container {
+      min-height: 222px !important;
+    }
+    .ql-blank{
+      min-height: 220px !important;
     }
   }
   
