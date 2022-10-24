@@ -27,11 +27,6 @@ const Home = () => {
             w={{ base: "100%", md: "100%" }}
             ml={{ md: "1.5rem" }}
             mx={{ lg: "auto" }}
-            //
-            // position={{ md: "fixed" }}
-            // top={{ md: "84px" }}
-            // left={{ md: "0" }}
-            // right={{ md: "0" }}
           >
             <AllSets />
           </Box>

@@ -183,14 +183,7 @@ const AllSets = () => {
                           w="64px"
                           bg={studyButtonBg}
                           zIndex={2}
-                          leftIcon={
-                            <StudyIcon
-                              // fill={isDark ? "gray.50" : "gray.700"}
-                              // fill={isDark ? "gray.50" : "gray.700"}
-                              boxSize="18px"
-                              mr="4px"
-                            />
-                          }
+                          leftIcon={<StudyIcon boxSize="18px" mr="4px" />}
                         >
                           Study
                         </Button>
@@ -224,9 +217,16 @@ export default AllSets;
 
 const NoSets = ({ isDark }) => {
   return (
-    <Flex w="100%" direction="column" justify="center" align="center" pt="1rem">
+    <Flex
+      pb="1rem"
+      w="100%"
+      direction="column"
+      justify="center"
+      align="center"
+      pt="1rem"
+    >
       <Text textAlign="center" fontWeight="700" fontSize="lg">
-        No Sets Found
+        You havent' created a set yet
       </Text>
 
       <Link to="/create">
