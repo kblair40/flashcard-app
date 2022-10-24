@@ -307,6 +307,9 @@ const MobileNav = ({ show, onToggle, signout, isSignedIn, onClose }) => {
           justify={"center"}
           spacing={{ base: "1rem", sm: "1.5rem" }}
           align="center"
+          pt="1rem"
+          borderTop={".1px solid"}
+          borderColor={isDark ? "gray.600" : "gray.400"}
         >
           <Box
             borderRadius="full"
@@ -349,10 +352,6 @@ const MobileNavItem = ({ label, href, onClick }) => {
         bg: "gray.100",
       }}
       w="100%"
-      // mx={{ base: "36px", sm: "80px" }}
-      // mx="auto"
-      // maxW={{ base: "300px", sm: "400px" }}
-      // border="1px solid #ccc"
       cursor="pointer"
     >
       <Text
@@ -392,7 +391,6 @@ const DesktopNav = ({ isSignedIn, isDark }) => {
   const linkHoverColor = useColorModeValue("gray.900", "white");
 
   const { pathname } = useLocation();
-  // console.log("PATHNAME:", pathname);
 
   return (
     <Stack align="center" direction={"row"} spacing={{ base: 2, sm: 4 }}>
