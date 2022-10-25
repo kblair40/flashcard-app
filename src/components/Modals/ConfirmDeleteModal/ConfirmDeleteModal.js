@@ -5,10 +5,10 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalCloseButton,
   Flex,
   Button,
   Text,
+  useColorMode,
 } from "@chakra-ui/react";
 
 const ConfirmDeleteModal = ({
@@ -18,6 +18,9 @@ const ConfirmDeleteModal = ({
   onCancel,
   confirming,
 }) => {
+  const { colorMode } = useColorMode();
+  const isDark = colorMode === "dark";
+
   return (
     <Modal
       size={{ base: "xs", sm: "sm", md: "md" }}
@@ -26,7 +29,7 @@ const ConfirmDeleteModal = ({
       isCentered
     >
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent bg={isDark ? "gray.800" : "gray.50"}>
         <ModalHeader pt="2rem">
           <Text textAlign="center" fontSize="xl" fontWeight="600">
             Are you sure you want to delete?
@@ -35,7 +38,6 @@ const ConfirmDeleteModal = ({
             This cannot be undone.
           </Text>
         </ModalHeader>
-        <ModalCloseButton />
         <ModalBody p="8px 24px 24px">
           <Flex
             w="100%"
@@ -49,6 +51,7 @@ const ConfirmDeleteModal = ({
               // size="sm"
               isLoading={confirming}
               onClick={onConfirm}
+              variant="solid-blue"
             >
               Confirm
             </Button>
