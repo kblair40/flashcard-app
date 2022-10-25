@@ -12,12 +12,15 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
+import ConfirmDeleteFavoriteModal from "components/Modals/ConfirmDeleteFavoriteModal";
 import { StarFilledIcon, StudyIcon } from "utils/icons";
 import api from "api";
 
 const FavoriteSets = () => {
   const [loading, setLoading] = useState(true);
   const [favSets, setFavSets] = useState([]);
+  const [setToDelete, setSetToDelete] = useState();
+  const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false);
   const [removingFavorite, setRemovingFavorite] = useState();
 
   const { colorMode } = useColorMode();
@@ -38,12 +41,12 @@ const FavoriteSets = () => {
     fetchFavSets();
   }, []);
 
-  const handleClickUnfavorite = async (setId) => {
-    setRemovingFavorite(setId);
+  const removeFavorite = async () => {
+    setRemovingFavorite(setToDelete);
 
     try {
       const response = await api.patch("/user/remove", {
-        favorite_set: setId,
+        favorite_set: setToDelete,
       });
       console.log("RESPONSE:", response.data);
 
@@ -51,7 +54,14 @@ const FavoriteSets = () => {
     } catch (e) {
       console.error("FAILED TO ADD/REMOVE SET AS FAVORITE:", e);
     }
-    setRemovingFavorite(setId);
+
+    setRemovingFavorite(undefined);
+    setSetToDelete(undefined);
+  };
+
+  const handleClickUnfavorite = (setId) => {
+    setSetToDelete(setId);
+    setShowConfirmDeleteModal(true);
   };
 
   if (loading) {
@@ -166,6 +176,17 @@ const FavoriteSets = () => {
           </Flex>
         ) : null}
       </Box>
+
+      {showConfirmDeleteModal && (
+        <ConfirmDeleteFavoriteModal
+          isOpen={showConfirmDeleteModal}
+          onClose={() => {
+            setSetToDelete(undefined);
+            setShowConfirmDeleteModal(false);
+          }}
+          onConfirm={removeFavorite}
+        />
+      )}
     </Flex>
   );
 };
