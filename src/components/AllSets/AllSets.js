@@ -154,7 +154,7 @@ const AllSets = () => {
                           fontSize="lg"
                           fontWeight="600"
                           lineHeight={1.3}
-                          noOfLines={2}
+                          noOfLines={1}
                         >
                           {set.title}
                         </Text>
