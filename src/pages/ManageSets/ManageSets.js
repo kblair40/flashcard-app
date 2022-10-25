@@ -293,6 +293,17 @@ const SetMenu = ({ setId }) => {
 
   const navigate = useNavigate();
 
+  const handleClickDelete = async () => {
+    setDeleting(true);
+    try {
+      const response = await api.delete(`/flashcard_set/${setId}`);
+      console.log("RESPONSE.DATA:", response.data);
+    } catch (e) {
+      console.log("FAILED TO DELETE SET:", e);
+    }
+    setDeleting(false);
+  };
+
   return (
     <Menu>
       <MenuButton
