@@ -63,7 +63,14 @@ const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ handleSignIn, handleSignOut, userData, isSignedIn, loading }}
+      value={{
+        handleSignIn,
+        handleSignOut,
+        userData,
+        isSignedIn,
+        loading,
+        fetchUser,
+      }}
     >
       {children}
     </UserContext.Provider>

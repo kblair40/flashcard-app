@@ -33,7 +33,7 @@ const CommunitySets = () => {
   const [communitySets, setCommunitySets] = useState();
   const [favSets, setFavSets] = useState([]);
 
-  let { userData, loading: ctxLoading } = useContext(UserContext);
+  let { userData, loading: ctxLoading, fetchUser } = useContext(UserContext);
   // console.log("USER DATA:", userData);
 
   useEffect(() => {
@@ -108,10 +108,10 @@ const CommunitySets = () => {
             communitySets.map((set, idx) => {
               return (
                 <CommunitySet
+                  fetchUser={fetchUser}
                   isFavorited={favSets.includes(set._id)}
                   key={idx}
                   set={set}
-                  onClick={() => console.log("clicked")}
                 />
               );
             })
@@ -124,12 +124,9 @@ const CommunitySets = () => {
 
 export default CommunitySets;
 
-const CommunitySet = ({ set, isFavorited }) => {
+const CommunitySet = ({ set, isFavorited, fetchUser }) => {
   const [loading, setLoading] = useState(false);
   const [isFavorite, setIsFavorite] = useState(isFavorited);
-
-  // const { colorMode } = useColorMode();
-  // const isDark = colorMode === "dark";
 
   useEffect(() => {
     if (typeof isFavorited === "boolean") {
@@ -140,12 +137,10 @@ const CommunitySet = ({ set, isFavorited }) => {
   const handleClickFavorite = async () => {
     try {
       setLoading(true);
-      const response = await api.patch(
-        `/user/${isFavorite ? "remove" : "add"}`,
-        {
-          favorite_set: set._id,
-        }
-      );
+      await api.patch(`/user/${isFavorite ? "remove" : "add"}`, {
+        favorite_set: set._id,
+      });
+      fetchUser();
       // console.log("RESPONSE:", response.data);
       setIsFavorite((prev) => !prev);
     } catch (e) {
