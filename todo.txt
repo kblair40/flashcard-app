@@ -1,5 +1,6 @@
 1. Detect refresh on StudySession page and save timer duration to localStorage before allowing
     - needs improvement
+2. Better random shuffle function for cards
 
 
 NICE TO HAVE(s)

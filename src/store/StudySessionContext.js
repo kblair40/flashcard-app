@@ -9,19 +9,14 @@ const StudySessionContext = createContext();
 
 const StudySessionProvider = ({ children }) => {
   const [badSession, setBadSession] = useState(false);
-  const [sessionId, setSessionId] = useState();
+  const [sessionId, setSessionId] = useState(
+    localStorage.getItem("session-id") || undefined
+  );
   const [setId, setSetId] = useState();
-
-  // let offset = localStorage.getItem("curent_session_timestamp");
-  // if (localStorage.getItem("curent_session_timestamp")) {
-  //   offset =
-  // }
-  // console.log("OFFSET:", offset);
 
   const { seconds, minutes, hours, isRunning, start, pause, reset } =
     useStopwatch({
       autoStart: false,
-      // offsetTimestamp: offset,
     });
 
   const params = useParams();
@@ -33,6 +28,7 @@ const StudySessionProvider = ({ children }) => {
       setBadSession(false);
       setSessionId(undefined);
       setSetId(undefined);
+      localStorage.removeItem("session-id");
     }
   }, [pathname]);
 
@@ -99,6 +95,7 @@ const StudySessionProvider = ({ children }) => {
         if (response.data && response.data.study_session) {
           const { _id } = response.data.study_session;
           setSessionId(_id);
+          localStorage.setItem("session-id", _id);
         }
         setBadSession(false);
       } else {
