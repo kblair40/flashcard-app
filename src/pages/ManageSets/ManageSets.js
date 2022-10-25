@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   Spinner,
   Center,
@@ -21,6 +21,7 @@ import {
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 
+import UserContext from "store/UserContext";
 import useDetectLogout from "hooks/useDetectLogout";
 import FavoriteSets from "components/FavoriteSets";
 import StudyHistory from "components/StudyHistory";
@@ -30,6 +31,8 @@ import {
   TrashIcon,
   StudyIcon,
   MoreHorizontalIcon,
+  StarFilledIcon,
+  StarOutlineIcon,
 } from "utils/icons";
 import api from "api";
 
@@ -92,7 +95,10 @@ const ManageSets = () => {
     setChangingPublicStatus(undefined);
   };
 
-  const filterSets = (deletedSetId) => {
+  const filterSets = (deletedSetId, deleteOnly = false) => {
+    if (deleteOnly) {
+      return setDeletedSetCount((prev) => prev + 1);
+    }
     let setIdx = flashcardSets.findIndex((set) => set._id === deletedSetId);
     if (setIdx === -1) return;
 
@@ -286,14 +292,28 @@ const CreatedSets = ({
 };
 
 const SetMenu = ({ setId, filterSets }) => {
-  const [deleting, setDeleting] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const menuBg = useColorModeValue("gray.50", "gray.800");
 
   const navigate = useNavigate();
 
+  const { userData } = useContext(UserContext);
+
+  useEffect(() => {
+    if (userData && userData.favorite_flashcard_sets && setId) {
+      console.log("FAV SETS:", userData.favorite_flashcard_sets);
+      console.log("SETID:", setId);
+      const { favorite_flashcard_sets: fav_sets } = userData;
+      if (fav_sets.includes(setId)) {
+        setIsFavorite(true);
+      }
+    }
+  }, [setId, userData]);
+
   const handleClickDelete = async () => {
-    setDeleting(true);
+    setLoading(true);
     try {
       const response = await api.delete(`/flashcard_set/${setId}`);
       console.log("RESPONSE.DATA:", response.data);
@@ -301,13 +321,29 @@ const SetMenu = ({ setId, filterSets }) => {
     } catch (e) {
       console.log("FAILED TO DELETE SET:", e);
     }
-    setDeleting(false);
+    setLoading(false);
+  };
+
+  const handleClickAddToFavorites = async () => {
+    setLoading(true);
+    try {
+      const response = await api.patch(`/user/add`, {
+        favorite_set: setId,
+      });
+      console.log("ADD FAVORITE RESPONSE:", response.data);
+      setIsFavorite(true);
+
+      filterSets(null, true);
+    } catch (e) {
+      console.error("Failed to add set to favorites:", e);
+    }
+    setLoading(false);
   };
 
   return (
     <Menu>
       <MenuButton
-        isDisabled={deleting}
+        isDisabled={loading}
         size="sm"
         rounded="full"
         as={IconButton}
@@ -323,6 +359,21 @@ const SetMenu = ({ setId, filterSets }) => {
           icon={<StudyIcon boxSize="18px" />}
         >
           Study
+        </MenuItem>
+
+        <MenuItem
+          closeOnSelect={true}
+          fontWeight="500"
+          onClick={!isFavorite ? handleClickAddToFavorites : null}
+          icon={
+            isFavorite ? (
+              <StarFilledIcon boxSize="18px" />
+            ) : (
+              <StarOutlineIcon boxSize="18px" />
+            )
+          }
+        >
+          {isFavorite ? "In Your Favorites" : "Add to Favorites"}
         </MenuItem>
 
         <MenuItem

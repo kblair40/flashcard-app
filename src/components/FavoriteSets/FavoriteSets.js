@@ -42,9 +42,7 @@ const FavoriteSets = ({ deletedSetCount }) => {
       const response = await api.patch("/user/remove", {
         favorite_set: setToDelete,
       });
-      console.log("RESPONSE:", response.data);
 
-      // if (response.data) setFavSets(response.data.favorite_flashcard_sets);
       fetchFavSets();
     } catch (e) {
       console.error("FAILED TO ADD/REMOVE SET AS FAVORITE:", e);
