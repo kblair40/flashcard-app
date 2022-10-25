@@ -182,7 +182,7 @@ export default StudySession;
 const GoBack = () => {
   return (
     <Box position="absolute" top="5rem" left={{ base: ".5rem", md: "1rem" }}>
-      <Link to="/">
+      <Link to={-1}>
         <Button
           variant="icon-button"
           leftIcon={
