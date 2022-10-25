@@ -1,9 +1,6 @@
 1. Detect refresh on StudySession page and save timer duration to localStorage before allowing
     - needs improvement
-2. History order needs to stay in reverse if history item gets deleted
-3. More checks to make user confirm they want to delete something
-4. Prevent duplicates in favorites
-6. Ability to delete a set
+2. Ability to delete a set
 
 
 NICE TO HAVE(s)
