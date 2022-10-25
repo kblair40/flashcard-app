@@ -165,11 +165,18 @@ const CommunitySet = ({ set, isFavorited, fetchUser }) => {
       px="1rem"
     >
       <Flex direction="column" w="100%">
-        <Text mr="6px" mb="6px" fontSize="lg" fontWeight="600" lineHeight={1}>
+        <Text
+          noOfLines={2}
+          mr="6px"
+          mb="6px"
+          fontSize="lg"
+          fontWeight="600"
+          lineHeight={1.2}
+        >
           {set.title}
         </Text>
 
-        <Text lineHeight={1} fontSize="sm">
+        <Text noOfLines={1} lineHeight={1} fontSize="sm">
           Created {new Date(set.createdAt).toLocaleDateString()}
         </Text>
       </Flex>
