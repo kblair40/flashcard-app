@@ -37,6 +37,7 @@ const ManageSets = () => {
   const [loading, setLoading] = useState(true);
   const [flashcardSets, setFlashcardSets] = useState();
   const [changingPublicStatus, setChangingPublicStatus] = useState();
+  const [deletedSetCount, setDeletedSetCount] = useState(0);
 
   useDetectLogout();
 
@@ -91,6 +92,16 @@ const ManageSets = () => {
     setChangingPublicStatus(undefined);
   };
 
+  const filterSets = (deletedSetId) => {
+    let setIdx = flashcardSets.findIndex((set) => set._id === deletedSetId);
+    if (setIdx === -1) return;
+
+    let sets = [...flashcardSets];
+    sets.splice(setIdx, 1);
+    setFlashcardSets(sets);
+    setDeletedSetCount((prev) => prev + 1);
+  };
+
   if (loading) {
     return (
       <Center h="400px">
@@ -122,6 +133,7 @@ const ManageSets = () => {
             flashcardSets={flashcardSets}
             handleChangePublicStatus={handleChangePublicStatus}
             isDark={isDark}
+            filterSets={filterSets}
           />
         </Box>
 
@@ -139,7 +151,7 @@ const ManageSets = () => {
             mb={{ md: "1.5rem" }}
           >
             <Box h={{ md: "100%" }} w={{ base: "100%", md: "100%" }}>
-              <FavoriteSets />
+              <FavoriteSets deletedSetCount={deletedSetCount} />
             </Box>
           </Box>
 
@@ -166,6 +178,7 @@ const CreatedSets = ({
   flashcardSets,
   handleChangePublicStatus,
   isDark,
+  filterSets,
 }) => {
   return (
     <Box bg={isDark ? "gray.800" : "gray.50"} rounded="lg" w="100%">
@@ -253,22 +266,8 @@ const CreatedSets = ({
                         />
                       )}
                     </GridItem>
-                    {/* 5hr 53min */}
                     <GridItem>
-                      <SetMenu setId={_id} />
-                      {/* <Link to={`/create/${_id}`}>
-                        <Button
-                          bg="transparent"
-                          transition="background-color 0.2s"
-                          _hover={{ bg: isDark ? "gray.700" : "gray.100" }}
-                          _active={{ bg: isDark ? "gray.600" : "gray.200" }}
-                          leftIcon={<EditIcon boxSize="14px" />}
-                          size="sm"
-                          w="100%"
-                        >
-                          Edit
-                        </Button>
-                      </Link> */}
+                      <SetMenu setId={_id} filterSets={filterSets} />
                     </GridItem>
                   </React.Fragment>
                 );
@@ -286,7 +285,7 @@ const CreatedSets = ({
   );
 };
 
-const SetMenu = ({ setId }) => {
+const SetMenu = ({ setId, filterSets }) => {
   const [deleting, setDeleting] = useState(false);
 
   const menuBg = useColorModeValue("gray.50", "gray.800");
@@ -298,6 +297,7 @@ const SetMenu = ({ setId }) => {
     try {
       const response = await api.delete(`/flashcard_set/${setId}`);
       console.log("RESPONSE.DATA:", response.data);
+      filterSets(setId);
     } catch (e) {
       console.log("FAILED TO DELETE SET:", e);
     }
@@ -307,6 +307,7 @@ const SetMenu = ({ setId }) => {
   return (
     <Menu>
       <MenuButton
+        isDisabled={deleting}
         size="sm"
         rounded="full"
         as={IconButton}
@@ -321,11 +322,10 @@ const SetMenu = ({ setId }) => {
           onClick={() => navigate(`/study/${setId}`)}
           icon={<StudyIcon boxSize="18px" />}
         >
-          Studdy
+          Study
         </MenuItem>
 
         <MenuItem
-          border="1px solid green"
           closeOnSelect={true}
           fontWeight="500"
           icon={<EditIcon boxSize="18px" />}
@@ -340,6 +340,7 @@ const SetMenu = ({ setId }) => {
           closeOnSelect={true}
           fontWeight="500"
           icon={<TrashIcon boxSize="18px" />}
+          onClick={handleClickDelete}
         >
           Delete Set
         </MenuItem>

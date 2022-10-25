@@ -1,6 +1,5 @@
 1. Detect refresh on StudySession page and save timer duration to localStorage before allowing
     - needs improvement
-2. Ability to delete a set
 
 
 NICE TO HAVE(s)

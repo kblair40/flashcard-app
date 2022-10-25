@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   Flex,
   Text,
@@ -16,7 +16,7 @@ import ConfirmDeleteFavoriteModal from "components/Modals/ConfirmDeleteFavoriteM
 import { StarFilledIcon, StudyIcon } from "utils/icons";
 import api from "api";
 
-const FavoriteSets = () => {
+const FavoriteSets = ({ deletedSetCount }) => {
   const [loading, setLoading] = useState(true);
   const [favSets, setFavSets] = useState([]);
   const [setToDelete, setSetToDelete] = useState();
@@ -26,20 +26,28 @@ const FavoriteSets = () => {
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
 
-  useEffect(() => {
-    const fetchFavSets = async () => {
-      try {
-        const response = await api.get("/favorite_sets");
-        // console.log("FAV SETS RESPONSE.DATA:", response.data);
-        setFavSets(response.data);
-      } catch (e) {
-        console.error("FAILED FETCHING SETS:", e);
-      }
-      setLoading(false);
-    };
+  const fetchFavSets = async () => {
+    try {
+      const response = await api.get("/favorite_sets");
+      // console.log("FAV SETS RESPONSE.DATA:", response.data);
+      setFavSets(response.data);
+    } catch (e) {
+      console.error("FAILED FETCHING SETS:", e);
+    }
+    setLoading(false);
+  };
 
+  useEffect(() => {
     fetchFavSets();
   }, []);
+
+  const deletedCount = useRef(0);
+  useEffect(() => {
+    if (deletedSetCount > 0 && deletedCount.current < deletedSetCount) {
+      deletedCount.current = deletedSetCount;
+      fetchFavSets();
+    }
+  }, [deletedSetCount]);
 
   const removeFavorite = async () => {
     setRemovingFavorite(setToDelete);
