@@ -17,7 +17,7 @@ import {
 import { Link as RRLink, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
-import { HamburgerIcon, CloseIcon, LogoutIcon } from "utils/icons";
+import { HamburgerIcon, CloseIcon, LogoutIcon, HomeIcon } from "utils/icons";
 import logo_lg_light from "assets/images/logo_lg_light.png";
 import logo_lg_dark from "assets/images/logo_lg_dark.png";
 import logo_sm from "assets/images/logo_sm.png";
@@ -322,7 +322,7 @@ const MobileNav = ({ show, onToggle, signout, isSignedIn, onClose }) => {
   );
 };
 
-const MobileNavItem = ({ label, href, onClick }) => {
+const MobileNavItem = ({ label, href, icon }) => {
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
 
@@ -334,7 +334,6 @@ const MobileNavItem = ({ label, href, onClick }) => {
       href={href ?? "#"}
       justify={"center"}
       align={"center"}
-      onClick={onClick ? onClick : null}
       _hover={{
         textDecoration: "none",
         bg: isDark ? "gray.700" : "gray.50",
@@ -345,10 +344,13 @@ const MobileNavItem = ({ label, href, onClick }) => {
       w="100%"
       cursor="pointer"
     >
+      {icon ? icon : null}
+
       <Text
         fontSize="lg"
         fontWeight={600}
         color={useColorModeValue("gray.600", "gray.100")}
+        ml={icon ? "8px" : 0}
       >
         {label}
       </Text>
@@ -437,7 +439,10 @@ const NAV_ITEMS = [
 ];
 
 const MOBILE_NAV_ITEMS = [
+  {
+    label: "Home",
+    href: "/",
+    icon: <HomeIcon boxSize="20px" />,
+  },
   ...NAV_ITEMS,
-  // { label: null, href: null },
-  // { label: "Sign Out", href: null },
 ];
