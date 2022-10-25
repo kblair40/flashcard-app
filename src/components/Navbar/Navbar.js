@@ -239,6 +239,7 @@ const shadows = {
 
 const MobileNav = ({ show, onToggle, signout, isSignedIn, onClose }) => {
   const isMd = useBreakpointValue({ base: false, md: true });
+  const { pathname } = useLocation();
 
   const outsideClickRef = useRef();
   useOutsideClick({
@@ -281,9 +282,6 @@ const MobileNav = ({ show, onToggle, signout, isSignedIn, onClose }) => {
         w="100vw"
       >
         {MOBILE_NAV_ITEMS.map((navItem) => {
-          if (isSignedIn && navItem.label === "Sign In") return null;
-          else if (!isSignedIn && navItem.label === "Sign Out") return null;
-
           return (
             <MobileNavItem
               onClick={navItem.label === "Sign Out" ? signout : null}
