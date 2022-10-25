@@ -286,6 +286,7 @@ const MobileNav = ({ show, onToggle, signout, isSignedIn, onClose }) => {
             <MobileNavItem
               onClick={navItem.label === "Sign Out" ? signout : null}
               key={navItem.label}
+              isActive={pathname === navItem.href}
               {...navItem}
             />
           );
@@ -320,7 +321,7 @@ const MobileNav = ({ show, onToggle, signout, isSignedIn, onClose }) => {
   );
 };
 
-const MobileNavItem = ({ label, href, icon }) => {
+const MobileNavItem = ({ label, href, icon, isActive }) => {
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
 
@@ -337,10 +338,11 @@ const MobileNavItem = ({ label, href, icon }) => {
         bg: isDark ? "gray.700" : "gray.50",
       }}
       _active={{
-        bg: "gray.100",
+        bg: isDark ? "gray.600" : "gray.100",
       }}
       w="100%"
       cursor="pointer"
+      bg={isDark && isActive ? "gray.700" : isActive ? "gray.50" : undefined}
     >
       {icon ? icon : null}
 
