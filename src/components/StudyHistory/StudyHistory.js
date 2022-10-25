@@ -124,6 +124,7 @@ const StudyHistory = () => {
           overflowY="auto"
           w="100%"
           maxH={{ base: "50vh", md: "unset" }}
+          pb={history && history.length ? "1rem" : 0}
         >
           {history && history.length ? (
             history.map((histItem, idx) => {
