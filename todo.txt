@@ -4,7 +4,7 @@
 3. More checks to make user confirm they want to delete something
 5. Tooltips in SetControls to explain why a button is disabled
 6. Default to dark theme
-7. 
+7. Home navigation in mobile menu
 
 
 

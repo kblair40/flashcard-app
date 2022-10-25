@@ -9,8 +9,10 @@ const inputHelpers = createMultiStyleConfigHelpers([
 const selectHelpers = createMultiStyleConfigHelpers(["icon", "field"]);
 
 const theme = extendTheme({
-  initialColorMode: "light",
-  useSystemColorMode: false,
+  config: {
+    initialColorMode: "dark",
+    useSystemColorMode: false,
+  },
   colors: {
     primary: {
       base: "#1A5CFB",
