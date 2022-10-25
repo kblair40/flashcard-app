@@ -12,13 +12,12 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
+import useFetchFavoriteSets from "hooks/useFetchFavoriteSets";
 import ConfirmDeleteFavoriteModal from "components/Modals/ConfirmDeleteFavoriteModal";
 import { StarFilledIcon, StudyIcon } from "utils/icons";
 import api from "api";
 
 const FavoriteSets = ({ deletedSetCount }) => {
-  const [loading, setLoading] = useState(true);
-  const [favSets, setFavSets] = useState([]);
   const [setToDelete, setSetToDelete] = useState();
   const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false);
   const [removingFavorite, setRemovingFavorite] = useState();
@@ -26,20 +25,7 @@ const FavoriteSets = ({ deletedSetCount }) => {
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
 
-  const fetchFavSets = async () => {
-    try {
-      const response = await api.get("/favorite_sets");
-      // console.log("FAV SETS RESPONSE.DATA:", response.data);
-      setFavSets(response.data);
-    } catch (e) {
-      console.error("FAILED FETCHING SETS:", e);
-    }
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    fetchFavSets();
-  }, []);
+  const { favSets, loading, fetchFavSets } = useFetchFavoriteSets();
 
   const deletedCount = useRef(0);
   useEffect(() => {
@@ -58,7 +44,8 @@ const FavoriteSets = ({ deletedSetCount }) => {
       });
       console.log("RESPONSE:", response.data);
 
-      if (response.data) setFavSets(response.data.favorite_flashcard_sets);
+      // if (response.data) setFavSets(response.data.favorite_flashcard_sets);
+      fetchFavSets();
     } catch (e) {
       console.error("FAILED TO ADD/REMOVE SET AS FAVORITE:", e);
     }

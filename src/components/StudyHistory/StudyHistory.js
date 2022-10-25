@@ -171,11 +171,20 @@ const StudyHistory = () => {
 
 export default StudyHistory;
 
+const deletedSetObj = {
+  title: "deleted set",
+};
+
 const HistoryItem = ({ item, onClick }) => {
   const duration = getCleanDuration(item.duration);
 
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
+
+  if (!item.flashcard_set) {
+    item.flashcard_set = deletedSetObj;
+    // return null;
+  }
 
   return (
     <Flex
