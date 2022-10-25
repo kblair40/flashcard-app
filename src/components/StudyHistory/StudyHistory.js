@@ -171,20 +171,11 @@ const StudyHistory = () => {
 
 export default StudyHistory;
 
-const deletedSetObj = {
-  title: "deleted set",
-};
-
 const HistoryItem = ({ item, onClick }) => {
   const duration = getCleanDuration(item.duration);
 
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
-
-  if (!item.flashcard_set) {
-    item.flashcard_set = deletedSetObj;
-    // return null;
-  }
 
   return (
     <Flex
@@ -197,8 +188,20 @@ const HistoryItem = ({ item, onClick }) => {
     >
       <Flex direction="column" w="100%">
         <Flex w="100%" align="end" mb="6px">
-          <Text mr="6px" fontSize="lg" fontWeight="600" lineHeight={1}>
-            {item.flashcard_set.title}
+          <Text
+            color={
+              !item.flashcard_set && isDark
+                ? "gray.400"
+                : !item.flashcard_set
+                ? "gray.500"
+                : undefined
+            }
+            mr="6px"
+            fontSize="md"
+            fontWeight="600"
+            lineHeight={1}
+          >
+            {item.flashcard_set ? item.flashcard_set.title : "deleted set"}
           </Text>
 
           <Text lineHeight={1} fontSize="sm">
