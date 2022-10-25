@@ -160,12 +160,7 @@ const CreatedSets = ({
   isDark,
 }) => {
   return (
-    <Box
-      // border="1px solid white"
-      bg={isDark ? "gray.800" : "gray.50"}
-      rounded="lg"
-      w="100%"
-    >
+    <Box bg={isDark ? "gray.800" : "gray.50"} rounded="lg" w="100%">
       <Box p={{ base: "1.5rem .5rem .5rem", sm: "1.5rem 1rem .5rem" }}>
         <Heading fontSize={{ base: "xl", sm: "2xl" }} pb="1rem">
           Your Created Sets
@@ -174,7 +169,6 @@ const CreatedSets = ({
 
       {flashcardSets && flashcardSets.length ? (
         <Grid
-          border="1px solid white"
           p={{ base: "0 .5rem .5rem", sm: "0 1rem .5rem" }}
           maxH={{ base: "45vh", md: "calc(100vh - 186px)" }}
           overflowY="auto"
