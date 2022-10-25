@@ -3,7 +3,6 @@
 2. History order needs to stay in reverse if history item gets deleted
 3. More checks to make user confirm they want to delete something
 4. Prevent duplicates in favorites
-5. GoBack component should navigate(-1) or something similar instead of hardcoded back to home route
 6. Ability to delete a set
 
 

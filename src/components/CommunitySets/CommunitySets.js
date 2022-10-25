@@ -37,7 +37,7 @@ const CommunitySets = () => {
   // console.log("USER DATA:", userData);
 
   useEffect(() => {
-    if (userData && !loading) {
+    if (userData) {
       setFavSets(userData?.favorite_flashcard_sets || []);
     }
   }, [ctxLoading, userData]);
