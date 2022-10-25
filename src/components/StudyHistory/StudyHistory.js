@@ -8,6 +8,8 @@ import {
   useColorMode,
   Box,
   Tooltip,
+  Center,
+  Spinner,
 } from "@chakra-ui/react";
 
 import api from "api";
@@ -48,20 +50,17 @@ const StudyHistory = () => {
       setMoreThan20(moreThan20);
     }
 
-    console.log("\nMORE THAN 20:", moreThan20, "N");
     console.log("history:", history);
     const sortedHistory = history
       .sort((a, b) => {
         a = a.start_time;
         b = b.start_time;
         return sortBy === "newest" ? b - a : a - b;
-        // return b.start_time - a.start_time;
       })
       .slice(0, 20);
     setHistory(sortedHistory);
   };
 
-  // new set 10/15/2022 is the most recent
   const handleChangeSortBy = (sortBy) => {
     setSortBy(sortBy);
     let histCopy = [...history];
@@ -78,16 +77,10 @@ const StudyHistory = () => {
   const deleteItem = async () => {
     try {
       const response = await api.delete(`/history/${itemToDelete}`);
-      // let moreThan20;
       if (response.data && response.data.history) {
         console.log("HISTORY AFTER DELETE:", response.data.history);
         const { history, moreThan20 } = response.data;
         defaultSortHistory({ history, moreThan20 });
-        // setHistory(response.data.history.reverse());
-
-        // if (typeof response.data.moreThan20 === "boolean") {
-        //   setMoreThan20(response.data.moreThan20);
-        // }
       }
     } catch (e) {
       console.error("FAILED TO DELETE:", e);
@@ -139,8 +132,12 @@ const StudyHistory = () => {
                 />
               );
             })
-          ) : (
+          ) : history && !history.length ? (
             <NoHistory />
+          ) : (
+            <Center h="140px">
+              <Spinner />
+            </Center>
           )}
 
           {moreThan20 ? (
