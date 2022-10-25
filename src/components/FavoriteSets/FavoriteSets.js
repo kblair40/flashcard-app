@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Flex,
   Text,
@@ -12,7 +12,6 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-import UserContext from "store/UserContext";
 import ConfirmDeleteFavoriteModal from "components/Modals/ConfirmDeleteFavoriteModal";
 import { StarFilledIcon, StudyIcon } from "utils/icons";
 import api from "api";
@@ -23,10 +22,6 @@ const FavoriteSets = () => {
   const [setToDelete, setSetToDelete] = useState();
   const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false);
   const [removingFavorite, setRemovingFavorite] = useState();
-
-  const {
-    userData: { favorite_flashcard_sets: fav_sets },
-  } = useContext(UserContext);
 
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
