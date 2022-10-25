@@ -11,6 +11,7 @@ import {
   PopoverArrow,
   Flex,
   Text,
+  Box,
 } from "@chakra-ui/react";
 import { useLocation, Link } from "react-router-dom";
 
@@ -107,7 +108,11 @@ export default SetSearch;
 
 const Result = ({ result, isDark }) => {
   return (
-    <Link to={`/study/${result._id}/`}>
+    <Link
+      style={{ zIndex: 1000000000 }}
+      onClick={(e) => e.stopPropagation()}
+      to={`/study/${result._id}/`}
+    >
       <Flex
         py="8px"
         px="12px"
