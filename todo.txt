@@ -4,7 +4,7 @@
 3. More checks to make user confirm they want to delete something
 5. Tooltips in SetControls to explain why a button is disabled
 6. Default to dark theme
-7. Icons to set control buttons
+7. 
 
 
 
@@ -14,3 +14,4 @@ NICE TO HAVE(s)
     Default to center, Huge text, and bold
 4. Social Auth 
   - At least facebook, maybe google
+5. Some kind of cool lightning loader

@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Flex, Button, Stack, Tooltip, Box } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
+import { AddIcon, TrashIcon, SaveIcon } from "utils/icons";
 import SetContext from "store/SetContext";
 
 const SetControls = ({ height = "100%", width = "100%" }) => {
@@ -110,6 +111,13 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
 
 export default SetControls;
 
+let boxSize = "14px";
+const icons = {
+  "New Card": <AddIcon boxSize={boxSize} />,
+  "Save Card": <SaveIcon boxSize={"15px"} />,
+  "Delete Card": <TrashIcon boxSize={boxSize} fill="gray.50" />,
+};
+
 const ControlButton = ({ label, onClick, loading, isDisabled, variant }) => {
   return (
     <Button
@@ -119,6 +127,7 @@ const ControlButton = ({ label, onClick, loading, isDisabled, variant }) => {
       isLoading={loading}
       isDisabled={isDisabled}
       variant={variant}
+      leftIcon={icons[label] ? icons[label] : null}
     >
       {label}
     </Button>
