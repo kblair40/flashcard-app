@@ -11,13 +11,26 @@ import {
   Text,
   Heading,
   Box,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  useColorModeValue,
+  MenuDivider,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import useDetectLogout from "hooks/useDetectLogout";
 import FavoriteSets from "components/FavoriteSets";
 import StudyHistory from "components/StudyHistory";
-import { AddIcon, EditIcon } from "utils/icons";
+import {
+  AddIcon,
+  EditIcon,
+  TrashIcon,
+  StudyIcon,
+  MoreHorizontalIcon,
+} from "utils/icons";
 import api from "api";
 
 const ManageSets = () => {
@@ -103,12 +116,7 @@ const ManageSets = () => {
         w="100%"
         mt="2rem"
       >
-        <Box
-          pr={{ md: "1rem" }}
-          w={{ base: "100%" }}
-          // w={{ base: "max-content", md: "max-content" }}
-          mx={{ md: "auto" }}
-        >
+        <Box pr={{ md: "1rem" }} w={{ base: "100%" }} mx={{ md: "auto" }}>
           <CreatedSets
             changingPublicStatus={changingPublicStatus}
             flashcardSets={flashcardSets}
@@ -247,7 +255,8 @@ const CreatedSets = ({
                     </GridItem>
                     {/* 5hr 53min */}
                     <GridItem>
-                      <Link to={`/create/${_id}`}>
+                      <SetMenu setId={_id} />
+                      {/* <Link to={`/create/${_id}`}>
                         <Button
                           bg="transparent"
                           transition="background-color 0.2s"
@@ -259,7 +268,7 @@ const CreatedSets = ({
                         >
                           Edit
                         </Button>
-                      </Link>
+                      </Link> */}
                     </GridItem>
                   </React.Fragment>
                 );
@@ -274,6 +283,57 @@ const CreatedSets = ({
         <NoSets isDark={isDark} />
       )}
     </Box>
+  );
+};
+
+const SetMenu = ({ setId }) => {
+  const [deleting, setDeleting] = useState(false);
+
+  const menuBg = useColorModeValue("gray.50", "gray.800");
+
+  const navigate = useNavigate();
+
+  return (
+    <Menu>
+      <MenuButton
+        size="sm"
+        rounded="full"
+        as={IconButton}
+        icon={<MoreHorizontalIcon boxSize="18px" />}
+        variant="ghost"
+      />
+
+      <MenuList bg={menuBg}>
+        <MenuItem
+          closeOnSelect={true}
+          fontWeight="500"
+          onClick={() => navigate(`/study/${setId}`)}
+          icon={<StudyIcon boxSize="18px" />}
+        >
+          Studdy
+        </MenuItem>
+
+        <MenuItem
+          border="1px solid green"
+          closeOnSelect={true}
+          fontWeight="500"
+          icon={<EditIcon boxSize="18px" />}
+          onClick={() => navigate(`/create/${setId}`)}
+        >
+          Edit
+        </MenuItem>
+
+        <MenuDivider />
+
+        <MenuItem
+          closeOnSelect={true}
+          fontWeight="500"
+          icon={<TrashIcon boxSize="18px" />}
+        >
+          Delete Set
+        </MenuItem>
+      </MenuList>
+    </Menu>
   );
 };
 
