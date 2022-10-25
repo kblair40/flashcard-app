@@ -27,7 +27,7 @@ const Hero = () => {
         </Flex>
 
         <Text textAlign="center" fontWeight="500" fontSize="2xl">
-          Study & share flashcard sets made around the world
+          Create, consume and share custom flashcard sets with our community
         </Text>
 
         <Flex align="center" justify="flex-end" mt="2rem">

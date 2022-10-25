@@ -48,7 +48,7 @@ const CreateSetForm = () => {
         title,
         description,
         category,
-        public: is_public,
+        is_public,
       });
       console.log("\nCREATE RESPONSE:", response.data);
 
