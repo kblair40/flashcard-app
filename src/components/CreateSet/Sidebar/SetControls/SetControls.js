@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Flex, Button, Stack } from "@chakra-ui/react";
+import { Flex, Button, Stack, Tooltip, Box } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 import SetContext from "store/SetContext";
@@ -58,24 +58,50 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
         spacing={{ base: ".25rem", sm: ".5rem" }}
         direction={{ base: "row-reverse", sm: "column" }}
       >
-        <ControlButton
-          isDisabled={activeCard.id === undefined}
-          label="New Card"
-          onClick={addCard}
-        />
-        <ControlButton
-          onClick={handleClickSave}
-          isDisabled={isEmpty(frontCardContent) || isEmpty(backCardContent)}
-          label="Save Card"
-          loading={saving}
-        />
-        <ControlButton
-          isDisabled={!isEditing}
-          onClick={deleteCard}
-          label="Delete Card"
-          loading={deleting}
-          variant="solid-red"
-        />
+        <Tooltip
+          label="You must be editing a previously created card"
+          placement="right"
+          isDisabled={activeCard.id !== undefined}
+        >
+          <Box>
+            <ControlButton
+              isDisabled={activeCard.id === undefined}
+              label="New Card"
+              onClick={addCard}
+            />
+          </Box>
+        </Tooltip>
+
+        <Tooltip
+          placement="right"
+          label="You must be editing a previously created card or have content on both sides of a new card"
+          isDisabled={!isEmpty(frontCardContent) || !isEmpty(backCardContent)}
+        >
+          <Box>
+            <ControlButton
+              onClick={handleClickSave}
+              isDisabled={isEmpty(frontCardContent) || isEmpty(backCardContent)}
+              label="Save Card"
+              loading={saving}
+            />
+          </Box>
+        </Tooltip>
+
+        <Tooltip
+          isDisabled={isEditing}
+          placement="right"
+          label={"A card you have created must be selected in order to delete"}
+        >
+          <Box>
+            <ControlButton
+              isDisabled={!isEditing}
+              onClick={deleteCard}
+              label="Delete Card"
+              loading={deleting}
+              variant="solid-red"
+            />
+          </Box>
+        </Tooltip>
         <ControlButton onClick={handleClickExit} label="Exit" />
       </Stack>
     </Flex>
