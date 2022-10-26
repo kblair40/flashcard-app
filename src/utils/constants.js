@@ -13,7 +13,8 @@ export const quillSettings = {
         { indent: "+1" },
       ],
       [{ align: ["", "center", "right", "justify"] }],
-      ["link", "image"],
+      // ["link", "image"],
+      ["link"],
     ],
   },
 };
