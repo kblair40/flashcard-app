@@ -8,11 +8,16 @@ import {
   TabPanels,
   Tab,
   TabPanel,
+  useColorMode,
+  color,
 } from "@chakra-ui/react";
 
 import SettingsForm from "components/Forms/SettingsForm";
 
 const Settings = () => {
+  const { colorMode } = useColorMode();
+  const isDark = colorMode === "dark";
+
   return (
     <Flex justifyContent="center" pt="61px">
       <Flex
@@ -43,9 +48,25 @@ const Settings = () => {
         </Text>
 
         <Tabs align="center" mt="1.5rem" isFitted>
-          <TabList w="300px">
-            <Tab>Card Front</Tab>
-            <Tab>Card Back</Tab>
+          <TabList w="300px" fontWeight="400">
+            <Tab
+              _selected={{
+                fontWeight: "600",
+                color: isDark ? "blue.300" : "blue.600",
+                borderBottomColor: isDark ? "blue.300" : "blue.600",
+              }}
+            >
+              Card Front
+            </Tab>
+            <Tab
+              _selected={{
+                fontWeight: "600",
+                color: isDark ? "blue.300" : "blue.600",
+                borderBottomColor: isDark ? "blue.300" : "blue.600",
+              }}
+            >
+              Card Back
+            </Tab>
           </TabList>
 
           <TabPanels>
