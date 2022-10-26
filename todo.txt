@@ -1,6 +1,5 @@
 1. Detect refresh on StudySession page and save timer duration to localStorage before allowing
     - needs improvement (still needs improvement, but much better now)
-2. SetSearch should show loading spinner and "no sets found" message at appropriate times
 
 
 NICE TO HAVE(s)

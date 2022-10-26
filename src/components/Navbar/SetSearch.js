@@ -78,7 +78,6 @@ const SetSearch = ({ isDisabled, isDark }) => {
     <Popover
       initialFocusRef={inputRef}
       returnFocusOnClose={false}
-      // isOpen={results && results.length && showResults}
       isOpen={value.length > 2 && showResults}
     >
       <PopoverTrigger>
@@ -107,7 +106,7 @@ const SetSearch = ({ isDisabled, isDark }) => {
         </PopoverHeader>
         <PopoverBody p={0}>
           {searching ? (
-            <Center h="120px">
+            <Center py="1rem">
               <Spinner />
             </Center>
           ) : results && results.length ? (
@@ -115,8 +114,8 @@ const SetSearch = ({ isDisabled, isDark }) => {
               return <Result key={i} result={result} isDark={isDark} />;
             })
           ) : results && !results.length ? (
-            <Center h="100px">
-              <Text>No Sets Found</Text>
+            <Center py="1rem">
+              <Text fontWeight="600">NO SETS FOUND</Text>
             </Center>
           ) : null}
         </PopoverBody>
