@@ -8,8 +8,6 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 
-import "./AllCards.css";
-
 const AllCards = ({
   flashcards,
   onClickCard,
