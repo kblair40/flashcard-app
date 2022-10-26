@@ -269,7 +269,7 @@ const MobileNav = ({ show, onToggle, signout, isSignedIn, onClose }) => {
         zIndex: 100,
       }}
       initial={{ y: "-100%" }}
-      animate={show && !isMd ? { y: 60 } : { y: -180 }}
+      animate={show && !isMd ? { y: 60 } : { y: -200 }}
       transition={{ duration: 0.25 }}
     >
       <Stack
