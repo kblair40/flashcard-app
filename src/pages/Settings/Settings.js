@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   Flex,
   Text,
@@ -10,15 +10,28 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 
+import api from "api";
 import UserContext from "store/UserContext";
 import SettingsForm from "components/Forms/SettingsForm";
 
 const Settings = () => {
+  const [saving, setSaving] = useState(false);
+
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
 
   const { userData } = useContext(UserContext);
   console.log("USER DATA:", userData);
+
+  const handleSubmit = async () => {
+    if (!userData || !userData.default_styles) return;
+
+    try {
+      // const response = await api.patch()
+    } catch (e) {
+      console.log("FAILED TO PATCH USER DEFAULT STYLES:", e);
+    }
+  };
 
   return (
     <Flex justifyContent="center" pt="61px">
@@ -78,18 +91,20 @@ const Settings = () => {
               userData.default_styles.front &&
               userData.default_styles.back ? (
                 <SettingsForm
+                  saving={saving}
                   cardSide={"Front"}
                   defaultData={userData.default_styles.front}
-                  onSubmit={() => console.log("submitted")}
+                  onSubmit={handleSubmit}
                 />
               ) : null}
             </TabPanel>
             <TabPanel>
               {userData && userData.default_styles ? (
                 <SettingsForm
+                  saving={saving}
                   cardSide={"Back"}
                   defaultData={userData.default_styles.back}
-                  onSubmit={() => console.log("submitted")}
+                  onSubmit={handleSubmit}
                 />
               ) : null}
             </TabPanel>

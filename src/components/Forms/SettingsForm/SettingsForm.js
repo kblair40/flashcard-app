@@ -14,7 +14,7 @@ import {
 import { toTitleCase } from "utils/helpers";
 import { options } from "./settings-options";
 
-const SettingsForm = ({ cardSide, onSubmit, defaultData }) => {
+const SettingsForm = ({ cardSide, onSubmit, defaultData, saving }) => {
   const [formData, setFormData] = useState(defaultData);
 
   const { colorMode } = useColorMode();
@@ -52,7 +52,7 @@ const SettingsForm = ({ cardSide, onSubmit, defaultData }) => {
         bg={isDark ? "gray.800" : "#fff"}
         borderRadius="10px"
         boxShadow={isDark ? "md" : "sm"}
-        align="center"
+        align="start"
         justify="center"
         w="100%"
         spacing="1.5rem"
@@ -61,7 +61,8 @@ const SettingsForm = ({ cardSide, onSubmit, defaultData }) => {
           <Text fontWeight="500" mb="6px" fontSize="md">
             Text Styles
           </Text>
-          <Stack spacing={[1, 5]} direction={["column", "row"]}>
+
+          <Stack spacing={[1, 5]} direction={["column", "row"]} align="start">
             <Checkbox
               {...checkboxProps}
               isChecked={formData.isBold}
@@ -129,7 +130,12 @@ const SettingsForm = ({ cardSide, onSubmit, defaultData }) => {
           </Select>
         </FormControl>
 
-        <Button w="100%" variant="solid-blue" onClick={handleSubmit}>
+        <Button
+          isLoading={saving}
+          w="100%"
+          variant="solid-blue"
+          onClick={handleSubmit}
+        >
           Save Changes
         </Button>
       </Stack>
