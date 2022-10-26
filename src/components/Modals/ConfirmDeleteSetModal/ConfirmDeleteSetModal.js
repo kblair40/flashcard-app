@@ -32,7 +32,7 @@ const ConfirmDeleteSetModal = ({
       <ModalContent bg={isDark ? "gray.800" : "gray.50"}>
         <ModalHeader pt="2rem">
           <Text textAlign="center" fontSize="xl" fontWeight="600">
-            Are you sure you want to delete?
+            Are you sure you want to delete this set?
           </Text>
           <Text fontSize="md" fontWeight="500" textAlign="center">
             This cannot be undone.
@@ -48,7 +48,6 @@ const ConfirmDeleteSetModal = ({
               w={{ base: "100%", sm: "50%" }}
               mb={{ base: "1rem", sm: 0 }}
               ml={{ sm: "1rem" }}
-              // size="sm"
               isLoading={confirming}
               onClick={onConfirm}
               variant="solid-blue"
