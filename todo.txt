@@ -3,6 +3,7 @@
 2. Better random shuffle function for cards
 3. Add tooltip to navbar when things are disabled OR allow 
     clicks and have them open signup modal
+4. Mobile nav menu slightly sticks out when closed, 8(ish)px
 
 
 NICE TO HAVE(s)
@@ -12,3 +13,6 @@ NICE TO HAVE(s)
 4. Social Auth 
   - At least facebook, maybe google and twitter
 5. Some kind of cool lightning loader
+6. A true "center" class for back of card that will force content to vertical/horizontal center of card
+7. User settings page where they can change...
+    - default styles for front and back of cards

@@ -9,7 +9,6 @@ import {
 } from "@chakra-ui/react";
 import { Reorder, useDragControls } from "framer-motion";
 
-import "./Thumbnails.css";
 import api from "api";
 import SetContext from "store/SetContext";
 
