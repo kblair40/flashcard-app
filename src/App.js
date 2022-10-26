@@ -9,6 +9,7 @@ import Create from "pages/Create";
 import Account from "pages/Account";
 import Study from "pages/Study";
 import StudySession from "pages/StudySession";
+import Settings from "pages/Settings";
 import ManageSets from "pages/ManageSets";
 import Navbar from "components/Navbar";
 
@@ -33,6 +34,8 @@ function App() {
               <Route path="/manage-sets" element={<ManageSets />} />
 
               <Route path="/account" element={<Account />} />
+
+              <Route path="/settings" element={<Settings />} />
 
               <Route path="*" element={<NotFound />} />
             </Routes>
