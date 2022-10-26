@@ -73,13 +73,24 @@ const Settings = () => {
 
           <TabPanels>
             <TabPanel>
-              {userData && userData.default_styles ? (
-                <SettingsForm cardSide={"Front"} />
+              {userData &&
+              userData.default_styles &&
+              userData.default_styles.front &&
+              userData.default_styles.back ? (
+                <SettingsForm
+                  cardSide={"Front"}
+                  defaultData={userData.default_styles.front}
+                  onSubmit={() => console.log("submitted")}
+                />
               ) : null}
             </TabPanel>
             <TabPanel>
               {userData && userData.default_styles ? (
-                <SettingsForm cardSide={"Back"} />
+                <SettingsForm
+                  cardSide={"Back"}
+                  defaultData={userData.default_styles.back}
+                  onSubmit={() => console.log("submitted")}
+                />
               ) : null}
             </TabPanel>
           </TabPanels>

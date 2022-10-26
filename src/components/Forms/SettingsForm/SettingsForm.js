@@ -14,14 +14,8 @@ import {
 import { toTitleCase } from "utils/helpers";
 import { options } from "./settings-options";
 
-const SettingsForm = ({ cardSide, onSubmit }) => {
-  const [formData, setFormData] = useState({
-    textAlign: "left",
-    fontSize: "medium",
-    isBold: false,
-    isItalic: false,
-    isUnderlined: false,
-  });
+const SettingsForm = ({ cardSide, onSubmit, defaultData }) => {
+  const [formData, setFormData] = useState(defaultData);
 
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
@@ -42,12 +36,10 @@ const SettingsForm = ({ cardSide, onSubmit }) => {
   };
 
   const handleSubmit = () => {
+    // TODO - ADD CHECK TO SEE IF ANY VALUES CHANGED
     onSubmit(cardSide);
   };
 
-  // CHECKBOX GROUP FOR BOLD, ITALIC AND UNDERLINE SETTINGS
-  // SELECT FOR DEFAULT FONT SIZE
-  // SELECT FOR ALIGNMENT
   const checkboxProps = {
     colorScheme: "gray",
     onChange: (e) => handleChangeCheck(e),
@@ -138,7 +130,7 @@ const SettingsForm = ({ cardSide, onSubmit }) => {
         </FormControl>
 
         <Button w="100%" variant="solid-blue" onClick={handleSubmit}>
-          Submit
+          Save Changes
         </Button>
       </Stack>
     </Flex>
