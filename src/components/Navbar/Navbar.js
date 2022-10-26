@@ -329,6 +329,7 @@ const MobileNavItem = ({ label, href, icon, isActive }) => {
     <Flex
       borderRadius="6px"
       py={2}
+      pointerEvents={isActive ? "none" : "auto"}
       as={href ? Link : undefined}
       href={href ?? "#"}
       justify={"center"}
