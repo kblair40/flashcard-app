@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import {
   Input,
   InputLeftElement,
@@ -11,14 +11,17 @@ import {
   PopoverArrow,
   Flex,
   Text,
-  Box,
+  Center,
+  Spinner,
 } from "@chakra-ui/react";
 import { useLocation, Link } from "react-router-dom";
+import debounce from "lodash.debounce";
 
 import { SearchIcon } from "utils/icons";
 import api from "api";
 
 const SetSearch = ({ isDisabled, isDark }) => {
+  const [searching, setSearching] = useState(false);
   const [value, setValue] = useState("");
   const [results, setResults] = useState([]);
   const [showResults, setShowResults] = useState(true);
@@ -33,13 +36,20 @@ const SetSearch = ({ isDisabled, isDark }) => {
     setResults("");
   }, [pathname]);
 
+  const debouncedSave = useCallback(
+    debounce((newValue) => search(newValue), 300),
+    []
+  );
+
   const handleChange = async (e) => {
     const { value } = e.target;
     setValue(value);
 
+    // must have at least 3 chars entered
     if (value.length > 2) {
-      // must have at least 3 chars entered
-      search(value);
+      setSearching(true);
+      debouncedSave(value);
+      // search(value);
       setShowResults(true);
     } else {
       setShowResults(false);
@@ -49,6 +59,7 @@ const SetSearch = ({ isDisabled, isDark }) => {
 
   const search = async (searchValue) => {
     console.log("SEARCH VALUE:", searchValue);
+    setSearching(true);
     try {
       const response = await api.get("/search", {
         params: { title: searchValue },
@@ -60,13 +71,15 @@ const SetSearch = ({ isDisabled, isDark }) => {
     } catch (e) {
       console.log("SEARCH FAILED:", e);
     }
+    setSearching(false);
   };
 
   return (
     <Popover
       initialFocusRef={inputRef}
       returnFocusOnClose={false}
-      isOpen={results && results.length && showResults}
+      // isOpen={results && results.length && showResults}
+      isOpen={value.length > 2 && showResults}
     >
       <PopoverTrigger>
         <InputGroup>
@@ -93,11 +106,19 @@ const SetSearch = ({ isDisabled, isDark }) => {
           Results
         </PopoverHeader>
         <PopoverBody p={0}>
-          {results
-            ? results.map((result, i) => {
-                return <Result key={i} result={result} isDark={isDark} />;
-              })
-            : null}
+          {searching ? (
+            <Center h="120px">
+              <Spinner />
+            </Center>
+          ) : results && results.length ? (
+            results.map((result, i) => {
+              return <Result key={i} result={result} isDark={isDark} />;
+            })
+          ) : results && !results.length ? (
+            <Center h="100px">
+              <Text>No Sets Found</Text>
+            </Center>
+          ) : null}
         </PopoverBody>
       </PopoverContent>
     </Popover>
