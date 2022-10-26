@@ -9,34 +9,43 @@ BLUE
 */
 
 /* BOTH SIDES */
-.custom-flashcard :is(ol,ul) {
-    padding-left: 1.5rem;
+.custom-flashcard :is(ol, ul) {
+  padding-left: 1.5rem;
 }
-
 
 /* CARD FRONT */
 .card-front p {
-    text-align: center;
-    font-size: 16px;
+  text-align: center;
+  font-size: 16px;
 }
 
 /* CARD BACK */
 .card-back p {
-    font-size: 14px;
+  font-size: 14px;
+  white-space: pre;
 }
 
 .custom-flashcard .ql-align-center {
-    text-align: center;
+  text-align: center;
 }
 
 /* Dark mode specific */
 .card-back.card-dark a {
-    /* blue.300 */
-    color: #63B3ED;
+  /* blue.300 */
+  color: #63b3ed;
 }
 
 /* Light mode specific */
 .card-back.card-light a {
-    /* blue.700 */
-    color: #2C5282; 
+  /* blue.700 */
+  color: #2c5282;
 }
+
+.ql-indent-1 { padding-left: 12px; }
+.ql-indent-2 { padding-left: 24px; }
+.ql-indent-3 { padding-left: 36px; }
+.ql-indent-4 { padding-left: 48px; }
+.ql-indent-5 { padding-left: 60px; }
+.ql-indent-6 { padding-left: 72px; }
+.ql-indent-7 { padding-left: 84px; }
+.ql-indent-8 { padding-left: 96px; }
