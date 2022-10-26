@@ -25,6 +25,7 @@ import UserContext from "store/UserContext";
 import useDetectLogout from "hooks/useDetectLogout";
 import FavoriteSets from "components/FavoriteSets";
 import StudyHistory from "components/StudyHistory";
+import ConfirmDeleteSetModal from "components/Modals/ConfirmDeleteSetModal";
 import {
   AddIcon,
   EditIcon,
@@ -215,7 +216,6 @@ const CreatedSets = ({
               return (
                 <GridItem
                   justifySelf={[1, 2, 3].includes(i) ? "center" : undefined}
-                  // border=".1px solid #fff"
                   key={i}
                   display={i === 2 ? { base: "none", lg: "block" } : "block"}
                 >
@@ -294,6 +294,7 @@ const CreatedSets = ({
 const SetMenu = ({ setId, filterSets }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const menuBg = useColorModeValue("gray.50", "gray.800");
 
@@ -313,6 +314,12 @@ const SetMenu = ({ setId, filterSets }) => {
   }, [setId, userData]);
 
   const handleClickDelete = async () => {
+    setShowConfirmModal(true);
+  };
+
+  const deleteSet = async () => {
+    handleCloseConfirmModal();
+
     setLoading(true);
     try {
       const response = await api.delete(`/flashcard_set/${setId}`);
@@ -322,6 +329,10 @@ const SetMenu = ({ setId, filterSets }) => {
       console.log("FAILED TO DELETE SET:", e);
     }
     setLoading(false);
+  };
+
+  const handleCloseConfirmModal = () => {
+    setShowConfirmModal(false);
   };
 
   const handleClickAddToFavorites = async () => {
@@ -341,62 +352,73 @@ const SetMenu = ({ setId, filterSets }) => {
   };
 
   return (
-    <Menu>
-      <MenuButton
-        isDisabled={loading}
-        size="sm"
-        rounded="full"
-        as={IconButton}
-        icon={<MoreHorizontalIcon boxSize="18px" />}
-        variant="ghost"
-      />
+    <React.Fragment>
+      {showConfirmModal && (
+        <ConfirmDeleteSetModal
+          isOpen={showConfirmModal}
+          onClose={handleCloseConfirmModal}
+          onCancel={handleCloseConfirmModal}
+          onConfirm={deleteSet}
+        />
+      )}
 
-      <MenuList bg={menuBg}>
-        <MenuItem
-          closeOnSelect={true}
-          fontWeight="500"
-          onClick={() => navigate(`/study/${setId}`)}
-          icon={<StudyIcon boxSize="18px" />}
-        >
-          Study
-        </MenuItem>
+      <Menu>
+        <MenuButton
+          isDisabled={loading}
+          size="sm"
+          rounded="full"
+          as={IconButton}
+          icon={<MoreHorizontalIcon boxSize="18px" />}
+          variant="ghost"
+        />
 
-        <MenuItem
-          closeOnSelect={true}
-          fontWeight="500"
-          onClick={!isFavorite ? handleClickAddToFavorites : null}
-          icon={
-            isFavorite ? (
-              <StarFilledIcon boxSize="18px" />
-            ) : (
-              <StarOutlineIcon boxSize="18px" />
-            )
-          }
-        >
-          {isFavorite ? "In Your Favorites" : "Add to Favorites"}
-        </MenuItem>
+        <MenuList bg={menuBg}>
+          <MenuItem
+            closeOnSelect={true}
+            fontWeight="500"
+            onClick={() => navigate(`/study/${setId}`)}
+            icon={<StudyIcon boxSize="18px" />}
+          >
+            Study
+          </MenuItem>
 
-        <MenuItem
-          closeOnSelect={true}
-          fontWeight="500"
-          icon={<EditIcon boxSize="18px" />}
-          onClick={() => navigate(`/create/${setId}`)}
-        >
-          Edit
-        </MenuItem>
+          <MenuItem
+            closeOnSelect={true}
+            fontWeight="500"
+            onClick={!isFavorite ? handleClickAddToFavorites : null}
+            icon={
+              isFavorite ? (
+                <StarFilledIcon boxSize="18px" />
+              ) : (
+                <StarOutlineIcon boxSize="18px" />
+              )
+            }
+          >
+            {isFavorite ? "In Your Favorites" : "Add to Favorites"}
+          </MenuItem>
 
-        <MenuDivider />
+          <MenuItem
+            closeOnSelect={true}
+            fontWeight="500"
+            icon={<EditIcon boxSize="18px" />}
+            onClick={() => navigate(`/create/${setId}`)}
+          >
+            Edit
+          </MenuItem>
 
-        <MenuItem
-          closeOnSelect={true}
-          fontWeight="500"
-          icon={<TrashIcon boxSize="18px" />}
-          onClick={handleClickDelete}
-        >
-          Delete Set
-        </MenuItem>
-      </MenuList>
-    </Menu>
+          <MenuDivider />
+
+          <MenuItem
+            closeOnSelect={true}
+            fontWeight="500"
+            icon={<TrashIcon boxSize="18px" />}
+            onClick={handleClickDelete}
+          >
+            Delete Set
+          </MenuItem>
+        </MenuList>
+      </Menu>
+    </React.Fragment>
   );
 };
 
