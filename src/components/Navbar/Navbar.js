@@ -398,6 +398,7 @@ const DesktopNav = ({ isSignedIn, isDark }) => {
             to={(isSignedIn && navItem.href) ?? "#"}
             fontSize={"sm"}
             fontWeight={600}
+            pointerEvents={pathname === navItem.href ? "none" : "auto"}
             color={linkColor}
             _hover={{
               textDecoration: "none",
@@ -410,7 +411,7 @@ const DesktopNav = ({ isSignedIn, isDark }) => {
             _after={{
               content: `""`,
               width: "100%",
-              bottom: 0,
+              bottom: "-1px",
               left: 0,
               position: "absolute",
               transform: pathname === navItem.href ? "scaleX(1)" : "scaleX(0)",
