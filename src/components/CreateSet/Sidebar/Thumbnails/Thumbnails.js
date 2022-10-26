@@ -151,13 +151,10 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
           axis={reorderAxis}
           style={{
             height: cardHeight,
-            // height: "100%",
             maxWidth: "100vw",
             display: cardsDisplay,
-            // overflowY: "hidden",
             overflowY: "auto",
             overflowX: cardsOverflow,
-            // border: "1px solid red",
           }}
         >
           {cards && cards.length ? (
@@ -169,7 +166,6 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
                   value={card}
                   dragControls={dragControls}
                   style={{
-                    // height: "100%",
                     margin: `0 ${cardMargin.right} 0 ${cardMargin.left}`,
                   }}
                 >
@@ -247,8 +243,10 @@ const Thumbnail = ({
       bg={isDark ? "gray.700" : "gray.50"}
       _hover={{ background: isDark ? "gray.600" : "gray.100" }}
       pb={{ base: ".75rem", sm: "0" }}
+      className="thumbnail"
     >
       <Box
+        className="preview-card-content-live"
         p={{ base: ".5rem 1rem", sm: ".25rem 1rem .25rem" }}
         textAlign="center"
         maxH={{ base: "120px", sm: "100px" }}

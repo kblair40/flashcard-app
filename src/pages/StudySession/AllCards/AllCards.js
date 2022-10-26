@@ -94,7 +94,8 @@ const Card = ({ content, onClick }) => {
         bg={isDark ? "gray.800" : "#fff"}
         _hover={{ bg: isDark ? "gray.700" : "gray.50" }}
         _active={{ bg: isDark ? "gray.600" : "gray.100" }}
-        p="4px"
+        // p="4px"
+        // overflow="hidden"
       >
         {content ? (
           <Box
