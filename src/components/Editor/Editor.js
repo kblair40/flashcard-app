@@ -11,20 +11,20 @@ const Editor = ({ value, onChange, cardSide }) => {
   const isDark = colorMode === "dark";
 
   const quill = useRef(null);
-  const didMount = useRef(false);
+  // const didMount = useRef(false);
 
-  useEffect(() => {
-    if (!didMount.current) {
-      if (cardSide === "front") {
-        let editor = quill.current.getEditor();
-        editor.format("bold", "true");
-        editor.format("align", "center");
-        editor.focus();
-      }
-    } else {
-      didMount.current = true;
-    }
-  }, [cardSide]);
+  // useEffect(() => {
+  //   if (!didMount.current) {
+  //     if (cardSide === "front") {
+  //       let editor = quill.current.getEditor();
+  //       editor.format("bold", "true");
+  //       editor.format("align", "center");
+  //       editor.focus();
+  //     }
+  //   } else {
+  //     didMount.current = true;
+  //   }
+  // }, [cardSide]);
 
   return (
     <Flex justify="center" w="100%">
