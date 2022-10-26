@@ -1,10 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import {
   Flex,
   Stack,
   Text,
-  Box,
-  Input,
   FormControl,
   FormLabel,
   Select,
@@ -15,9 +13,8 @@ import {
 
 import { toTitleCase } from "utils/helpers";
 import { options } from "./settings-options";
-import UserContext from "store/UserContext";
 
-const SettingsForm = ({ cardSide }) => {
+const SettingsForm = ({ cardSide, onSubmit }) => {
   const [formData, setFormData] = useState({
     textAlign: "left",
     fontSize: "medium",
@@ -28,8 +25,6 @@ const SettingsForm = ({ cardSide }) => {
 
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
-
-  const { userData } = useContext(UserContext);
 
   const handleChangeCheck = (e) => {
     const { value, checked } = e.target;
@@ -46,6 +41,10 @@ const SettingsForm = ({ cardSide }) => {
     setFormData({ ...formData, [`${id}`]: value });
   };
 
+  const handleSubmit = () => {
+    onSubmit(cardSide);
+  };
+
   // CHECKBOX GROUP FOR BOLD, ITALIC AND UNDERLINE SETTINGS
   // SELECT FOR DEFAULT FONT SIZE
   // SELECT FOR ALIGNMENT
@@ -60,7 +59,7 @@ const SettingsForm = ({ cardSide }) => {
         p={{ base: "1.5rem 1rem", sm: "1.5rem" }}
         bg={isDark ? "gray.800" : "#fff"}
         borderRadius="10px"
-        boxShadow="md"
+        boxShadow={isDark ? "md" : "sm"}
         align="center"
         justify="center"
         w="100%"
@@ -138,66 +137,9 @@ const SettingsForm = ({ cardSide }) => {
           </Select>
         </FormControl>
 
-        {/* <FormControl isRequired>
-          <FormLabel>Set Title</FormLabel>
-          <Input
-            variant="neutral-outline"
-            onChange={(e) => {
-              setFormData({ ...formData, title: e.target.value });
-              if (errors.title) setErrors(INITIAL_ERROR_STATE);
-            }}
-          />
-        </FormControl> */}
-
-        {/* <FormControl>
-          <FormLabel>Description</FormLabel>
-          <Input
-            variant="neutral-outline"
-            onChange={(e) =>
-              setFormData({ ...formData, description: e.target.value })
-            }
-          />
-        </FormControl> */}
-
-        {/* <FormControl isRequired>
-          <FormLabel>Category</FormLabel>
-          <Select
-            variant="neutral-outline"
-            onChange={(e) => {
-              setFormData({ ...formData, category: e.target.value });
-            }}
-            placeholder="Select Category"
-            value={formData.category}
-          >
-            {categories.map((cat, i) => {
-              return (
-                <option key={i} value={cat.value}>
-                  {cat.label}
-                </option>
-              );
-            })}
-          </Select>
-        </FormControl> */}
-
-        {/* <Tooltip
-          placement="right"
-          openDelay={500}
-          label="If public, your set will be searchable by other users"
-          shouldWrapChildren={true}
-          hasArrow
-        > */}
-        {/* <Checkbox
-            colorScheme="gray"
-            spacing=".75rem"
-            isChecked={formData.is_public}
-            onChange={(e) =>
-              setFormData({ ...formData, is_public: e.target.checked })
-            }
-            fontWeight={500}
-          >
-            Make Set Public
-          </Checkbox> */}
-        {/* </Tooltip> */}
+        <Button w="100%" variant="solid-blue" onClick={handleSubmit}>
+          Submit
+        </Button>
       </Stack>
     </Flex>
   );

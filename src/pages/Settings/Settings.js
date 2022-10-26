@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
-  Box,
   Flex,
   Text,
   Tabs,
@@ -9,14 +8,17 @@ import {
   Tab,
   TabPanel,
   useColorMode,
-  color,
 } from "@chakra-ui/react";
 
+import UserContext from "store/UserContext";
 import SettingsForm from "components/Forms/SettingsForm";
 
 const Settings = () => {
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
+
+  const { userData } = useContext(UserContext);
+  console.log("USER DATA:", userData);
 
   return (
     <Flex justifyContent="center" pt="61px">
@@ -71,10 +73,14 @@ const Settings = () => {
 
           <TabPanels>
             <TabPanel>
-              <SettingsForm cardSide={"Front"} />
+              {userData && userData.default_styles ? (
+                <SettingsForm cardSide={"Front"} />
+              ) : null}
             </TabPanel>
             <TabPanel>
-              <SettingsForm cardSide={"Back"} />
+              {userData && userData.default_styles ? (
+                <SettingsForm cardSide={"Back"} />
+              ) : null}
             </TabPanel>
           </TabPanels>
         </Tabs>

@@ -1,6 +1,7 @@
 1. Detect refresh on StudySession page and save timer duration to localStorage before allowing
     - needs improvement (still needs improvement, but much better now)
 2. Make sure "Last studied on..." is working properly
+3. On creating an account, set userData in user context
 
 NICE TO HAVE(s)
 1. User shouldn't be able to "save" after 'editing' unless a change was made to the card
