@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { Reorder, useDragControls } from "framer-motion";
 
+import "./Thumbnails.css";
 import api from "api";
 import SetContext from "store/SetContext";
 
@@ -109,11 +110,8 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
 
   return (
     <Box
-      // border="1px solid white"
-      // mt={{ base: "4px", sm: 0 }}
       height={height}
       width={width}
-      // maxHeight="100%"
       position={{ sm: "absolute" }}
       bottom={{ sm: 0 }}
       left={{ sm: 0 }}
@@ -131,7 +129,6 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
       </Heading>
 
       <Box
-        // border="1px solid blue"
         display={{ base: "flex", sm: "block" }}
         flexDirection={{ base: "row", sm: "unset" }}
         flexWrap={{ base: "wrap", sm: "unset" }}
@@ -139,10 +136,9 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
         onPointerDown={startDrag}
         onPointerUp={endDrag}
         w="100%"
-        height={{ base: "calc(100% - 0px)", sm: "100%" }}
+        height={{ base: "100%" }}
         overflowY={{ sm: "auto" }}
-        p={{ sm: "4px 6px 0 6px", md: "4px 8px 0 8px" }}
-        // mt="4px"
+        p={{ sm: "6px 6px 0 6px", md: "4px 8px 0 8px" }}
         background={
           saving ? "rgba(10,20,240,0.02)" : isDark ? "gray.800" : "#fff"
         }
