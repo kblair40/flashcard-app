@@ -1,6 +1,8 @@
 1. Detect refresh on StudySession page and save timer duration to localStorage before allowing
     - needs improvement
 2. Better random shuffle function for cards
+3. Add tooltip to navbar when things are disabled OR allow 
+    clicks and have them open signup modal
 
 
 NICE TO HAVE(s)

@@ -8,6 +8,8 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 
+import "./AllCards.css";
+
 const AllCards = ({
   flashcards,
   onClickCard,
@@ -78,6 +80,7 @@ const Card = ({ content, onClick }) => {
   return (
     <Box py="8px" bg={isDark ? "gray.900" : "gray.50"}>
       <Flex
+        className="preview-card-live"
         onClick={onClick}
         justify="center"
         align="center"
@@ -88,11 +91,17 @@ const Card = ({ content, onClick }) => {
         borderRadius="4px"
         cursor="pointer"
         transition="background 0.3s"
-        bg={isDark ? "gray.800" : undefined}
+        bg={isDark ? "gray.800" : "#fff"}
         _hover={{ bg: isDark ? "gray.700" : "gray.50" }}
         _active={{ bg: isDark ? "gray.600" : "gray.100" }}
+        p="4px"
       >
-        {content ? <Box dangerouslySetInnerHTML={{ __html: content }} /> : null}
+        {content ? (
+          <Box
+            className="preview-card-content-live"
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
+        ) : null}
       </Flex>
     </Box>
   );
