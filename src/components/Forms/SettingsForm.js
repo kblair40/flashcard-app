@@ -11,7 +11,11 @@ import {
 } from "@chakra-ui/react";
 
 const SettingsForm = ({ cardSide = "front" }) => {
-  return <Flex direction="column" align="center"></Flex>;
+  return (
+    <Flex direction="column" align="center">
+      gafsas gsafdsa sgsda fdsa gsdaf sadfas sadfas sadfas sadfas sadfas{" "}
+    </Flex>
+  );
 };
 
 export default SettingsForm;
