@@ -73,12 +73,17 @@ const StudySession = () => {
   }, [params]);
 
   const shuffle = (cardsArray) => {
-    const copy = [...cardsArray];
-    copy.sort(() => Math.random() - 0.5);
-    console.log("CARDS AFTER:", copy);
+    // fisher-yates algorithm
+    // https://dev.to/codebubb/how-to-shuffle-an-array-in-javascript-2ikj
+    for (let i = cardsArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = cardsArray[i];
+      cardsArray[i] = cardsArray[j];
+      cardsArray[j] = temp;
+    }
 
     setCurrentCard(0);
-    setFlashcards(copy);
+    setFlashcards(cardsArray);
   };
 
   const handleClickCardPreview = (index) => {
