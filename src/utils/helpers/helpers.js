@@ -36,11 +36,12 @@ export const getCleanDuration = (duration) => {
 };
 
 export const toTitleCase = (str) => {
+  let sep = str.includes("/") ? "/" : " ";
   return str
     .toLowerCase()
-    .split(" ")
+    .split(sep)
     .map(function (word) {
       return word.replace(word[0], word[0].toUpperCase());
     })
-    .join(" ");
+    .join(sep);
 };
