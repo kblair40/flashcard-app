@@ -5,7 +5,7 @@
   border-radius: 6px !important;
 }
 
-pre.ql-container {
+.ql-container {
   min-height: 132px !important;
   border-radius: 0 0 6px 6px !important;
   border: 1px solid red !important;
@@ -14,8 +14,13 @@ pre.ql-container {
   border-radius: 6px 6px 0 0 !important;
   height: 100% !important;
 }
-.ql-blank {
+.custom-editor .ql-blank {
   min-height: 130px !important;
+  height: 100% !important;
+}
+.custom-editor .ql-editor {
+  min-height: 130px !important;
+  height: 100% !important;
 }
 .ql-size-large {
   font-size: 20px;
