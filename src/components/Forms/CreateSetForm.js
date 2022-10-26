@@ -10,6 +10,8 @@ import {
   Select,
   Heading,
   useColorMode,
+  Box,
+  Tooltip,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
@@ -121,30 +123,47 @@ const CreateSetForm = () => {
           </Select>
         </FormControl>
 
-        <Checkbox
-          colorScheme="gray"
-          spacing=".75rem"
-          isChecked={formData.is_public}
-          onChange={(e) =>
-            setFormData({ ...formData, is_public: e.target.checked })
-          }
-          fontWeight={500}
+        <Tooltip
+          placement="right"
+          openDelay={500}
+          label="If public, your set will be searchable by other users"
+          shouldWrapChildren={true}
+          hasArrow
         >
-          Make Set Public
-        </Checkbox>
+          <Checkbox
+            colorScheme="gray"
+            spacing=".75rem"
+            isChecked={formData.is_public}
+            onChange={(e) =>
+              setFormData({ ...formData, is_public: e.target.checked })
+            }
+            fontWeight={500}
+          >
+            Make Set Public
+          </Checkbox>
+        </Tooltip>
 
-        <Button
-          isDisabled={!formData.category || !formData.title}
-          pointerEvents={
-            !formData.category || !formData.title ? "none" : "auto"
-          }
-          w="100%"
-          onClick={handleSubmit}
-          isLoading={loading}
-          variant="solid-blue"
+        <Tooltip
+          isDisabled={formData.category && formData.title}
+          label="Complete both required fields in order to submit"
+          placement="bottom"
+          hasArrow
         >
-          Create
-        </Button>
+          <Box w="100%">
+            <Button
+              isDisabled={!formData.category || !formData.title}
+              pointerEvents={
+                !formData.category || !formData.title ? "none" : "auto"
+              }
+              w="100%"
+              onClick={handleSubmit}
+              isLoading={loading}
+              variant="solid-blue"
+            >
+              Create
+            </Button>
+          </Box>
+        </Tooltip>
       </VStack>
     </Flex>
   );
