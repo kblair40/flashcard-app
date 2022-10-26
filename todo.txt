@@ -2,6 +2,7 @@
     - needs improvement (still needs improvement, but much better now)
 2. Make sure "Last studied on..." is working properly
 3. Add styles for 'link' input in Editor
+4. toTitleCase function should handle '/' as a separator
 
 NICE TO HAVE(s)
 1. User shouldn't be able to "save" after 'editing' unless a change was made to the card
