@@ -74,6 +74,7 @@ const UserProvider = ({ children }) => {
         isSignedIn,
         loading,
         fetchUser,
+        setUserData,
       }}
     >
       {children}
