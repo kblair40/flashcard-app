@@ -188,7 +188,13 @@ const CreatedSets = ({
   filterSets,
 }) => {
   return (
-    <Box bg={isDark ? "gray.800" : "gray.50"} rounded="lg" w="100%">
+    <Box
+      bg={isDark ? "gray.800" : "gray.50"}
+      rounded="lg"
+      w="100%"
+      mx={{ lg: "auto" }}
+      maxW={{ base: "660px", xl: "720px" }}
+    >
       <Box p={{ base: "1.5rem .5rem .5rem", sm: "1.5rem 1rem .5rem" }}>
         <Heading fontSize={{ base: "xl", sm: "2xl" }} pb="1rem">
           Your Created Sets

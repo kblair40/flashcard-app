@@ -15,3 +15,4 @@ NICE TO HAVE(s)
 5. A true "center" class for back of card that will force content to vertical/horizontal center of card
 6. User settings page where they can change...
     - default styles for front and back of cards
+7. In ManageSets component at lg breakpoint, allow history and FavoriteSets to leave right edge
