@@ -9,8 +9,9 @@ import {
   Avatar,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
-import { LogoutIcon } from "utils/icons";
+import { LogoutIcon, SettingsIcon } from "utils/icons";
 
 const AvatarMenu = ({ handleClickSignout }) => {
   const bg = useColorModeValue("blue.100", "blue.800");
@@ -29,6 +30,12 @@ const AvatarMenu = ({ handleClickSignout }) => {
         </MenuButton>
 
         <MenuList py={0} bg={menuBg}>
+          <Link to="/settings">
+            <MenuItem fontWeight="600" icon={<SettingsIcon boxSize="18px" />}>
+              Settings
+            </MenuItem>
+          </Link>
+
           <MenuItem
             fontWeight="600"
             icon={<LogoutIcon boxSize="18px" />}

@@ -10,6 +10,7 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  Box,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
@@ -80,6 +81,7 @@ const CommunitySets = () => {
         position="relative"
         bg={bgMain}
         rounded="lg"
+        pb="8px"
       >
         <Flex
           w="100%"
@@ -150,6 +152,7 @@ const CommunitySet = ({ set, isFavorited, fetchUser }) => {
   };
 
   const menuBg = useColorModeValue("gray.50", "gray.700");
+  const createdDateStyle = useColorModeValue("lm-tertiary", "dm-tertiary");
 
   if (!set) {
     return null;
@@ -168,7 +171,6 @@ const CommunitySet = ({ set, isFavorited, fetchUser }) => {
         <Text
           noOfLines={2}
           mr="6px"
-          mb="6px"
           fontSize="lg"
           fontWeight="600"
           lineHeight={1.2}
@@ -176,9 +178,19 @@ const CommunitySet = ({ set, isFavorited, fetchUser }) => {
           {set.title}
         </Text>
 
-        <Text noOfLines={1} lineHeight={1} fontSize="sm">
+        <Box
+          noOfLines={1}
+          lineHeight={1}
+          mt="3px"
+          fontSize="xs"
+          textStyle={createdDateStyle}
+        >
           Created {new Date(set.createdAt).toLocaleDateString()}
-        </Text>
+          {/* <Text>Created {new Date(set.createdAt).toLocaleDateString()}</Text> */}
+        </Box>
+        {/* <Text noOfLines={1} lineHeight={1} fontSize="sm">
+          Created {new Date(set.createdAt).toLocaleDateString()}
+        </Text> */}
       </Flex>
 
       <Menu>

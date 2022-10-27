@@ -41,10 +41,12 @@ const SigninForm = ({ onClose, onAuthSuccess }) => {
       });
 
       if (response && response.data) {
-        onAuthSuccess(response.data.token);
+        const { token, user } = response.data;
+        console.log("\nUSER RESPONSE:", user);
+        onAuthSuccess(token, user);
       }
     } catch (e) {
-      console.error("FAILED SIGNING UP:", e.response);
+      console.error("FAILED SIGNING UP:", e);
       setErrorMsg("Username and/or password is incorrect");
     }
 

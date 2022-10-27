@@ -83,7 +83,7 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
           flashcards: cardsArray,
         }
       );
-      console.log("CHANGE ORDER RESPONSE:", response.data);
+      // console.log("CHANGE ORDER RESPONSE:", response.data);
 
       if (response.data && response.data.set) {
         const { set } = response.data;
@@ -158,7 +158,7 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
         >
           {cards && cards.length ? (
             cards.map((card, i) => {
-              console.log("\nCARD:", card);
+              // console.log("\nCARD:", card);
               return (
                 <Reorder.Item
                   key={card._id}

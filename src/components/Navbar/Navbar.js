@@ -17,7 +17,13 @@ import {
 import { Link as RRLink, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
-import { HamburgerIcon, CloseIcon, LogoutIcon, HomeIcon } from "utils/icons";
+import {
+  HamburgerIcon,
+  CloseIcon,
+  LogoutIcon,
+  HomeIcon,
+  SettingsIcon,
+} from "utils/icons";
 import logo_lg_light from "assets/images/logo_lg_light.png";
 import logo_lg_dark from "assets/images/logo_lg_dark.png";
 import logo_sm from "assets/images/logo_sm.png";
@@ -269,7 +275,7 @@ const MobileNav = ({ show, onToggle, signout, isSignedIn, onClose }) => {
         zIndex: 100,
       }}
       initial={{ y: "-100%" }}
-      animate={show && !isMd ? { y: 60 } : { y: -200 }}
+      animate={show && !isMd ? { y: 60 } : { y: -236 }}
       transition={{ duration: 0.25 }}
     >
       <Stack
@@ -445,6 +451,11 @@ const MOBILE_NAV_ITEMS = [
     label: "Home",
     href: "/",
     icon: <HomeIcon boxSize="20px" />,
+  },
+  {
+    label: "Settings",
+    href: "/settings",
+    icon: <SettingsIcon boxSize="20px" />,
   },
   ...NAV_ITEMS,
 ];

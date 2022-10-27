@@ -1,16 +1,18 @@
 1. Detect refresh on StudySession page and save timer duration to localStorage before allowing
     - needs improvement (still needs improvement, but much better now)
 2. Make sure "Last studied on..." is working properly
-3. Add styles for 'link' input in Editor
-5. Deleting a set should bring up a modal instead of automatically deleting
+3. Clicking "New Card" in SetControls, front of card styles all apply EXCEPT font size.
+    - https://quilljs.com/docs/api/
+        - Look at disabling and enabling editor, and associated events
 
 NICE TO HAVE(s)
 1. User shouldn't be able to "save" after 'editing' unless a change was made to the card
 2. Have separate toolbar module for front of card editor.
     Default to center, Huge text, and bold
-4. Social Auth 
+3. Social Auth 
   - At least facebook, maybe google and twitter
-5. Some kind of cool lightning loader
-6. A true "center" class for back of card that will force content to vertical/horizontal center of card
-7. User settings page where they can change...
+4. Some kind of cool lightning loader
+5. A true "center" class for back of card that will force content to vertical/horizontal center of card
+6. User settings page where they can change...
     - default styles for front and back of cards
+7. In ManageSets component at lg breakpoint, allow history and FavoriteSets to leave right edge

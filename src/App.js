@@ -1,16 +1,26 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 
 import { UserProvider } from "store/UserContext";
 import { StudySessionProvider } from "store/StudySessionContext";
-import Home from "pages/Home";
-import Create from "pages/Create";
-import Account from "pages/Account";
-import Study from "pages/Study";
-import StudySession from "pages/StudySession";
-import ManageSets from "pages/ManageSets";
 import Navbar from "components/Navbar";
+import PageLoading from "components/PageLoading";
+
+import Home from "pages/Home";
+// import Create from "pages/Create";
+// import Account from "pages/Account";
+// import Study from "pages/Study";
+// import StudySession from "pages/StudySession";
+// import Settings from "pages/Settings";
+// import ManageSets from "pages/ManageSets";
+
+const Create = lazy(() => import("./pages/Create"));
+const Account = lazy(() => import("./pages/Account"));
+const Study = React.lazy(() => import("./pages/Study"));
+const StudySession = React.lazy(() => import("./pages/StudySession"));
+const Settings = React.lazy(() => import("./pages/Settings"));
+const ManageSets = React.lazy(() => import("./pages/ManageSets"));
 
 function App() {
   const mainBg = useColorModeValue("#fff", "gray.900");
@@ -23,16 +33,69 @@ function App() {
           <Box position="relative">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/create" element={<Create />} />
-              <Route path="/create/:id" element={<Create />} />
 
-              <Route path="/study" element={<Study />} />
+              <Route
+                path="/create"
+                element={
+                  <Suspense fallback={<PageLoading />}>
+                    <Create />
+                  </Suspense>
+                }
+              />
 
-              <Route path="/study/:id" element={<StudySession />} />
+              <Route
+                path="/create/:id"
+                element={
+                  <Suspense fallback={<PageLoading />}>
+                    <Create />
+                  </Suspense>
+                }
+              />
 
-              <Route path="/manage-sets" element={<ManageSets />} />
+              <Route
+                path="/study"
+                element={
+                  <Suspense fallback={<PageLoading />}>
+                    <Study />
+                  </Suspense>
+                }
+              />
 
-              <Route path="/account" element={<Account />} />
+              <Route
+                path="/study/:id"
+                element={
+                  <Suspense fallback={<PageLoading />}>
+                    <StudySession />
+                  </Suspense>
+                }
+              />
+
+              <Route
+                path="/manage-sets"
+                element={
+                  <Suspense fallback={<PageLoading />}>
+                    <ManageSets />
+                  </Suspense>
+                }
+              />
+
+              <Route
+                path="/account"
+                element={
+                  <Suspense fallback={<PageLoading />}>
+                    <Account />
+                  </Suspense>
+                }
+              />
+
+              <Route
+                path="/settings"
+                element={
+                  <Suspense fallback={<PageLoading />}>
+                    <Settings />
+                  </Suspense>
+                }
+              />
 
               <Route path="*" element={<NotFound />} />
             </Routes>

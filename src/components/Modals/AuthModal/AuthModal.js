@@ -13,9 +13,9 @@ import Tabs from "./Tabs";
 const AuthModal = ({ isOpen, onClose, defaultTab }) => {
   const { handleSignIn } = useContext(UserContext);
 
-  const onAuthSuccess = (token) => {
+  const onAuthSuccess = (token, user) => {
     window.localStorage.setItem("auth-token", token);
-    handleSignIn();
+    handleSignIn(user);
     onClose();
   };
 
