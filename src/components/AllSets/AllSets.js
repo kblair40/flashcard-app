@@ -22,11 +22,26 @@ const AllSets = () => {
 
   const [loading, setLoading] = useState(true);
   const [flashcardSets, setFlashcardSets] = useState();
+  const [latestSessions, setLatestSessions] = useState();
 
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
 
   const studyButtonBg = isDark ? "gray.800" : "gray.50";
+
+  const figureLatestSessions = (sets, sessions) => {
+    let latestSessions = {};
+    console.log("SETS/SESSIONS:", { sets, sessions });
+    sessions.sort((a, b) => a.start_time - b.start_time);
+
+    for (let session of sessions) {
+      if (!latestSessions[session.flashcard_set]) {
+        latestSessions[session.flashcard_set] = session.start_time;
+      }
+    }
+
+    setLatestSessions(latestSessions);
+  };
 
   useEffect(() => {
     const fetchFlashcardData = async () => {
@@ -37,7 +52,15 @@ const AllSets = () => {
 
         if (response.data && response.data.user) {
           setLoading(false);
+          // console.log("response.data.user:", response.data.user);
           setFlashcardSets(response.data.user.flashcard_sets || []);
+
+          figureLatestSessions(
+            response.data.user.flashcard_sets,
+            response.data.user.study_sessions
+          );
+
+          return;
         }
       } catch (e) {
         console.error("FAILED FETCHING USER:", e);
@@ -159,20 +182,18 @@ const AllSets = () => {
                           {set.title}
                         </Text>
 
-                        <Text
+                        <Box
                           lineHeight={1}
-                          fontSize="sm"
-                          fontWeight="500"
-                          textStyle={isDark ? "dm-secondary" : "lm-secondary"}
+                          mt="3px"
+                          fontSize="xs"
+                          textStyle={isDark ? "dm-tertiary" : "lm-tertiary"}
                         >
-                          {`Last studied on ${
-                            set.last_study_session_timestamp
-                              ? new Date(
-                                  set.last_study_session_timestamp
-                                ).toLocaleDateString()
-                              : ""
-                          }`}
-                        </Text>
+                          {latestSessions[set._id]
+                            ? `Last Studied: ${new Date(
+                                latestSessions[set._id]
+                              ).toLocaleDateString()}`
+                            : "Not yet studied"}
+                        </Box>
                       </Box>
 
                       <Flex align="center" w="80px" h="24px">
