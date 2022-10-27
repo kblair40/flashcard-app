@@ -23,14 +23,21 @@ const Settings = () => {
   const { userData } = useContext(UserContext);
   console.log("USER DATA:", userData);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (cardSide, data) => {
     if (!userData || !userData.default_styles) return;
 
+    setSaving(true);
+
     try {
-      // const response = await api.patch()
+      const response = await api.patch("/styles", {
+        side: cardSide,
+        styles: data,
+      });
+      console.log("\n\nPATCH RESPONSE:", response.data);
     } catch (e) {
       console.log("FAILED TO PATCH USER DEFAULT STYLES:", e);
     }
+    setSaving(false);
   };
 
   return (

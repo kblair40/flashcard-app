@@ -29,7 +29,6 @@ const SettingsForm = ({ cardSide, onSubmit, defaultData, saving }) => {
 
   const handleChangeSelect = (e) => {
     const { id, value } = e.target;
-
     console.log("VALUE/ID:", { value, id });
 
     setFormData({ ...formData, [`${id}`]: value });
@@ -37,7 +36,7 @@ const SettingsForm = ({ cardSide, onSubmit, defaultData, saving }) => {
 
   const handleSubmit = () => {
     // TODO - ADD CHECK TO SEE IF ANY VALUES CHANGED
-    onSubmit(cardSide);
+    onSubmit(cardSide, formData);
   };
 
   const checkboxProps = {
@@ -71,6 +70,7 @@ const SettingsForm = ({ cardSide, onSubmit, defaultData, saving }) => {
             >
               Bold
             </Checkbox>
+
             <Checkbox
               {...checkboxProps}
               isChecked={formData.isItalic}
@@ -79,6 +79,7 @@ const SettingsForm = ({ cardSide, onSubmit, defaultData, saving }) => {
             >
               Italic
             </Checkbox>
+
             <Checkbox
               {...checkboxProps}
               isChecked={formData.isUnderlined}
