@@ -30,7 +30,7 @@ const Settings = () => {
 
     try {
       const response = await api.patch("/styles", {
-        side: cardSide,
+        side: cardSide.toLowerCase(),
         styles: data,
       });
       console.log("\n\nPATCH RESPONSE:", response.data);
