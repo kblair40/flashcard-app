@@ -1,6 +1,5 @@
 1. Detect refresh on StudySession page and save timer duration to localStorage before allowing
     - needs improvement (still needs improvement, but much better now)
-2. Make sure "Last studied on..." is working properly
 3. Clicking "New Card" in SetControls, front of card styles all apply EXCEPT font size.
     - https://quilljs.com/docs/api/
         - Look at disabling and enabling editor, and associated events
