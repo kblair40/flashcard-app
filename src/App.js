@@ -1,9 +1,11 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 
 import { UserProvider } from "store/UserContext";
 import { StudySessionProvider } from "store/StudySessionContext";
+import Navbar from "components/Navbar";
+import PageLoading from "components/PageLoading";
 import Home from "pages/Home";
 import Create from "pages/Create";
 import Account from "pages/Account";
@@ -11,7 +13,6 @@ import Study from "pages/Study";
 import StudySession from "pages/StudySession";
 import Settings from "pages/Settings";
 import ManageSets from "pages/ManageSets";
-import Navbar from "components/Navbar";
 
 function App() {
   const mainBg = useColorModeValue("#fff", "gray.900");
