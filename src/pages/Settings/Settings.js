@@ -20,8 +20,7 @@ const Settings = () => {
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
 
-  const { userData } = useContext(UserContext);
-  console.log("USER DATA:", userData);
+  const { userData, setUserData } = useContext(UserContext);
 
   const handleSubmit = async (cardSide, data) => {
     if (!userData || !userData.default_styles) return;
@@ -33,7 +32,14 @@ const Settings = () => {
         side: cardSide.toLowerCase(),
         styles: data,
       });
-      console.log("\n\nPATCH RESPONSE:", response.data);
+      console.log("\n\nSTYLE PATCH RESPONSE:", response.data.default_styles);
+
+      if (response.data) {
+        const { default_styles } = response.data;
+        if (!default_styles.front || !default_styles.back) return;
+        console.log("DEFAULT STYLES:", default_styles);
+        setUserData({ ...userData, default_styles });
+      }
     } catch (e) {
       console.log("FAILED TO PATCH USER DEFAULT STYLES:", e);
     }
