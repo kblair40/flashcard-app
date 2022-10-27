@@ -20,7 +20,7 @@ const styleMap = {
   huge: ["size", "huge"],
 };
 
-const Editors = ({ width = "100%", height = "100%" }) => {
+const Editors = ({ width = "100%" }) => {
   const {
     frontCardContent,
     setFrontCardContent,
@@ -30,10 +30,6 @@ const Editors = ({ width = "100%", height = "100%" }) => {
     activeCard,
   } = useContext(SetContext);
 
-  useEffect(() => {
-    console.log("SET DATA:", flashcardSetData);
-  }, [flashcardSetData]);
-
   const { userData } = useContext(UserContext);
 
   const frontRef = useRef();
@@ -42,7 +38,7 @@ const Editors = ({ width = "100%", height = "100%" }) => {
   useEffect(() => {
     const getDefaultStyles = (styles, cardSide) => {
       if (!styles) return;
-      console.log("yes styles");
+      // console.log("yes styles");
 
       let defaultStyles = [];
 
@@ -84,30 +80,28 @@ const Editors = ({ width = "100%", height = "100%" }) => {
       activeCard &&
       (!activeCard.id || activeCard.index === -1)
     ) {
-      console.log("TRUE");
+      // console.log("TRUE");
       if (frontRef.current) {
-        console.log("TRUE FRONT");
+        // console.log("TRUE FRONT");
         const styles = userData.default_styles.front;
         getDefaultStyles(styles, "front");
       }
       if (backRef.current) {
-        console.log("TRUE BACK");
+        // console.log("TRUE BACK");
         const styles = userData.default_styles.back;
         getDefaultStyles(styles, "back");
       }
     }
-  }, [userData, flashcardSetData, activeCard?.id]);
+  }, [userData, flashcardSetData, activeCard]);
 
   return (
     <Flex
       // spacing={{ base: "1rem", sm: "2rem" }}
       w={width}
-      // h={height}
       h="max-content"
       pr={{ base: "8px", sm: "16px" }}
       pl={{ base: "8px", sm: "0" }}
       direction="column-reverse"
-      // border="1px solid green"
       alignItems="flex-start"
     >
       <Box

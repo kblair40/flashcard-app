@@ -1,9 +1,7 @@
 1. Detect refresh on StudySession page and save timer duration to localStorage before allowing
     - needs improvement (still needs improvement, but much better now)
 2. Make sure "Last studied on..." is working properly
-3. On creating an account, set userData in user context
-4. bug: delete a card, then add new card.  new card doesn't seem to show up without refresh
-5. Clicking "New Card" in SetControls, front of card styles all apply EXCEPT font size.
+3. Clicking "New Card" in SetControls, front of card styles all apply EXCEPT font size.
     - https://quilljs.com/docs/api/
         - Look at disabling and enabling editor, and associated events
 
