@@ -97,7 +97,8 @@ const AllSets = () => {
         w="100%"
         justify="space-between"
         position="relative"
-        pb="8px"
+        pb={{ base: "8px", md: 0 }}
+        // pb="8px"
       >
         <Flex
           w="100%"

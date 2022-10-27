@@ -81,6 +81,7 @@ const CommunitySets = () => {
         position="relative"
         bg={bgMain}
         rounded="lg"
+        pb="8px"
       >
         <Flex
           w="100%"
