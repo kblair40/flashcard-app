@@ -63,7 +63,7 @@ const SetProvider = ({ children }) => {
         }
       );
 
-      console.log("\nRESPONSE:", response.data, "\n");
+      console.log("\nSAVE RESPONSE:", response.data, "\n");
       clearCards();
       setFlashcardSetData(response.data.flashcardSet);
       setSaving(false);
@@ -122,6 +122,8 @@ const SetProvider = ({ children }) => {
       if (response.data && response.data.set) {
         const { set } = response.data;
 
+        console.log("SET AFTER DELETE:", set);
+
         setFlashcardSetData(set);
         clearCards();
       }
@@ -134,12 +136,17 @@ const SetProvider = ({ children }) => {
 
   const addCard = () => {
     clearCards();
-    setActiveCard({ index: -1, id: undefined });
+    // setActiveCard({ index: -1, id: undefined });
   };
 
   const clearCards = () => {
     setFrontCardContent("");
     setBackCardContent("");
+    setActiveCard({ index: -1, id: undefined });
+
+    // setTimeout(() => {
+    //   setFlashcardSetData(flashcardSetData);
+    // }, 1000);
   };
 
   return (
