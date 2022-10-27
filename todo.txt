@@ -1,6 +1,6 @@
 1. Detect refresh on StudySession page and save timer duration to localStorage before allowing
     - needs improvement (still needs improvement, but much better now)
-3. Clicking "New Card" in SetControls, front of card styles all apply EXCEPT font size.
+2. Clicking "New Card" in SetControls, front of card styles all apply EXCEPT font size.
     - https://quilljs.com/docs/api/
         - Look at disabling and enabling editor, and associated events
 
@@ -12,6 +12,4 @@ NICE TO HAVE(s)
   - At least facebook, maybe google and twitter
 4. Some kind of cool lightning loader
 5. A true "center" class for back of card that will force content to vertical/horizontal center of card
-6. User settings page where they can change...
-    - default styles for front and back of cards
-7. In ManageSets component at lg breakpoint, allow history and FavoriteSets to leave right edge
+6. In ManageSets component at lg breakpoint, allow history and FavoriteSets to leave right edge
