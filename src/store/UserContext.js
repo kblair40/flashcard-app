@@ -52,7 +52,11 @@ const UserProvider = ({ children }) => {
     }
   }, [isSignedIn]);
 
-  const handleSignIn = () => setIsSignedIn(true);
+  const handleSignIn = (initialData) => {
+    setUserData(initialData);
+    setIsSignedIn(true);
+  };
+
   const handleSignOut = () => {
     window.localStorage.removeItem("auth-token");
 

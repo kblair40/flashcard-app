@@ -109,7 +109,8 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
       });
 
       if (response && response.data) {
-        onAuthSuccess(response.data.token);
+        const { token, user } = response.data;
+        onAuthSuccess(token, user);
       }
     } catch (e) {
       if (e.response.data) {
