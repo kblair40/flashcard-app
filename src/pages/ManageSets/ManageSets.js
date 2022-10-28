@@ -133,6 +133,7 @@ const ManageSets = () => {
         align={{ base: "center", md: "start" }}
         w="100%"
         mt="2rem"
+        mr={{ lg: "1rem" }}
       >
         <Box pr={{ md: "1rem" }} w={{ base: "100%" }} mx={{ md: "auto" }}>
           <CreatedSets

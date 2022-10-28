@@ -76,7 +76,7 @@ const FavoriteSets = ({ deletedSetCount }) => {
       direction="column"
       w="100%"
       bg={isDark ? "gray.800" : "gray.50"}
-      borderRadius={{ base: "8px", md: "8px 0 0 8px" }}
+      borderRadius={{ base: "8px", md: "8px 0 0 8px", lg: "8px" }}
       h="100%"
     >
       <Box p={{ base: "1.5rem 1rem .5rem" }}>

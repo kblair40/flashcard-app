@@ -3,7 +3,6 @@
 2. Clicking "New Card" in SetControls, front of card styles all apply EXCEPT font size.
     - https://quilljs.com/docs/api/
         - Look at disabling and enabling editor, and associated events
-3. Add AddIcon to nav menu "Create Set" link
 
 NICE TO HAVE(s)
 1. User shouldn't be able to "save" after 'editing' unless a change was made to the card
@@ -13,4 +12,3 @@ NICE TO HAVE(s)
   - At least facebook, maybe google and twitter
 4. Some kind of cool lightning loader
 5. A true "center" class for back of card that will force content to vertical/horizontal center of card
-6. In ManageSets component at lg breakpoint, allow history and FavoriteSets to leave right edge
