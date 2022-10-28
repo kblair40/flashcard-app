@@ -76,7 +76,11 @@ const Card = ({ content, onClick }) => {
   const isDark = colorMode === "dark";
 
   return (
-    <Box py="8px" bg={isDark ? "gray.900" : "gray.50"}>
+    <Box
+      py="8px"
+      bg={isDark ? "gray.900" : "gray.50"}
+      //
+    >
       <Flex
         className="preview-card-live"
         onClick={onClick}
@@ -92,8 +96,7 @@ const Card = ({ content, onClick }) => {
         bg={isDark ? "gray.800" : "#fff"}
         _hover={{ bg: isDark ? "gray.700" : "gray.50" }}
         _active={{ bg: isDark ? "gray.600" : "gray.100" }}
-        // p="4px"
-        // overflow="hidden"
+        p="4px"
       >
         {content ? (
           <Box
