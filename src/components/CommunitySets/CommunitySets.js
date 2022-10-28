@@ -152,7 +152,7 @@ const CommunitySet = ({ set, isFavorited, fetchUser }) => {
   };
 
   const menuBg = useColorModeValue("gray.50", "gray.700");
-  const createdDateStyle = useColorModeValue("lm-tertiary", "dm-tertiary");
+  const createdDateStyle = useColorModeValue("lm-secondary", "dm-tertiary");
 
   if (!set) {
     return null;

@@ -188,7 +188,7 @@ const AllSets = () => {
                           lineHeight={1}
                           mt="3px"
                           fontSize="xs"
-                          textStyle={isDark ? "dm-tertiary" : "lm-tertiary"}
+                          textStyle={isDark ? "dm-tertiary" : "lm-secondary"}
                         >
                           {latestSessions[set._id]
                             ? `Last Studied: ${new Date(
