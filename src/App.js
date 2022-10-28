@@ -8,12 +8,6 @@ import Navbar from "components/Navbar";
 import PageLoading from "components/PageLoading";
 
 import Home from "pages/Home";
-// import Create from "pages/Create";
-// import Account from "pages/Account";
-// import Study from "pages/Study";
-// import StudySession from "pages/StudySession";
-// import Settings from "pages/Settings";
-// import ManageSets from "pages/ManageSets";
 
 const Create = lazy(() => import("./pages/Create"));
 const Account = lazy(() => import("./pages/Account"));
