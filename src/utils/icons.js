@@ -457,3 +457,37 @@ export const HomeIcon = ({ boxSize = "24px", ...props }) => {
     </Icon>
   );
 };
+export const CardsIcon = ({ boxSize = "24px", ...props }) => {
+  const {
+    colors: { gray },
+  } = useTheme();
+
+  const modeBg = useColorModeValue(gray["700"], gray["100"]);
+  const activeFill = props.fill ? props.fill : modeBg;
+
+  return (
+    <Icon boxSize={boxSize} fill="none" viewBox="0 0 24 24" {...props}>
+      <path
+        d="M3.604 7.19701L10.742 4.08801C10.8598 4.03753 10.9865 4.01113 11.1146 4.01039C11.2428 4.00965 11.3698 4.03457 11.4881 4.08369C11.6065 4.1328 11.7138 4.20512 11.8038 4.29637C11.8938 4.38762 11.9646 4.49597 12.012 4.61501L16.936 16.517C17.0373 16.7585 17.0402 17.0299 16.9442 17.2735C16.8482 17.5172 16.6608 17.7136 16.422 17.821L9.285 20.93C9.16716 20.9807 9.04037 21.0072 8.91211 21.008C8.78386 21.0088 8.65674 20.9839 8.53826 20.9348C8.41978 20.8857 8.31234 20.8133 8.2223 20.722C8.13226 20.6306 8.06143 20.5222 8.014 20.403L3.09 8.50001C2.98898 8.25852 2.98617 7.98715 3.08216 7.74362C3.17815 7.50009 3.36538 7.30362 3.604 7.19601V7.19701Z"
+        stroke={activeFill}
+        strokeWidth="2.96784"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M15 4H16C16.2652 4 16.5196 4.10536 16.7071 4.29289C16.8946 4.48043 17 4.73478 17 5V8.5"
+        stroke={activeFill}
+        strokeWidth="2.96784"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M20 6C20.264 6.112 20.52 6.217 20.768 6.315C21.0121 6.41859 21.2051 6.6149 21.3045 6.86075C21.4039 7.1066 21.4015 7.38187 21.298 7.626L19 13"
+        stroke={activeFill}
+        strokeWidth="2.96784"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Icon>
+  );
+};
