@@ -102,7 +102,8 @@ const Card = ({ content, onClick }) => {
         {content ? (
           <Box
             className="preview-card-content-live"
-            noOfLines={2}
+            // noOfLines={2}
+            noOfLines={{ base: 2, sm: 3 }}
             dangerouslySetInnerHTML={{ __html: content }}
           />
         ) : null}

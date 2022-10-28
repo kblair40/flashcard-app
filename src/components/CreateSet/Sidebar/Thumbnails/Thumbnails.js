@@ -105,17 +105,19 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
     sm: { left: 0, right: 0 },
   });
   const cardsOverflow = useBreakpointValue({ base: "auto", sm: "hidden" });
-  const cardHeight = useBreakpointValue({ base: "100%", sm: undefined });
+  // const cardHeight = useBreakpointValue({ base: "100%", sm: undefined });
+  const cardHeight = useBreakpointValue({ base: "75px", sm: undefined });
 
   return (
     <Box
+      // border="1px solid #f00"
       height={height}
       width={width}
       position={{ sm: "absolute" }}
       bottom={{ sm: 0 }}
       left={{ sm: 0 }}
-      pt={{ sm: "16px" }}
-      pb={{ sm: "32px" }}
+      pt={{ base: 0, sm: "16px" }}
+      pb={{ base: 0, sm: "32px" }}
     >
       <Heading
         display={{ base: "none", sm: "block" }}
@@ -150,6 +152,7 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
           axis={reorderAxis}
           style={{
             height: cardHeight,
+            width: "100%", // new
             maxWidth: "100vw",
             display: cardsDisplay,
             overflowY: "auto",
@@ -158,7 +161,6 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
         >
           {cards && cards.length ? (
             cards.map((card, i) => {
-              // console.log("\nCARD:", card);
               return (
                 <Reorder.Item
                   key={card._id}
@@ -218,9 +220,10 @@ const Thumbnail = ({
       mb={{ sm: "8px" }}
       h="100%"
       minH={{ base: "50px", sm: "60px" }}
-      maxH={{ base: "120px", sm: "100px" }}
+      maxH={{ base: "75px", sm: "80px", md: "100px" }}
       overflow={{ base: "hidden" }}
-      minW={{ base: "120px", sm: "unset" }}
+      minW={{ base: "100px", sm: "unset" }}
+      maxW={{ base: "100px", sm: "unset" }}
       w="100%"
       borderWidth={1}
       borderStyle="solid"
@@ -241,16 +244,16 @@ const Thumbnail = ({
       transition={"background 0.3s"}
       bg={isDark ? "gray.700" : "gray.50"}
       _hover={{ background: isDark ? "gray.600" : "gray.100" }}
-      pb={{ base: ".75rem", sm: "0" }}
+      p="4px"
       className="thumbnail"
     >
       <Box
         className="preview-card-content-live"
-        p={{ base: ".5rem 1rem", sm: ".25rem 1rem .25rem" }}
         textAlign="center"
-        maxH={{ base: "120px", sm: "100px" }}
         overflow={{ base: "hidden" }}
         dangerouslySetInnerHTML={{ __html: frontContent }}
+        noOfLines={{ base: 3, md: 3 }}
+        h="100%"
       />
 
       <Text
