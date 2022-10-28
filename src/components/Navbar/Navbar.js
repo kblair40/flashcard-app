@@ -23,6 +23,7 @@ import {
   LogoutIcon,
   HomeIcon,
   SettingsIcon,
+  AddIcon,
 } from "utils/icons";
 import logo_lg_light from "assets/images/logo_lg_light.png";
 import logo_lg_dark from "assets/images/logo_lg_dark.png";
@@ -439,6 +440,7 @@ const NAV_ITEMS = [
   {
     label: "Create Set",
     href: "/create",
+    icon: <AddIcon boxSize="20px" />,
   },
   {
     label: "Manage Sets",
