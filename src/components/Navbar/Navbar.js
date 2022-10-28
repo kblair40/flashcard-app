@@ -33,10 +33,10 @@ import SetSearch from "./SetSearch";
 import ThemeToggle from "./ThemeToggle";
 import AuthModal from "components/Modals/AuthModal";
 
-export default function WithSubnavigation() {
+export default function Navbar() {
   const [authModalDefaultTab, setAuthModalDefaultTab] = useState(0);
   const { handleSignOut, isSignedIn } = useContext(UserContext);
-  console.log("IS SIGNED IN:", isSignedIn);
+  // console.log("IS SIGNED IN:", isSignedIn);
 
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";
