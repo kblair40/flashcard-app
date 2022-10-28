@@ -76,17 +76,12 @@ const Card = ({ content, onClick }) => {
   const isDark = colorMode === "dark";
 
   return (
-    <Box
-      py="8px"
-      bg={isDark ? "gray.900" : "gray.50"}
-      //
-    >
+    <Box py="8px" bg={isDark ? "gray.900" : "gray.50"}>
       <Flex
         className="preview-card-live"
         onClick={onClick}
         justify="center"
         align="center"
-        // h={{ base: "80px", sm: "100px" }}
         h={{ base: "65px", sm: "100px" }}
         minW={{ base: "150px", sm: "180px" }}
         mr={{ base: "8px", sm: "12px" }}
@@ -102,7 +97,6 @@ const Card = ({ content, onClick }) => {
         {content ? (
           <Box
             className="preview-card-content-live"
-            // noOfLines={2}
             noOfLines={{ base: 2, sm: 3 }}
             dangerouslySetInnerHTML={{ __html: content }}
           />

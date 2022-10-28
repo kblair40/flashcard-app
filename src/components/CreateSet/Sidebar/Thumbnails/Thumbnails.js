@@ -37,7 +37,6 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
   }, [flashcardSetData]);
 
   const handleChangeOrder = async (cardsArray) => {
-    console.log("NEW ORDER:", cardsArray);
     // Only updates locally, so user can visually see order has changed.
     // api call to change the order is in the endDrag handler
     setCards(cardsArray);
@@ -83,7 +82,6 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
           flashcards: cardsArray,
         }
       );
-      // console.log("CHANGE ORDER RESPONSE:", response.data);
 
       if (response.data && response.data.set) {
         const { set } = response.data;
@@ -105,12 +103,10 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
     sm: { left: 0, right: 0 },
   });
   const cardsOverflow = useBreakpointValue({ base: "auto", sm: "hidden" });
-  // const cardHeight = useBreakpointValue({ base: "100%", sm: undefined });
   const cardHeight = useBreakpointValue({ base: "75px", sm: undefined });
 
   return (
     <Box
-      // border="1px solid #f00"
       height={height}
       width={width}
       position={{ sm: "absolute" }}
