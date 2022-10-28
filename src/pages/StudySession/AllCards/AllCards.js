@@ -53,8 +53,8 @@ const AllCards = ({
       <HStack
         transition="all 0.4s ease"
         position="fixed"
-        right="1rem"
-        bottom={show ? { base: "7rem", sm: "8.5rem" } : { base: "1rem" }}
+        right=".5rem"
+        bottom={show ? { base: "5.75rem", sm: "8rem" } : { base: "1rem" }}
         zIndex={10}
       >
         <Button onClick={show ? hideSelf : showSelf} size="xs">
@@ -86,7 +86,8 @@ const Card = ({ content, onClick }) => {
         onClick={onClick}
         justify="center"
         align="center"
-        h={{ base: "80px", sm: "100px" }}
+        // h={{ base: "80px", sm: "100px" }}
+        h={{ base: "65px", sm: "100px" }}
         minW={{ base: "150px", sm: "180px" }}
         mr={{ base: "8px", sm: "12px" }}
         boxShadow="md"
@@ -101,6 +102,7 @@ const Card = ({ content, onClick }) => {
         {content ? (
           <Box
             className="preview-card-content-live"
+            noOfLines={2}
             dangerouslySetInnerHTML={{ __html: content }}
           />
         ) : null}
