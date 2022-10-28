@@ -24,6 +24,7 @@ import {
   HomeIcon,
   SettingsIcon,
   AddIcon,
+  CardsIcon,
 } from "utils/icons";
 import logo_lg_light from "assets/images/logo_lg_light.png";
 import logo_lg_dark from "assets/images/logo_lg_dark.png";
@@ -445,6 +446,7 @@ const NAV_ITEMS = [
   {
     label: "Manage Sets",
     href: "/manage-sets",
+    icon: <CardsIcon boxSize="20px" />,
   },
 ];
 
