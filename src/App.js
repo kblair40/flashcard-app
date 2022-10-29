@@ -5,7 +5,7 @@ import { Box, Flex, Text, Button, useColorModeValue } from "@chakra-ui/react";
 import { UserProvider } from "store/UserContext";
 import { StudySessionProvider } from "store/StudySessionContext";
 import Navbar from "components/Navbar";
-import PageLoading from "components/PageLoading";
+import PageLoading from "components/Loading/PageLoading";
 
 const Create = lazy(() => import("./pages/Create"));
 const Account = lazy(() => import("./pages/Account"));
