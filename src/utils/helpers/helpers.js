@@ -9,8 +9,9 @@ export const convertFromUnix = (timestamp) => {
 export const makeDisplayName = (userData) => {
   if (!userData) return null;
   const { first_name, last_name } = userData;
+  const totalLength = first_name.length + last_name.length;
 
-  return `${first_name} ${last_name}`;
+  return totalLength <= 12 ? `${first_name} ${last_name}` : `${first_name}`;
 };
 
 export const getCleanDuration = (duration) => {
