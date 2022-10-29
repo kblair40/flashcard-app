@@ -24,7 +24,7 @@ const AuthModal = ({ isOpen, onClose, defaultTab }) => {
 
   return (
     <Modal
-      isCentered
+      // isCentered
       isOpen={isOpen}
       onClose={onClose}
       px={{ base: "1rem", sm: 0 }}

@@ -19,11 +19,16 @@ const AuthModalTabs = ({ onClose, onAuthSuccess, defaultTab }) => {
     color: useColorModeValue("blue.700", "blue.300"),
   };
 
+  const tabStyles = {
+    px: "2.5rem",
+    _selected: selectedStyles,
+  };
+
   return (
-    <Tabs isFitted defaultIndex={defaultTab}>
+    <Tabs variant="unstyled" align="center" defaultIndex={defaultTab}>
       <TabList mb="1rem">
-        <Tab _selected={selectedStyles}>Sign Up</Tab>
-        <Tab _selected={selectedStyles}>Sign In</Tab>
+        <Tab {...tabStyles}>Sign Up</Tab>
+        <Tab {...tabStyles}>Sign In</Tab>
       </TabList>
 
       <TabPanels>
