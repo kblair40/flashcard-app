@@ -13,7 +13,7 @@ const PageLoading = () => {
       w="100vw"
       bg="rgba(26, 32, 44, 0.3)"
     >
-      <Spinner />
+      <Spinner size="xl" thickness="6px" />
     </Center>
   );
 };
