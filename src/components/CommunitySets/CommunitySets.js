@@ -61,7 +61,7 @@ const CommunitySets = () => {
     fetchHistory();
   }, []);
 
-  const borderColor = useColorModeValue("gray.200", "gray.600");
+  const borderColor = useColorModeValue("gray.200", "gray.700");
   const bgMain = useColorModeValue("gray.50", "gray.800");
 
   return (
