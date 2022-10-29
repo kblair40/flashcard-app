@@ -143,7 +143,7 @@ const AllSets = () => {
           pb={{ md: "1rem" }}
         >
           {loading ? (
-            <Loading h="100px" />
+            <Loading h="200px" />
           ) : !isSignedIn ? (
             <NotLoggedIn />
           ) : flashcardSets && flashcardSets.length ? (

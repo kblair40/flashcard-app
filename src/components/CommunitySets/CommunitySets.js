@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
+import Loading from "components/Loading";
 import UserContext from "store/UserContext";
 import {
   MoreHorizontalIcon,
@@ -102,10 +103,8 @@ const CommunitySets = () => {
           overflowY={{ base: "auto" }}
           pb={{ md: "1rem" }}
         >
-          {loading ? (
-            <Flex h="200px" w="100%" justify="center" align="center">
-              <Spinner />
-            </Flex>
+          {!loading ? (
+            <Loading h="200px" />
           ) : communitySets && communitySets.length ? (
             communitySets.map((set, idx) => {
               return (
