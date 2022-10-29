@@ -3,7 +3,6 @@ import {
   Text,
   Flex,
   Heading,
-  Spinner,
   useColorModeValue,
   IconButton,
   Menu,
@@ -103,7 +102,7 @@ const CommunitySets = () => {
           overflowY={{ base: "auto" }}
           pb={{ md: "1rem" }}
         >
-          {!loading ? (
+          {loading ? (
             <Loading h="200px" />
           ) : communitySets && communitySets.length ? (
             communitySets.map((set, idx) => {

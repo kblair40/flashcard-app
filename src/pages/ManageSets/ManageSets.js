@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import {
-  Spinner,
-  Center,
   Flex,
   Button,
   Grid,
@@ -21,6 +19,7 @@ import {
 } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 
+import Loading from "components/Loading";
 import UserContext from "store/UserContext";
 import useDetectLogout from "hooks/useDetectLogout";
 import FavoriteSets from "components/FavoriteSets";
@@ -110,11 +109,7 @@ const ManageSets = () => {
   };
 
   if (loading) {
-    return (
-      <Center h="400px">
-        <Spinner />
-      </Center>
-    );
+    return <Loading h="400px" />;
   }
 
   return (
@@ -122,7 +117,6 @@ const ManageSets = () => {
       pt="60px"
       justify="center"
       w="100%"
-      // maxW={{ base: "98%", sm: "100vw", md: "100vw" }}
       maxW={{ base: "100vw" }}
       pr={{ base: "16px", md: 0 }}
       pl="16px"
@@ -267,9 +261,7 @@ const CreatedSets = ({
 
                     <GridItem display="flex" justifyContent="center">
                       {changingPublicStatus === _id ? (
-                        <Center>
-                          <Spinner />
-                        </Center>
+                        <Loading />
                       ) : (
                         <Checkbox
                           colorScheme="gray"
