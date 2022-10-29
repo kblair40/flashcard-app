@@ -1,10 +1,12 @@
 import React from "react";
-import { Center, Spinner } from "@chakra-ui/react";
+import { Center, Spinner, useColorModeValue } from "@chakra-ui/react";
 
 const Loading = ({ ...props }) => {
+  const spinnerColor = useColorModeValue("blue.600", "blue.300");
+
   return (
     <Center {...props}>
-      <Spinner />
+      <Spinner color={spinnerColor} />
     </Center>
   );
 };

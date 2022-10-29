@@ -7,14 +7,13 @@ import { StudySessionProvider } from "store/StudySessionContext";
 import Navbar from "components/Navbar";
 import PageLoading from "components/PageLoading";
 
-import Home from "pages/Home";
-
 const Create = lazy(() => import("./pages/Create"));
 const Account = lazy(() => import("./pages/Account"));
 const Study = React.lazy(() => import("./pages/Study"));
 const StudySession = React.lazy(() => import("./pages/StudySession"));
 const Settings = React.lazy(() => import("./pages/Settings"));
 const ManageSets = React.lazy(() => import("./pages/ManageSets"));
+const Home = React.lazy(() => import("./pages/Home"));
 
 function App() {
   const mainBg = useColorModeValue("#fff", "gray.900");
@@ -26,7 +25,14 @@ function App() {
 
           <Box position="relative">
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route
+                path="/"
+                element={
+                  <Suspense fallback={<PageLoading />}>
+                    <Home />
+                  </Suspense>
+                }
+              />
 
               <Route
                 path="/create"
