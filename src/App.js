@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from "react";
-import { Routes, Route } from "react-router-dom";
-import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
+import { Routes, Route, Link } from "react-router-dom";
+import { Box, Flex, Text, Button, useColorModeValue } from "@chakra-ui/react";
 
 import { UserProvider } from "store/UserContext";
 import { StudySessionProvider } from "store/StudySessionContext";
@@ -103,11 +103,25 @@ function App() {
 export default App;
 
 const NotFound = () => {
+  const uniqueTextColor = useColorModeValue("blue.500", "blue.300");
   return (
-    <Flex h="400px" justify="center" align="center">
-      <Text fontWeight="600" fontSize="xl">
-        (404) Page Not Found
-      </Text>
+    <Flex
+      direction="column"
+      h="calc(100vh - 60px)"
+      justify="center"
+      align="center"
+    >
+      <Flex fontWeight="600" fontSize="xl" mb="1rem">
+        <Text>Page Not Found</Text>
+
+        <Box ml="6px">(4</Box>
+        <Box color={uniqueTextColor}>0</Box>
+        <Box>4)</Box>
+      </Flex>
+
+      <Link to="/">
+        <Button variant="solid-blue">Go Home</Button>
+      </Link>
     </Flex>
   );
 };
