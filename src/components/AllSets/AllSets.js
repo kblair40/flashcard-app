@@ -43,40 +43,47 @@ const AllSets = () => {
     setLatestSessions(latestSessions);
   };
 
-  useEffect(() => {}, [userData]);
-
   useEffect(() => {
-    const fetchFlashcardData = async () => {
-      try {
-        const response = await api.get("/user", {
-          params: { flashcard_sets: true },
-        });
+    if (!userData) return;
 
-        if (response.data && response.data.user) {
-          setLoading(false);
-          // console.log("response.data.user:", response.data.user);
-          setFlashcardSets(response.data.user.flashcard_sets || []);
-
-          figureLatestSessions(
-            response.data.user.flashcard_sets,
-            response.data.user.study_sessions
-          );
-
-          return;
-        }
-      } catch (e) {
-        console.error("FAILED FETCHING USER:", e);
-      }
-
-      setLoading(false);
-    };
-
-    if (isSignedIn) {
-      fetchFlashcardData();
-    } else {
-      setLoading(false);
+    const { flashcard_sets, study_sessions } = userData;
+    if (flashcard_sets && study_sessions) {
+      figureLatestSessions(flashcard_sets, study_sessions);
     }
-  }, [isSignedIn]);
+  }, [userData]);
+
+  // useEffect(() => {
+  //   const fetchFlashcardData = async () => {
+  //     try {
+  //       const response = await api.get("/user", {
+  //         params: { flashcard_sets: true },
+  //       });
+
+  //       if (response.data && response.data.user) {
+  //         setLoading(false);
+  //         // console.log("response.data.user:", response.data.user);
+  //         setFlashcardSets(response.data.user.flashcard_sets || []);
+
+  //         figureLatestSessions(
+  //           response.data.user.flashcard_sets,
+  //           response.data.user.study_sessions
+  //         );
+
+  //         return;
+  //       }
+  //     } catch (e) {
+  //       console.error("FAILED FETCHING USER:", e);
+  //     }
+
+  //     setLoading(false);
+  //   };
+
+  //   if (isSignedIn) {
+  //     fetchFlashcardData();
+  //   } else {
+  //     setLoading(false);
+  //   }
+  // }, [isSignedIn]);
 
   if (!isSignedIn) {
     return null;
