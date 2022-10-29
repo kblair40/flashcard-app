@@ -4,9 +4,13 @@
     - https://quilljs.com/docs/api/
         - Look at disabling and enabling editor, and associated events
 3. Style improvements to AuthModal (still might want/need more)
+4. makeDisplayName helper should see if first + last is greater than 12 chars and render only first name if true
+5. Signup/in forms should be submittable with enter key
+
+// these go together
 4. On Home page, try to use data from context instead of own fetches
-5. makeDisplayName helper should see if first + last is greater than 12 chars and render only first name if true
-6. Signup/in forms should be submittable with enter key
+7. merge homepage-context with main once able to push backend changes with populated user data.
+//
 
 NICE TO HAVE(s)
 1. User shouldn't be able to "save" after 'editing' unless a change was made to the card

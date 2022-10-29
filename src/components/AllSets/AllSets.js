@@ -48,6 +48,8 @@ const AllSets = () => {
 
     const { flashcard_sets, study_sessions } = userData;
     if (flashcard_sets && study_sessions) {
+      setFlashcardSets(flashcard_sets);
+      setLoading(false);
       figureLatestSessions(flashcard_sets, study_sessions);
     }
   }, [userData]);
