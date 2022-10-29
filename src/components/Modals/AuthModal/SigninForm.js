@@ -121,6 +121,9 @@ const SigninForm = ({ onClose, onAuthSuccess }) => {
             Cancel
           </Button>
           <Button
+            isDisabled={
+              formData.username.length < 3 || !formData.password.length
+            }
             variant="solid-blue"
             w="50%"
             isLoading={loading}
