@@ -130,7 +130,6 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
   };
 
   const handleKeyDown = (e) => {
-    console.log("KEYDOWN:", e.key);
     if (e.key === "Enter") handleSubmit();
   };
 

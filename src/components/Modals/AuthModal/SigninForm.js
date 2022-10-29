@@ -11,6 +11,7 @@ import {
   InputRightElement,
   IconButton,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
 import { VisibleIcon, NotVisibleIcon } from "utils/icons";
@@ -53,6 +54,12 @@ const SigninForm = ({ onClose, onAuthSuccess }) => {
     setLoading(false);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") handleSubmit();
+  };
+
+  const errorTextColor = useColorModeValue("red.500", "red.300");
+
   return (
     <Box>
       <VStack spacing="1rem">
@@ -65,6 +72,7 @@ const SigninForm = ({ onClose, onAuthSuccess }) => {
             name="username"
             value={formData.username}
             onChange={handleChange}
+            onKeyDown={handleKeyDown}
           />
         </FormControl>
 
@@ -79,6 +87,7 @@ const SigninForm = ({ onClose, onAuthSuccess }) => {
               name="password"
               value={formData.password}
               onChange={handleChange}
+              onKeyDown={handleKeyDown}
             />
 
             <InputRightElement w="2.5rem">
@@ -98,7 +107,7 @@ const SigninForm = ({ onClose, onAuthSuccess }) => {
         </FormControl>
 
         <Text
-          color="red"
+          color={errorTextColor}
           h="1.5rem"
           fontSize="sm"
           textAlign="center"
