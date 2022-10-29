@@ -5,6 +5,7 @@ import {
   ModalContent,
   ModalBody,
   ModalCloseButton,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
 import UserContext from "store/UserContext";
@@ -19,6 +20,8 @@ const AuthModal = ({ isOpen, onClose, defaultTab }) => {
     onClose();
   };
 
+  const bg = useColorModeValue("gray.50", "gray.800");
+
   return (
     <Modal
       isCentered
@@ -28,7 +31,7 @@ const AuthModal = ({ isOpen, onClose, defaultTab }) => {
       size={{ base: "xs", sm: "md", md: "lg" }}
     >
       <ModalOverlay />
-      <ModalContent px="1rem" pt="2rem">
+      <ModalContent px="1rem" pt="2rem" bg={bg}>
         <ModalCloseButton />
         <ModalBody px={0}>
           <Tabs

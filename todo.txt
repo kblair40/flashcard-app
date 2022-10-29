@@ -3,7 +3,7 @@
 2. Clicking "New Card" in SetControls, front of card styles all apply EXCEPT font size.
     - https://quilljs.com/docs/api/
         - Look at disabling and enabling editor, and associated events
-3. Email validation
+3. Style improvements to AuthModal
 4. On Home page, try to use data from context instead of own fetches
 5. makeDisplayName helper should see if first + last is greater than 12 chars and render only first name if true
 
