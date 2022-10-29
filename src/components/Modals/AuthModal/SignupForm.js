@@ -129,6 +129,11 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
     setLoading(false);
   };
 
+  const handleKeyDown = (e) => {
+    console.log("KEYDOWN:", e.key);
+    if (e.key === "Enter") handleSubmit();
+  };
+
   return (
     <Box>
       <VStack spacing="1rem">
@@ -143,6 +148,7 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
               name="first_name"
               value={formData.first_name}
               onChange={handleChange}
+              onKeyDown={handleKeyDown}
             />
             <FormErrorMessage>
               {errors["first_name"] && typeof errors["first_name"] === "boolean"
@@ -160,6 +166,7 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
               name="last_name"
               value={formData.last_name}
               onChange={handleChange}
+              onKeyDown={handleKeyDown}
             />
 
             <FormErrorMessage>
@@ -179,6 +186,7 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
             name="email"
             value={formData.email}
             onChange={handleChange}
+            onKeyDown={handleKeyDown}
           />
 
           <FormErrorMessage>
@@ -197,6 +205,7 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
             name="username"
             value={formData.username}
             onChange={handleChange}
+            onKeyDown={handleKeyDown}
           />
           <FormErrorMessage>
             {errors["username"] && typeof errors["username"] === "boolean"
@@ -216,6 +225,7 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
               name="password"
               value={formData.password}
               onChange={handleChange}
+              onKeyDown={handleKeyDown}
             />
 
             <InputRightElement w="2.5rem">
@@ -251,6 +261,7 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
               name="confirm_password"
               value={formData.confirm_password}
               onChange={handleChange}
+              onKeyDown={handleKeyDown}
             />
             <InputRightElement w="2.5rem">
               <IconButton
