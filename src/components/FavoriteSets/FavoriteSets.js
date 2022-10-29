@@ -3,8 +3,6 @@ import {
   Flex,
   Text,
   Heading,
-  Center,
-  Spinner,
   IconButton,
   useColorMode,
   Box,
@@ -12,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
+import Loading from "components/Loading";
 import useFetchFavoriteSets from "hooks/useFetchFavoriteSets";
 import ConfirmDeleteFavoriteModal from "components/Modals/ConfirmDeleteFavoriteModal";
 import { StarFilledIcon, StudyIcon } from "utils/icons";
@@ -57,14 +56,6 @@ const FavoriteSets = ({ deletedSetCount }) => {
     setShowConfirmDeleteModal(true);
   };
 
-  if (loading) {
-    return (
-      <Center h="200px">
-        <Spinner />
-      </Center>
-    );
-  }
-
   const headingStyles = {
     textTransform: "capitalize",
     fontWeight: "700",
@@ -91,9 +82,7 @@ const FavoriteSets = ({ deletedSetCount }) => {
         overflowY="auto"
       >
         {loading ? (
-          <Center h="200px">
-            <Spinner />
-          </Center>
+          <Loading h="200px" />
         ) : favSets && favSets.length ? (
           favSets.map((set, i) => {
             return (

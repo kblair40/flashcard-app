@@ -97,7 +97,6 @@ const StudyHistory = () => {
       borderRadius={{ base: "8px", md: "8px 0 0 8px", lg: "8px" }}
       justify="center"
       w={{ base: "100%" }}
-      // mr={{ lg: "8px" }}
     >
       <Flex w="100%" direction="column" align="center">
         <Flex
