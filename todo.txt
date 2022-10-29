@@ -3,6 +3,9 @@
 2. Clicking "New Card" in SetControls, front of card styles all apply EXCEPT font size.
     - https://quilljs.com/docs/api/
         - Look at disabling and enabling editor, and associated events
+3. Email validation
+4. On Home page, try to use data from context instead of own fetches
+5. makeDisplayName helper should see if first + last is greater than 12 chars and render only first name if true
 
 NICE TO HAVE(s)
 1. User shouldn't be able to "save" after 'editing' unless a change was made to the card

@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 
 import { VisibleIcon, NotVisibleIcon } from "utils/icons";
+import { isEmailValid } from "utils/helpers";
 import api from "api";
 
 const INITIAL_ERROR_STATE = {
@@ -93,8 +94,8 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
     }
     if (password.length < 6) errorObj["password"] = tooShort(6);
     if (password.length > 24) errorObj["password"] = tooLong(24);
-
-    // TODO - ADD HANDLING TO VALIDATE THAT EMAIL IS LIKELY A VALID EMAIL ADDRESS
+    if (!isEmailValid(email))
+      errorObj["email"] = "Must be a valid email address";
 
     if (Object.values(errorObj).some(Boolean)) {
       console.log("SETTING ERRORS TO:", errorObj);
