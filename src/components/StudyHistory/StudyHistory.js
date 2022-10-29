@@ -8,11 +8,10 @@ import {
   useColorMode,
   Box,
   Tooltip,
-  Center,
-  Spinner,
 } from "@chakra-ui/react";
 
 import api from "api";
+import Loading from "components/Loading";
 import { TrashIcon } from "utils/icons";
 import { getCleanDuration } from "utils/helpers";
 import ConfirmDeleteModal from "components/Modals/ConfirmDeleteModal";
@@ -135,9 +134,7 @@ const StudyHistory = () => {
           ) : history && !history.length ? (
             <NoHistory />
           ) : (
-            <Center h="140px">
-              <Spinner />
-            </Center>
+            <Loading h="200px" />
           )}
 
           {moreThan20 ? (
