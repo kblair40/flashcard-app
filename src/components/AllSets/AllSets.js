@@ -43,6 +43,8 @@ const AllSets = () => {
     setLatestSessions(latestSessions);
   };
 
+  useEffect(() => {}, [userData]);
+
   useEffect(() => {
     const fetchFlashcardData = async () => {
       try {
