@@ -129,7 +129,7 @@ const SigninForm = ({ onClose, onAuthSuccess }) => {
             isLoading={loading}
             onClick={handleSubmit}
           >
-            Submit
+            Sign In
           </Button>
         </HStack>
       </VStack>

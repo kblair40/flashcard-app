@@ -296,7 +296,7 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
             onClick={handleSubmit}
             variant="solid-blue"
           >
-            Submit
+            Sign Up
           </Button>
         </HStack>
       </VStack>
