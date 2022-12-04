@@ -32,7 +32,19 @@ Saved cards will show up in the left hand side bar and a preview of the text con
 You may notice the timer above the Last/Next buttons.  Your study sessions durations are recorded and can be viewed/deleted in "Manage Sets".
 ![homepage with set](./src/assets/readme/study_session.png)
 
-#### Usage (Other)
+#### Other Usage
  - The Sun/Moon Icon button in the upper-right will change the color theme from dark to light, or vice-versa if you're currently using light mode.
  - In Manage Sets, you can edit/delete your flashcard sets, as well as view/delete past study sessions.
+
+
+ ## Built With
+ #### Client
+  - React
+  - React Context API
+  - Chakra UI
+  - Framer Motion
+#### Server
+  - Node / Express.js
+  - MongoDB / Mongoose
+
 
