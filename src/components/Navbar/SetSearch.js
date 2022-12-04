@@ -130,7 +130,7 @@ const Result = ({ result, isDark }) => {
   return (
     <Link style={{ zIndex: 10000000 }} to={`/study/${result._id}/`}>
       <Flex
-        onClick={(e) => e.stopPropagation()}
+        // onClick={(e) => e.stopPropagation()}
         py="8px"
         px="12px"
         w="100%"
