@@ -38,13 +38,17 @@ You may notice the timer above the Last/Next buttons.  Your study sessions durat
 
 
  ## Built With
+
  #### Client
   - React
   - React Context API
   - Chakra UI
   - Framer Motion
+
 #### Server
   - Node / Express.js
   - MongoDB / Mongoose
 
-
+#### Todo
+  - Prevent 'saving' a card in edit mode if no actual changes were made
+  - Add bad-words check to newly created sets to prevent public sets with inappropriate titles and/or content do not appear in 'Latest Sets From the Community' section
