@@ -11,7 +11,10 @@ const Editor = React.forwardRef(({ value, onChange }, ref) => {
   const isDark = colorMode === "dark";
 
   return (
-    <Flex justify="center" w="100%">
+    <Flex
+      justify="center"
+      // w="100%"
+    >
       <Box
         w="100%"
         sx={{

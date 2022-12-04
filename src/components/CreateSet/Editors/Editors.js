@@ -97,12 +97,15 @@ const Editors = ({ width = "100%" }) => {
   return (
     <Flex
       // spacing={{ base: "1rem", sm: "2rem" }}
+      // border="1px solid red"
       w={width}
+      // w="fit-content"
       h="max-content"
       pr={{ base: "8px", sm: "16px" }}
       pl={{ base: "8px", sm: "0" }}
       direction="column-reverse"
-      alignItems="flex-start"
+      // alignItems="flex-start"
+      alignItems="center"
     >
       <Box
         w="100%"
