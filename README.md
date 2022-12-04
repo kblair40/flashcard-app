@@ -35,8 +35,4 @@ Saved cards will show up in the left hand side bar and a preview of the text con
 6. The front of the first card will be shown to start.  Flip a card by clicking the "Flip" button, and show the next/previous card with the "Last Card" and "Next Card" buttons.  You can randomize the cards order by clicking "Randomize" in the lower-right corner and hide the cards by clicking "Hide".  Click on a specific card to navigate directly to that card.
 You may notice the timer above the Last/Next buttons.  Your study sessions durations are recorded and can be viewed in "Manage Sets".
 
----
-
-
-
 ![homepage with set](./src/assets/readme/study_session.png)
