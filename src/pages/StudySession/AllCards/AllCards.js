@@ -35,7 +35,12 @@ const AllCards = ({
         }}
         unmountOnExit
       >
-        <Flex align="center" justify="start" mx="8px">
+        <Flex
+          // border="1px solid green"
+          align="center"
+          justify="start"
+          mx="8px"
+        >
           {flashcards && flashcards.length
             ? flashcards.map((card, i) => {
                 return (
@@ -76,7 +81,14 @@ const Card = ({ content, onClick }) => {
   const isDark = colorMode === "dark";
 
   return (
-    <Box py="8px" bg={isDark ? "gray.900" : "gray.50"}>
+    <Box
+      //
+      w="100%"
+      maxW={{ base: "200px" }}
+      py="8px"
+      bg={isDark ? "gray.900" : "gray.50"}
+      mr={{ base: "8px" }}
+    >
       <Flex
         className="preview-card-live"
         onClick={onClick}
