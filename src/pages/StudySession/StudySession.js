@@ -31,7 +31,6 @@ const StudySession = () => {
   const { createStudySession } = useContext(StudySessionContext);
 
   const { colorMode } = useColorMode();
-  const isDark = colorMode === "dark";
 
   const params = useParams();
 
@@ -177,7 +176,7 @@ const StudySession = () => {
         showSelf={() => setHideAllCards(false)}
       />
 
-      <GoBack isDark={isDark} />
+      <GoBack />
     </Flex>
   );
 };

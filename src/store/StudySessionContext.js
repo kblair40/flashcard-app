@@ -28,7 +28,7 @@ const StudySessionProvider = ({ children }) => {
       setBadSession(false);
       setSessionId(undefined);
       setSetId(undefined);
-      localStorage.removeItem("session-id");
+      // localStorage.removeItem("session-id");
     }
   }, [pathname]);
 
@@ -44,6 +44,7 @@ const StudySessionProvider = ({ children }) => {
 
       console.log("HOURS/MINUTES/SECONDS:", { hours, minutes, seconds });
 
+      // At a minimum, minutes needs to be truthy (1 or more);
       if (hours || minutes) {
         try {
           const response = await api.patch(`/study_session/${sessionId}`, {
@@ -57,6 +58,7 @@ const StudySessionProvider = ({ children }) => {
         }
       } else {
         console.log("DELETING");
+        // delete session if total time was less than 1 minute
         try {
           const response = await api.delete(`/history/${sessionId}`);
 
@@ -67,6 +69,8 @@ const StudySessionProvider = ({ children }) => {
           console.error("FAILED TO DELETE:", e);
         }
       }
+
+      localStorage.removeItem("session-id");
     };
 
     if (
@@ -80,7 +84,7 @@ const StudySessionProvider = ({ children }) => {
   }, [params, pathname]);
 
   const createStudySession = async (setId, cardCount) => {
-    console.log("CREATE STUDY SESSION");
+    // console.log("CREATE STUDY SESSION");
     // if cardCount === 0, don't create a study session.
     patchedSession.current = false; // start with this, called onMount in StudySession component
     try {
