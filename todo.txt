@@ -19,3 +19,4 @@ NICE TO HAVE(s)
 LAST MINUTE IMPROVEMENT(s)
 1. Use css variables in editor.css file
 2. Edit 'link' input on quill editor so it is visible in dark mode
+3. Fix set showing as studied if user clicks "Back to My Sets" in a study session before a minute has passed

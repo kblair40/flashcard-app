@@ -35,12 +35,7 @@ const AllCards = ({
         }}
         unmountOnExit
       >
-        <Flex
-          // border="1px solid green"
-          align="center"
-          justify="start"
-          mx="8px"
-        >
+        <Flex align="center" justify="start" mx="8px">
           {flashcards && flashcards.length
             ? flashcards.map((card, i) => {
                 return (
@@ -66,7 +61,7 @@ const AllCards = ({
           {show ? "Hide" : "Show Cards"}
         </Button>
 
-        <Button onClick={() => shuffle(flashcards)} size="xs">
+        <Button onClick={() => shuffle([...flashcards])} size="xs">
           Randomize
         </Button>
       </HStack>

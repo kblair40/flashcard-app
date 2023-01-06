@@ -9,8 +9,6 @@ const Timer = () => {
   const { seconds, minutes, hours, isRunning, start, pause, reset } =
     useContext(StudySessionContext);
 
-  console.log("type:", typeof seconds, typeof minutes, typeof hours);
-
   useBeforeunload(async (e) => {
     e.preventDefault();
     if (seconds || minutes || hours) {
