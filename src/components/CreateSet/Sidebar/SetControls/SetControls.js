@@ -1,5 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Flex, Button, Stack, Tooltip, Box } from "@chakra-ui/react";
+import {
+  Flex,
+  Button,
+  Stack,
+  Tooltip,
+  Box,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 import { AddIcon, TrashIcon, SaveIcon } from "utils/icons";
@@ -42,6 +49,8 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
     return val.replace(/<(.|\n)*?>/g, "").trim().length === 0;
   };
 
+  const tooltipPlacement = useBreakpointValue({ base: "top", sm: "right" });
+
   return (
     <Flex
       direction={{ sm: "column" }}
@@ -60,8 +69,8 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
         direction={{ base: "row-reverse", sm: "column" }}
       >
         <Tooltip
+          placement={tooltipPlacement}
           label="You must be editing a previously created card"
-          placement="right"
           isDisabled={activeCard.id !== undefined}
         >
           <Box>
@@ -74,7 +83,7 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
         </Tooltip>
 
         <Tooltip
-          placement="right"
+          placement={tooltipPlacement}
           label="You must be editing a previously created card or have content on both sides of a new card"
           isDisabled={!isEmpty(frontCardContent) || !isEmpty(backCardContent)}
         >
@@ -89,8 +98,8 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
         </Tooltip>
 
         <Tooltip
+          placement={tooltipPlacement}
           isDisabled={isEditing}
-          placement="right"
           label={"A card you have created must be selected in order to delete"}
         >
           <Box>

@@ -113,8 +113,8 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
       position={{ sm: "absolute" }}
       bottom={{ sm: 0 }}
       left={{ sm: 0 }}
-      pt={{ base: 0, sm: "16px" }}
-      pb={{ base: 0, sm: "32px" }}
+      p={{ sm: "16px 0 32px" }}
+      border="1px solid blue"
     >
       <Heading
         display={{ base: "none", sm: "block" }}
@@ -142,6 +142,7 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
         }
         transition={"background 0.2s"}
         zIndex={-1}
+        border="1px solid red"
       >
         <Reorder.Group
           onReorder={handleChangeOrder}
@@ -198,6 +199,7 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
           )}
         </Reorder.Group>
       </Box>
+
       {saving && <LoadingOverlay cardCount={cards ? cards.length : 0} />}
     </Box>
   );
