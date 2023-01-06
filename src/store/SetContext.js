@@ -138,10 +138,6 @@ const SetProvider = ({ children }) => {
     setDeleting(false);
   };
 
-  const addCard = () => {
-    clearCards();
-  };
-
   const clearCards = () => {
     // called every time a card is saved or deleted.
     // all control buttons except 'Exit' will be disabled immediately after this function
@@ -166,7 +162,7 @@ const SetProvider = ({ children }) => {
         activeCard,
         updateActiveCard,
         patchCard,
-        addCard,
+        addCard: clearCards,
       }}
     >
       {children}
