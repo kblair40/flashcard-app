@@ -19,7 +19,6 @@ const SetProvider = ({ children }) => {
     const fetchSet = async (id) => {
       try {
         const response = await api.get(`/flashcard_set/${id}`);
-        // console.log("\nRESPONSE:", response.data, "\n");
 
         if (response.data && response.data.set) {
           const { set } = response.data;
@@ -63,7 +62,6 @@ const SetProvider = ({ children }) => {
         }
       );
 
-      // console.log("\nSAVE RESPONSE:", response.data, "\n");
       clearCards();
       setFlashcardSetData(response.data.flashcardSet);
       setSaving(false);
@@ -87,7 +85,6 @@ const SetProvider = ({ children }) => {
         back_content: backCardContent,
       });
 
-      // console.log("\n\nPATCH RESPONSE:", response.data);
       if (response.data && response.data.flashcard) {
         const { flashcard } = response.data;
         const dataCopy = { ...flashcardSetData };
@@ -117,12 +114,9 @@ const SetProvider = ({ children }) => {
 
     try {
       const response = await api.delete(`/flashcard_set/${set_id}/${card_id}`);
-      // console.log("\n\nRESPONSE.DATA:", response.data);
 
       if (response.data && response.data.set) {
         const { set } = response.data;
-
-        // console.log("SET AFTER DELETE:", set);
 
         setFlashcardSetData(set);
         clearCards();
@@ -136,17 +130,12 @@ const SetProvider = ({ children }) => {
 
   const addCard = () => {
     clearCards();
-    // setActiveCard({ index: -1, id: undefined });
   };
 
   const clearCards = () => {
     setFrontCardContent("");
     setBackCardContent("");
     setActiveCard({ index: -1, id: undefined });
-
-    // setTimeout(() => {
-    //   setFlashcardSetData(flashcardSetData);
-    // }, 1000);
   };
 
   return (

@@ -49,7 +49,6 @@ const SetSearch = ({ isDisabled, isDark }) => {
     if (value.length > 2) {
       setSearching(true);
       debouncedSave(value);
-      // search(value);
       setShowResults(true);
     } else {
       setShowResults(false);
@@ -130,7 +129,6 @@ const Result = ({ result, isDark }) => {
   return (
     <Link style={{ zIndex: 10000000 }} to={`/study/${result._id}/`}>
       <Flex
-        // onClick={(e) => e.stopPropagation()}
         py="8px"
         px="12px"
         w="100%"
