@@ -114,7 +114,7 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
       bottom={{ sm: 0 }}
       left={{ sm: 0 }}
       p={{ sm: "16px 0 32px" }}
-      border="1px solid blue"
+      // border="1px solid blue"
     >
       <Heading
         display={{ base: "none", sm: "block" }}
@@ -142,7 +142,7 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
         }
         transition={"background 0.2s"}
         zIndex={-1}
-        border="1px solid red"
+        // border="1px solid red"
       >
         <Reorder.Group
           onReorder={handleChangeOrder}
@@ -251,16 +251,16 @@ const Thumbnail = ({
       transition={"background 0.3s"}
       bg={isDark ? "gray.700" : "gray.50"}
       _hover={{ background: isDark ? "gray.600" : "gray.100" }}
-      p="4px"
-      className="thumbnail"
+      p={{ base: "4px 12px", sm: "4px 16px" }}
     >
       <Box
+        w="100%"
         className="preview-card-content-live"
         textAlign="center"
         overflow={{ base: "hidden" }}
         dangerouslySetInnerHTML={{ __html: frontContent }}
         noOfLines={{ base: 3, md: 3 }}
-        h="100%"
+        maxH="100%"
       />
 
       <Text

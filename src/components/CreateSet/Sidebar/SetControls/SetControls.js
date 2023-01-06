@@ -131,7 +131,7 @@ const ControlButton = ({ label, onClick, loading, isDisabled, variant }) => {
   return (
     <Button
       w="100%"
-      size="xs"
+      size={{ base: "xs", sm: "sm" }}
       onClick={onClick}
       isLoading={loading}
       isDisabled={isDisabled}

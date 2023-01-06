@@ -13,25 +13,25 @@ body {
   overflow-y: hidden;
 }
 .preview-card-content-live p {
-  font-size: 16px !important;
+  font-size: 15px !important;
   line-height: 1.3;
   font-weight: 400;
 }
 .preview-card-content-live p strong {
-  font-size: 16px !important;
+  font-size: 15px !important;
   line-height: 1.3;
-  font-weight: 600;
+  font-weight: 700;
 }
 .preview-card-content-live p em {
-  font-size: 16px !important;
+  font-size: 15px !important;
   line-height: 1.3;
 }
 .preview-card-content-live p u {
-  font-size: 16px !important;
+  font-size: 15px !important;
   line-height: 1.3;
 }
 .preview-card-content-live p a {
-  font-size: 16px !important;
+  font-size: 15px !important;
   line-height: 1.3;
   color: #3182CE;
   text-decoration: underline;

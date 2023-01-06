@@ -9,12 +9,7 @@ const Sidebar = ({ width = "100%" }) => {
   const isDark = colorMode === "dark";
 
   return (
-    <Box
-      border="2px solid white"
-      bg={isDark ? "gray.800" : "#fff"}
-      width={width}
-      h="100%"
-    >
+    <Box bg={isDark ? "gray.800" : "#fff"} width={width} h="100%">
       <Flex
         direction="column"
         h="100%"
