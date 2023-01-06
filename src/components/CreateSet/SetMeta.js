@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Flex, Text, IconButton } from "@chakra-ui/react";
+import { Box, Flex, Text, IconButton, Stack } from "@chakra-ui/react";
 
 import { EditIcon } from "utils/icons";
 import EditModal from "components/Modals/EditModal";
@@ -43,15 +43,17 @@ const SetMeta = ({ setData, width = "100%" }) => {
       flexWrap="wrap"
       justifyContent="center"
     >
-      <Flex h={{ base: "max-content" }} w="100%" maxWidth="700px">
-        <Flex
-          w={{ base: "35%" }}
-          direction="row"
-          flexWrap="wrap"
-          align="center"
-          mr="1.25rem"
-        >
-          <Text fontWeight={600} mr="6px" noOfLines={1}>
+      <Stack
+        h={{ base: "max-content" }}
+        w="100%"
+        maxWidth="700px"
+        direction="row"
+        spacing={{ base: "1rem" }}
+        align={{ md: "center" }}
+        justify={{ base: "center" }}
+      >
+        <Flex direction={{ base: "column", md: "row" }} mr="1.25rem">
+          <Text fontWeight={700} mr="6px" noOfLines={1}>
             Category:
           </Text>
           <Text
@@ -64,13 +66,8 @@ const SetMeta = ({ setData, width = "100%" }) => {
           </Text>
         </Flex>
 
-        <Flex
-          w={{ base: "35%" }}
-          direction="row"
-          flexWrap="wrap"
-          align="center"
-        >
-          <Text fontWeight={600} mr="6px" noOfLines={1}>
+        <Flex direction={{ base: "column", md: "row" }}>
+          <Text fontWeight={700} mr="6px" noOfLines={1}>
             Title:
           </Text>
           {title && (
@@ -85,20 +82,16 @@ const SetMeta = ({ setData, width = "100%" }) => {
           )}
         </Flex>
 
-        <Flex
-          w={{ base: "30%" }}
-          direction="row"
-          flexWrap="wrap"
-          align="center"
-          justify="end"
-        >
+        <Flex pl={{ base: "2rem" }}>
           <IconButton
             onClick={() => setShowEditModal((prev) => !prev)}
             variant="icon-button"
-            icon={<EditIcon boxSize="18px" />}
+            icon={<EditIcon boxSize="17px" />}
+            size="sm"
+            rounded="full"
           />
         </Flex>
-      </Flex>
+      </Stack>
 
       {showEditModal && (
         <EditModal
