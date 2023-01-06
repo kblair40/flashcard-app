@@ -27,10 +27,11 @@ const SetProvider = ({ children }) => {
           setFlashcardSetData(response.data.set);
 
           if (set.flashcards.length) {
+            /* only set if the set already has cards, which will only be the case if a previously
+               created set is being edited */
             setActiveCard({ index: set.flashcards.length, id: undefined });
           }
 
-          // if there was previously an error, remove it.
           setFetchError(false);
         }
       } catch (e) {

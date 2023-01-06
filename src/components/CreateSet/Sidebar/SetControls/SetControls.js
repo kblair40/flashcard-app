@@ -34,7 +34,6 @@ const SetControls = ({ height = "100%", width = "100%" }) => {
 
   const handleClickSave = async () => {
     if (isEditing) {
-      // patch card
       patchCard();
     } else {
       await saveCard();
