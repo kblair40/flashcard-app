@@ -162,6 +162,7 @@ const SetProvider = ({ children }) => {
         activeCard,
         updateActiveCard,
         patchCard,
+        fetchError,
         addCard: clearCards,
       }}
     >
