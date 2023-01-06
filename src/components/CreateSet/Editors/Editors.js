@@ -1,10 +1,9 @@
 import React, { useContext, useRef, useEffect } from "react";
-import { Box, VStack, Flex } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 
 import UserContext from "store/UserContext";
 import SetContext from "store/SetContext";
 import Editor from "components/Editor";
-import { act } from "react-dom/test-utils";
 
 const styleMap = {
   bold: ["bold", "true"],
@@ -38,7 +37,6 @@ const Editors = ({ width = "100%" }) => {
   useEffect(() => {
     const getDefaultStyles = (styles, cardSide) => {
       if (!styles) return;
-      // console.log("yes styles");
 
       let defaultStyles = [];
 
@@ -51,24 +49,13 @@ const Editors = ({ width = "100%" }) => {
       if (styles.fontSize !== "medium") {
         defaultStyles.push(styleMap[styles["fontSize"]]);
       }
-      // console.log("default styles:", defaultStyles);
 
       let ref = cardSide === "front" ? frontRef : backRef;
       const editor = ref.current.getEditor();
 
-      // const format = editor.getFormat();
-      // console.log("FORMAT BEFORE:", format);
-      // editor.removeFormat(0, 50);
-      // const formatAfter = editor.getFormat();
-      // console.log("FORMAT AFTER REMOVE:", formatAfter);
-
       for (let style of defaultStyles) {
-        // console.log("SETTING:", style, " to", cardSide);
         editor.format(...style);
       }
-
-      // const formatAfterUpdate = editor.getFormat();
-      // console.log("FORMAT AFTER UPDATE:", formatAfterUpdate);
 
       // regardless of back or front, make sure front gets focused first
       frontRef.current.focus();
@@ -80,14 +67,11 @@ const Editors = ({ width = "100%" }) => {
       activeCard &&
       (!activeCard.id || activeCard.index === -1)
     ) {
-      // console.log("TRUE");
       if (frontRef.current) {
-        // console.log("TRUE FRONT");
         const styles = userData.default_styles.front;
         getDefaultStyles(styles, "front");
       }
       if (backRef.current) {
-        // console.log("TRUE BACK");
         const styles = userData.default_styles.back;
         getDefaultStyles(styles, "back");
       }
@@ -96,23 +80,14 @@ const Editors = ({ width = "100%" }) => {
 
   return (
     <Flex
-      // spacing={{ base: "1rem", sm: "2rem" }}
-      // border="1px solid red"
       w={width}
-      // w="fit-content"
       h="max-content"
       pr={{ base: "8px", sm: "16px" }}
       pl={{ base: "8px", sm: "0" }}
       direction="column-reverse"
-      // alignItems="flex-start"
       alignItems="center"
     >
-      <Box
-        w="100%"
-        maxW="700px"
-        mt={{ base: "1rem", sm: "2rem" }}
-        // border="1px solid #aaa"
-      >
+      <Box w="100%" maxW="700px" mt={{ base: "1rem", sm: "2rem" }}>
         <Editor
           ref={backRef}
           cardSide="back"
@@ -121,11 +96,7 @@ const Editors = ({ width = "100%" }) => {
         />
       </Box>
 
-      <Box
-        w="100%"
-        maxWidth="700px"
-        // border="1px solid #aaa"
-      >
+      <Box w="100%" maxWidth="700px">
         <Editor
           ref={frontRef}
           cardSide="front"
@@ -138,33 +109,3 @@ const Editors = ({ width = "100%" }) => {
 };
 
 export default Editors;
-
-//
-//
-// return (
-//   <VStack
-//     spacing={{ base: "1rem", sm: "2rem" }}
-//     w={width}
-//     h={height}
-//     pr={{ base: "8px", sm: "16px" }}
-//     pl={{ base: "8px", sm: "0" }}
-//   >
-//     <Box w="100%" maxWidth="700px">
-//       <Editor
-//         ref={frontRef}
-//         cardSide="front"
-//         value={frontCardContent}
-//         onChange={setFrontCardContent}
-//       />
-//     </Box>
-
-//     <Box w="100%" maxW="700px" pb="1rem">
-//       <Editor
-//         ref={backRef}
-//         cardSide="back"
-//         value={backCardContent}
-//         onChange={setBackCardContent}
-//       />
-//     </Box>
-//   </VStack>
-// );
