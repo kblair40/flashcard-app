@@ -15,7 +15,6 @@ export const quillSettings = {
       ["link"],
     ],
   },
-  formats: ["bold"],
 };
 
 const CATEGORIES = [

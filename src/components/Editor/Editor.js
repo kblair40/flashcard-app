@@ -3,7 +3,7 @@ import { Flex, Box, useColorMode } from "@chakra-ui/react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-import "editor.css";
+import "editor.css"; // custom overrides
 import { quillSettings } from "utils/constants";
 
 const Editor = React.forwardRef(({ value, onChange }, ref) => {
@@ -11,10 +11,7 @@ const Editor = React.forwardRef(({ value, onChange }, ref) => {
   const isDark = colorMode === "dark";
 
   return (
-    <Flex
-      justify="center"
-      // w="100%"
-    >
+    <Flex justify="center">
       <Box
         w="100%"
         sx={{
@@ -35,7 +32,6 @@ const Editor = React.forwardRef(({ value, onChange }, ref) => {
           value={value}
           onChange={onChange}
           preserveWhitespace={true}
-          // formats={quillSettings.formats}
         />
       </Box>
     </Flex>
