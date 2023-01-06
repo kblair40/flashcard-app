@@ -38,13 +38,26 @@ export const getCleanDuration = (duration) => {
 
 export const toTitleCase = (str) => {
   let sep = str.includes("/") ? "/" : " ";
-  return str
+  let splitStr = str
+    .trim()
     .toLowerCase()
     .split(sep)
-    .map(function (word) {
-      return word.replace(word[0], word[0].toUpperCase());
-    })
-    .join(sep);
+    .map((word) => word.trim());
+
+  let res = "";
+  if (splitStr.length > 1) {
+    res = splitStr
+      .map(function (word) {
+        return word[0].toUpperCase() + word.slice(1);
+      })
+      .join(sep);
+  } else {
+    let word = splitStr[0];
+    res = word[0].toUpperCase() + word.slice(1);
+  }
+
+  console.log("output:", res);
+  return res;
 };
 
 export const isEmailValid = (email) => {

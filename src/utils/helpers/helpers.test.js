@@ -1,4 +1,9 @@
-import { getUnixTimestamp, convertFromUnix, makeDisplayName } from "./helpers";
+import {
+  getUnixTimestamp,
+  convertFromUnix,
+  makeDisplayName,
+  toTitleCase,
+} from "./helpers";
 
 it("Returns current date as a unix timestamp and converts that timestamp to a Date object on request", () => {
   let nowTimestamp = getUnixTimestamp();
@@ -15,6 +20,32 @@ it("Takes a user data object and returns a string with the first name and last n
   expect(nameArray).toHaveLength(2);
   expect(nameArray[0].length).toBeGreaterThanOrEqual(2);
   expect(nameArray[1].length).toBeGreaterThanOrEqual(2);
+  expect(nameArray[0]).toEqual("asdf");
+  expect(nameArray[1]).toEqual("asdf");
+});
+
+it("Converts first character of all words in a string to uppercase, and all other letters to lowercase", () => {
+  let singleName1 = "kevIn";
+  let singleName2 = "KEVIN";
+  let singleName3 = " kevin ";
+
+  expect(toTitleCase(singleName1)).toEqual("Kevin");
+  expect(toTitleCase(singleName2)).toEqual("Kevin");
+  expect(toTitleCase(singleName3)).toEqual("Kevin");
+
+  let multiName1 = "kevin blair";
+  let multiName2 = "kEvIn BlaIR";
+  let multiName3 = "KEVIN BLAIR";
+
+  expect(toTitleCase(multiName1)).toEqual("Kevin Blair");
+  expect(toTitleCase(multiName2)).toEqual("Kevin Blair");
+  expect(toTitleCase(multiName3)).toEqual("Kevin Blair");
+
+  // let slashName1 = "kevin/blair ";
+  // let slashName2 = " keVin /  Blair";
+
+  // expect(toTitleCase(slashName1)).toEqual("Kevin Blair");
+  // expect(toTitleCase(slashName2)).toEqual("Kevin Blair");
 });
 
 const DUMMY_USER_DATA = {
