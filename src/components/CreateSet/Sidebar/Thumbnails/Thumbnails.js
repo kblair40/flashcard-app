@@ -6,6 +6,7 @@ import {
   Flex,
   Spinner,
   useBreakpointValue,
+  Center,
 } from "@chakra-ui/react";
 import { Reorder, useDragControls } from "framer-motion";
 
@@ -183,9 +184,17 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
               );
             })
           ) : (
-            <Text textAlign="center" pt="8px" fontWeight="600" fontSize="sm">
-              No Cards
-            </Text>
+            <Center w={{ base: "100%", sm: "unset" }}>
+              <Text
+                textAlign="center"
+                pt="8px"
+                letterSpacing=".2px"
+                fontWeight="700"
+                fontSize={{ base: "md", sm: "sm" }}
+              >
+                No Cards
+              </Text>
+            </Center>
           )}
         </Reorder.Group>
       </Box>
