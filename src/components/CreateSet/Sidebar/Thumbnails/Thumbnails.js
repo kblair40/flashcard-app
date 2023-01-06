@@ -26,12 +26,17 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
     setFlashcardSetData,
   } = useContext(SetContext);
 
+  // initially, flashcardsOrder === flashcardsOrderComparator
+  // flashcardsOrderComparator is updated after a successful patch to the set's order so it
+  //    can be used as reference of the set's order again
+  // flashcardsOrder is updated as order changes.  It does not wait for the "dragEnd" event
   const flashcardsOrder = useRef();
   const flashcardsOrderComparator = useRef();
 
   useEffect(() => {
     if (flashcardSetData && flashcardSetData.flashcards) {
       setCards(flashcardSetData.flashcards);
+
       flashcardsOrder.current = flashcardSetData.flashcards;
       flashcardsOrderComparator.current = flashcardSetData.flashcards;
     }
@@ -45,11 +50,13 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
   };
 
   const isDragging = useRef(false);
-  const startDrag = (e) => {
+  const startDrag = () => {
     isDragging.current = true;
   };
 
   const didChange = (cardsArray, comparator) => {
+    // compares cardsArray with flashcardsOrderComparator
+    // if order changed, returns true, else returns false
     for (let i = 0; i < cardsArray.length; i++) {
       if (cardsArray[i]._id !== comparator[i]._id) {
         return true;
@@ -59,24 +66,28 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
     return false;
   };
 
-  const endDrag = async (e) => {
+  const endDrag = async () => {
+    // called when user finishes dragging after after starting to drag a card
     const cardsArray = flashcardsOrder.current;
     isDragging.current = false;
 
     if (
       !didChange(flashcardsOrder.current, flashcardsOrderComparator.current)
     ) {
+      // silently end here if order didn't change
       return;
     }
 
     setSaving(true);
 
     for (let i = 0; i < cardsArray.length; i++) {
+      // assign index to each card
       let card = cardsArray[i];
       card.index = i + 1;
     }
 
     try {
+      // send patch request to update set order
       const response = await api.patch(
         `/flashcard_set/change_order/${flashcardSetData._id}`,
         {
@@ -114,7 +125,6 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
       bottom={{ sm: 0 }}
       left={{ sm: 0 }}
       p={{ sm: "16px 0 32px" }}
-      // border="1px solid blue"
     >
       <Heading
         display={{ base: "none", sm: "block" }}
@@ -142,7 +152,6 @@ const Thumbnails = ({ isDark, height = "100%", width = "100%" }) => {
         }
         transition={"background 0.2s"}
         zIndex={-1}
-        // border="1px solid red"
       >
         <Reorder.Group
           onReorder={handleChangeOrder}
