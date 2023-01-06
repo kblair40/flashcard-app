@@ -88,7 +88,7 @@ const EditModal = ({ isOpen, onClose, setData, onPatchSuccess }) => {
             </VStack>
 
             <VStack spacing="4px" w="100%" align="start">
-              <Text fontWeight="500">Set Description</Text>
+              <Text fontWeight="500">Category</Text>
               <Select
                 id="category"
                 variant="neutral-outline"

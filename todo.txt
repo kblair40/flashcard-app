@@ -18,3 +18,4 @@ NICE TO HAVE(s)
 
 LAST MINUTE IMPROVEMENT(s)
 1. Use css variables in editor.css file
+2. Edit 'link' input on quill editor so it is visible in dark mode
