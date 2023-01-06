@@ -38,7 +38,7 @@ const Editors = ({ width = "100%" }) => {
     const getDefaultStyles = (styles, cardSide) => {
       if (!styles) return;
 
-      let defaultStyles = [];
+      const defaultStyles = [];
 
       if (styles.isBold) defaultStyles.push(styleMap.bold);
       if (styles.isItalic) defaultStyles.push(styleMap.italic);
@@ -51,9 +51,11 @@ const Editors = ({ width = "100%" }) => {
       }
 
       let ref = cardSide === "front" ? frontRef : backRef;
+      // get editor for currently active side
       const editor = ref.current.getEditor();
 
       for (let style of defaultStyles) {
+        // assign each style to the editor
         editor.format(...style);
       }
 

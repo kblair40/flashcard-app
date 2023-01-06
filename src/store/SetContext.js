@@ -12,11 +12,13 @@ const SetProvider = ({ children }) => {
   const [frontCardContent, setFrontCardContent] = useState("");
   const [backCardContent, setBackCardContent] = useState("");
   const [activeCard, setActiveCard] = useState({ index: -1, id: undefined });
+  const [fetchError, setFetchError] = useState(false);
 
   const params = useParams();
 
   useEffect(() => {
     const fetchSet = async (id) => {
+      // get set by id, then set it's data in state
       try {
         const response = await api.get(`/flashcard_set/${id}`);
 
@@ -27,13 +29,18 @@ const SetProvider = ({ children }) => {
           if (set.flashcards.length) {
             setActiveCard({ index: set.flashcards.length, id: undefined });
           }
+
+          // if there was previously an error, remove it.
+          setFetchError(false);
         }
       } catch (e) {
         console.log("FAILED FETCHING SET:", e);
+        setFetchError(true);
       }
     };
 
     if (params.id) {
+      // Only fetch if set id is available in url params
       fetchSet(params.id);
     }
   }, [params.id]);
@@ -49,18 +56,20 @@ const SetProvider = ({ children }) => {
   };
 
   const saveCard = async () => {
+    // flashcardSetData being falsy should never happen, but just in case...
     if (!flashcardSetData) return false;
 
+    // makes loading indicator/spinner visible on save button
     setSaving(true);
 
     try {
-      const response = await api.patch(
-        `/flashcard_set/add/${flashcardSetData._id}`,
-        {
-          front_content: frontCardContent,
-          back_content: backCardContent,
-        }
-      );
+      const data = {
+        front_content: frontCardContent,
+        back_content: backCardContent,
+      };
+      const url = `/flashcard_set/add/${flashcardSetData._id}`;
+      // patch set with new card
+      const response = await api.patch(url, data);
 
       clearCards();
       setFlashcardSetData(response.data.flashcardSet);
@@ -80,6 +89,7 @@ const SetProvider = ({ children }) => {
     setSaving(true);
 
     try {
+      // patch flashcard with new content
       const response = await api.patch(`/flashcard/${id}`, {
         front_content: frontCardContent,
         back_content: backCardContent,
@@ -93,6 +103,7 @@ const SetProvider = ({ children }) => {
         cardsCopy[activeCard.index] = flashcard;
         dataCopy.flashcards = cardsCopy;
 
+        // update state locally so a GET request can be avoided
         setFlashcardSetData(dataCopy);
         clearCards();
         setActiveCard({ id: undefined, index: -1 });
@@ -108,17 +119,16 @@ const SetProvider = ({ children }) => {
     const { id: card_id } = activeCard;
     if (!card_id || !flashcardSetData) return null;
 
-    const { _id: set_id } = flashcardSetData;
-
+    // makes loading indicator/spinner visible on delete button
     setDeleting(true);
 
     try {
-      const response = await api.delete(`/flashcard_set/${set_id}/${card_id}`);
+      const deleteUrl = `/flashcard_set/${flashcardSetData._id}/${card_id}`;
+      const response = await api.delete(deleteUrl);
 
       if (response.data && response.data.set) {
-        const { set } = response.data;
-
-        setFlashcardSetData(set);
+        // update set with same data, minus the deleted card
+        setFlashcardSetData(response.data.set);
         clearCards();
       }
     } catch (e) {
@@ -133,6 +143,8 @@ const SetProvider = ({ children }) => {
   };
 
   const clearCards = () => {
+    // called every time a card is saved or deleted.
+    // all control buttons except 'Exit' will be disabled immediately after this function
     setFrontCardContent("");
     setBackCardContent("");
     setActiveCard({ index: -1, id: undefined });
