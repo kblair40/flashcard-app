@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 
-import "./index.css";
+import "./styles/index.css";
 import theme from "utils/theme";
 import App from "./App";
 

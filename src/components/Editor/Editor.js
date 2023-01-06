@@ -3,7 +3,7 @@ import { Flex, Box, useColorMode } from "@chakra-ui/react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-import "editor.css"; // custom overrides
+import "styles/editor.css"; // custom overrides
 import { quillSettings } from "utils/constants";
 
 const Editor = React.forwardRef(({ value, onChange }, ref) => {

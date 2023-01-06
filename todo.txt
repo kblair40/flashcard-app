@@ -14,3 +14,7 @@ NICE TO HAVE(s)
   - At least facebook, maybe google and twitter
 3. Some kind of cool lightning loader
 4. A true "center" class for back of card that will force content to vertical/horizontal center of card
+
+
+LAST MINUTE IMPROVEMENT(s)
+1. Use css variables in editor.css file
