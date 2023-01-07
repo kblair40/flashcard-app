@@ -20,7 +20,7 @@ describe("Date Functions", () => {
 });
 
 describe("makeDisplayName", () => {
-  it("Takes a user data object and returns a string with the first name and last name of the user separated by a space ", () => {
+  it("Takes a user data object and returns a string with the first name and last name of the user separated by a space", () => {
     let testData = { first_name: "asdf", last_name: "asdf" };
     let fullName = makeDisplayName(testData);
     let nameArray = fullName.split(" ");
