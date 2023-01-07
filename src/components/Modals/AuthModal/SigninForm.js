@@ -61,7 +61,7 @@ const SigninForm = ({ onClose, onAuthSuccess }) => {
   const errorTextColor = useColorModeValue("red.500", "red.300");
 
   return (
-    <Box>
+    <Box data-testid="signinForm">
       <VStack spacing="1rem">
         <FormControl isRequired>
           <FormLabel mb="4px" fontSize="sm">

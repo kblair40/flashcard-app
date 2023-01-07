@@ -134,7 +134,7 @@ const SignupForm = ({ onClose, onAuthSuccess }) => {
   };
 
   return (
-    <Box>
+    <Box data-testid="signupForm">
       <VStack spacing="1rem">
         <HStack w="100%" spacing="1rem">
           <FormControl isRequired isInvalid={!!errors["first_name"]}>
