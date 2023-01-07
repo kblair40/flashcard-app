@@ -13,7 +13,7 @@ it("renders without crashing", () => {
   render(
     <BrowserRouter>
       <ChakraProvider theme={theme}>
-        {/* <ColorModeScript initialColorMode={theme.config.initialColorMode} /> */}
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
         <App />
       </ChakraProvider>
     </BrowserRouter>
