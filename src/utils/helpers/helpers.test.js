@@ -93,13 +93,32 @@ describe("toTitleCase", () => {
 });
 
 describe("getCleanDuration", () => {
-  let duration1 = { hours: 0, minutes: 4, seconds: 36 };
-  let duration2 = { hours: 1, minutes: 0, seconds: 36 };
-  let duration3 = { hours: 0, minutes: 19, seconds: 0 };
-
   it("Only returns values for fields with values > 0", () => {
+    let duration1 = { hours: 0, minutes: 4, seconds: 36 };
+    let duration2 = { hours: 2, minutes: 0, seconds: 36 };
+    let duration3 = { hours: 0, minutes: 19, seconds: 0 };
+    let duration4 = { hours: 3, minutes: 4, seconds: 27 };
     expect(getCleanDuration(duration1)).toEqual("4 minutes, 36 seconds");
-    expect(getCleanDuration(duration2)).toEqual("1 hour, 36 seconds");
+    expect(getCleanDuration(duration2)).toEqual("2 hours, 36 seconds");
+    expect(getCleanDuration(duration3)).toEqual("19 minutes");
+    expect(getCleanDuration(duration4)).toEqual(
+      "3 hours, 4 minutes, 27 seconds"
+    );
+  });
+
+  it("Returns singular version of value name if corresponding value === 1", () => {
+    let duration1 = { hours: 1, minutes: 1, seconds: 1 };
+    let duration2 = { hours: 0, minutes: 1, seconds: 0 };
+    let duration3 = { hours: 1, minutes: 0, seconds: 0 };
+
+    expect(getCleanDuration(duration1)).toEqual("1 hour, 1 minute, 1 second");
+    expect(getCleanDuration(duration2)).toEqual("1 minute");
+    expect(getCleanDuration(duration3)).toEqual("1 hour");
+  });
+
+  it("Returns null if all values are 0, or duration arg is falsy", () => {
+    expect(getCleanDuration({ hours: 0, minutes: 0, seconds: 0 })).toBeNull();
+    expect(getCleanDuration(undefined)).toBeNull();
   });
 });
 
