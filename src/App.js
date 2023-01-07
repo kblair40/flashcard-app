@@ -20,7 +20,7 @@ function App() {
   return (
     <UserProvider>
       <StudySessionProvider>
-        <Box minH="100vh" bg={mainBg}>
+        <Box data-testid="App" id="App" minH="100vh" bg={mainBg}>
           <Navbar />
 
           <Box position="relative">
