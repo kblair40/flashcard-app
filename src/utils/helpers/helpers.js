@@ -37,11 +37,16 @@ export const getCleanDuration = (duration) => {
 };
 
 export const toTitleCase = (str) => {
-  str = str.trim();
-  // only building this to handle inputs with letters, forward slashes and whitespace.
+  // should only handle inputs with letters, forward slashes and whitespace.
   // return null if input includes any other characters
+  str = str.trim();
   let validateInput = /^[a-zA-Z /]+$/;
-  if (!validateInput.test(str)) return null;
+  if (
+    !validateInput.test(str) ||
+    str[0].toUpperCase() === str[0].toLowerCase()
+  ) {
+    return null;
+  }
 
   // sep will be used to split here, and join at the end
   let sep = str.includes("/") ? "/" : " ";
@@ -49,18 +54,14 @@ export const toTitleCase = (str) => {
     .toLowerCase()
     .split(sep)
     .map((word) => word.trim());
+  console.log("SPLIT STR:", splitStr, "  input:", str);
 
   let res = "";
-  if (splitStr.length > 1) {
-    res = splitStr
-      .map(function (word) {
-        return word[0].toUpperCase() + word.slice(1);
-      })
-      .join(sep);
-  } else {
-    let word = splitStr[0];
-    res = word[0].toUpperCase() + word.slice(1);
-  }
+  res = splitStr
+    .map(function (word) {
+      return word[0].toUpperCase() + word.slice(1);
+    })
+    .join(sep);
 
   console.log("output:", res);
   return res;
