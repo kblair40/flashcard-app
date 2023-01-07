@@ -30,6 +30,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test-safe": "NODE_ENV=--experimental-vm-modules react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -50,5 +51,9 @@
       "last 1 safari version"
     ]
   },
-  "jest": {}
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!axios)"
+    ]
+  }
 }
