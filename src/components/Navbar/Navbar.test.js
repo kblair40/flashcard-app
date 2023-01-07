@@ -8,7 +8,6 @@ describe("Navbar", () => {
     const loginButton = screen.getByText("Log In");
     expect(loginButton).toBeInTheDocument();
 
-    // Should mount/open auth modal, which will render el with authTabs data-testid
     fireEvent.click(loginButton);
     expect(screen.getByTestId("authTabs")).toBeInTheDocument();
   });
@@ -18,7 +17,6 @@ describe("Navbar", () => {
     const signupButton = screen.getByText("Sign In");
     expect(signupButton).toBeInTheDocument();
 
-    // Should mount/open auth modal, which will render el with authTabs data-testid
     fireEvent.click(signupButton);
     expect(screen.getByTestId("authTabs")).toBeInTheDocument();
   });
@@ -28,7 +26,6 @@ describe("Navbar", () => {
     const signupButton = screen.getByText("Sign In");
     expect(signupButton).toBeInTheDocument();
 
-    // Should mount/open auth modal, which will render el with authTabs data-testid
     fireEvent.click(signupButton);
     expect(screen.getByTestId("signupForm")).toBeInTheDocument();
   });
@@ -38,7 +35,6 @@ describe("Navbar", () => {
     const loginButton = screen.getByText("Log In");
     expect(loginButton).toBeInTheDocument();
 
-    // Should mount/open auth modal, which will render el with authTabs data-testid
     fireEvent.click(loginButton);
     expect(screen.getByTestId("signinForm")).toBeInTheDocument();
   });
