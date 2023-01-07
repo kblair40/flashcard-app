@@ -167,6 +167,7 @@ export default StudyHistory;
 
 const HistoryItem = ({ item, onClick }) => {
   const duration = getCleanDuration(item.duration);
+  // console.log("DURATION OBJECT:", duration);
 
   const { colorMode } = useColorMode();
   const isDark = colorMode === "dark";

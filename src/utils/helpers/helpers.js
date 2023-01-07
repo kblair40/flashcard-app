@@ -22,24 +22,29 @@ export const makeDisplayName = (userData) => {
 };
 
 export const getCleanDuration = (duration) => {
+  console.log("\nduration input:", duration);
   if (!duration) return null;
 
   const { hours, minutes, seconds } = duration;
+  if (![hours, minutes, seconds].every((val) => val !== undefined)) {
+    return null;
+  }
 
   let res;
   if (hours) {
-    res = `${hours} hours`;
+    res = `${hours} ${hours > 1 ? "hours" : "hour"}`;
     if (minutes) res += `, ${minutes} minutes`;
     if (seconds) res += `, ${seconds} seconds`;
   } else if (minutes) {
-    res = `${minutes} minutes`;
+    res = `${minutes} ${minutes > 1 ? "minutes" : "minute"}`;
     if (seconds) res += `, ${seconds} seconds`;
   } else if (seconds) {
-    res = `${seconds} seconds`;
+    res = `${seconds} ${seconds > 1 ? "seconds" : "second"}`;
   } else {
     return null;
   }
 
+  console.log("duration output:", res, "\n");
   return res;
 };
 

@@ -3,6 +3,7 @@ import {
   convertFromUnix,
   makeDisplayName,
   toTitleCase,
+  getCleanDuration,
 } from "./helpers";
 
 describe("Date Functions", () => {
@@ -88,6 +89,17 @@ describe("toTitleCase", () => {
     expect(toTitleCase(nullName3)).toEqual(null);
     expect(toTitleCase(nullName4)).toEqual(null);
     expect(toTitleCase(nullName5)).toEqual(null);
+  });
+});
+
+describe("getCleanDuration", () => {
+  let duration1 = { hours: 0, minutes: 4, seconds: 36 };
+  let duration2 = { hours: 1, minutes: 0, seconds: 36 };
+  let duration3 = { hours: 0, minutes: 19, seconds: 0 };
+
+  it("Only returns values for fields with values > 0", () => {
+    expect(getCleanDuration(duration1)).toEqual("4 minutes, 36 seconds");
+    expect(getCleanDuration(duration2)).toEqual("1 hour, 36 seconds");
   });
 });
 
