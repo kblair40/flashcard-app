@@ -8,9 +8,16 @@ export const convertFromUnix = (timestamp) => {
 
 export const makeDisplayName = (userData) => {
   if (!userData) return null;
+
   const { first_name, last_name } = userData;
+  if (!first_name) {
+    // first name is required
+    return null;
+  }
+
   const totalLength = first_name.length + last_name.length;
 
+  // return full name if total length <= 12, else just first name
   return totalLength <= 12 ? `${first_name} ${last_name}` : `${first_name}`;
 };
 

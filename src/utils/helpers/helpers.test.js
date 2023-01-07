@@ -13,8 +13,9 @@ it("Returns current date as a unix timestamp and converts that timestamp to a Da
   expect(nowConverted.getHours()).toEqual(new Date().getHours());
 });
 
-it("Takes a user data object and returns a string with the first name and last name of the user separated by a space", () => {
-  let fullName = makeDisplayName(DUMMY_USER_DATA);
+it("Takes a user data object and returns a string with the first name and last name of the user separated by a space ", () => {
+  let testData = { first_name: "asdf", last_name: "asdf" };
+  let fullName = makeDisplayName(testData);
   let nameArray = fullName.split(" ");
 
   expect(nameArray).toHaveLength(2);
@@ -22,6 +23,24 @@ it("Takes a user data object and returns a string with the first name and last n
   expect(nameArray[1].length).toBeGreaterThanOrEqual(2);
   expect(nameArray[0]).toEqual("asdf");
   expect(nameArray[1]).toEqual("asdf");
+
+  testData = { first_name: "muchlonger", last_name: "namelength" };
+  fullName = makeDisplayName(testData);
+  nameArray = fullName.split(" ");
+
+  expect(nameArray).toHaveLength(1);
+  expect(nameArray[0].length).toBeGreaterThanOrEqual(2);
+  expect(nameArray[0]).toEqual("muchlonger");
+});
+
+it("returns only the first name if combined length of first and last name is > 12", () => {
+  let testData = { first_name: "muchlonger", last_name: "namelength" };
+  let fullName = makeDisplayName(testData);
+  let nameArray = fullName.split(" ");
+
+  expect(nameArray).toHaveLength(1);
+  expect(nameArray[0].length).toBeGreaterThanOrEqual(2);
+  expect(nameArray[0]).toEqual("muchlonger");
 });
 
 it("Converts first character of all words in a string to uppercase, and all other letters to lowercase", () => {
@@ -62,16 +81,17 @@ it("Converts first character of all words in a string to uppercase, and all othe
   expect(toTitleCase(nullName5)).toEqual(null);
 });
 
-const DUMMY_USER_DATA = {
-  _id: "63419b250c1d0369414b5f20",
-  email: "asdf",
-  password: "$2b$10$LSucetdFm122l5LG7KMXWuEv15p9ie.ZkICorMPw4K2O9.nLB8vYC",
-  first_name: "asdf",
-  last_name: "asdf",
-  username: "asdfasdf",
-  avatar_image_url: "",
-  createdAt: "2022-10-08T15:45:41.354Z",
-  updatedAt: "2022-10-17T16:26:39.369Z",
-  __v: 51,
-  favorite_flashcard_sets: [],
-};
+// // Full object...
+// const DUMMY_USER_DATA = {
+//   _id: "63419b250c1d0369414b5f20",
+//   email: "asdf",
+//   password: "$2b$10$LSucetdFm122l5LG7KMXWuEv15p9ie.ZkICorMPw4K2O9.nLB8vYC",
+//   first_name: "asdf",
+//   last_name: "asdf",
+//   username: "asdfasdf",
+//   avatar_image_url: "",
+//   createdAt: "2022-10-08T15:45:41.354Z",
+//   updatedAt: "2022-10-17T16:26:39.369Z",
+//   __v: 51,
+//   favorite_flashcard_sets: [],
+// };
