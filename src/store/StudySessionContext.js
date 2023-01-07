@@ -23,7 +23,7 @@ const StudySessionProvider = ({ children }) => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    console.log("\nPATHNAME:", pathname, "\n");
+    // console.log("\nPATHNAME:", pathname, "\n");
     if (!pathname.startsWith("/study")) {
       setBadSession(false);
       setSessionId(undefined);
@@ -37,7 +37,7 @@ const StudySessionProvider = ({ children }) => {
   useEffect(() => {
     const patchSessionDuration = async () => {
       if (!sessionId || badSession) {
-        console.log("NO SESSION ID IN STATE - UNABLE TO PATCH");
+        // console.log("NO SESSION ID IN STATE - UNABLE TO PATCH");
         setBadSession(false);
         return;
       }
