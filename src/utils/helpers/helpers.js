@@ -61,7 +61,7 @@ export const toTitleCase = (str) => {
     .toLowerCase()
     .split(sep)
     .map((word) => word.trim());
-  console.log("SPLIT STR:", splitStr, "  input:", str);
+  // console.log("SPLIT STR:", splitStr, "  input:", str);
 
   let res = "";
   res = splitStr
@@ -70,7 +70,7 @@ export const toTitleCase = (str) => {
     })
     .join(sep);
 
-  console.log("output:", res);
+  // console.log("output:", res);
   return res;
 };
 

@@ -5,80 +5,90 @@ import {
   toTitleCase,
 } from "./helpers";
 
-it("Returns current date as a unix timestamp and converts that timestamp to a Date object on request", () => {
-  let nowTimestamp = getUnixTimestamp();
-  let nowConverted = convertFromUnix(nowTimestamp);
+describe("Date Functions", () => {
+  it("Returns current date as a unix timestamp and converts that timestamp to a Date object on request", () => {
+    let nowTimestamp = getUnixTimestamp();
+    let nowConverted = convertFromUnix(nowTimestamp);
 
-  expect(nowConverted.getDate()).toEqual(new Date().getDate());
-  expect(nowConverted.getHours()).toEqual(new Date().getHours());
+    expect(nowConverted.getDate()).toEqual(new Date().getDate());
+    expect(nowConverted.getHours()).toEqual(new Date().getHours());
+  });
+
+  it("isgood", () => {
+    expect(true).toBeTruthy();
+  });
 });
 
-it("Takes a user data object and returns a string with the first name and last name of the user separated by a space ", () => {
-  let testData = { first_name: "asdf", last_name: "asdf" };
-  let fullName = makeDisplayName(testData);
-  let nameArray = fullName.split(" ");
+describe("makeDisplayName", () => {
+  it("Takes a user data object and returns a string with the first name and last name of the user separated by a space ", () => {
+    let testData = { first_name: "asdf", last_name: "asdf" };
+    let fullName = makeDisplayName(testData);
+    let nameArray = fullName.split(" ");
 
-  expect(nameArray).toHaveLength(2);
-  expect(nameArray[0].length).toBeGreaterThanOrEqual(2);
-  expect(nameArray[1].length).toBeGreaterThanOrEqual(2);
-  expect(nameArray[0]).toEqual("asdf");
-  expect(nameArray[1]).toEqual("asdf");
+    expect(nameArray).toHaveLength(2);
+    expect(nameArray[0].length).toBeGreaterThanOrEqual(2);
+    expect(nameArray[1].length).toBeGreaterThanOrEqual(2);
+    expect(nameArray[0]).toEqual("asdf");
+    expect(nameArray[1]).toEqual("asdf");
 
-  testData = { first_name: "muchlonger", last_name: "namelength" };
-  fullName = makeDisplayName(testData);
-  nameArray = fullName.split(" ");
+    testData = { first_name: "muchlonger", last_name: "namelength" };
+    fullName = makeDisplayName(testData);
+    nameArray = fullName.split(" ");
 
-  expect(nameArray).toHaveLength(1);
-  expect(nameArray[0].length).toBeGreaterThanOrEqual(2);
-  expect(nameArray[0]).toEqual("muchlonger");
+    expect(nameArray).toHaveLength(1);
+    expect(nameArray[0].length).toBeGreaterThanOrEqual(2);
+    expect(nameArray[0]).toEqual("muchlonger");
+  });
+
+  it("returns only the first name if combined length of first and last name is > 12", () => {
+    let testData = { first_name: "muchlonger", last_name: "namelength" };
+    let fullName = makeDisplayName(testData);
+    let nameArray = fullName.split(" ");
+
+    expect(nameArray).toHaveLength(1);
+    expect(nameArray[0].length).toBeGreaterThanOrEqual(2);
+    expect(nameArray[0]).toEqual("muchlonger");
+  });
 });
 
-it("returns only the first name if combined length of first and last name is > 12", () => {
-  let testData = { first_name: "muchlonger", last_name: "namelength" };
-  let fullName = makeDisplayName(testData);
-  let nameArray = fullName.split(" ");
+describe("toTitleCase", () => {
+  it("Converts first character of all words in a string to uppercase, and all other letters to lowercase", () => {
+    let singleName1 = "kevIn";
+    let singleName2 = "KEVIN";
+    let singleName3 = " kevin ";
 
-  expect(nameArray).toHaveLength(1);
-  expect(nameArray[0].length).toBeGreaterThanOrEqual(2);
-  expect(nameArray[0]).toEqual("muchlonger");
-});
+    expect(toTitleCase(singleName1)).toEqual("Kevin");
+    expect(toTitleCase(singleName2)).toEqual("Kevin");
+    expect(toTitleCase(singleName3)).toEqual("Kevin");
 
-it("Converts first character of all words in a string to uppercase, and all other letters to lowercase", () => {
-  let singleName1 = "kevIn";
-  let singleName2 = "KEVIN";
-  let singleName3 = " kevin ";
+    let multiName1 = "kevin blair";
+    let multiName2 = "kEvIn BlaIR";
+    let multiName3 = "KEVIN BLAIR";
 
-  expect(toTitleCase(singleName1)).toEqual("Kevin");
-  expect(toTitleCase(singleName2)).toEqual("Kevin");
-  expect(toTitleCase(singleName3)).toEqual("Kevin");
+    expect(toTitleCase(multiName1)).toEqual("Kevin Blair");
+    expect(toTitleCase(multiName2)).toEqual("Kevin Blair");
+    expect(toTitleCase(multiName3)).toEqual("Kevin Blair");
 
-  let multiName1 = "kevin blair";
-  let multiName2 = "kEvIn BlaIR";
-  let multiName3 = "KEVIN BLAIR";
+    let slashName1 = "kevin/blair ";
+    let slashName2 = " keVin /  Blair";
+    let slashName3 = " KEVIN / BLAIR";
 
-  expect(toTitleCase(multiName1)).toEqual("Kevin Blair");
-  expect(toTitleCase(multiName2)).toEqual("Kevin Blair");
-  expect(toTitleCase(multiName3)).toEqual("Kevin Blair");
+    expect(toTitleCase(slashName1)).toEqual("Kevin/Blair");
+    expect(toTitleCase(slashName2)).toEqual("Kevin/Blair");
+    expect(toTitleCase(slashName3)).toEqual("Kevin/Blair");
 
-  let slashName1 = "kevin/blair ";
-  let slashName2 = " keVin /  Blair";
-  let slashName3 = " KEVIN / BLAIR";
+    let nullName1 = "kevin-";
+    let nullName2 = "kevin-blair";
+    let nullName3 = "";
+    let nullName4 = "  ";
+    let nullName5 = "/";
 
-  expect(toTitleCase(slashName1)).toEqual("Kevin/Blair");
-  expect(toTitleCase(slashName2)).toEqual("Kevin/Blair");
-  expect(toTitleCase(slashName3)).toEqual("Kevin/Blair");
-
-  let nullName1 = "kevin-";
-  let nullName2 = "kevin-blair";
-  let nullName3 = "";
-  let nullName4 = "  ";
-  let nullName5 = "/";
-
-  expect(toTitleCase(nullName1)).toEqual(null);
-  expect(toTitleCase(nullName2)).toEqual(null);
-  expect(toTitleCase(nullName3)).toEqual(null);
-  expect(toTitleCase(nullName4)).toEqual(null);
-  expect(toTitleCase(nullName5)).toEqual(null);
+    expect(toTitleCase(nullName1)).toEqual(null);
+    expect(toTitleCase(nullName2)).toEqual(null);
+    expect(toTitleCase(nullName3)).toEqual(null);
+    expect(toTitleCase(nullName4)).toEqual(null);
+    expect(toTitleCase(nullName5)).toEqual(null);
+  });
 });
 
 // // Full object...
