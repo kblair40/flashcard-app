@@ -4,6 +4,7 @@ import {
   makeDisplayName,
   toTitleCase,
   getCleanDuration,
+  isEmailValid,
 } from "./helpers";
 
 describe("Date Functions", () => {
@@ -119,6 +120,16 @@ describe("getCleanDuration", () => {
   it("Returns null if all values are 0, or duration arg is falsy", () => {
     expect(getCleanDuration({ hours: 0, minutes: 0, seconds: 0 })).toBeNull();
     expect(getCleanDuration(undefined)).toBeNull();
+  });
+});
+
+describe("isEmailValid", () => {
+  it("Returns true for emails in proper format, and false otherwise", () => {
+    expect(isEmailValid("fdsa@fda.com")).toEqual(true);
+    expect(isEmailValid("gdsghdsgd@gfsdfasf.gfqjk")).toEqual(true);
+    expect(isEmailValid("fdsafda.com")).toEqual(false);
+    expect(isEmailValid("fdsa@fda.")).toEqual(false);
+    expect(isEmailValid()).toEqual(false);
   });
 });
 

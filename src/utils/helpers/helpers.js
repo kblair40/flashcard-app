@@ -22,10 +22,10 @@ export const makeDisplayName = (userData) => {
 };
 
 export const getCleanDuration = (duration) => {
-  console.log("duration input:", duration);
   if (!duration) return null;
 
   const { hours, minutes, seconds } = duration;
+
   if (![hours, minutes, seconds].every((val) => val !== undefined)) {
     return null;
   }
@@ -44,7 +44,6 @@ export const getCleanDuration = (duration) => {
     return null;
   }
 
-  console.log("duration output:", res);
   return res;
 };
 
