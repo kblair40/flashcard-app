@@ -6,7 +6,7 @@ import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import theme from "utils/theme";
 import App from "./App";
 
-// simple smoke test
+// simple smoke test - mounts app and ensures no errors are thrown
 it("renders without crashing", () => {
   const root = createRoot(document.createElement("div"));
   root.render(

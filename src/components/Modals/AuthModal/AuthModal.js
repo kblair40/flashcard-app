@@ -24,7 +24,6 @@ const AuthModal = ({ isOpen, onClose, defaultTab }) => {
 
   return (
     <Modal
-      // isCentered
       isOpen={isOpen}
       onClose={onClose}
       px={{ base: "1rem", sm: 0 }}
@@ -34,11 +33,13 @@ const AuthModal = ({ isOpen, onClose, defaultTab }) => {
       <ModalContent px="1rem" pt="2rem" bg={bg}>
         <ModalCloseButton />
         <ModalBody px={0}>
-          <Tabs
-            onClose={onClose}
-            onAuthSuccess={onAuthSuccess}
-            defaultTab={defaultTab}
-          />
+          {isOpen && (
+            <Tabs
+              onClose={onClose}
+              onAuthSuccess={onAuthSuccess}
+              defaultTab={defaultTab}
+            />
+          )}
         </ModalBody>
       </ModalContent>
     </Modal>

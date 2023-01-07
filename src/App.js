@@ -16,11 +16,12 @@ const ManageSets = React.lazy(() => import("./pages/ManageSets"));
 const Home = React.lazy(() => import("./pages/Home"));
 
 function App() {
-  const mainBg = useColorModeValue("#fff", "gray.900");
+  const bg = useColorModeValue("#fff", "gray.900");
+
   return (
     <UserProvider>
       <StudySessionProvider>
-        <Box data-testid="App" id="App" minH="100vh" bg={mainBg}>
+        <Box data-testid="App" minH="100vh" bg={bg}>
           <Navbar />
 
           <Box position="relative">

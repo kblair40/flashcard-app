@@ -25,7 +25,12 @@ const AuthModalTabs = ({ onClose, onAuthSuccess, defaultTab }) => {
   };
 
   return (
-    <Tabs variant="unstyled" align="center" defaultIndex={defaultTab}>
+    <Tabs
+      variant="unstyled"
+      align="center"
+      defaultIndex={defaultTab}
+      data-testid="authTabs"
+    >
       <TabList mb="1rem">
         <Tab {...tabStyles}>Sign Up</Tab>
         <Tab {...tabStyles}>Sign In</Tab>
