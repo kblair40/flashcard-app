@@ -42,7 +42,7 @@ describe("makeDisplayName", () => {
     expect(nameArray[0]).toEqual("muchlonger");
   });
 
-  it("returns only the first name if combined length of first and last name is > 12", () => {
+  it("Returns only the first name if combined length of first and last name is > 12", () => {
     let testData = { first_name: "muchlonger", last_name: "namelength" };
     let fullName = makeDisplayName(testData);
     let nameArray = fullName.split(" ");
@@ -50,6 +50,11 @@ describe("makeDisplayName", () => {
     expect(nameArray).toHaveLength(1);
     expect(nameArray[0].length).toBeGreaterThanOrEqual(2);
     expect(nameArray[0]).toEqual("muchlonger");
+  });
+
+  it("Returns null if no data is provided or value for first_name is not provided", () => {
+    expect(makeDisplayName({ last_name: "lastname" })).toBeNull();
+    expect(makeDisplayName()).toBeNull();
   });
 });
 

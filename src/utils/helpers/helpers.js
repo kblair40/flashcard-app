@@ -11,7 +11,7 @@ export const makeDisplayName = (userData) => {
 
   const { first_name, last_name } = userData;
   if (!first_name) {
-    // first name is required
+    // first name is required.  return null if not provided
     return null;
   }
 
@@ -25,7 +25,7 @@ export const getCleanDuration = (duration) => {
   if (!duration) return null;
 
   const { hours, minutes, seconds } = duration;
-
+  // make sure all values exist, even if they are 0
   if (![hours, minutes, seconds].every((val) => val !== undefined)) {
     return null;
   }
@@ -65,7 +65,6 @@ export const toTitleCase = (str) => {
     .toLowerCase()
     .split(sep)
     .map((word) => word.trim());
-  // console.log("SPLIT STR:", splitStr, "  input:", str);
 
   let res = "";
   res = splitStr
@@ -74,7 +73,6 @@ export const toTitleCase = (str) => {
     })
     .join(sep);
 
-  // console.log("output:", res);
   return res;
 };
 
