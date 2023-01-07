@@ -104,6 +104,7 @@ describe("getCleanDuration", () => {
     let duration2 = { hours: 2, minutes: 0, seconds: 36 };
     let duration3 = { hours: 0, minutes: 19, seconds: 0 };
     let duration4 = { hours: 3, minutes: 4, seconds: 27 };
+
     expect(getCleanDuration(duration1)).toEqual("4 minutes, 36 seconds");
     expect(getCleanDuration(duration2)).toEqual("2 hours, 36 seconds");
     expect(getCleanDuration(duration3)).toEqual("19 minutes");
@@ -122,9 +123,20 @@ describe("getCleanDuration", () => {
     expect(getCleanDuration(duration3)).toEqual("1 hour");
   });
 
-  it("Returns null if all values are 0, or duration arg is falsy", () => {
+  it("Returns null if all values are 0, any value is not defined, or duration arg is falsy", () => {
     expect(getCleanDuration({ hours: 0, minutes: 0, seconds: 0 })).toBeNull();
     expect(getCleanDuration(undefined)).toBeNull();
+    expect(
+      getCleanDuration({ hours: 1, minutes: undefined, seconds: 8 })
+    ).toBeNull();
+  });
+
+  it("Only returns seconds value if minutes and hours are 0", () => {
+    let duration1 = { hours: 0, minutes: 0, seconds: 7 };
+    let duration2 = { hours: 0, minutes: 0, seconds: 1 };
+
+    expect(getCleanDuration(duration1)).toEqual("7 seconds");
+    expect(getCleanDuration(duration2)).toEqual("1 second");
   });
 });
 
