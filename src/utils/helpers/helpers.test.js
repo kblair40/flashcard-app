@@ -41,11 +41,17 @@ it("Converts first character of all words in a string to uppercase, and all othe
   expect(toTitleCase(multiName2)).toEqual("Kevin Blair");
   expect(toTitleCase(multiName3)).toEqual("Kevin Blair");
 
-  // let slashName1 = "kevin/blair ";
-  // let slashName2 = " keVin /  Blair";
+  let slashName1 = "kevin/blair ";
+  let slashName2 = " keVin /  Blair";
 
-  // expect(toTitleCase(slashName1)).toEqual("Kevin Blair");
-  // expect(toTitleCase(slashName2)).toEqual("Kevin Blair");
+  expect(toTitleCase(slashName1)).toEqual("Kevin/Blair");
+  expect(toTitleCase(slashName2)).toEqual("Kevin/Blair");
+
+  let errorName1 = "kevin-";
+  let errorName2 = "kevin-blair";
+
+  expect(toTitleCase(errorName1)).toEqual(null);
+  expect(toTitleCase(errorName2)).toEqual(null);
 });
 
 const DUMMY_USER_DATA = {
