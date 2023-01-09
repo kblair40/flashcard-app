@@ -95,7 +95,7 @@ const FavoriteSets = ({ deletedSetCount }) => {
                 pr={{ base: "1rem", sm: 0 }}
               >
                 <Flex align="center" mr="2rem">
-                  <Text noOfLines={1} fontWeight="500">
+                  <Text noOfLines={1} fontWeight="600">
                     {set.title}
                   </Text>
 
