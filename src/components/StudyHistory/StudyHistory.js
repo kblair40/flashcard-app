@@ -200,7 +200,7 @@ const HistoryItem = ({ item, onClick }) => {
           </Text>
 
           <Text lineHeight={1} fontSize="sm">
-            {new Date(item.start_time).toLocaleDateString()}
+            {new Date(item.createdAt).toLocaleDateString()}
           </Text>
         </Flex>
 
