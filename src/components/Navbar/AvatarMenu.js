@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import { LogoutIcon, SettingsIcon } from "utils/icons";
 
 const AvatarMenu = ({ handleClickSignout }) => {
-  const bg = useColorModeValue("blue.100", "blue.800");
+  const bg = useColorModeValue("blue.300", "blue.800");
   const menuBg = useColorModeValue("gray.50", "gray.700");
   return (
     <Flex alignItems={"center"} display={{ base: "none", md: "flex" }}>
