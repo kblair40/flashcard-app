@@ -29,21 +29,25 @@ const AllSets = () => {
 
   const studyButtonBg = isDark ? "gray.800" : "gray.50";
 
-  const figureLatestSessions = (sets, sessions) => {
-    let latestSessions = {};
-    console.log("SETS/SESSIONS:", { sets, sessions });
-    sessions.sort((a, b) => a.start_time - b.start_time);
+  const isAfter = (date1, date2) => {
+    return Math.floor(new Date(date2)) > Math.floor(new Date(date1));
+  };
 
+  const calcLatestSessions = (sets, sessions) => {
+    console.log("\n\nFIGURE LATEST SESSIONS RCVD:", { sets, sessions });
+    let latestSessions = {};
+    sessions.sort((a, b) => a.createdAt - b.createdAt);
     for (let session of sessions) {
-      if (!latestSessions[session.flashcard_set]) {
-        latestSessions[session.flashcard_set] = session.start_time;
+      if (
+        !latestSessions[session.flashcard_set] ||
+        isAfter(latestSessions[session.flashcard_set], session.createdAt)
+      ) {
+        latestSessions[session.flashcard_set] = session.createdAt;
       }
     }
 
     setLatestSessions(latestSessions);
   };
-
-  useEffect(() => {}, [userData]);
 
   useEffect(() => {
     const fetchFlashcardData = async () => {
@@ -54,10 +58,9 @@ const AllSets = () => {
 
         if (response.data && response.data.user) {
           setLoading(false);
-          // console.log("response.data.user:", response.data.user);
           setFlashcardSets(response.data.user.flashcard_sets || []);
 
-          figureLatestSessions(
+          calcLatestSessions(
             response.data.user.flashcard_sets,
             response.data.user.study_sessions
           );
@@ -100,7 +103,6 @@ const AllSets = () => {
         justify="space-between"
         position="relative"
         pb={{ base: "8px", md: 0 }}
-        // pb="8px"
       >
         <Flex
           w="100%"
