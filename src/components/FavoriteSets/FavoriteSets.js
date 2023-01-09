@@ -39,7 +39,7 @@ const FavoriteSets = ({ deletedSetCount }) => {
 
     try {
       const response = await api.patch("/user/remove", {
-        favorite_set: setToDelete,
+        data: { favorite_set: setToDelete },
       });
 
       fetchFavSets();

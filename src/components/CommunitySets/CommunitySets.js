@@ -138,7 +138,7 @@ const CommunitySet = ({ set, isFavorited, fetchUser }) => {
     try {
       setLoading(true);
       await api.patch(`/user/${isFavorite ? "remove" : "add"}`, {
-        favorite_set: set._id,
+        data: { favorite_set: set._id },
       });
       fetchUser();
       // console.log("RESPONSE:", response.data);

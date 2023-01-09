@@ -337,8 +337,8 @@ const SetMenu = ({ setId, filterSets }) => {
   const handleClickAddToFavorites = async () => {
     setLoading(true);
     try {
-      const response = await api.patch(`/user/add`, {
-        favorite_set: setId,
+      const response = await api.patch("/user/add", {
+        data: { favorite_set: setId },
       });
       console.log("ADD FAVORITE RESPONSE:", response.data);
       setIsFavorite(true);
