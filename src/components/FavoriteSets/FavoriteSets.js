@@ -111,7 +111,11 @@ const FavoriteSets = ({ deletedSetCount }) => {
                 </Flex>
 
                 <Flex align="center">
-                  <Tooltip label="Start a new study session" placement="left">
+                  <Tooltip
+                    openDelay={500}
+                    label="Start a new study session"
+                    placement="left"
+                  >
                     <Link to={`/study/${set._id}`}>
                       <IconButton
                         mr="4px"
@@ -124,7 +128,11 @@ const FavoriteSets = ({ deletedSetCount }) => {
                     </Link>
                   </Tooltip>
 
-                  <Tooltip label="Remove from favorites" placement="left">
+                  <Tooltip
+                    openDelay={500}
+                    label="Remove from favorites"
+                    placement="left"
+                  >
                     <IconButton
                       variant="ghost"
                       isLoading={removingFavorite === set._id}
