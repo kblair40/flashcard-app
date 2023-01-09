@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 
-import AllSets from "components/AllSets";
+import UserSets from "components/UserSets";
 import CommunitySets from "components/CommunitySets";
 import Hero from "components/Hero";
 import UserContext from "store/UserContext";
@@ -28,7 +28,7 @@ const Home = () => {
             ml={{ md: "1.5rem" }}
             mx={{ lg: "auto" }}
           >
-            <AllSets />
+            <UserSets />
           </Box>
 
           <Box
