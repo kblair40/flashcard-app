@@ -303,8 +303,6 @@ const SetMenu = ({ setId, filterSets }) => {
 
   useEffect(() => {
     if (userData && userData.favorite_flashcard_sets && setId) {
-      console.log("FAV SETS:", userData.favorite_flashcard_sets);
-      console.log("SETID:", setId);
       const { favorite_flashcard_sets: fav_sets } = userData;
       if (fav_sets.includes(setId)) {
         setIsFavorite(true);
@@ -350,6 +348,13 @@ const SetMenu = ({ setId, filterSets }) => {
     setLoading(false);
   };
 
+  const menuItemProps = {
+    bg: useColorModeValue("gray.50", "gray.800"),
+    _hover: { bg: useColorModeValue("gray.100", "gray.700") },
+    closeOnSelect: true,
+    fontWeight: "500",
+  };
+
   return (
     <React.Fragment>
       {showConfirmModal && (
@@ -361,7 +366,7 @@ const SetMenu = ({ setId, filterSets }) => {
         />
       )}
 
-      <Menu>
+      <Menu bg={menuBg}>
         <MenuButton
           isDisabled={loading}
           size="sm"
@@ -373,8 +378,7 @@ const SetMenu = ({ setId, filterSets }) => {
 
         <MenuList bg={menuBg}>
           <MenuItem
-            closeOnSelect={true}
-            fontWeight="500"
+            {...menuItemProps}
             onClick={() => navigate(`/study/${setId}`)}
             icon={<StudyIcon boxSize="18px" />}
           >
@@ -382,8 +386,7 @@ const SetMenu = ({ setId, filterSets }) => {
           </MenuItem>
 
           <MenuItem
-            closeOnSelect={true}
-            fontWeight="500"
+            {...menuItemProps}
             onClick={!isFavorite ? handleClickAddToFavorites : null}
             icon={
               isFavorite ? (
@@ -397,8 +400,7 @@ const SetMenu = ({ setId, filterSets }) => {
           </MenuItem>
 
           <MenuItem
-            closeOnSelect={true}
-            fontWeight="500"
+            {...menuItemProps}
             icon={<EditIcon boxSize="18px" />}
             onClick={() => navigate(`/create/${setId}`)}
           >
@@ -408,8 +410,7 @@ const SetMenu = ({ setId, filterSets }) => {
           <MenuDivider />
 
           <MenuItem
-            closeOnSelect={true}
-            fontWeight="500"
+            {...menuItemProps}
             icon={<TrashIcon boxSize="18px" />}
             onClick={handleClickDelete}
           >
