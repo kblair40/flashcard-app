@@ -12,7 +12,7 @@ NICE TO HAVE(s)
 1. User shouldn't be able to "save" after 'editing' unless a change was made to the card
 2. Social Auth 
   - At least facebook, maybe google and twitter
-3. Some kind of cool lightning loader
+3. Some kind of cool lightning loading indicator
 4. A true "center" class for back of card that will force content to vertical/horizontal center of card
 
 
