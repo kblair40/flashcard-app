@@ -7,6 +7,7 @@
 4. On Home page, try to use data from context instead of own fetches
 5. makeDisplayName helper should see if first + last is greater than 12 chars and render only first name if true
 6. Signup/in forms should be submittable with enter key
+7. Edit 'link' input on quill editor so it is visible in dark mode
 
 NICE TO HAVE(s)
 1. User shouldn't be able to "save" after 'editing' unless a change was made to the card
@@ -15,8 +16,3 @@ NICE TO HAVE(s)
 3. Some kind of cool lightning loading indicator
 4. A true "center" class for back of card that will force content to vertical/horizontal center of card
 
-
-LAST MINUTE IMPROVEMENT(s)
-1. Use css variables in editor.css file
-2. Edit 'link' input on quill editor so it is visible in dark mode
-3. Fix set showing as studied if user clicks "Back to My Sets" in a study session before a minute has passed
